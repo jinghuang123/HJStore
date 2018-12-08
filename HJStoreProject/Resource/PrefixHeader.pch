@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  HJStoreProject
+//
+//  Created by 黄靖 on 2018/11/29.
+//  Copyright © 2018年 黄靖. All rights reserved.
+//
+
+
+#import "HJMacros.h"
+#import "HJEnumerations.h"
+#import "SimulationDatas.h"
+#import <JKCategories.h>
+#import <MJRefresh/MJRefreshHeader.h>
+#import <MJRefresh/MJRefreshFooter.h>
+#import <MJExtension.h>
+#import <Masonry.h>
+#import <AFNetworking.h>
+#import <FMDB.h>
+#import <UIImageView+WebCache.h>
+
+
+#import "HJNetworkType.h"
