@@ -123,7 +123,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -134,17 +134,9 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         return 1;
     }
     if(section == HJMainVCSectionTypeSection2){
-        return self;
+        return self.youLikeItems.count;
     }
-    if(section == HJMainVCSectionTypeSection3){
-        return 0;
-    }
-    if(section == HJMainVCSectionTypeSection4){
-        return 0;
-    }
-    if(section == HJMainVCSectionTypeSection5){
-        return 0;
-    }
+
     return 0;
 }
 
@@ -160,7 +152,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         HJGoodsCountDownCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodsCountDownCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
         gridcell = cell;
-    }else if (indexPath.section == HJMainVCSectionTypeSection5) {
+    }else if (indexPath.section == HJMainVCSectionTypeSection2) {
         HJGoodItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
         HJRecommendItem *item = [self.youLikeItems objectAtIndex:indexPath.row];
@@ -196,31 +188,21 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }
     if (indexPath.section == HJMainVCSectionTypeSection1) {//广告
         return CGSizeMake(MaxWidth, 180);
-//        return CGSizeMake((MaxWidth - 4)/2, (MaxWidth - 4)/2 + 40);
     }
     if (indexPath.section == HJMainVCSectionTypeSection2) {//计时
-        return CGSizeMake(MaxWidth, 150);
-    }
-    if (indexPath.section == HJMainVCSectionTypeSection3) {//掌上
-        return CGSizeMake(MaxWidth,MaxWidth * 0.35 + 120);
-    }
-    if (indexPath.section == HJMainVCSectionTypeSection4) {//推荐组
-        return CGSizeMake(MaxWidth,MaxWidth * 0.35 + 120);
-//        return [self layoutAttributesForItemAtIndexPath:indexPath].size;
-    }
-    if (indexPath.section == HJMainVCSectionTypeSection5) {//猜你喜欢
         return CGSizeMake((MaxWidth - 4)/2, (MaxWidth - 4)/2 + 40);
     }
+
     return CGSizeZero;
 }
 
 #pragma mark - X间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return (section == HJMainVCSectionTypeSection5) ? 4 : 0;
+    return (section == HJMainVCSectionTypeSection2) ? 4 : 0;
 }
 #pragma mark - Y间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return (section == HJMainVCSectionTypeSection5) ? 4 : 0;
+    return (section == HJMainVCSectionTypeSection2) ? 4 : 0;
 }
 
 #pragma mark - head宽高
@@ -229,9 +211,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     if (section == HJMainVCSectionTypeSection0) {
         return CGSizeMake(MaxWidth, 230); //图片滚动的宽高
     }
-    if (section == HJMainVCSectionTypeSection2 || section == HJMainVCSectionTypeSection4 || section == HJMainVCSectionTypeSection5) {//猜你喜欢的宽高
-        return CGSizeMake(MaxWidth, 40);  //推荐适合的宽高
-    }
     return CGSizeZero;
 }
 
@@ -239,12 +218,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section == HJMainVCSectionTypeSection0) {
         return CGSizeMake(MaxWidth, 140);  //Top头条的宽高
-    }
-    if (section == HJMainVCSectionTypeSection3) {
-        return CGSizeMake(MaxWidth, 80); // 滚动广告
-    }
-    if (section == HJMainVCSectionTypeSection5) {
-        return CGSizeMake(MaxWidth, 40); // 结束
     }
     return CGSizeZero;
 }

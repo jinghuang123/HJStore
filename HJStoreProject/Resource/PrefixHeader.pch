@@ -19,5 +19,5 @@
 #import <FMDB.h>
 #import <UIImageView+WebCache.h>
 
-
+#import "HJWebProtocol.h"
 #import "HJNetworkType.h"

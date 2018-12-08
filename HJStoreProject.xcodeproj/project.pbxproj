@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		296F06B196B4CBA081E8D294 /* libPods-HJStoreProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */; };
 		B856EC4F21BB7CFA00503DF7 /* CountDownShop.plist in Resources */ = {isa = PBXBuildFile; fileRef = B856EC4E21BB7CF900503DF7 /* CountDownShop.plist */; };
+		B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5121BB985B00503DF7 /* HJWebProtocol.m */; };
+		B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5421BB9AD400503DF7 /* HJShareInstance.m */; };
+		B856EC5821BBA35A00503DF7 /* LinkageMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5621BBA35A00503DF7 /* LinkageMenuView.m */; };
+		B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5A21BBA3AA00503DF7 /* OneView.m */; };
 		B86E7AD921B4BE730094B82B /* HJMainAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E7AD821B4BE730094B82B /* HJMainAdCell.m */; };
 		B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E7ADB21B4C1300094B82B /* HJMainGridSectionFootView.m */; };
 		B86E7ADF21B4D49F0094B82B /* HJMainTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E7ADE21B4D49F0094B82B /* HJMainTopToolView.m */; };
@@ -41,6 +45,14 @@
 		2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.release.xcconfig"; sourceTree = "<group>"; };
 		4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJStoreProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B856EC4E21BB7CF900503DF7 /* CountDownShop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CountDownShop.plist; sourceTree = "<group>"; };
+		B856EC5021BB985B00503DF7 /* HJWebProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJWebProtocol.h; sourceTree = "<group>"; };
+		B856EC5121BB985B00503DF7 /* HJWebProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJWebProtocol.m; sourceTree = "<group>"; };
+		B856EC5321BB9AD400503DF7 /* HJShareInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJShareInstance.h; sourceTree = "<group>"; };
+		B856EC5421BB9AD400503DF7 /* HJShareInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJShareInstance.m; sourceTree = "<group>"; };
+		B856EC5621BBA35A00503DF7 /* LinkageMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkageMenuView.m; sourceTree = "<group>"; };
+		B856EC5721BBA35A00503DF7 /* LinkageMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkageMenuView.h; sourceTree = "<group>"; };
+		B856EC5921BBA3AA00503DF7 /* OneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneView.h; sourceTree = "<group>"; };
+		B856EC5A21BBA3AA00503DF7 /* OneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneView.m; sourceTree = "<group>"; };
 		B86E7AD721B4BE730094B82B /* HJMainAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMainAdCell.h; sourceTree = "<group>"; };
 		B86E7AD821B4BE730094B82B /* HJMainAdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMainAdCell.m; sourceTree = "<group>"; };
 		B86E7ADA21B4C1300094B82B /* HJMainGridSectionFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMainGridSectionFootView.h; sourceTree = "<group>"; };
@@ -112,6 +124,8 @@
 				B8A9180E21AFD02C006733BA /* HJSuperViewController.m */,
 				B873DA4821B0E1C7008DBC66 /* HJSuperView.h */,
 				B873DA4921B0E1C7008DBC66 /* HJSuperView.m */,
+				B856EC5321BB9AD400503DF7 /* HJShareInstance.h */,
+				B856EC5421BB9AD400503DF7 /* HJShareInstance.m */,
 			);
 			path = SuperClass;
 			sourceTree = "<group>";
@@ -123,6 +137,8 @@
 				B873DA5A21B1160D008DBC66 /* Reachability.m */,
 				B873DA5621B1156D008DBC66 /* HJNetworkType.h */,
 				B873DA5721B1156D008DBC66 /* HJNetworkType.m */,
+				B856EC5021BB985B00503DF7 /* HJWebProtocol.h */,
+				B856EC5121BB985B00503DF7 /* HJWebProtocol.m */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -246,6 +262,10 @@
 			children = (
 				B8A9181321AFD090006733BA /* HJStroeTypeListVC.h */,
 				B8A9181421AFD090006733BA /* HJStroeTypeListVC.m */,
+				B856EC5721BBA35A00503DF7 /* LinkageMenuView.h */,
+				B856EC5621BBA35A00503DF7 /* LinkageMenuView.m */,
+				B856EC5921BBA3AA00503DF7 /* OneView.h */,
+				B856EC5A21BBA3AA00503DF7 /* OneView.m */,
 			);
 			path = TypeList;
 			sourceTree = "<group>";
@@ -401,13 +421,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
 				B8A9181E21AFD334006733BA /* HJNavigationVC.m in Sources */,
 				B86E7ADF21B4D49F0094B82B /* HJMainTopToolView.m in Sources */,
 				B873DA4D21B0E29B008DBC66 /* HJGridCell.m in Sources */,
 				B8A917F621AFB75A006733BA /* main.m in Sources */,
+				B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */,
 				B8A917E821AFB758006733BA /* AppDelegate.m in Sources */,
 				B873DA5B21B1160D008DBC66 /* Reachability.m in Sources */,
 				B873DA6221B12F71008DBC66 /* HJGoodItemCell.m in Sources */,
+				B856EC5821BBA35A00503DF7 /* LinkageMenuView.m in Sources */,
 				B8A9181521AFD090006733BA /* HJStroeTypeListVC.m in Sources */,
 				B86E7AE221B4FDA90094B82B /* HJGoodsCountDownCell.m in Sources */,
 				B8A9180F21AFD02C006733BA /* HJSuperViewController.m in Sources */,
@@ -415,6 +438,7 @@
 				B873DA4A21B0E1C7008DBC66 /* HJSuperView.m in Sources */,
 				B8A9181221AFD073006733BA /* HJMainVC.m in Sources */,
 				B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */,
+				B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */,
 				B873DA5821B1156D008DBC66 /* HJNetworkType.m in Sources */,
 				B8A9181821AFD0A2006733BA /* HJMineVC.m in Sources */,
 				B86E7AD921B4BE730094B82B /* HJMainAdCell.m in Sources */,

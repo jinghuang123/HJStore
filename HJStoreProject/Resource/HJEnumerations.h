@@ -12,9 +12,6 @@ typedef NS_ENUM(NSUInteger, HJMainVCSectionType) {
     HJMainVCSectionTypeSection0,
     HJMainVCSectionTypeSection1,
     HJMainVCSectionTypeSection2,
-    HJMainVCSectionTypeSection3,
-    HJMainVCSectionTypeSection4,
-    HJMainVCSectionTypeSection5,
 };
 
 
