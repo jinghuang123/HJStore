@@ -20,6 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSArray *menutitles = @[@"为您推荐",@"美容美妆",@"奶粉纸尿裤",@"母婴专区",@"箱包配饰",@"家居个护",@"营养保健",@"服饰鞋靴",@"海外直邮",@"数码家电",@"环球美食",@"运动户外",@"生鲜",@"国家馆",@"品牌馆"];
+    
     NSMutableArray *views = [[NSMutableArray alloc] init];
     for (NSString *title in menutitles) {
         OneView *view = [[OneView alloc] init];

@@ -166,7 +166,7 @@
 			children = (
 				B873DA5521B1155B008DBC66 /* Commons */,
 				B8A917FC21AFB7C1006733BA /* AppDelegate */,
-				B8A9180021AFB804006733BA /* Deletages */,
+				B8A9180021AFB804006733BA /* Delegates */,
 				B8A917FD21AFB7E6006733BA /* Classes */,
 				B8A9180121AFB861006733BA /* Resource */,
 				B8A917EC21AFB758006733BA /* Main.storyboard */,
@@ -200,11 +200,12 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		B8A9180021AFB804006733BA /* Deletages */ = {
+		B8A9180021AFB804006733BA /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Deletages;
+			name = Delegates;
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		B8A9180121AFB861006733BA /* Resource */ = {
