@@ -30,6 +30,36 @@
     }
     LinkageMenuView *lkMenu = [[LinkageMenuView alloc] initWithFrame:CGRectMake(0, 0,MaxWidth , MaxHeight - HJTabH) WithMenu:menutitles andViews:views];
     [self.view addSubview:lkMenu];
+    [self setupNavItems];
+}
+
+- (void)setupNavItems {
+    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickLeft)];
+    self.navigationItem.leftBarButtonItem = leftButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickRight)];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    //设置圆角效果
+    bgView.layer.cornerRadius = 14;
+    bgView.layer.masksToBounds = YES;
+    
+    bgView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+    
+    self.navigationItem.titleView = bgView;
+}
+
+
+- (void)onClickSearchBtn {
+    
+}
+- (void)onClickLeft {
+    
+}
+- (void)onClickRight {
+    
 }
 
 /*

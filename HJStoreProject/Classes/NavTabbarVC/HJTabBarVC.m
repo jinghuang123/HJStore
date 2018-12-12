@@ -37,7 +37,7 @@
 #pragma mark - 添加子控制器
 - (void)addChildViewContorller {
     NSArray *childArray = @[
-                            @{HJStroeTabbarClassKey  : @"HJMainVC",
+                            @{HJStroeTabbarClassKey  : @"HJSegemengVC",
                               HJStroeTabbarTitleKey  : @"首页",
                               HJStroeTabbarImgKey    : @"tabr_02_up",
                               HJStroeTabbarSelImgKey : @"tabr_02_down"},

@@ -25,7 +25,7 @@
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIView *rightview;
-
+@property (nonatomic, strong) NSMutableArray *menubtns;
 @end
 
 @implementation LinkageMenuView{
@@ -57,7 +57,7 @@
         _textSize = 14.0;
         _textColor = [UIColor blackColor];
         _selectTextColor = [UIColor whiteColor];
-        _selectViewColor = [UIColor blackColor];
+        _selectViewColor = [UIColor redColor];
         
         if (views.count < menu.count) {
             NSLog(@"Please Add More Views");
@@ -80,6 +80,13 @@
         [self addSubview:self.rightview];
     }
     return self;
+}
+
+- (NSMutableArray *)menubtns {
+    if (!_menubtns) {
+        _menubtns = [[NSMutableArray alloc] init];
+    }
+    return _menubtns;
 }
 
 #pragma mark - Setter Method
@@ -127,7 +134,7 @@
     if (!_menuView) {
         _menuView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MENU_WIDTH, self.frame.size.height)];
         _menuView.backgroundColor = [UIColor whiteColor];
-        _menuView.scrollsToTop = NO;
+        _menuView.scrollsToTop = YES;
         _menuView.showsVerticalScrollIndicator = NO;
         
         _menuView.contentSize = CGSizeMake(0, titlesCount * btnHeight + blankHeight + 5.0);
@@ -136,7 +143,7 @@
         _bottomView.layer.cornerRadius = BOTTOMVIEW_HEIGHT / 2.0;
         _bottomView.backgroundColor = _selectViewColor;
         [_menuView addSubview:_bottomView];
-        
+        [self.menubtns removeAllObjects];
         for (int i = 1; i <= menuArray.count; i++) {
             UIButton *menuButton = [[UIButton alloc] init];
             menuButton.tag = i;
@@ -151,8 +158,13 @@
             }
             [menuButton addTarget:self action:@selector(choseMenu:) forControlEvents:UIControlEventTouchUpInside];
             [_menuView addSubview:menuButton];
+            [self.menubtns addObject:menuButton];
         }
     }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self choseMenu:[self.menubtns objectAtIndex:0]];
+    });
+    
     return _menuView;
 }
 

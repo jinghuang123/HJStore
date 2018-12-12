@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		187CE7F221C135D5005B9D77 /* ZXSegmentHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7E521C135D5005B9D77 /* ZXSegmentHeaderCell.m */; };
+		187CE7F321C135D5005B9D77 /* ZXSegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7E621C135D5005B9D77 /* ZXSegmentController.m */; };
+		187CE7F421C135D5005B9D77 /* ZXSegmentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7E821C135D5005B9D77 /* ZXSegmentHeaderView.m */; };
+		187CE7F621C135D5005B9D77 /* ZXSegmentHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7EC21C135D5005B9D77 /* ZXSegmentHeaderModel.m */; };
+		187CE7F721C135D5005B9D77 /* UIColor+RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7ED21C135D5005B9D77 /* UIColor+RGB.m */; };
+		187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7FA21C13639005B9D77 /* HJSegemengVC.m */; };
 		296F06B196B4CBA081E8D294 /* libPods-HJStoreProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */; };
 		B856EC4F21BB7CFA00503DF7 /* CountDownShop.plist in Resources */ = {isa = PBXBuildFile; fileRef = B856EC4E21BB7CF900503DF7 /* CountDownShop.plist */; };
 		B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5121BB985B00503DF7 /* HJWebProtocol.m */; };
@@ -41,6 +47,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		187CE7E521C135D5005B9D77 /* ZXSegmentHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSegmentHeaderCell.m; sourceTree = "<group>"; };
+		187CE7E621C135D5005B9D77 /* ZXSegmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSegmentController.m; sourceTree = "<group>"; };
+		187CE7E721C135D5005B9D77 /* ZXSegmentHeaderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSegmentHeaderModel.h; sourceTree = "<group>"; };
+		187CE7E821C135D5005B9D77 /* ZXSegmentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSegmentHeaderView.m; sourceTree = "<group>"; };
+		187CE7E921C135D5005B9D77 /* UIColor+RGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RGB.h"; sourceTree = "<group>"; };
+		187CE7EB21C135D5005B9D77 /* ZXSegmentHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSegmentHeaderCell.h; sourceTree = "<group>"; };
+		187CE7EC21C135D5005B9D77 /* ZXSegmentHeaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSegmentHeaderModel.m; sourceTree = "<group>"; };
+		187CE7ED21C135D5005B9D77 /* UIColor+RGB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGB.m"; sourceTree = "<group>"; };
+		187CE7EE21C135D5005B9D77 /* ZXSegmentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSegmentHeaderView.h; sourceTree = "<group>"; };
+		187CE7EF21C135D5005B9D77 /* ZXSegmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSegmentController.h; sourceTree = "<group>"; };
+		187CE7F921C13639005B9D77 /* HJSegemengVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSegemengVC.h; sourceTree = "<group>"; };
+		187CE7FA21C13639005B9D77 /* HJSegemengVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSegemengVC.m; sourceTree = "<group>"; };
 		2A9627EBDD40F69EA553FBA1 /* Pods-HJStoreProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.debug.xcconfig"; sourceTree = "<group>"; };
 		2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.release.xcconfig"; sourceTree = "<group>"; };
 		4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJStoreProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +135,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		187CE7E321C135D5005B9D77 /* ZXSegmentController */ = {
+			isa = PBXGroup;
+			children = (
+				187CE7E421C135D5005B9D77 /* Classes */,
+			);
+			path = ZXSegmentController;
+			sourceTree = "<group>";
+		};
+		187CE7E421C135D5005B9D77 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				187CE7E521C135D5005B9D77 /* ZXSegmentHeaderCell.m */,
+				187CE7E621C135D5005B9D77 /* ZXSegmentController.m */,
+				187CE7E721C135D5005B9D77 /* ZXSegmentHeaderModel.h */,
+				187CE7E821C135D5005B9D77 /* ZXSegmentHeaderView.m */,
+				187CE7E921C135D5005B9D77 /* UIColor+RGB.h */,
+				187CE7EB21C135D5005B9D77 /* ZXSegmentHeaderCell.h */,
+				187CE7EC21C135D5005B9D77 /* ZXSegmentHeaderModel.m */,
+				187CE7ED21C135D5005B9D77 /* UIColor+RGB.m */,
+				187CE7EE21C135D5005B9D77 /* ZXSegmentHeaderView.h */,
+				187CE7EF21C135D5005B9D77 /* ZXSegmentController.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		B873DA4721B0E18D008DBC66 /* SuperClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +176,7 @@
 		B873DA5521B1155B008DBC66 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				187CE7E321C135D5005B9D77 /* ZXSegmentController */,
 				B873DA5921B1160C008DBC66 /* Reachability.h */,
 				B873DA5A21B1160D008DBC66 /* Reachability.m */,
 				B873DA5621B1156D008DBC66 /* HJNetworkType.h */,
@@ -236,6 +280,8 @@
 		B8A9180921AFCFA6006733BA /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				187CE7F921C13639005B9D77 /* HJSegemengVC.h */,
+				187CE7FA21C13639005B9D77 /* HJSegemengVC.m */,
 				B8A9181021AFD073006733BA /* HJMainVC.h */,
 				B8A9181121AFD073006733BA /* HJMainVC.m */,
 				B86E7AD721B4BE730094B82B /* HJMainAdCell.h */,
@@ -437,13 +483,19 @@
 				B8A9180F21AFD02C006733BA /* HJSuperViewController.m in Sources */,
 				B8A9180821AFC5B8006733BA /* HJTabBarVC.m in Sources */,
 				B873DA4A21B0E1C7008DBC66 /* HJSuperView.m in Sources */,
+				187CE7F321C135D5005B9D77 /* ZXSegmentController.m in Sources */,
+				187CE7F621C135D5005B9D77 /* ZXSegmentHeaderModel.m in Sources */,
+				187CE7F721C135D5005B9D77 /* UIColor+RGB.m in Sources */,
 				B8A9181221AFD073006733BA /* HJMainVC.m in Sources */,
+				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
 				B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */,
 				B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */,
 				B873DA5821B1156D008DBC66 /* HJNetworkType.m in Sources */,
+				187CE7F221C135D5005B9D77 /* ZXSegmentHeaderCell.m in Sources */,
 				B8A9181821AFD0A2006733BA /* HJMineVC.m in Sources */,
 				B86E7AD921B4BE730094B82B /* HJMainAdCell.m in Sources */,
 				B873DA5021B0E391008DBC66 /* HJGridItem.m in Sources */,
+				187CE7F421C135D5005B9D77 /* ZXSegmentHeaderView.m in Sources */,
 				B873DA5321B10BF2008DBC66 /* HJMainSliderHeadView.m in Sources */,
 				B8A9181B21AFD0D1006733BA /* HJRecommendVC.m in Sources */,
 			);
@@ -599,6 +651,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanfeng.HJStoreProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0876eac5-4758-4e52-8a3e-64d01b32db26";
 				PROVISIONING_PROFILE_SPECIFIER = "App ID No Limited Profile";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -609,6 +662,7 @@
 			baseConfigurationReference = 2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = WQVP8C8Z5H;
 				GCC_PREFIX_HEADER = HJStoreProject/Resource/PrefixHeader.pch;
@@ -620,6 +674,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanfeng.HJStoreProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0876eac5-4758-4e52-8a3e-64d01b32db26";
 				PROVISIONING_PROFILE_SPECIFIER = "App ID No Limited Profile";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -24,7 +24,8 @@
 /* 10个属性 */
 @property (strong , nonatomic) NSMutableArray<HJGridItem *> *gridItems;
 /* 推荐商品属性 */
-@property (strong , nonatomic)NSMutableArray<HJRecommendItem *> *youLikeItems;
+@property (strong , nonatomic) NSMutableArray<HJRecommendItem *> *youLikeItems;
+
 @end
 
 
@@ -42,12 +43,16 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     [HJNetworkType isConnected];
     [self setupUI];
     NSLog(@"maxw:%f  maxh:%f",MaxWidth,MaxHeight);
+    [self.collectionView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
 }
 
+
+
+
+
 - (void)setupUI {
     self.collectionView.backgroundColor = RGB(245, 245, 245);
-    [self setupNavView];
 }
 
 - (UICollectionView *)collectionView {
@@ -56,7 +61,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.frame = CGRectMake(0, HJTopNavH, MaxWidth, MaxHeight - HJTabH - HJTopNavH);
+        _collectionView.frame = CGRectMake(0, 0, MaxWidth, MaxHeight - HJTabH);
         _collectionView.showsVerticalScrollIndicator = NO;
         
         [_collectionView registerClass:[HJGridCell class] forCellWithReuseIdentifier:HJGridCellIdentifier];
@@ -81,18 +86,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     return _collectionView;
 }
 
-
-- (void)setupNavView {
-    _topToolView = [[HJMainTopToolView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, 64)];
-    _topToolView.leftItemClickBlock = ^{
-        NSLog(@"点击了首页扫一扫");
-
-    };
-    _topToolView.rightItemClickBlock = ^{
-        NSLog(@"点击了首页分类");
-    };
-    [self.view addSubview:self.topToolView];
-}
 
 - (NSMutableArray<HJGridItem *> *)gridItems {
     if (!_gridItems) {
