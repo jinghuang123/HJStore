@@ -1,5 +1,5 @@
 //
-//  HJMainSliderHeadView.h
+//  HJMainSliderCell.h
 //  HJStoreProject
 //
 //  Created by 黄靖 on 2018/11/30.
@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface HJMainSliderHeadView : UICollectionReusableView
-/* 轮播图数组 */
+@interface HJMainSliderCell : UICollectionViewCell
+/* 轮播图数组 url*/
 @property (copy , nonatomic) NSArray *imageGroupArray;
+/* 轮播图数组 图片对象 */
+@property (copy , nonatomic) NSArray *bannerItems;
 @end
 
 

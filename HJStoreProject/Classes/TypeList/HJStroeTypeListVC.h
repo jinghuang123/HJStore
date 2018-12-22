@@ -8,10 +8,10 @@
 
 #import "HJSuperViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface HJStroeTypeListVC : HJSuperViewController
 
 @end
 
-NS_ASSUME_NONNULL_END
+

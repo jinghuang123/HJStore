@@ -118,14 +118,14 @@
 - (UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc] initWithFrame:CGRectMake(MENU_WIDTH, 0, LINEVIEW_WIDTH, self.frame.size.height)];
-        _lineView.backgroundColor = [UIColor lightGrayColor];
+        _lineView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     }
     return _lineView;
 }
 
 - (UIView *)rightview{
     if (!_rightview) {
-        _rightview = [[UIView alloc] initWithFrame:CGRectMake(MENU_WIDTH + LINEVIEW_WIDTH, NAVIGATION_HEIGHT, FUll_VIEW_WIDTH - MENU_WIDTH + LINEVIEW_WIDTH, FUll_VIEW_HEIGHT)];
+        _rightview = [[UIView alloc] initWithFrame:CGRectMake(MENU_WIDTH + LINEVIEW_WIDTH, 0, FUll_VIEW_WIDTH - MENU_WIDTH + LINEVIEW_WIDTH, FUll_VIEW_HEIGHT - HJTabH)];
     }
     return _rightview;
 }
@@ -139,7 +139,7 @@
         
         _menuView.contentSize = CGSizeMake(0, titlesCount * btnHeight + blankHeight + 5.0);
         
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake((MENU_WIDTH - BOTTOMVIEW_WIDTH) / 2.0, blankHeight + 1.0,BOTTOMVIEW_WIDTH , BOTTOMVIEW_HEIGHT)];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake((MENU_WIDTH - BOTTOMVIEW_WIDTH) / 2.0, blankHeight + 1,BOTTOMVIEW_WIDTH , BOTTOMVIEW_HEIGHT)];
         _bottomView.layer.cornerRadius = BOTTOMVIEW_HEIGHT / 2.0;
         _bottomView.backgroundColor = _selectViewColor;
         [_menuView addSubview:_bottomView];
@@ -150,7 +150,7 @@
             menuButton.titleLabel.font = [UIFont systemFontOfSize:_textSize];
             [menuButton setTitle:[menuArray objectAtIndex:(i - 1)] forState:UIControlStateNormal];
             [menuButton setBackgroundColor:[UIColor clearColor]];
-            menuButton.frame = CGRectMake(0, btnHeight * (i - 1) + half_blankHeight + 1.0, MENU_WIDTH, btnHeight);
+            menuButton.frame = CGRectMake(0, btnHeight * (i - 1) + half_blankHeight + 1, MENU_WIDTH, btnHeight);
             if (i == 1) {
                 [menuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             }else{
@@ -161,18 +161,20 @@
             [self.menubtns addObject:menuButton];
         }
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self choseMenu:[self.menubtns objectAtIndex:0]];
-    });
     
     return _menuView;
+}
+
+- (void)setDefaultViewContent {
+    UIButton *menubtn = [self.menubtns objectAtIndex:0];
+    choseTag = 2;
+    [self choseMenu:menubtn];
 }
 
 #pragma mark - MenuButton Method
 - (void)choseMenu:(UIButton *)button{
     NSLog(@"%ld==%@",(long)button.tag,button.titleLabel.text);
     newChoseTag = button.tag;
-    
     if (newChoseTag != choseTag) {
         UIButton *lastButton = (UIButton *)[self viewWithTag:choseTag];
         [lastButton setTitleColor:_textColor forState:UIControlStateNormal];
@@ -181,9 +183,9 @@
         
         if (menuArray.count > DTScrollTag * 2.0) {
             if (button.tag <= DTScrollTag) {
-                [UIView animateWithDuration:ANIMATION_TIME animations:^{
-                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT) animated:NO];
-                }];
+//                [UIView animateWithDuration:ANIMATION_TIME animations:^{
+//                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT) animated:NO];
+//                }];
             }else if (button.tag > menuArray.count - DTScrollTag){
                 [UIView animateWithDuration:ANIMATION_TIME animations:^{
                     [_menuView setContentOffset:CGPointMake(0, scroHeight) animated:NO];
@@ -221,6 +223,9 @@
         }
         UIView *rigView = [viewArray objectAtIndex:viewtag];
         [_rightview addSubview:rigView];
+        if (self.ItemSelectedBlock) {
+            self.ItemSelectedBlock(rigView);
+        }
     }
 }
 

@@ -20,7 +20,6 @@
 @end
 
 
-#define itemsize  MaxWidth == ENM_SCREEN_W_5S ? 38 : 45
 
 @implementation HJGridCell
 
@@ -37,10 +36,10 @@
     [self addSubview:_gridImageView];
     
     _gridLabel = [[UILabel alloc] init];
-    _gridLabel.font = PFR13Font;
+    _gridLabel.font = PFR12Font;
+    _gridLabel.textColor = [UIColor jk_colorWithHexString:@"#8F8F8F"];
     _gridLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_gridLabel];
-    
 }
 
 - (void)layoutSubviews
@@ -61,13 +60,15 @@
     
 }
 
-- (void)updeteCellWithGridItem:(HJGridItem *)gridItem {
-    _gridLabel.text = gridItem.gridTitle;
-    if (gridItem.iconImage.length == 0) return;
-    if ([[gridItem.iconImage substringToIndex:4] isEqualToString:@"http"]) {
-        [_gridImageView sd_setImageWithURL:[NSURL URLWithString:gridItem.iconImage]placeholderImage:[UIImage imageNamed:@"default_49_11"]];
-    }else{
-        _gridImageView.image = [UIImage imageNamed:gridItem.iconImage];
-    }
+- (void)updeteCellWithGridItem:(HJSubCategoryModel *)category {
+    _gridLabel.text = category.name;
+    if (category.image.length == 0) return;
+    [_gridImageView sd_setImageWithURLString:category.image placeholderImage:[UIImage imageNamed:@"default_49_11"]];
+}
+
+- (void)updeteCellWithActivityItem:(HJActivityModel *)activity {
+    _gridLabel.text = activity.name;
+    if (activity.pic_image.length == 0) return;
+    [_gridImageView sd_setImageWithURLString:activity.pic_image placeholderImage:[UIImage imageNamed:@"default_49_11"]];
 }
 @end

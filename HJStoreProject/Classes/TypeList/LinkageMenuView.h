@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^CategoryItemSelectedBlock)(id responseObject);
+
+
 @interface LinkageMenuView : UIView
 
+@property (nonatomic, copy) CategoryItemSelectedBlock ItemSelectedBlock;
 @property (nonatomic, strong) UIColor *selectViewColor;  /**< select view color (滑块颜色)*/
 @property (nonatomic, strong) UIColor *textColor;  /**< text color (标题颜色)*/
 @property (nonatomic, strong) UIColor *selectTextColor;  /**< select text color (标题选中的颜色)*/
@@ -24,5 +28,5 @@
 
  */
 - (instancetype)initWithFrame:(CGRect)frame WithMenu:(NSArray *)menu andViews:(NSArray *)views;
-
+- (void)setDefaultViewContent;
 @end

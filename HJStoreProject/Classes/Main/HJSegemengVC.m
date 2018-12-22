@@ -9,6 +9,8 @@
 #import "HJSegemengVC.h"
 #import "ZXSegmentController.h"
 #import "HJMainVC.h"
+#import "HJMainRequest.h"
+
 @interface HJSegemengVC()
 @property (strong , nonatomic) UITextField *textField;
 @end
@@ -16,37 +18,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    HJMainVC *mainVC1 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC2 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC3 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC4 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC5 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC6 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC7 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC8 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC9 = [[HJMainVC alloc] init];
-    HJMainVC *mainVC10 = [[HJMainVC alloc] init];
-    NSArray* names = @[@"头条",@"视频",@"娱乐",@"体育",@"段子",@"新时代",@"本地",@"网易号",@"微咨询",@"财经"];
-    NSArray* controllers = @[mainVC1,mainVC2,mainVC3,mainVC4,mainVC5,mainVC6,mainVC7,mainVC8,mainVC9,mainVC10];
-    
-    
-    /*
-     *   controllers长度和names长度必须一致，否则将会导致cash
-     *   segmentController在一个屏幕里最多显示6个按钮，如果超过6个，将会自动开启滚动功能，如果不足6个，按钮宽度=父view宽度/x  (x=按钮个数)
-     */
-    ZXSegmentController* segmentController = [[ZXSegmentController alloc] initWithControllers:controllers
+    [[HJMainRequest shared] getMainCategoryCache:YES success:^(NSArray *categorys) {
+        NSMutableArray *datas = [[NSMutableArray alloc] init];
+        NSMutableArray *names = [[NSMutableArray alloc] init];
+        for (HJCategoryModel *category in categorys) {
+            HJMainVC *mainVC = [[HJMainVC alloc] init];
+            mainVC.catteryId = category.categoryId;
+            [names addObject:category.name];
+            [datas addObject:mainVC];
+        }
+        [self setupUIWithCategorys:datas names:names];
+    } fail:^(NSError *error) {
+        
+    }];
+    [self setupNavItems];
+}
+
+- (void)setupUIWithCategorys:(NSArray *)Cacontrollers names:(NSArray *)names {
+    ZXSegmentController* segmentController = [[ZXSegmentController alloc] initWithControllers:Cacontrollers
                                                                                withTitleNames:names
-                                                                             withDefaultIndex:8
+                                                                             withDefaultIndex:0
                                                                                withTitleColor:[UIColor grayColor]
                                                                        withTitleSelectedColor:[UIColor redColor]
                                                                               withSliderColor:[UIColor redColor]];
     [self.view addSubview:segmentController.view];
     [segmentController didMoveToParentViewController:self];
+    CGFloat yOffset = MaxHeight >= ENM_SCREEN_H_X ? 84 : 64;
     [segmentController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(64);
-        make.left.right.bottom.mas_equalTo(0);
+        make.top.mas_equalTo(yOffset);
+        make.left.bottom.mas_offset(0);
+        make.right.mas_offset(0);
     }];
-    [self setupNavItems];
 }
 
 - (void)setupNavItems {

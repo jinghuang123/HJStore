@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HJGridItem.h"
+#import "HJCategoryModel.h"
+#import "HJActivityModel.h"
 
+
+#define itemsize  MaxWidth == ENM_SCREEN_W_5S ? 35 : 42
 
 @interface HJGridCell : UICollectionViewCell
 
-- (void)updeteCellWithGridItem:(HJGridItem *)gridItem;
+- (void)updeteCellWithGridItem:(HJSubCategoryModel *)category;
+
+- (void)updeteCellWithActivityItem:(HJActivityModel *)activity;
 
 @end
 

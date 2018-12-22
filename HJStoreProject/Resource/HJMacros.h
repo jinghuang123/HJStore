@@ -61,4 +61,8 @@
 // 顶部Nav高度+指示器
 #define HJTopNavH  64
 
+#define segemeHeadH 40
+
+#define REQ_TIMEOUT 20
+
 #endif /* HJMacros_h */

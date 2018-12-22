@@ -177,7 +177,7 @@
 - (void)createAutolayout{
     [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(segemeHeadH);
     }];
 
     [_currentController.view mas_remakeConstraints:^(MASConstraintMaker *make) {

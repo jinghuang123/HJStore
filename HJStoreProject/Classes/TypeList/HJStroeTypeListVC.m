@@ -9,9 +9,11 @@
 #import "HJStroeTypeListVC.h"
 #import "LinkageMenuView.h"
 #import "OneView.h"
+#import "HJCategoryRequest.h"
+
 
 @interface HJStroeTypeListVC ()
-
+@property (nonatomic,strong) NSMutableArray *dataSource;
 @end
 
 @implementation HJStroeTypeListVC
@@ -19,28 +21,47 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSArray *menutitles = @[@"为您推荐",@"美容美妆",@"奶粉纸尿裤",@"母婴专区",@"箱包配饰",@"家居个护",@"营养保健",@"服饰鞋靴",@"海外直邮",@"数码家电",@"环球美食",@"运动户外",@"生鲜",@"国家馆",@"品牌馆"];
-    
-    NSMutableArray *views = [[NSMutableArray alloc] init];
-    for (NSString *title in menutitles) {
-        OneView *view = [[OneView alloc] init];
-        HJGridItem *grid = [[HJGridItem alloc] init];
-        view.dataArray = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"];
-        [views addObject:view];
-    }
-    LinkageMenuView *lkMenu = [[LinkageMenuView alloc] initWithFrame:CGRectMake(0, 0,MaxWidth , MaxHeight - HJTabH) WithMenu:menutitles andViews:views];
-    [self.view addSubview:lkMenu];
+
+    [[HJCategoryRequest shared] getCategoryCache:YES success:^(NSArray *categorys) {
+        [self.dataSource setArray:categorys];
+        [self setView];
+    } fail:^(NSError *error) {
+    }];
     [self setupNavItems];
 }
 
+- (void)setView {
+    NSMutableArray *rightViews = [[NSMutableArray alloc] init];
+    NSMutableArray *menutitles = [[NSMutableArray alloc] init];
+    for (HJCategoryModel *category in self.dataSource) {
+        OneView *rightView = [[OneView alloc] init];
+        rightView.categoryId = category.categoryId;
+        rightView.tag = category.categoryId;
+        [menutitles addObject:category.name];
+        [rightViews addObject:rightView];
+    }
+    LinkageMenuView *lkMenu = [[LinkageMenuView alloc] initWithFrame:CGRectMake(0, HJNavH , MaxWidth , MaxHeight - HJTabH) WithMenu:menutitles andViews:rightViews];
+    lkMenu.ItemSelectedBlock = ^(OneView *rightView) {
+        [[HJCategoryRequest shared] getSubCategoryCache:YES parentId:rightView.categoryId success:^(NSArray *categorys) {
+            NSLog(@"rightViewTag = %ld",rightView.tag);
+            [rightView setDataArray:categorys];
+        } fail:^(NSError *error) {
+        }];
+    };
+    [lkMenu setDefaultViewContent];
+    [self.view addSubview:lkMenu];
+    
+}
+
+- (NSMutableArray *)dataSource {
+    if(!_dataSource){
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    return _dataSource;
+}
+
 - (void)setupNavItems {
-    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickLeft)];
-    self.navigationItem.leftBarButtonItem = leftButtonItem;
-    
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickRight)];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
-    
-    
+
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
     //设置圆角效果
     bgView.layer.cornerRadius = 14;

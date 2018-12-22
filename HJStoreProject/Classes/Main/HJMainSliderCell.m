@@ -1,15 +1,15 @@
 //
-//  HJMainSliderHeadView.m
+//  HJMainSliderCell.m
 //  HJStoreProject
 //
 //  Created by 黄靖 on 2018/11/30.
 //  Copyright © 2018年 黄靖. All rights reserved.
 //
 
-#import "HJMainSliderHeadView.h"
+#import "HJMainSliderCell.h"
 #import <SDCycleScrollView.h>
 
-@interface HJMainSliderHeadView ()<SDCycleScrollViewDelegate>
+@interface HJMainSliderCell ()<SDCycleScrollViewDelegate>
 
 /* 轮播图 */
 @property (strong , nonatomic) SDCycleScrollView *cycleScrollView;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation HJMainSliderHeadView
+@implementation HJMainSliderCell
 - (instancetype)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];

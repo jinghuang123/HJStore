@@ -7,11 +7,11 @@
 //
 
 #import "HJSuperViewController.h"
+#import "HJMainRequest.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface HJMainVC : HJSuperViewController
-
+@property (nonatomic,assign) NSInteger catteryId;
 @end
 
-NS_ASSUME_NONNULL_END
+

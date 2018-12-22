@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, HJMainVCSectionType) {
     HJMainVCSectionTypeSection0,
     HJMainVCSectionTypeSection1,
     HJMainVCSectionTypeSection2,
+    HJMainVCSectionTypeSection3,
 };
 
 
@@ -34,4 +35,10 @@ typedef NS_ENUM(NSUInteger, ScreenWidthType) {
     ENM_SCREEN_W_XR = 414,
     ENM_SCREEN_W_XS = 375,
     ENM_SCREEN_W_XSMAX = 414,
+};
+
+
+typedef NS_ENUM(NSUInteger, kRankRequestState) {
+    kRankRequesting,                 //请求中
+    kRankRequestend,          //请求结束
 };

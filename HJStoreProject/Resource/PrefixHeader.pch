@@ -11,13 +11,14 @@
 #import "HJEnumerations.h"
 #import "SimulationDatas.h"
 #import <JKCategories.h>
-#import <MJRefresh/MJRefreshHeader.h>
-#import <MJRefresh/MJRefreshFooter.h>
+#import <MJRefresh/MJRefreshNormalHeader.h>
+#import <MJRefresh/MJRefreshAutoNormalFooter.h>
 #import <MJExtension.h>
 #import <Masonry.h>
 #import <AFNetworking.h>
 #import <FMDB.h>
 #import <UIImageView+WebCache.h>
-
 #import "HJWebProtocol.h"
 #import "HJNetworkType.h"
+#import "YFHTTPRequestOperationManager.h"
+#import "UIImageView+HHWebImage.h"

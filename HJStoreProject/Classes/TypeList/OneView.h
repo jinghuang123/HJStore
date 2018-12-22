@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HJGridItem.h"
+#import "HJCategoryModel.h"
 
 @interface OneView : UIView<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-
+@property (nonatomic, assign) NSInteger categoryId;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end

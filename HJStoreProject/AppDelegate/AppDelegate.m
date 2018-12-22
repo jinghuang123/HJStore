@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "HJTabBarVC.h"
-
+#import "HJMainRequest.h"
+#import "HJCategoryRequest.h"
 
 
 @interface AppDelegate ()
@@ -20,8 +21,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+  
+    [[HJCategoryRequest shared] getCategoryCache:NO success:^(id responseObject) {
+    } fail:^(NSError *error) {
+    }];
+    [NSThread sleepForTimeInterval:0.5];
     self.window.rootViewController = [[HJTabBarVC alloc] init];
-
     return YES;
 }
 

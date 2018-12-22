@@ -8,16 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "HJGridItem.h"
-
+#import "HJRecommendModel.h"
 
 @interface HJGoodItemCell : UICollectionViewCell
-/* 相同 */
-@property (strong , nonatomic)UIButton *sameButton;
 
-/** 找相似点击回调 */
-@property (nonatomic, copy) dispatch_block_t lookSameBlock;
-
-- (void)setItemCellWithItem:(HJRecommendItem *)item;
+- (void)setItemCellWithItem:(HJRecommendModel *)item;
 @end
 
 
