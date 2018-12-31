@@ -20,6 +20,8 @@
 - (void)getMainCategoryCache:(BOOL)cache success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
 
 - (void)getMainListCache:(BOOL)cache
+              categoryId:(NSInteger)categoryId
+                    sort:(NSInteger)sort
                   pageNo:(NSInteger)pageNo
                 pageSize:(NSInteger)pangeSize
                  success:(CompletionSuccessBlock)success
@@ -33,13 +35,6 @@
                              success:(CompletionSuccessBlock)success
                                 fail:(CompletionFailBlock)fail;
 
-- (void)getMainProductListCache:(BOOL)cache
-                       parentId:(NSInteger)parentId
-                         pageNo:(NSInteger)pageNo
-                       pageSize:(NSInteger)pangeSize
-                       sortType:(NSInteger)sort
-                        success:(CompletionSuccessBlock)success
-                           fail:(CompletionFailBlock)fail;
 
 - (void)getProductDetailCache:(BOOL)cache
                     productId:(NSInteger)productId

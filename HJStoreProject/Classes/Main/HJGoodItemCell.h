@@ -16,3 +16,6 @@
 @end
 
 
+@interface HJGoodItemSingleCell : UICollectionViewCell
+- (void)setItemCellWithItem:(HJRecommendModel *)item;
+@end

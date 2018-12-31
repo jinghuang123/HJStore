@@ -23,6 +23,9 @@
         NSMutableArray *names = [[NSMutableArray alloc] init];
         for (HJCategoryModel *category in categorys) {
             HJMainVC *mainVC = [[HJMainVC alloc] init];
+            mainVC.listType = HJMainVCProductListTypeMain;
+            mainVC.headType = category.categoryId == 0 ? HJMainVCProductListHeadTypeMain : HJMainVCProductListHeadTypeList;
+            mainVC.showType = category.categoryId == 0 ? signleLineShowDoubleGoods : singleLineShowOneGoods;
             mainVC.catteryId = category.categoryId;
             [names addObject:category.name];
             [datas addObject:mainVC];

@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^itemClickBlock)(id obj);
 @interface HJMainListHeadView : UICollectionReusableView
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface HJMainListHeadViewList : UICollectionReusableView
+@property (nonatomic, copy) itemClickBlock showModeChangedBlock;
+@property (nonatomic, copy) itemClickBlock sortTypeChengBlock;
+
+@end
+
+

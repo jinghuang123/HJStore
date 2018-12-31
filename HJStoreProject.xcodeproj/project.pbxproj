@@ -22,6 +22,12 @@
 		B811D7EF21CE7F7400FBED10 /* HJMainListHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B811D7EE21CE7F7400FBED10 /* HJMainListHeadView.m */; };
 		B815DC6321C3C8620093CCD3 /* YFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B815DC6221C3C8620093CCD3 /* YFHTTPRequestOperationManager.m */; };
 		B815DC6621C3DD740093CCD3 /* HJCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B815DC6521C3DD740093CCD3 /* HJCategoryModel.m */; };
+		B8264A6621D8BAB600004420 /* HJProductDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A6521D8BAB600004420 /* HJProductDetailVC.m */; };
+		B8264A7021D8BFE100004420 /* MYPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A6821D8BFE100004420 /* MYPresentationController.m */; };
+		B8264A7121D8BFE100004420 /* MYPresentedController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A6A21D8BFE100004420 /* MYPresentedController.m */; };
+		B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A6B21D8BFE100004420 /* MYPresentAnimationManager.m */; };
+		B8264A7321D8BFE100004420 /* MYColorBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A6D21D8BFE100004420 /* MYColorBackView.m */; };
+		B8264A7621D8C03C00004420 /* HJMainPodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A7521D8C03C00004420 /* HJMainPodVC.m */; };
 		B856EC4F21BB7CFA00503DF7 /* CountDownShop.plist in Resources */ = {isa = PBXBuildFile; fileRef = B856EC4E21BB7CF900503DF7 /* CountDownShop.plist */; };
 		B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5121BB985B00503DF7 /* HJWebProtocol.m */; };
 		B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5421BB9AD400503DF7 /* HJShareInstance.m */; };
@@ -88,6 +94,18 @@
 		B815DC6221C3C8620093CCD3 /* YFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		B815DC6421C3DD740093CCD3 /* HJCategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJCategoryModel.h; sourceTree = "<group>"; };
 		B815DC6521C3DD740093CCD3 /* HJCategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJCategoryModel.m; sourceTree = "<group>"; };
+		B8264A6421D8BAB600004420 /* HJProductDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJProductDetailVC.h; sourceTree = "<group>"; };
+		B8264A6521D8BAB600004420 /* HJProductDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJProductDetailVC.m; sourceTree = "<group>"; };
+		B8264A6821D8BFE100004420 /* MYPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYPresentationController.m; sourceTree = "<group>"; };
+		B8264A6921D8BFE100004420 /* MYColorBackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYColorBackView.h; sourceTree = "<group>"; };
+		B8264A6A21D8BFE100004420 /* MYPresentedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYPresentedController.m; sourceTree = "<group>"; };
+		B8264A6B21D8BFE100004420 /* MYPresentAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYPresentAnimationManager.m; sourceTree = "<group>"; };
+		B8264A6C21D8BFE100004420 /* MYPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYPresentationController.h; sourceTree = "<group>"; };
+		B8264A6D21D8BFE100004420 /* MYColorBackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYColorBackView.m; sourceTree = "<group>"; };
+		B8264A6E21D8BFE100004420 /* MYPresentAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYPresentAnimationManager.h; sourceTree = "<group>"; };
+		B8264A6F21D8BFE100004420 /* MYPresentedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYPresentedController.h; sourceTree = "<group>"; };
+		B8264A7421D8C03C00004420 /* HJMainPodVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMainPodVC.h; sourceTree = "<group>"; };
+		B8264A7521D8C03C00004420 /* HJMainPodVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMainPodVC.m; sourceTree = "<group>"; };
 		B856EC4E21BB7CF900503DF7 /* CountDownShop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CountDownShop.plist; sourceTree = "<group>"; };
 		B856EC5021BB985B00503DF7 /* HJWebProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJWebProtocol.h; sourceTree = "<group>"; };
 		B856EC5121BB985B00503DF7 /* HJWebProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJWebProtocol.m; sourceTree = "<group>"; };
@@ -193,6 +211,7 @@
 		B815D9D621C3C6640093CCD3 /* 3RD */ = {
 			isa = PBXGroup;
 			children = (
+				B8264A6721D8BFE100004420 /* MYPresentation */,
 				187CE7E321C135D5005B9D77 /* ZXSegmentController */,
 			);
 			path = 3RD;
@@ -209,6 +228,21 @@
 				B8E38B5B21C94076008C216F /* HJCategoryRequest.m */,
 			);
 			path = WebRequest;
+			sourceTree = "<group>";
+		};
+		B8264A6721D8BFE100004420 /* MYPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				B8264A6821D8BFE100004420 /* MYPresentationController.m */,
+				B8264A6921D8BFE100004420 /* MYColorBackView.h */,
+				B8264A6A21D8BFE100004420 /* MYPresentedController.m */,
+				B8264A6B21D8BFE100004420 /* MYPresentAnimationManager.m */,
+				B8264A6C21D8BFE100004420 /* MYPresentationController.h */,
+				B8264A6D21D8BFE100004420 /* MYColorBackView.m */,
+				B8264A6E21D8BFE100004420 /* MYPresentAnimationManager.h */,
+				B8264A6F21D8BFE100004420 /* MYPresentedController.h */,
+			);
+			path = MYPresentation;
 			sourceTree = "<group>";
 		};
 		B873DA4721B0E18D008DBC66 /* SuperClass */ = {
@@ -355,6 +389,10 @@
 				B811D7E821CE1D0300FBED10 /* HJRollingModel.m */,
 				B811D7ED21CE7F7400FBED10 /* HJMainListHeadView.h */,
 				B811D7EE21CE7F7400FBED10 /* HJMainListHeadView.m */,
+				B8264A6421D8BAB600004420 /* HJProductDetailVC.h */,
+				B8264A6521D8BAB600004420 /* HJProductDetailVC.m */,
+				B8264A7421D8C03C00004420 /* HJMainPodVC.h */,
+				B8264A7521D8C03C00004420 /* HJMainPodVC.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -527,10 +565,12 @@
 			files = (
 				B811D7E321CE1AB000FBED10 /* HJActivityModel.m in Sources */,
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
+				B8264A7321D8BFE100004420 /* MYColorBackView.m in Sources */,
 				B8E38B5C21C94076008C216F /* HJCategoryRequest.m in Sources */,
 				B8A9181E21AFD334006733BA /* HJNavigationVC.m in Sources */,
 				B86E7ADF21B4D49F0094B82B /* HJMainTopToolView.m in Sources */,
 				B873DA4D21B0E29B008DBC66 /* HJGridCell.m in Sources */,
+				B8264A7121D8BFE100004420 /* MYPresentedController.m in Sources */,
 				B8A917F621AFB75A006733BA /* main.m in Sources */,
 				B811D7EF21CE7F7400FBED10 /* HJMainListHeadView.m in Sources */,
 				B8E38B5921C93BF0008C216F /* HJMainRequest.m in Sources */,
@@ -538,6 +578,7 @@
 				B8A917E821AFB758006733BA /* AppDelegate.m in Sources */,
 				B873DA5B21B1160D008DBC66 /* Reachability.m in Sources */,
 				B873DA6221B12F71008DBC66 /* HJGoodItemCell.m in Sources */,
+				B8264A7021D8BFE100004420 /* MYPresentationController.m in Sources */,
 				B856EC5821BBA35A00503DF7 /* LinkageMenuView.m in Sources */,
 				B8A9181521AFD090006733BA /* HJStroeTypeListVC.m in Sources */,
 				B86E7AE221B4FDA90094B82B /* HJGoodsCountDownCell.m in Sources */,
@@ -545,11 +586,13 @@
 				B815DC6621C3DD740093CCD3 /* HJCategoryModel.m in Sources */,
 				B8A9180821AFC5B8006733BA /* HJTabBarVC.m in Sources */,
 				B873DA4A21B0E1C7008DBC66 /* HJSuperView.m in Sources */,
+				B8264A6621D8BAB600004420 /* HJProductDetailVC.m in Sources */,
 				187CE7F321C135D5005B9D77 /* ZXSegmentController.m in Sources */,
 				B811D7E621CE1B9A00FBED10 /* HJRecommendModel.m in Sources */,
 				187CE7F621C135D5005B9D77 /* ZXSegmentHeaderModel.m in Sources */,
 				187CE7F721C135D5005B9D77 /* UIColor+RGB.m in Sources */,
 				B8A9181221AFD073006733BA /* HJMainVC.m in Sources */,
+				B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */,
 				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
 				B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */,
 				B811D7EC21CE1F4500FBED10 /* UIImageView+HHWebImage.m in Sources */,
@@ -565,6 +608,7 @@
 				B815DC6321C3C8620093CCD3 /* YFHTTPRequestOperationManager.m in Sources */,
 				B873DA5321B10BF2008DBC66 /* HJMainSliderCell.m in Sources */,
 				B8A9181B21AFD0D1006733BA /* HJRecommendVC.m in Sources */,
+				B8264A7621D8C03C00004420 /* HJMainPodVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

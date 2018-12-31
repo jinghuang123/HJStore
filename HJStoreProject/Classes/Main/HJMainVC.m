@@ -15,6 +15,8 @@
 #import "HJMainTopToolView.h"
 #import "HJGoodsCountDownCell.h"
 #import "HJMainListHeadView.h"
+#import "HJProductDetailVC.h"
+#import "HJSegemengVC.h"
 
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -41,16 +43,20 @@
 @property (assign , nonatomic) NSInteger pageNo;
 @property (assign , nonatomic) NSInteger pageSize;
 @property (assign , nonatomic) NSInteger sort;
+
+
 @end
 
 
 /* cell */
 static NSString *const HJGridCellIdentifier = @"HJGridCell";
 static NSString *const HJGoodItemCellIdentifier = @"HJGoodItemCell";
+static NSString *const HJGoodItemSingleCellIdentifier =  @"HJGoodItemSingleCell";
+
 static NSString *const HJMainSliderCellIdentifier = @"HJMainSliderCellI";
 
 static NSString *const HJMainListHeadViewIdentifier = @"HJMainListHeadView";
-
+static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2";
 static NSString *const HJMainGridSectionFootViewIdentifier = @"HJMainGridSectionFootView";
 static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
@@ -86,8 +92,8 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
-    if(self.catteryId > 0){
-        [[HJMainRequest shared] getMainListByCategoryIdCache:NO categoryId:self.catteryId pageNo:self.pageNo pageSize:self.pageSize sort:self.sort success:^(NSDictionary *response) {
+    if (self.listType == HJMainVCProductListTypeList) {
+        [[HJMainRequest shared] getMainListByCategoryIdCache:YES categoryId:self.catteryId pageNo:self.pageNo pageSize:20 sort:self.sort success:^(NSDictionary *response) {
             if (self.pageNo > 1) {
                 [self.recommends addObjectsFromArray:[response objectForKey:@"recommends"]];
                 if (self.recommends.count < 20) {
@@ -95,16 +101,14 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 }
             }else{
                 self.recommends = [response objectForKey:@"recommends"];
-                self.activitys = [response objectForKey:@"categorys"];
             }
             success(nil);
             [self.collectionView reloadData];
         } fail:^(NSError *error) {
-            success(nil);
+             success(nil);
         }];
-
     }else{
-        [[HJMainRequest shared] getMainListCache:NO pageNo:self.pageNo pageSize:self.pageSize success:^(NSDictionary *response) {
+        [[HJMainRequest shared] getMainListCache:NO categoryId:self.catteryId sort:self.sort pageNo:self.pageNo pageSize:self.pageSize success:^(NSDictionary *response) {
             if (self.pageNo > 1) {
                 [self.recommends addObjectsFromArray:[response objectForKey:@"recommends"]];
                 if (self.recommends.count < 20) {
@@ -123,6 +127,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
             success(nil);
         }];
     }
+
 }
 
 
@@ -139,19 +144,24 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.frame = CGRectMake(0, 0, MaxWidth, MaxHeight - HJTabH - HJTopNavH - 5);
+
+        CGFloat collectionH = self.listType == HJMainVCProductListTypeMain ? MaxHeight - HJTabH - HJTopNavH - 5 : MaxHeight;
+        _collectionView.frame = CGRectMake(0, 0, MaxWidth, collectionH);
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.alwaysBounceVertical = YES;
         
         [_collectionView registerClass:[HJMainSliderCell class] forCellWithReuseIdentifier:HJMainSliderCellIdentifier];
         [_collectionView registerClass:[HJGridCell class] forCellWithReuseIdentifier:HJGridCellIdentifier];
         [_collectionView registerClass:[HJGoodItemCell class] forCellWithReuseIdentifier:HJGoodItemCellIdentifier];
+        [_collectionView registerClass:[HJGoodItemSingleCell class] forCellWithReuseIdentifier:HJGoodItemSingleCellIdentifier];
+
         [_collectionView registerClass:[HJGoodsCountDownCell class] forCellWithReuseIdentifier:HJGoodsCountDownCellIdentifier];
    
 
         [_collectionView registerClass:[HJMainGridSectionFootView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:HJMainGridSectionFootViewIdentifier];
         
         [_collectionView registerClass:[HJMainListHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier];
+        [_collectionView registerClass:[HJMainListHeadViewList class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier2];
         
         _collectionView.mj_footer.ignoredScrollViewContentInsetBottom = MaxHeight >= ENM_SCREEN_H_X ? 34 : 0;
         
@@ -235,6 +245,16 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         HJMainSliderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJMainSliderCellIdentifier forIndexPath:indexPath];
         cell.imageGroupArray = self.bannerImages;
         cell.bannerItems = self.banners;
+        weakify(self)
+        cell.bannerCellItemClick = ^(HJBannerModel *banner) {
+            if (banner.typedata == HJNavPushTypeUrl) {
+                [weak_self pushToSDKWebWithUrl:banner.content_url];
+            }else if (banner.typedata == HJNavPushTypeDetail) {
+                [weak_self pushToProductDetailWithId:banner.content_product];
+            }else if (banner.typedata == HJNavPushTypeList) {
+                [weak_self pushToProductListWithId:banner.taobao_activity_id];
+            }
+        };
         gridcell = cell;
     }else if (indexPath.section == HJMainVCSectionTypeSection1) {
         HJGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGridCellIdentifier forIndexPath:indexPath];
@@ -244,7 +264,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
             HJActivityModel *item = (HJActivityModel *)obj;
             [cell updeteCellWithActivityItem:item];
         }else{
-            HJSubCategoryModel *item = (HJSubCategoryModel *)obj;
+            HJCategoryModel *item = (HJCategoryModel *)obj;
             [cell updeteCellWithGridItem:item];
         }
         gridcell = cell;
@@ -253,11 +273,19 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         cell.backgroundColor = [UIColor whiteColor];
         gridcell = cell;
     }else if (indexPath.section == HJMainVCSectionTypeSection3) {
-        HJGoodItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemCellIdentifier forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor whiteColor];
-        HJRecommendModel *item = [self.recommends objectAtIndex:indexPath.row];
-        [cell setItemCellWithItem:item];
-        gridcell = cell;
+        if (self.showType == signleLineShowDoubleGoods) {
+            HJGoodItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemCellIdentifier forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor whiteColor];
+            HJRecommendModel *item = [self.recommends objectAtIndex:indexPath.row];
+            [cell setItemCellWithItem:item];
+            gridcell = cell;
+        }else{
+            HJGoodItemSingleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemSingleCellIdentifier forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor whiteColor];
+            HJRecommendModel *item = [self.recommends objectAtIndex:indexPath.row];
+            [cell setItemCellWithItem:item];
+            gridcell = cell;
+        }
     }
     return gridcell;
 }
@@ -266,11 +294,31 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     UICollectionReusableView *reusableview = [[UICollectionReusableView alloc] init];
     if (kind == UICollectionElementKindSectionHeader){
         if (indexPath.section == HJMainVCSectionTypeSection3) {
-            UICollectionReusableView *headerView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier forIndexPath:indexPath];
-            headerView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5].CGColor;
-            headerView.layer.borderWidth = self.catteryId > 0 ? 0.5 : 0;
-            headerView.backgroundColor = [UIColor whiteColor];
-            reusableview = headerView;
+            if(self.headType == HJMainVCProductListHeadTypeMain){
+                HJMainListHeadView *headerView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier forIndexPath:indexPath];
+                headerView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5].CGColor;
+                headerView.layer.borderWidth = self.catteryId > 0 ? 0.5 : 0;
+                headerView.backgroundColor = [UIColor whiteColor];
+                reusableview = headerView;
+            }else{
+                HJMainListHeadViewList *headerView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier2 forIndexPath:indexPath];
+                headerView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5].CGColor;
+                headerView.layer.borderWidth = self.catteryId > 0 ? 0.5 : 0;
+                headerView.backgroundColor = [UIColor whiteColor];
+                weakify(self)
+                headerView.sortTypeChengBlock = ^(id obj) {
+                    
+                };
+                headerView.showModeChangedBlock = ^(id obj) {
+                    if (weak_self.showType == singleLineShowOneGoods) {
+                        weak_self.showType = signleLineShowDoubleGoods;
+                    }else{
+                        weak_self.showType = singleLineShowOneGoods;
+                    }
+                    [weak_self.collectionView reloadData];
+                };
+                reusableview = headerView;
+            }
         }
     }else{
         if (indexPath.section == HJMainVCSectionTypeSection1) {
@@ -293,7 +341,12 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         return CGSizeMake(MaxWidth, 180);
     }
     if (indexPath.section == HJMainVCSectionTypeSection3) {//列表
-        return CGSizeMake((MaxWidth - 15)/2, (MaxWidth - 5)/2 + 90);
+        if (self.showType == signleLineShowDoubleGoods) {
+            return CGSizeMake((MaxWidth - 15)/2, (MaxWidth - 5)/2 + 90);
+        }else{
+            return CGSizeMake(MaxWidth, 150);
+        }
+        
     }
 
     return CGSizeZero;
@@ -301,7 +354,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 #pragma mark - X间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return (section == HJMainVCSectionTypeSection3) ? 5 : 0;
+    return (section == HJMainVCSectionTypeSection3 && self.showType == signleLineShowDoubleGoods) ? 5 : 0;
 }
 #pragma mark - Y间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
@@ -310,7 +363,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }else if(section == HJMainVCSectionTypeSection2){
         return 0;
     }else if(section == HJMainVCSectionTypeSection3){
-        return 5;
+        return self.showType == signleLineShowDoubleGoods ? 5 : 0;
     }else{
         return 0;
     }
@@ -326,7 +379,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         }
         return UIEdgeInsetsZero;
     }else if(section == HJMainVCSectionTypeSection3){
-        return UIEdgeInsetsMake(5, 5, 0, 5);
+        return self.showType == signleLineShowDoubleGoods ? UIEdgeInsetsMake(5, 5, 0, 5) : UIEdgeInsetsZero;
     }else{
         return UIEdgeInsetsZero;
     }
@@ -346,6 +399,58 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         return CGSizeMake(MaxWidth,30);  //Top头条的宽高
     }
     return CGSizeZero;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"didSelectItemAtIndexPath sectiion = %ld",indexPath.section);
+    if (indexPath.section == HJMainVCSectionTypeSection0) {
+
+    }else if (indexPath.section == HJMainVCSectionTypeSection1){
+        HJActivityModel *model = [self.activitys objectAtIndex:indexPath.row];
+        if (model.typedata == HJNavPushTypeUrl) {
+            [self pushToSDKWebWithUrl:model.content_url];
+        }else if (model.typedata == HJNavPushTypeDetail) {
+            [self pushToProductDetailWithId:model.content_product];
+        }else if (model.typedata == HJNavPushTypeList) {
+             [self pushToProductListWithId:model.content_list];
+        }
+       
+    }else if(indexPath.section == HJMainVCSectionTypeSection2){
+
+    }else if(indexPath.section == HJMainVCSectionTypeSection3){
+        HJRecommendModel *item = [self.recommends objectAtIndex:indexPath.row];
+        [self pushToProductDetailWithId:item.product_id];
+    }
+}
+
+
+- (void)pushToProductListWithId:(NSInteger)categoryId {
+    HJMainVC *productListVC = [[HJMainVC alloc] init];
+    productListVC.hidesBottomBarWhenPushed = YES;
+    productListVC.catteryId = categoryId;
+    productListVC.headType  = HJMainVCProductListHeadTypeList;
+    productListVC.listType = HJMainVCProductListTypeList;
+    if (self.productListItemClickBlock) {
+        self.productListItemClickBlock(@(categoryId));
+    }else{
+        [self.navigationController pushViewController:productListVC animated:YES];
+    }
+}
+
+- (void)pushToProductDetailWithId:(NSInteger)productId {
+    HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
+    productDetailVC.productId = productId;
+    productDetailVC.hidesBottomBarWhenPushed = YES;
+    if (self.productDetailItemClickBlock) {
+        self.productDetailItemClickBlock(@(productId));
+    }
+    [self.navigationController pushViewController:productDetailVC animated:YES];
+}
+
+- (void)pushToSDKWebWithUrl:(NSString *)url {
+    if (self.urlItemClickBlock) {
+        self.urlItemClickBlock(url);
+    }
 }
 
 @end

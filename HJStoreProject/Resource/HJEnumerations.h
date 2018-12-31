@@ -15,6 +15,28 @@ typedef NS_ENUM(NSUInteger, HJMainVCSectionType) {
     HJMainVCSectionTypeSection3,
 };
 
+typedef NS_ENUM(NSUInteger, HJMainVCProductListType) {
+    HJMainVCProductListTypeMain,
+    HJMainVCProductListTypeList,
+};
+
+typedef NS_ENUM(NSUInteger, HJMainVCProductListHeadType) {
+    HJMainVCProductListHeadTypeMain,
+    HJMainVCProductListHeadTypeList,
+};
+
+typedef NS_ENUM(NSUInteger, HJNavPushType) {
+    HJNavPushTypeUrl,
+    HJNavPushTypeDetail,
+    HJNavPushTypeList,
+};
+
+typedef NS_ENUM(NSUInteger, GoodsListShowType) {
+    singleLineShowOneGoods,
+    signleLineShowDoubleGoods,
+};
+
+
 
 typedef NS_ENUM(NSUInteger, ScreenHeightType) {
     ENM_SCREEN_H_5S = 568,

@@ -10,6 +10,7 @@
 #import "LinkageMenuView.h"
 #import "OneView.h"
 #import "HJCategoryRequest.h"
+#import "HJMainVC.H"
 
 
 @interface HJStroeTypeListVC ()
@@ -39,6 +40,16 @@
         rightView.tag = category.categoryId;
         [menutitles addObject:category.name];
         [rightViews addObject:rightView];
+        weakify(self)
+        rightView.subCategoryCellClick = ^(HJCategoryModel *model) {
+            HJMainVC *productListVC = [[HJMainVC alloc] init];
+            productListVC.hidesBottomBarWhenPushed = YES;
+            productListVC.catteryId = model.categoryId;
+            productListVC.headType  = HJMainVCProductListHeadTypeList;
+            productListVC.listType = HJMainVCProductListTypeList;
+            productListVC.showType = singleLineShowOneGoods;
+            [weak_self.navigationController pushViewController:productListVC animated:YES];
+        };
     }
     LinkageMenuView *lkMenu = [[LinkageMenuView alloc] initWithFrame:CGRectMake(0, HJNavH , MaxWidth , MaxHeight - HJTabH) WithMenu:menutitles andViews:rightViews];
     lkMenu.ItemSelectedBlock = ^(OneView *rightView) {

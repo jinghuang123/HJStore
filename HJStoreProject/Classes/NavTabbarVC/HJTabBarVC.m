@@ -43,12 +43,12 @@
                               HJStroeTabbarSelImgKey : @"tabr_02_down"},
                             
                             @{HJStroeTabbarClassKey  : @"HJStroeTypeListVC",
-                              HJStroeTabbarTitleKey  : @"美媒榜",
+                              HJStroeTabbarTitleKey  : @"分类",
                               HJStroeTabbarImgKey    : @"tabr_03_up",
                               HJStroeTabbarSelImgKey : @"tabr_03_down"},
                             
                             @{HJStroeTabbarClassKey  : @"HJRecommendVC",
-                              HJStroeTabbarTitleKey  : @"美店",
+                              HJStroeTabbarTitleKey  : @"社区",
                               HJStroeTabbarImgKey    : @"tabr_04_up",
                               HJStroeTabbarSelImgKey : @"tabr_04_down"},
                             

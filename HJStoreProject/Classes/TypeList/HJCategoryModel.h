@@ -17,10 +17,5 @@
 @property (nonatomic , copy) NSString *image;
 @end
 
-@interface HJSubCategoryModel : NSObject
-@property (nonatomic , assign) NSInteger category_Id;
-@property (nonatomic , assign) NSInteger parent_id;
-@property (nonatomic , copy) NSString *name;
-@property (nonatomic , copy) NSString *image;
-@end
+
 

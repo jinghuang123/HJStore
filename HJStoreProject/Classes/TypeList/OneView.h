@@ -6,12 +6,14 @@
 //  Copyright © 2017年 EmotionV. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HJSuperView.h"
 #import "HJCategoryModel.h"
 
-@interface OneView : UIView<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+
+
+@interface OneView : HJSuperView <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, assign) NSInteger categoryId;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
-
+@property (nonatomic, copy) cellItemClick subCategoryCellClick;
 @end

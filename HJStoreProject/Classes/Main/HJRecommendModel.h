@@ -10,18 +10,14 @@
 
 
 @interface HJRecommendModel : NSObject
-@property (nonatomic, assign) NSInteger channel_id;
-@property (nonatomic, strong) NSString *coupon;
-@property (nonatomic, strong) NSString *earnSum;
-@property (nonatomic, strong) NSString *image;
-@property (nonatomic, strong) NSString *price;
-@property (nonatomic, assign) NSInteger product_id;
-@property (nonatomic, strong) NSString *rebate_price;
-@property (nonatomic, assign) NSInteger sold_count;
-@property (nonatomic, strong) NSString *store_name;
-@property (nonatomic, strong) NSString *stote_logo;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *updatetime;
+@property (nonatomic , assign) NSInteger          product_id;
+@property (nonatomic , copy) NSString              * title;
+@property (nonatomic , copy) NSString              * pict_url_image; //商品主图
+@property (nonatomic , assign) NSInteger            user_type; //卖家类型:0=淘宝,1=天猫
+@property (nonatomic , copy) NSString              * reserve_price; //商品一口价格
+@property (nonatomic , copy) NSString              * zk_final_price; //商品折扣价格
+@property (nonatomic , assign) NSInteger              volume; //销量
+@property (nonatomic , copy) NSString              * max_commission_rate; //佣金比率
+@property (nonatomic , copy) NSString              * coupon_value; //优惠券金额
 @end
 

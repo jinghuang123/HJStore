@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface HJSegemengVC : UIViewController
+#import "HJSuperViewController.h"
+@interface HJSegemengVC : HJSuperViewController
 
 @end

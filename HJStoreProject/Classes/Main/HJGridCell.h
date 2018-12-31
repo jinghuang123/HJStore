@@ -15,7 +15,7 @@
 
 @interface HJGridCell : UICollectionViewCell
 
-- (void)updeteCellWithGridItem:(HJSubCategoryModel *)category;
+- (void)updeteCellWithGridItem:(HJCategoryModel *)category;
 
 - (void)updeteCellWithActivityItem:(HJActivityModel *)activity;
 

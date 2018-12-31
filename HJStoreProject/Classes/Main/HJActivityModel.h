@@ -11,14 +11,14 @@
 
 
 @interface HJActivityModel : NSObject
-@property (nonatomic, strong) NSString *content_list;
-@property (nonatomic, strong) NSString *content_product;
+@property (nonatomic, assign) NSInteger content_list;
+@property (nonatomic, assign) NSInteger content_product;
 @property (nonatomic, strong) NSString *content_url;
 @property (nonatomic, assign) NSInteger activityId;
 @property (nonatomic, assign) NSInteger islogindata;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *pic_image;
-@property (nonatomic, assign) NSInteger typedata;
+@property (nonatomic, assign) NSInteger typedata; //0.url 1.产品详情  2.产品列表
 @end
 
 

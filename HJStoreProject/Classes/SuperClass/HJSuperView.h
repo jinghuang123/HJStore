@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+typedef void(^cellItemClick)(id obj);
 
 @interface HJSuperView : UIView
 
 @end
 
-NS_ASSUME_NONNULL_END
+

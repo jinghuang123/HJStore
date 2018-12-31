@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HJSuperView.h"
 
 @interface HJMainSliderCell : UICollectionViewCell
 /* 轮播图数组 url*/
 @property (copy , nonatomic) NSArray *imageGroupArray;
 /* 轮播图数组 图片对象 */
 @property (copy , nonatomic) NSArray *bannerItems;
+
+@property (copy , nonatomic) cellItemClick bannerCellItemClick;
 @end
 
 

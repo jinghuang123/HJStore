@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString *banner_image;
 @property (nonatomic, assign) NSInteger content_product;
 @property (nonatomic, strong) NSString *content_url;
-@property (nonatomic, assign) NSInteger taobao_activity_ids;
+@property (nonatomic, assign) NSInteger taobao_activity_id;
 @property (nonatomic, assign) NSInteger typedata;
 @end
 

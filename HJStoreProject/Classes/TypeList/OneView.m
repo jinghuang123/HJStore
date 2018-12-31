@@ -58,9 +58,17 @@ static NSString *const HJGridCellIdentifier = @"HJGridCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HJGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGridCellIdentifier forIndexPath:indexPath];
-    HJSubCategoryModel *subCategory = [self.dataArray objectAtIndex:indexPath.row];
+    HJCategoryModel *subCategory = [self.dataArray objectAtIndex:indexPath.row];
     [cell updeteCellWithGridItem:subCategory];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HJCategoryModel *subCategory = [self.dataArray objectAtIndex:indexPath.row];
+    NSLog(@"HJCategoryModel ID:%ld",subCategory.categoryId);
+    if (self.subCategoryCellClick) {
+        self.subCategoryCellClick(subCategory);
+    }
 }
 
 @end

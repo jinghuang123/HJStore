@@ -60,7 +60,7 @@
     
 }
 
-- (void)updeteCellWithGridItem:(HJSubCategoryModel *)category {
+- (void)updeteCellWithGridItem:(HJCategoryModel *)category {
     _gridLabel.text = category.name;
     if (category.image.length == 0) return;
     [_gridImageView sd_setImageWithURLString:category.image placeholderImage:[UIImage imageNamed:@"default_49_11"]];
