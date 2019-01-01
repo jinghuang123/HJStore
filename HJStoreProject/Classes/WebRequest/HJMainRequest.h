@@ -12,6 +12,8 @@
 #import "HJActivityModel.h"
 #import "HJRecommendModel.h"
 #import "HJRollingModel.h"
+#import "HJProductDetailModel.h"
+
 
 @interface HJMainRequest : NSObject
 

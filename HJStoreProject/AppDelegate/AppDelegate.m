@@ -10,7 +10,7 @@
 #import "HJTabBarVC.h"
 #import "HJMainRequest.h"
 #import "HJCategoryRequest.h"
-
+#import "AlibcManager.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +21,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window makeKeyAndVisible];
     
+    [AlibcManager shared];
   
     [[HJCategoryRequest shared] getCategoryCache:NO success:^(id responseObject) {
     } fail:^(NSError *error) {
@@ -56,6 +60,18 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    
+    // 新接口写法
+    if (![[AlibcTradeSDK sharedInstance] application:application
+                                             openURL:url
+                                             options:options]) {
+        //处理其他app跳转到自己的app，如果百川处理过会返回YES
+    }
+    return YES;
 }
 
 

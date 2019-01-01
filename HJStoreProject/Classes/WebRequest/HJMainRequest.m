@@ -8,6 +8,7 @@
 
 #import "HJMainRequest.h"
 
+
 @interface HJMainRequest ()
 @property (nonatomic,strong) NSMutableArray *categorys;
 @end
@@ -142,6 +143,8 @@
     NSDictionary *parms = @{@"productId":@(productId)};
     [kHTTPManager tryPost:kUrlGetProductDetail parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"getProductDetailCache:%@",responseObject);
+        HJProductDetailModel *model = [HJProductDetailModel mj_objectWithKeyValues:responseObject];
+        success(model);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
