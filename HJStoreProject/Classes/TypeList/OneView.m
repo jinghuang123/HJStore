@@ -52,7 +52,7 @@ static NSString *const HJGridCellIdentifier = @"HJGridCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat cellWidth = (self.frame.size.width - 5.0) / 3.0;
-    CGFloat cellHeight = itemsize + 30;
+    CGFloat cellHeight = 65;
     return CGSizeMake(cellWidth, cellHeight);
 }
 

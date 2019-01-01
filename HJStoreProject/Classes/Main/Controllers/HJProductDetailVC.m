@@ -11,14 +11,21 @@
 #import "HJMainSliderCell.h"
 #import "AlibcManager.h"
 #import "HJProductDetailContentCell.h"
+#import "HJShareVC.h"
 
 static NSString *const HJProductDetailContentCellIdentifier = @"HJProductDetailContentCell";
+static NSString *const HJProductDetailCellIdentifier = @"HJProductDetailCell";
+static NSString *const HJProductDetailTipCellIdentifier = @"HJProductDetailTipCell";
+static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
+
 
 @interface HJProductDetailVC () <UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) HJMainSliderView *tableHeadView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *randoms;
+@property (nonatomic, strong) HJProductDetailModel *detailmodel;
 @end
 
 @implementation HJProductDetailVC
@@ -40,26 +47,44 @@ static NSString *const HJProductDetailContentCellIdentifier = @"HJProductDetailC
     return _dataSource;
 }
 
+- (NSMutableArray *)randoms {
+    if(!_randoms){
+        _randoms = [[NSMutableArray alloc] init];
+    }
+    return _randoms;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
 
     [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJProductDetailModel *detailModel) {
         self.tableHeadView.imageGroupArray = detailModel.small_images;
-        [self.dataSource addObjectsFromArray:@[detailModel]];
-        [self.tableView reloadData];
+        self.detailmodel = detailModel;
+        [self getRamdoms];
     } fail:^(NSError *error) {
         
     }];
     
 
+
     [self setupNavItems];
     [self setupButtons];
 }
 
+- (void)getRamdoms {
+    [[HJMainRequest shared] getRandomListCache:YES pageSize:10 success:^(NSArray *recommends) {
+        [self.randoms setArray:recommends];
+        [self.dataSource addObjectsFromArray:@[self.detailmodel,@(NO),@[],self.randoms]];
+        [self.tableView reloadData];
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
-        UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, MaxWidth, MaxHeight - 49)];
+        UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, MaxWidth, MaxHeight - 29)];
         _tableView = tableView;
         tableView.backgroundColor = [UIColor clearColor];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -137,22 +162,78 @@ static NSString *const HJProductDetailContentCellIdentifier = @"HJProductDetailC
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count > 0 ? 1 : 0;
+    if(section == 0){
+        return  1;
+    }else if(section == 1){
+        NSNumber *contain = [self.dataSource objectAtIndex:section];
+        return [contain boolValue] ? 1 : 0;
+    }else if(section == 2){
+        return 1;
+    }else{
+        NSArray *randoms = [self.dataSource objectAtIndex:section];
+        return randoms.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HJProductDetailContentCell *cell = [[HJProductDetailContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HJProductDetailContentCellIdentifier];
-    HJProductDetailModel *detailModel = [self.dataSource objectAtIndex:0];
-    [cell setcontentWithModel:detailModel];
+    UITableViewCell *cell;
+    if (indexPath.section == 0) {
+        HJProductDetailContentCell *contentCell = [tableView dequeueReusableCellWithIdentifier:HJProductDetailContentCellIdentifier];
+        if (!contentCell) {
+            contentCell = [[HJProductDetailContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HJProductDetailContentCellIdentifier];
+        }
+        HJProductDetailModel *detailModel = [self.dataSource objectAtIndex:0];
+        [contentCell setcontentWithModel:detailModel];
+        cell = contentCell;
+    }else if(indexPath.section == 1){
+        HJProductDetailCell *detailcell = [tableView dequeueReusableCellWithIdentifier:HJProductDetailCellIdentifier];
+        if (!detailcell) {
+            detailcell = [[HJProductDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HJProductDetailCellIdentifier];
+        }
+        cell = detailcell;
+    }else if(indexPath.section == 2){
+        HJProductDetailTipCell *tipCell = [tableView dequeueReusableCellWithIdentifier:HJProductDetailTipCellIdentifier];
+        if (!tipCell) {
+            tipCell = [[HJProductDetailTipCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HJProductDetailTipCellIdentifier];
+        }
+        cell = tipCell;
+    }else {
+        HJRecommendModel *recommend = self.dataSource[indexPath.section][indexPath.row];
+        HJGoodItemsSingleCell *listCell = [tableView dequeueReusableCellWithIdentifier:HJGoodItemSingleCellIdentifier];
+        if (!listCell) {
+            listCell = [[HJGoodItemsSingleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HJGoodItemSingleCellIdentifier];
+        }
+        [listCell setItemCellWithItem:recommend];
+        cell = listCell;
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 -(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 140;
+    if (indexPath.section == 0) {
+        return 175;
+    }else if(indexPath.section == 1) {
+        return 50;
+    }else if(indexPath.section == 2) {
+        return 60;
+    }else{
+        return 150;
+    }
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 3) {
+        HJRecommendModel *recommend = self.dataSource[indexPath.section][indexPath.row];
+        HJProductDetailVC *detailVc = [[HJProductDetailVC alloc] init];
+        detailVc.productId = recommend.product_id;
+        [self.navigationController pushViewController:detailVc animated:YES];
+    }
 }
 
 
@@ -168,6 +249,8 @@ static NSString *const HJProductDetailContentCellIdentifier = @"HJProductDetailC
 
 - (void)shareAction {
     NSLog(@"shareAction");
+    HJShareVC *share = [[HJShareVC alloc] init];
+    [self.navigationController pushViewController:share animated:YES];
 }
 
 - (void)couponInfo {

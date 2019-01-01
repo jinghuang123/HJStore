@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HJProductDetailModel.h"
 #import "HJSuperView.h"
+#import "HJRecommendModel.h"
 
 
 @interface HJProductDetailContentCell : UITableViewCell
@@ -18,3 +19,14 @@
 @end
 
 
+@interface HJProductDetailCell : UITableViewCell
+@property (nonatomic,copy) cellItemClick openCellBlock;
+@end
+
+@interface HJProductDetailTipCell : UITableViewCell
+@end
+
+
+@interface HJGoodItemsSingleCell : UITableViewCell
+- (void)setItemCellWithItem:(HJRecommendModel *)item;
+@end

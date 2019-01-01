@@ -150,4 +150,19 @@
     }];
 }
 
+- (void)getRandomListCache:(BOOL)cache
+                 pageSize:(NSInteger)pageSize
+                   success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail  {
+    NSDictionary *parms = @{@"pageSize":@(pageSize)};
+    [kHTTPManager tryPost:kUrlGetRandomList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSArray *recommends = [HJRecommendModel mj_objectArrayWithKeyValuesArray:responseObject];
+
+        success(recommends);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
 @end

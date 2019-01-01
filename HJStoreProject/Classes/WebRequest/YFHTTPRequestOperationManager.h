@@ -7,6 +7,8 @@
 
 #define kHTTPManager [YFHTTPRequestOperationManager shared]
 
+#define PRODUCTDETAILHEAD @"https://hws.m.taobao.com/cache/wdesc/5.0/"
+#define PRODUCTDETAILTAIL @"&qq-pf-to=pcqq.group"
 
 @interface YFHTTPRequestOperationManager : AFHTTPSessionManager
 

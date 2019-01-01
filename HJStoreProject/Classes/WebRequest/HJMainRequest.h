@@ -42,5 +42,10 @@
                     productId:(NSInteger)productId
                       success:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail;
+
+- (void)getRandomListCache:(BOOL)cache
+                  pageSize:(NSInteger)pageSize
+                   success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail ;
 @end
 

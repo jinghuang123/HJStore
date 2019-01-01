@@ -19,7 +19,8 @@
 #define FUll_VIEW_WIDTH     ([[UIScreen mainScreen] bounds].size.width)
 #define FUll_VIEW_HEIGHT    ([[UIScreen mainScreen] bounds].size.height)
 
-@interface LinkageMenuView()
+
+@interface LinkageMenuView() <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *menuView;
 @property (nonatomic, strong) UIView *bottomView;
@@ -38,6 +39,7 @@
     NSInteger DTScrollTag; //滚动tag
     CGFloat blankHeight;
     CGFloat half_blankHeight;
+    BOOL setDefultvalue;
 }
 
 #pragma mark - Init Method
@@ -134,7 +136,8 @@
     if (!_menuView) {
         _menuView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MENU_WIDTH, self.frame.size.height)];
         _menuView.backgroundColor = [UIColor whiteColor];
-        _menuView.scrollsToTop = YES;
+        _menuView.scrollsToTop = NO;
+        _menuView.delegate = self;
         _menuView.showsVerticalScrollIndicator = NO;
         
         _menuView.contentSize = CGSizeMake(0, titlesCount * btnHeight + blankHeight + 5.0);
@@ -168,6 +171,7 @@
 - (void)setDefaultViewContent {
     UIButton *menubtn = [self.menubtns objectAtIndex:0];
     choseTag = 2;
+    setDefultvalue = YES;
     [self choseMenu:menubtn];
 }
 
@@ -179,28 +183,29 @@
         UIButton *lastButton = (UIButton *)[self viewWithTag:choseTag];
         [lastButton setTitleColor:_textColor forState:UIControlStateNormal];
         
-        CGFloat scroHeight = _menuView.contentSize.height - FUll_VIEW_HEIGHT + TABBAR_HEIGHT;
-        
+        CGFloat scroHeight = _menuView.contentSize.height - FUll_VIEW_HEIGHT + TABBAR_HEIGHT + HJNavH;
         if (menuArray.count > DTScrollTag * 2.0) {
             if (button.tag <= DTScrollTag) {
-//                [UIView animateWithDuration:ANIMATION_TIME animations:^{
-//                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT) animated:NO];
-//                }];
+                CGFloat offset = setDefultvalue ? 0 : 20;
+                setDefultvalue = NO;
+                [UIView animateWithDuration:ANIMATION_TIME animations:^{
+                    [_menuView setContentOffset:CGPointMake(0,-offset) animated:YES];
+                }];
             }else if (button.tag > menuArray.count - DTScrollTag){
                 [UIView animateWithDuration:ANIMATION_TIME animations:^{
-                    [_menuView setContentOffset:CGPointMake(0, scroHeight) animated:NO];
+                    [_menuView setContentOffset:CGPointMake(0, scroHeight) animated:YES];
                 }];
             }else if(button.tag == DTScrollTag + 1){
-                [UIView animateWithDuration:ANIMATION_TIME animations:^{
-                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT + blankHeight + 1.0) animated:NO];
-                }];
+//                [UIView animateWithDuration:ANIMATION_TIME animations:^{
+//                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT + blankHeight + 1.0) animated:YES];
+//                }];
             }else if (button.tag > DTScrollTag + 1 && button.tag < menuArray.count - DTScrollTag){
                 [UIView animateWithDuration:ANIMATION_TIME animations:^{
-                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT + blankHeight + 1.0 + button.frame.size.height * (button.tag - DTScrollTag - 1)) animated:NO];
+                    [_menuView setContentOffset:CGPointMake(0,- NAVIGATION_HEIGHT + blankHeight + 1.0 + button.frame.size.height * (button.tag - DTScrollTag - 1)) animated:YES];
                 }];
             }else if (button.tag == menuArray.count - DTScrollTag){
                 [UIView animateWithDuration:ANIMATION_TIME animations:^{
-                    [_menuView setContentOffset:CGPointMake(0, scroHeight - blankHeight - 5.0) animated:NO];
+                    [_menuView setContentOffset:CGPointMake(0, scroHeight - blankHeight - 5.0) animated:YES];
                 }];
             }
  
@@ -236,4 +241,7 @@
         choseTag = newChoseTag;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@">>>>>>>>>%f",scrollView.jk_contentOffsetY);
+}
 @end

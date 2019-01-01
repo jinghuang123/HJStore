@@ -8,6 +8,8 @@
 #define BASE_URL @""
 #import "YFHTTPRequestOperationManager.h"
 
+
+
 @implementation YFHTTPRequestOperationManager
 
 + (instancetype)shared {
@@ -63,6 +65,7 @@
                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error,NSString *yfErrCode))failure {
     NSURLSessionDataTask *getTask = [self GET:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject%@",responseObject);
         success(task,responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (task.state == NSURLSessionTaskStateCanceling) {
