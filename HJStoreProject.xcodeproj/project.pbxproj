@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7FA21C13639005B9D77 /* HJSegemengVC.m */; };
 		296F06B196B4CBA081E8D294 /* libPods-HJStoreProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */; };
+		B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */; };
+		B8052FAE21DE2E0300F125F4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */; };
+		B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDE921E055920059CACC /* HJSearchListVC.m */; };
+		B810EDED21E058470059CACC /* LLSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDEC21E058470059CACC /* LLSearchView.m */; };
+		B810EDF021E072470059CACC /* HJSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDEF21E072470059CACC /* HJSearchModel.m */; };
 		B811D7E021CE18EF00FBED10 /* HJBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B811D7DF21CE18EF00FBED10 /* HJBannerModel.m */; };
 		B811D7E321CE1AB000FBED10 /* HJActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B811D7E221CE1AB000FBED10 /* HJActivityModel.m */; };
 		B811D7E621CE1B9A00FBED10 /* HJRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B811D7E521CE1B9A00FBED10 /* HJRecommendModel.m */; };
@@ -51,7 +56,6 @@
 		B82126E021D9C819007828B2 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B82126DC21D9C819007828B2 /* AlipaySDK.bundle */; };
 		B82126E121D9C819007828B2 /* ALPLinkPartnerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B82126DD21D9C819007828B2 /* ALPLinkPartnerSDK.bundle */; };
 		B82126E221D9C819007828B2 /* NBResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B82126DE21D9C819007828B2 /* NBResource.bundle */; };
-		B82126E421D9CE19007828B2 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B82126E321D9CE19007828B2 /* yw_1222.jpg */; };
 		B82126E721D9D013007828B2 /* AlibcManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B82126E621D9D013007828B2 /* AlibcManager.m */; };
 		B82126EA21D9DA9B007828B2 /* ALiTradeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B82126E821D9DA9B007828B2 /* ALiTradeWebViewController.m */; };
 		B8264A6621D8BAB600004420 /* HJProductDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8264A6521D8BAB600004420 /* HJProductDetailVC.m */; };
@@ -68,6 +72,7 @@
 		B856EC5821BBA35A00503DF7 /* LinkageMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5621BBA35A00503DF7 /* LinkageMenuView.m */; };
 		B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */ = {isa = PBXBuildFile; fileRef = B856EC5A21BBA3AA00503DF7 /* OneView.m */; };
 		B8626E6E21DB46CF00D7BA74 /* HJShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8626E6D21DB46CF00D7BA74 /* HJShareVC.m */; };
+		B8626E7121DB5D5E00D7BA74 /* HJShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8626E7021DB5D5E00D7BA74 /* HJShareCell.m */; };
 		B86E7AD921B4BE730094B82B /* HJMainAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E7AD821B4BE730094B82B /* HJMainAdCell.m */; };
 		B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E7ADB21B4C1300094B82B /* HJMainGridSectionFootView.m */; };
 		B86E7ADF21B4D49F0094B82B /* HJMainTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = B86E7ADE21B4D49F0094B82B /* HJMainTopToolView.m */; };
@@ -103,6 +108,15 @@
 		2A9627EBDD40F69EA553FBA1 /* Pods-HJStoreProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.debug.xcconfig"; sourceTree = "<group>"; };
 		2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.release.xcconfig"; sourceTree = "<group>"; };
 		4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJStoreProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8052FAA21DE2DBB00F125F4 /* HJSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchVC.h; sourceTree = "<group>"; };
+		B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchVC.m; sourceTree = "<group>"; };
+		B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
+		B810EDE821E055920059CACC /* HJSearchListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchListVC.h; sourceTree = "<group>"; };
+		B810EDE921E055920059CACC /* HJSearchListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchListVC.m; sourceTree = "<group>"; };
+		B810EDEB21E058470059CACC /* LLSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSearchView.h; sourceTree = "<group>"; };
+		B810EDEC21E058470059CACC /* LLSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSearchView.m; sourceTree = "<group>"; };
+		B810EDEE21E072470059CACC /* HJSearchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchModel.h; sourceTree = "<group>"; };
+		B810EDEF21E072470059CACC /* HJSearchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchModel.m; sourceTree = "<group>"; };
 		B811D7DE21CE18EF00FBED10 /* HJBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJBannerModel.h; sourceTree = "<group>"; };
 		B811D7DF21CE18EF00FBED10 /* HJBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJBannerModel.m; sourceTree = "<group>"; };
 		B811D7E121CE1AB000FBED10 /* HJActivityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJActivityModel.h; sourceTree = "<group>"; };
@@ -155,7 +169,6 @@
 		B82126DC21D9C819007828B2 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		B82126DD21D9C819007828B2 /* ALPLinkPartnerSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ALPLinkPartnerSDK.bundle; sourceTree = "<group>"; };
 		B82126DE21D9C819007828B2 /* NBResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NBResource.bundle; sourceTree = "<group>"; };
-		B82126E321D9CE19007828B2 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		B82126E521D9D013007828B2 /* AlibcManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlibcManager.h; sourceTree = "<group>"; };
 		B82126E621D9D013007828B2 /* AlibcManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlibcManager.m; sourceTree = "<group>"; };
 		B82126E821D9DA9B007828B2 /* ALiTradeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALiTradeWebViewController.m; sourceTree = "<group>"; };
@@ -187,6 +200,8 @@
 		B856EC5A21BBA3AA00503DF7 /* OneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneView.m; sourceTree = "<group>"; };
 		B8626E6C21DB46CF00D7BA74 /* HJShareVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJShareVC.h; sourceTree = "<group>"; };
 		B8626E6D21DB46CF00D7BA74 /* HJShareVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJShareVC.m; sourceTree = "<group>"; };
+		B8626E6F21DB5D5E00D7BA74 /* HJShareCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJShareCell.h; sourceTree = "<group>"; };
+		B8626E7021DB5D5E00D7BA74 /* HJShareCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJShareCell.m; sourceTree = "<group>"; };
 		B86E7AD721B4BE730094B82B /* HJMainAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMainAdCell.h; sourceTree = "<group>"; };
 		B86E7AD821B4BE730094B82B /* HJMainAdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMainAdCell.m; sourceTree = "<group>"; };
 		B86E7ADA21B4C1300094B82B /* HJMainGridSectionFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMainGridSectionFootView.h; sourceTree = "<group>"; };
@@ -328,10 +343,14 @@
 				B8A9181121AFD073006733BA /* HJMainVC.m */,
 				B8264A6421D8BAB600004420 /* HJProductDetailVC.h */,
 				B8264A6521D8BAB600004420 /* HJProductDetailVC.m */,
-				B8264A7421D8C03C00004420 /* HJMainPodVC.h */,
-				B8264A7521D8C03C00004420 /* HJMainPodVC.m */,
 				B8626E6C21DB46CF00D7BA74 /* HJShareVC.h */,
 				B8626E6D21DB46CF00D7BA74 /* HJShareVC.m */,
+				B8264A7421D8C03C00004420 /* HJMainPodVC.h */,
+				B8264A7521D8C03C00004420 /* HJMainPodVC.m */,
+				B8052FAA21DE2DBB00F125F4 /* HJSearchVC.h */,
+				B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */,
+				B810EDE821E055920059CACC /* HJSearchListVC.h */,
+				B810EDE921E055920059CACC /* HJSearchListVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -339,6 +358,8 @@
 		B82126EC21D9DFD9007828B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B810EDEB21E058470059CACC /* LLSearchView.h */,
+				B810EDEC21E058470059CACC /* LLSearchView.m */,
 				B821267E21D9BC2D007828B2 /* SegmentHeaderView.h */,
 				B821267F21D9BC2D007828B2 /* SegmentHeaderView.m */,
 				B821267C21D9BC2D007828B2 /* SegmentView.h */,
@@ -361,6 +382,8 @@
 				B811D7EE21CE7F7400FBED10 /* HJMainListHeadView.m */,
 				B840430421DA400A0025B0CC /* HJProductDetailContentCell.h */,
 				B840430521DA400A0025B0CC /* HJProductDetailContentCell.m */,
+				B8626E6F21DB5D5E00D7BA74 /* HJShareCell.h */,
+				B8626E7021DB5D5E00D7BA74 /* HJShareCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -380,6 +403,8 @@
 				B811D7E821CE1D0300FBED10 /* HJRollingModel.m */,
 				B840430121DA064A0025B0CC /* HJProductDetailModel.h */,
 				B840430221DA064A0025B0CC /* HJProductDetailModel.m */,
+				B810EDEE21E072470059CACC /* HJSearchModel.h */,
+				B810EDEF21E072470059CACC /* HJSearchModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,6 +442,7 @@
 		B873DA5521B1155B008DBC66 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */,
 				B873DA5921B1160C008DBC66 /* Reachability.h */,
 				B873DA5A21B1160D008DBC66 /* Reachability.m */,
 				B873DA5621B1156D008DBC66 /* HJNetworkType.h */,
@@ -430,7 +456,6 @@
 		B8A917DA21AFB758006733BA = {
 			isa = PBXGroup;
 			children = (
-				B82126E321D9CE19007828B2 /* yw_1222.jpg */,
 				B8A917E521AFB758006733BA /* HJStoreProject */,
 				B8A917E421AFB758006733BA /* Products */,
 				E279B105CB3D6E55735CAFFB /* Pods */,
@@ -659,13 +684,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B82126E421D9CE19007828B2 /* yw_1222.jpg in Resources */,
 				B82126E021D9C819007828B2 /* AlipaySDK.bundle in Resources */,
 				B856EC4F21BB7CFA00503DF7 /* CountDownShop.plist in Resources */,
 				B8A917F321AFB75A006733BA /* LaunchScreen.storyboard in Resources */,
 				B8A917F021AFB75A006733BA /* Assets.xcassets in Resources */,
 				B82126E121D9C819007828B2 /* ALPLinkPartnerSDK.bundle in Resources */,
 				B8A917EE21AFB758006733BA /* Main.storyboard in Resources */,
+				B8052FAE21DE2E0300F125F4 /* yw_1222.jpg in Resources */,
 				B82126DF21D9C819007828B2 /* AlibabaAuthSDK.bundle in Resources */,
 				B873DA5F21B11B76008DBC66 /* HomeHighGoods.plist in Resources */,
 				B82126E221D9C819007828B2 /* NBResource.bundle in Resources */,
@@ -721,6 +746,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8626E7121DB5D5E00D7BA74 /* HJShareCell.m in Sources */,
 				B811D7E321CE1AB000FBED10 /* HJActivityModel.m in Sources */,
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
 				B8264A7321D8BFE100004420 /* MYColorBackView.m in Sources */,
@@ -737,6 +763,7 @@
 				B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */,
 				B8A917E821AFB758006733BA /* AppDelegate.m in Sources */,
 				B873DA5B21B1160D008DBC66 /* Reachability.m in Sources */,
+				B810EDF021E072470059CACC /* HJSearchModel.m in Sources */,
 				B873DA6221B12F71008DBC66 /* HJGoodItemCell.m in Sources */,
 				B8264A7021D8BFE100004420 /* MYPresentationController.m in Sources */,
 				B856EC5821BBA35A00503DF7 /* LinkageMenuView.m in Sources */,
@@ -750,16 +777,19 @@
 				B811D7E621CE1B9A00FBED10 /* HJRecommendModel.m in Sources */,
 				B8A9181221AFD073006733BA /* HJMainVC.m in Sources */,
 				B82126E721D9D013007828B2 /* AlibcManager.m in Sources */,
+				B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */,
 				B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */,
 				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
 				B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */,
 				B840430621DA400A0025B0CC /* HJProductDetailContentCell.m in Sources */,
 				B821268021D9BC2E007828B2 /* SegmentView.m in Sources */,
+				B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */,
 				B811D7EC21CE1F4500FBED10 /* UIImageView+HHWebImage.m in Sources */,
 				B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */,
 				B8626E6E21DB46CF00D7BA74 /* HJShareVC.m in Sources */,
 				B811D7E921CE1D0300FBED10 /* HJRollingModel.m in Sources */,
 				B873DA5821B1156D008DBC66 /* HJNetworkType.m in Sources */,
+				B810EDED21E058470059CACC /* LLSearchView.m in Sources */,
 				B8A9181821AFD0A2006733BA /* HJMineVC.m in Sources */,
 				B86E7AD921B4BE730094B82B /* HJMainAdCell.m in Sources */,
 				B811D7E021CE18EF00FBED10 /* HJBannerModel.m in Sources */,

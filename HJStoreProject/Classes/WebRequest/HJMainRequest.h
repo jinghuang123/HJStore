@@ -13,6 +13,7 @@
 #import "HJRecommendModel.h"
 #import "HJRollingModel.h"
 #import "HJProductDetailModel.h"
+#import "HJSearchModel.h"
 
 
 @interface HJMainRequest : NSObject
@@ -47,5 +48,16 @@
                   pageSize:(NSInteger)pageSize
                    success:(CompletionSuccessBlock)success
                       fail:(CompletionFailBlock)fail ;
+
+
+- (void)getListBySearchCodeCache:(BOOL)cache
+                            code:(NSString *)code
+                          pageNo:(NSInteger)pageNo
+                        pageSize:(NSInteger)pangeSize
+                            sort:(NSInteger)sort
+                          coupon:(NSInteger)has_coupon
+                           tmall:(NSInteger)is_tmall
+                         success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail ;
 @end
 

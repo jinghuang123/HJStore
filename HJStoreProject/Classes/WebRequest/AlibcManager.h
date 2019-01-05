@@ -13,6 +13,8 @@
 #import <UTMini/AppMonitor.h>
 #import "ALiTradeWebViewController.h"
 
+#define aliopenId @"tbopen25540430"
+
 @interface AlibcManager : NSObject
 + (instancetype)shared;
 
@@ -21,7 +23,7 @@
 - (void)showWithAliSDKByParamsType:(NSInteger)type
                   parentController:(UIViewController *)parentController
                            webView:(UIWebView *)webView
-                         productId:(NSInteger)productId
+                               url:(NSString *)url
                            success:(AlibcTradeProcessSuccessCallback)success
                               fail:(AlibcTradeProcessFailedCallback)fail;
 @end

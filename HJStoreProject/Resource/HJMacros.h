@@ -14,6 +14,8 @@
 /** 屏幕宽度 */
 #define MaxWidth [UIScreen mainScreen].bounds.size.width
 
+#define KHistorySearchPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"PYSearchhistories.plist"]
+
 
 ////系统字体大小
 #define PFR [[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0 ? @"PingFangSC-Regular" : @"PingFang SC"

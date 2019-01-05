@@ -165,4 +165,40 @@
     
 }
 
+
+- (void)getListBySearchCodeCache:(BOOL)cache
+                          code:(NSString *)code
+                              pageNo:(NSInteger)pageNo
+                            pageSize:(NSInteger)pangeSize
+                                sort:(NSInteger)sort
+                                coupon:(NSInteger)has_coupon
+                                tmall:(NSInteger)is_tmall
+                             success:(CompletionSuccessBlock)success
+                                fail:(CompletionFailBlock)fail {
+    //排序方式，1->综合，2->优惠券面值由低到高，3->优惠券面值由高到低，4->预估收益由高到低，5->卷后价由低到高，6->卷后价由高到低，7->销量由低到高，8->销量由高到低
+    NSDictionary *parms = @{
+                            @"q":code,
+                            @"pageNo" :@(pageNo),
+                            @"pageSize":@(pangeSize),
+                            @"has_coupon":@(has_coupon),
+                            @"is_tmall":@(is_tmall),
+                            @"sort":@(sort)
+                            };
+    [kHTTPManager tryPost:kUrlGetListSearch parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"getListBySearchCodeCache:%@",responseObject);
+        NSDictionary *result = [responseObject objectForKey:@"result_list"];
+        NSArray *map_data = [result objectForKey:@"map_data"];
+        NSArray *searchModel = [HJSearchModel mj_objectArrayWithKeyValuesArray:map_data];
+        
+        NSDictionary *response = @{
+                                   @"searchModel":searchModel,
+                                   };
+        success(response);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
+
+
+
 @end

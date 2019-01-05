@@ -22,29 +22,7 @@
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-/* collectionView */
-@property (strong , nonatomic) UICollectionView *collectionView;
-/* nav */
 @property (strong , nonatomic) HJMainTopToolView *topToolView;
-
-/* banners */
-@property (strong , nonatomic) NSMutableArray<HJBannerModel *> *banners;
-@property (strong , nonatomic) NSMutableArray<NSString *> *bannerImages;
-
-/* activitys */
-@property (strong , nonatomic) NSMutableArray *activitys;
-/* rollings */
-@property (strong , nonatomic) NSMutableArray<HJRollingModel *> *rollings;
-/* recommends */
-@property (strong , nonatomic) NSMutableArray<HJRecommendModel *> *recommends;
-/* hosts */
-@property (strong , nonatomic) NSMutableArray *hosts;
-
-
-@property (assign , nonatomic) NSInteger pageNo;
-@property (assign , nonatomic) NSInteger pageSize;
-@property (assign , nonatomic) NSInteger sort;
-
 
 @end
 
@@ -70,7 +48,9 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     [HJNetworkType isConnected];
     [self setupUI];
     NSLog(@"maxw:%f  maxh:%f",MaxWidth,MaxHeight);
-    [self.collectionView.mj_header beginRefreshing];
+    if (!self.isSearch) {
+       [self.collectionView.mj_header beginRefreshing];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -84,7 +64,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 - (void)footRefresh {
     weakify(self)
     self.pageNo++;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self refreshActionSuccess:^(id responseObject) {
             [weak_self.collectionView.mj_footer endRefreshing];
         }];
@@ -108,7 +88,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         } fail:^(NSError *error) {
              success(nil);
         }];
-    }else{
+    }else if(self.listType == HJMainVCProductListTypeMain){
         [[HJMainRequest shared] getMainListCache:NO categoryId:self.catteryId sort:self.sort pageNo:self.pageNo pageSize:self.pageSize success:^(NSDictionary *response) {
             if (self.pageNo > 1) {
                 [self.recommends addObjectsFromArray:[response objectForKey:@"recommends"]];
@@ -312,8 +292,10 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 };
                 headerView.showModeChangedBlock = ^(id obj) {
                     if (weak_self.showType == singleLineShowOneGoods) {
+                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
                         weak_self.showType = signleLineShowDoubleGoods;
                     }else{
+                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
                         weak_self.showType = singleLineShowOneGoods;
                     }
                     [weak_self.collectionView reloadData];
@@ -440,8 +422,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     productDetailVC.hidesBottomBarWhenPushed = YES;
 
     [self.navigationController pushViewController:productDetailVC animated:YES];
-    
-//    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:nil productId:productId success:nil fail:nil];
 }
 
 - (void)pushToSDKWebWithUrl:(NSString *)url {

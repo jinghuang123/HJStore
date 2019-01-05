@@ -142,7 +142,10 @@
 
 - (void)setcontentWithModel:(HJProductDetailModel *)item {
     NSString *type = item.user_type == 1 ? @"天猫价" : @"淘宝价";
-    _priceLabel.text = [NSString stringWithFormat:@"%@   %@:%@",item.zk_final_price,type,item.reserve_price];
+    CGFloat final_value = [item.zk_final_price floatValue];
+    CGFloat couponValue = [item.coupon_value floatValue];
+    NSString *value = [NSString stringWithFormat:@"%.2f", final_value - couponValue];
+    _priceLabel.text = [NSString stringWithFormat:@"%@   %@:%@",value,type,item.reserve_price];
     //3.初始化NSTextAttachment对象
     [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
@@ -158,7 +161,7 @@
     _titleLabel.attributedText = attributedString;
     
     
-    NSInteger final_price_length = item.zk_final_price.length + 1;
+    NSInteger final_price_length = value.length + 1;
     NSMutableAttributedString *newPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",_priceLabel.text]];
     
     [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 1)];

@@ -12,11 +12,35 @@
 
 
 @interface HJMainVC : HJSuperViewController
+
+/* collectionView */
+@property (strong , nonatomic) UICollectionView *collectionView;
+/* nav */
+
+/* banners */
+@property (strong , nonatomic) NSMutableArray<HJBannerModel *> *banners;
+@property (strong , nonatomic) NSMutableArray<NSString *> *bannerImages;
+
+/* activitys */
+@property (strong , nonatomic) NSMutableArray *activitys;
+/* rollings */
+@property (strong , nonatomic) NSMutableArray<HJRollingModel *> *rollings;
+/* recommends */
+@property (strong , nonatomic) NSMutableArray<HJRecommendModel *> *recommends;
+/* hosts */
+@property (strong , nonatomic) NSMutableArray *hosts;
+
+
+@property (assign , nonatomic) NSInteger pageNo;
+@property (assign , nonatomic) NSInteger pageSize;
+@property (assign , nonatomic) NSInteger sort;
+
+
 @property (nonatomic,assign) HJMainVCProductListHeadType headType;
 @property (nonatomic,assign) HJMainVCProductListType listType;
 @property (nonatomic,assign) NSInteger catteryId;
 @property (assign , nonatomic) GoodsListShowType showType;
-
+@property (nonatomic,assign) BOOL isSearch;
 @end
 
 

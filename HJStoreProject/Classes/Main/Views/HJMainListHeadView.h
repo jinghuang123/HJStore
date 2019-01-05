@@ -14,8 +14,11 @@ typedef void(^itemClickBlock)(id obj);
 @end
 
 @interface HJMainListHeadViewList : UICollectionReusableView
+
 @property (nonatomic, copy) itemClickBlock showModeChangedBlock;
 @property (nonatomic, copy) itemClickBlock sortTypeChengBlock;
+@property (nonatomic, strong) UIButton *rightBtn;
+
 
 @end
 

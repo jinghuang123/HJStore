@@ -10,6 +10,7 @@
 #import "HJMainVC.h"
 #import "HJMainRequest.h"
 #import "SegmentView.h"
+#import "HJSearchVC.h"
 
 @interface HJSegemengVC()
 @property (strong , nonatomic) UITextField *textField;
@@ -68,13 +69,18 @@
     bgView.layer.masksToBounds = YES;
     
     bgView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+    [bgView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        HJSearchVC *searchvc = [[HJSearchVC alloc] init];
+        searchvc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:searchvc animated:YES];
+    }];
     
     self.navigationItem.titleView = bgView;
 }
 
 
 - (void)onClickSearchBtn {
-    
+
 }
 - (void)onClickLeft {
     

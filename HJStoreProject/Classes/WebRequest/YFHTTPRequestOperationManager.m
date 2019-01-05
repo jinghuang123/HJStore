@@ -22,7 +22,9 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.manager = [AFHTTPSessionManager manager];
+        [self.manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
         self.manager.requestSerializer.timeoutInterval = REQ_TIMEOUT;
+        [self.manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
         self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json", @"text/html"]];

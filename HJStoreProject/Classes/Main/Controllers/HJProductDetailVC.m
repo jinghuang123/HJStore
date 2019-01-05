@@ -26,6 +26,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *randoms;
 @property (nonatomic, strong) HJProductDetailModel *detailmodel;
+@property (nonatomic, strong) UIButton *couponInfoBtn;
 @end
 
 @implementation HJProductDetailVC
@@ -57,19 +58,37 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
-
-    [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJProductDetailModel *detailModel) {
-        self.tableHeadView.imageGroupArray = detailModel.small_images;
-        self.detailmodel = detailModel;
-        [self getRamdoms];
-    } fail:^(NSError *error) {
-        
-    }];
-    
-
-
     [self setupNavItems];
     [self setupButtons];
+    if (self.productId > 0) {
+        [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJProductDetailModel *detailModel) {
+            self.tableHeadView.imageGroupArray = detailModel.small_images;
+            self.detailmodel = detailModel;
+            NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",detailModel.coupon_value];
+            [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
+            
+            [self getRamdoms];
+        } fail:^(NSError *error) {
+            
+        }];
+    }else if(self.searchModel){
+        
+        self.detailmodel = [[HJProductDetailModel alloc] init];
+        self.tableHeadView.imageGroupArray = self.searchModel.small_images.string;
+        self.detailmodel.title = self.searchModel.title;
+        self.detailmodel.user_type = self.searchModel.user_type;
+        self.detailmodel.zk_final_price = self.searchModel.zk_final_price;
+        self.detailmodel.reserve_price = self.searchModel.reserve_price;
+        self.detailmodel.coupon_value = @"0";
+        self.detailmodel.pict_url_image = self.searchModel.pict_url;
+        self.detailmodel.coupon_click_url = self.searchModel.coupon_share_url;
+        self.detailmodel.nick = self.searchModel.shop_title;
+        self.detailmodel.volume = self.searchModel.volume;
+        NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",self.detailmodel.coupon_value];
+        [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
+        [self getRamdoms];
+    }
+  
 }
 
 - (void)getRamdoms {
@@ -120,7 +139,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     [_navView addSubview:backButton];
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(15);
-        make.top.mas_offset(15);
+        make.top.mas_offset(25);
         make.height.width.mas_equalTo(30);
     }];
 }
@@ -135,6 +154,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
     shareBtn.titleLabel.font = PFR16Font;
     UIButton *couponInfoBtn = [[UIButton alloc] init];
+    _couponInfoBtn = couponInfoBtn;
     couponInfoBtn.backgroundColor = [UIColor redColor];
     [couponInfoBtn setTitle:@"领券 ¥3" forState:UIControlStateNormal];
     [couponInfoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -254,7 +274,9 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 }
 
 - (void)couponInfo {
-    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:nil productId:self.productId success:nil fail:nil];
+    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:nil url:self.detailmodel.coupon_click_url success:nil fail:nil];
 }
+
+
 
 @end

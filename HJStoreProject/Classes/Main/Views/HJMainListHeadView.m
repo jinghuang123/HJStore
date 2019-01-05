@@ -113,6 +113,8 @@
     }];
     
     UIButton *rightBtn = [[UIButton alloc] init];
+    _rightBtn = rightBtn;
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_liebiao"] forState:UIControlStateNormal];
     [self addSubview:rightBtn];
     [rightBtn addTarget:self action:@selector(showModeChange) forControlEvents:UIControlEventTouchUpInside];
     [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
