@@ -7,11 +7,10 @@
 //
 
 #import "HJSuperViewController.h"
-
-NS_ASSUME_NONNULL_BEGIN
+#import "HJShareModel.h"
 
 @interface HJShareVC : HJSuperViewController
-
+@property (nonatomic, strong) HJShareModel *shareModel;
 @end
 
-NS_ASSUME_NONNULL_END
+

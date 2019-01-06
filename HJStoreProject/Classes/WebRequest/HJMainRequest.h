@@ -14,6 +14,7 @@
 #import "HJRollingModel.h"
 #import "HJProductDetailModel.h"
 #import "HJSearchModel.h"
+#import "HJShareModel.h"
 
 
 @interface HJMainRequest : NSObject
@@ -33,7 +34,7 @@
 - (void)getMainListByCategoryIdCache:(BOOL)cache
                           categoryId:(NSInteger)categoryId
                               pageNo:(NSInteger)pageNo
-                            pageSize:(NSInteger)pangeSize
+                            pageSize:(NSInteger)pageSize
                                 sort:(NSInteger)sort
                              success:(CompletionSuccessBlock)success
                                 fail:(CompletionFailBlock)fail;
@@ -49,15 +50,29 @@
                    success:(CompletionSuccessBlock)success
                       fail:(CompletionFailBlock)fail ;
 
+- (void)getActivityListCache:(BOOL)cache
+                  activityId:(NSInteger)activityId
+                      pageNo:(NSInteger)pageNo
+                    pageSize:(NSInteger)pageSize
+                        sort:(NSInteger)sort
+                     success:(CompletionSuccessBlock)success
+                        fail:(CompletionFailBlock)fail;
+
 
 - (void)getListBySearchCodeCache:(BOOL)cache
                             code:(NSString *)code
                           pageNo:(NSInteger)pageNo
                         pageSize:(NSInteger)pangeSize
                             sort:(NSInteger)sort
-                          coupon:(NSInteger)has_coupon
-                           tmall:(NSInteger)is_tmall
                          success:(CompletionSuccessBlock)success
                             fail:(CompletionFailBlock)fail ;
+
+
+- (void)getShareDataCache:(BOOL)cache
+                productId:(NSInteger )productId
+                    title:(NSString *)title
+                      url:(NSString *)url
+                  success:(CompletionSuccessBlock)success
+                     fail:(CompletionFailBlock)fail;
 @end
 

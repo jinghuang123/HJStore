@@ -13,11 +13,9 @@
 
 @interface HJGoodItemCell : UICollectionViewCell
 - (void)setItemCellWithItem:(HJRecommendModel *)item;
-- (void)setItemCellWithSearchItem:(HJSearchModel *)item;
 @end
 
 
 @interface HJGoodItemSingleCell : UICollectionViewCell
 - (void)setItemCellWithItem:(HJRecommendModel *)item;
-- (void)setItemCellWithSearchItem:(HJSearchModel *)item;
 @end

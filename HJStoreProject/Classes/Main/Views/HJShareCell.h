@@ -7,11 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJShareModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^couponShowSelected)(id obj);
 @interface HJShareCell : UITableViewCell
+@property (nonatomic, copy) couponShowSelected couponShowBlock;
+- (void)updateCellWithModel:(HJShareModel *)share;
 
 @end
 
-NS_ASSUME_NONNULL_END
+
+@interface HJShareImageView : UIImageView
+@property (nonatomic,strong) UIButton *selBtn;
+@end
+
+@interface HJShareImagesCell : UITableViewCell
+- (void)updateCellWithModel:(HJShareModel *)share;
+@end
+
+

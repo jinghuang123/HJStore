@@ -109,7 +109,7 @@
 - (void)getMainListByCategoryIdCache:(BOOL)cache
                           categoryId:(NSInteger)categoryId
                               pageNo:(NSInteger)pageNo
-                            pageSize:(NSInteger)pangeSize
+                            pageSize:(NSInteger)pageSize
                                 sort:(NSInteger)sort
                              success:(CompletionSuccessBlock)success
                                 fail:(CompletionFailBlock)fail {
@@ -117,7 +117,7 @@
     NSDictionary *parms = @{
                             @"categoryId":@(categoryId),
                             @"pageNo" :@(pageNo),
-                            @"pageSize":@(pangeSize),
+                            @"pageSize":@(pageSize),
                             @"sort":@(sort)
                             };
     [kHTTPManager tryPost:kUrlGetCategoryMainList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
@@ -165,14 +165,39 @@
     
 }
 
+- (void)getActivityListCache:(BOOL)cache
+                  activityId:(NSInteger)activityId
+                      pageNo:(NSInteger)pageNo
+                    pageSize:(NSInteger)pageSize
+                        sort:(NSInteger)sort
+                   success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail  {
+    NSDictionary *parms = @{
+                            @"activityId":@(activityId),
+                            @"pageNo" :@(pageNo),
+                            @"pageSize":@(pageSize),
+                            @"sort":@(sort)
+                            };
+    [kHTTPManager tryPost:kUrlGetActivityList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSArray *recommends = [HJRecommendModel mj_objectArrayWithKeyValuesArray:responseObject];
+        NSDictionary *response = @{
+                                   @"recommends":recommends,
+                                   };
+        success(response);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
+
+
 
 - (void)getListBySearchCodeCache:(BOOL)cache
                           code:(NSString *)code
                               pageNo:(NSInteger)pageNo
                             pageSize:(NSInteger)pangeSize
                                 sort:(NSInteger)sort
-                                coupon:(NSInteger)has_coupon
-                                tmall:(NSInteger)is_tmall
                              success:(CompletionSuccessBlock)success
                                 fail:(CompletionFailBlock)fail {
     //排序方式，1->综合，2->优惠券面值由低到高，3->优惠券面值由高到低，4->预估收益由高到低，5->卷后价由低到高，6->卷后价由高到低，7->销量由低到高，8->销量由高到低
@@ -180,24 +205,42 @@
                             @"q":code,
                             @"pageNo" :@(pageNo),
                             @"pageSize":@(pangeSize),
-                            @"has_coupon":@(has_coupon),
-                            @"is_tmall":@(is_tmall),
                             @"sort":@(sort)
                             };
     [kHTTPManager tryPost:kUrlGetListSearch parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"getListBySearchCodeCache:%@",responseObject);
-        NSDictionary *result = [responseObject objectForKey:@"result_list"];
-        NSArray *map_data = [result objectForKey:@"map_data"];
-        NSArray *searchModel = [HJSearchModel mj_objectArrayWithKeyValuesArray:map_data];
-        
+        NSArray *recommends = [HJRecommendModel mj_objectArrayWithKeyValuesArray:responseObject];
         NSDictionary *response = @{
-                                   @"searchModel":searchModel,
+                                   @"recommends":recommends,
                                    };
         success(response);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
 }
+
+- (void)getShareDataCache:(BOOL)cache
+                productId:(NSInteger )productId
+                    title:(NSString *)title
+                      url:(NSString *)url
+                  success:(CompletionSuccessBlock)success
+                     fail:(CompletionFailBlock)fail  {
+    NSDictionary *parms = @{
+                            @"product_id":@(productId),
+                            @"text" :title,
+                            @"url":url,
+                            };
+    [kHTTPManager tryPost:kUrlGetShareData parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"getShareDataCache:%@",responseObject);
+        HJShareModel *shareModel = [HJShareModel mj_objectWithKeyValues:responseObject];
+        success(shareModel);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
+
 
 
 

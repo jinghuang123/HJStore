@@ -25,7 +25,7 @@
     if (!_tableview) {
         UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight)];
         _tableview = tableView;
-        tableView.backgroundColor = [UIColor clearColor];
+        tableView.backgroundColor = RGB(245, 245, 245);;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -42,23 +42,66 @@
 }
 
 
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return  1;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, 10)];
+        view.backgroundColor = self.tableview.backgroundColor;
+        return view;
+    }else{
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, 0)];
+        view.backgroundColor = self.tableview.backgroundColor;
+        return view;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HJShareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HJShareCell"];
-    if (!cell) {
-        cell = [[HJShareCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HJShareCell"];
+    if (indexPath.section == 0) {
+        HJShareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HJShareCell"];
+        if (!cell) {
+            cell = [[HJShareCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HJShareCell"];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell updateCellWithModel:self.shareModel];
+        weakify(self)
+        cell.couponShowBlock = ^(id obj) {
+            weak_self.shareModel.showCoupon = !self.shareModel.showCoupon;
+            [weak_self.tableview reloadData];
+        };
+        return cell;
+    }else{
+        HJShareImagesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HJShareImagesCell"];
+        if (!cell) {
+            cell = [[HJShareImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HJShareImagesCell"];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell updateCellWithModel:self.shareModel];
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
 }
 
 -(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 240;
+    if (indexPath.section == 0) {
+        return self.shareModel.showCoupon ? 240 : 225;
+    }else{
+        return MaxHeight - 240 - 100;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    }else{
+        return 10;
+    }
 }
 @end

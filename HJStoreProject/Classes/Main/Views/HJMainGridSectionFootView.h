@@ -10,7 +10,8 @@
 
 
 @interface HJMainGridSectionFootView : UICollectionReusableView
-
+@property (nonatomic,strong) NSArray *titles;
+@property (nonatomic,copy) void(^rollingDidSelected)(NSInteger index);
 @end
 
 

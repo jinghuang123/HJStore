@@ -10,14 +10,14 @@
 #import <FLAnimatedImageView.h>
 #import <FLAnimatedImage.h>
 #import <UIImage+GIF.h>
+#import "SGAdvertScrollView.h"
 
-@interface HJMainGridSectionFootView ()
-
-/* 顶部广告宣传图片 */
-@property (strong , nonatomic) UIImageView *topAdImageView;
-
+@interface HJMainGridSectionFootView () <SGAdvertScrollViewDelegate>
 
 @property (strong , nonatomic) UIView *bottomLineView;
+
+
+@property (strong, nonatomic) SGAdvertScrollView *advertScrollView;
 
 @end
 
@@ -31,12 +31,12 @@
 
 - (void)setUpUI {
     self.backgroundColor = [UIColor whiteColor];
-    _topAdImageView = [[UIImageView alloc] init];
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:HomeBottomViewGIFImage]];
-    UIImage *gifImage = [UIImage sd_animatedGIFWithData:data];
-    _topAdImageView.image = gifImage;
-    _topAdImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:_topAdImageView];
+    _advertScrollView = [[SGAdvertScrollView alloc] init];
+    [self addSubview:_advertScrollView];
+
+    _advertScrollView.signImages = @[@"hot", @"", @"activity"];
+    _advertScrollView.titles = self.titles;
+    _advertScrollView.textAlignment = NSTextAlignmentCenter;
 
     
     _bottomLineView = [[UIView alloc] init];
@@ -48,11 +48,21 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [_topAdImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self);
-        make.top.mas_equalTo(self);
-        make.width.mas_equalTo(self);
-        make.bottom.mas_equalTo(self).offset(-8);
+    [_advertScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_offset(0);
+        make.bottom.mas_offset(-1);
     }];
+}
+
+- (void)setTitles:(NSArray *)titles {
+    _titles = titles;
+    _advertScrollView.titles = titles;
+}
+
+/// 代理方法
+- (void)advertScrollView:(SGAdvertScrollView *)advertScrollView didSelectedItemAtIndex:(NSInteger)index {
+    if (self.rollingDidSelected) {
+        self.rollingDidSelected(index);
+    }
 }
 @end

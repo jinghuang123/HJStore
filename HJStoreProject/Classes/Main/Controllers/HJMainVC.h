@@ -39,6 +39,7 @@
 @property (nonatomic,assign) HJMainVCProductListHeadType headType;
 @property (nonatomic,assign) HJMainVCProductListType listType;
 @property (nonatomic,assign) NSInteger catteryId;
+@property (nonatomic,assign) NSInteger activityId;
 @property (assign , nonatomic) GoodsListShowType showType;
 @property (nonatomic,assign) BOOL isSearch;
 @end

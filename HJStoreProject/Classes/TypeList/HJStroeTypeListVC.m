@@ -11,6 +11,7 @@
 #import "OneView.h"
 #import "HJCategoryRequest.h"
 #import "HJMainVC.H"
+#import "HJSearchVC.h"
 
 
 @interface HJStroeTypeListVC ()
@@ -22,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     [[HJCategoryRequest shared] getCategoryCache:YES success:^(NSArray *categorys) {
         [self.dataSource setArray:categorys];
         [self setView];
@@ -48,6 +48,7 @@
             productListVC.headType  = HJMainVCProductListHeadTypeList;
             productListVC.listType = HJMainVCProductListTypeList;
             productListVC.showType = singleLineShowOneGoods;
+            [productListVC setNavBackItem];
             [weak_self.navigationController pushViewController:productListVC animated:YES];
         };
     }
@@ -79,7 +80,11 @@
     bgView.layer.masksToBounds = YES;
     
     bgView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
-    
+    [bgView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        HJSearchVC *searchvc = [[HJSearchVC alloc] init];
+        searchvc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:searchvc animated:YES];
+    }];
     self.navigationItem.titleView = bgView;
 }
 

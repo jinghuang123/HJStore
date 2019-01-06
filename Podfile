@@ -13,6 +13,7 @@ pod 'FMDB', '~> 2.7.2'
 pod 'IQKeyboardManager', '~> 6.0.3'
 pod 'JKCategories', '~> 1.7'
 pod 'SDWebImage/GIF'
+pod 'WebViewJavascriptBridge', '~> 6.0'
 
 target 'HJStoreProject' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks

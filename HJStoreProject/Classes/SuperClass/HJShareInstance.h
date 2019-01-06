@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ShareSDK/ShareSDK.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface HJShareInstance : NSObject
-
++ (instancetype)shareInstance;
+- (void)registerShareSDK;
 @end
 
-NS_ASSUME_NONNULL_END
+

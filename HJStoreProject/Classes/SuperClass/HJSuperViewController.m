@@ -19,7 +19,20 @@
     self.view.backgroundColor = RGB(245, 245, 245);
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
+    
+
 }
+
+- (void)setNavBackItem {
+    UIImage *img = [UIImage imageNamed:@"NavBar_backImg"];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(-10, 10, 22, 22);
+    [btn setImage:img forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.leftBarButtonItem = backButton;
+}
+    
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -29,6 +42,10 @@
     [super viewWillDisappear:animated];
 }
 
+
+- (void)backButtonClick {
+    [self.navigationController popViewControllerAnimated:NO];
+}
 /*
 #pragma mark - Navigation
 

@@ -18,6 +18,7 @@
 #import "HJProductDetailVC.h"
 #import "HJSegemengVC.h"
 #import "AlibcManager.h"
+#import "YFPolicyWebVC.h"
 
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -74,20 +75,38 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
     if (self.listType == HJMainVCProductListTypeList) {
-        [[HJMainRequest shared] getMainListByCategoryIdCache:YES categoryId:self.catteryId pageNo:self.pageNo pageSize:20 sort:self.sort success:^(NSDictionary *response) {
-            if (self.pageNo > 1) {
-                [self.recommends addObjectsFromArray:[response objectForKey:@"recommends"]];
-                if (self.recommends.count < 20) {
-                    [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
+        if(self.catteryId > 0){
+            [[HJMainRequest shared] getMainListByCategoryIdCache:YES categoryId:self.catteryId pageNo:self.pageNo pageSize:self.pageSize sort:self.sort success:^(NSDictionary *response) {
+                if (self.pageNo > 1) {
+                    [self.recommends addObjectsFromArray:[response objectForKey:@"recommends"]];
+                    if (self.recommends.count < 20) {
+                        [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
+                    }
+                }else{
+                    self.recommends = [response objectForKey:@"recommends"];
                 }
-            }else{
-                self.recommends = [response objectForKey:@"recommends"];
-            }
-            success(nil);
-            [self.collectionView reloadData];
-        } fail:^(NSError *error) {
-             success(nil);
-        }];
+                success(nil);
+                [self.collectionView reloadData];
+            } fail:^(NSError *error) {
+                success(nil);
+            }];
+        }else{
+            [[HJMainRequest shared] getActivityListCache:YES activityId:self.activityId pageNo:self.pageNo pageSize:self.pageSize sort:self.sort success:^(NSDictionary *response) {
+                if (self.pageNo > 1) {
+                    [self.recommends addObjectsFromArray:[response objectForKey:@"recommends"]];
+                    if (self.recommends.count < 20) {
+                        [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
+                    }
+                }else{
+                    self.recommends = [response objectForKey:@"recommends"];
+                }
+                success(nil);
+                [self.collectionView reloadData];
+            } fail:^(NSError *error) {
+                success(nil);
+            }];
+        }
+
     }else if(self.listType == HJMainVCProductListTypeMain){
         [[HJMainRequest shared] getMainListCache:NO categoryId:self.catteryId sort:self.sort pageNo:self.pageNo pageSize:self.pageSize success:^(NSDictionary *response) {
             if (self.pageNo > 1) {
@@ -229,11 +248,11 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         weakify(self)
         cell.bannerCellItemClick = ^(HJBannerModel *banner) {
             if (banner.typedata == HJNavPushTypeUrl) {
-                [weak_self pushToSDKWebWithUrl:banner.content_url];
+                [weak_self pushToWebWithUrl:banner.content_url];
             }else if (banner.typedata == HJNavPushTypeDetail) {
                 [weak_self pushToProductDetailWithId:banner.content_product];
             }else if (banner.typedata == HJNavPushTypeList) {
-                [weak_self pushToProductListWithId:banner.taobao_activity_id];
+                [weak_self pushToProductListWithId:banner.content_product activityId:banner.taobao_activity_id];
             }
         };
         gridcell = cell;
@@ -306,6 +325,14 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }else{
         if (indexPath.section == HJMainVCSectionTypeSection1) {
             HJMainGridSectionFootView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:HJMainGridSectionFootViewIdentifier forIndexPath:indexPath];
+            footerView.rollingDidSelected = ^(NSInteger index) {
+                
+            };
+            NSMutableArray *titles = [[NSMutableArray alloc] init];
+            for (HJRollingModel *rol in self.rollings) {
+                [titles addObject:rol.title];
+            }
+            footerView.titles = titles;
             reusableview = footerView;
         }
     }
@@ -386,15 +413,26 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"didSelectItemAtIndexPath sectiion = %ld",indexPath.section);
     if (indexPath.section == HJMainVCSectionTypeSection0) {
-
+        HJBannerModel *banner = [self.banners objectAtIndex:indexPath.row];
+        if (banner.typedata == HJNavPushTypeUrl) {
+            [self pushToWebWithUrl:banner.content_url];
+        }else if (banner.typedata == HJNavPushTypeDetail) {
+            [self pushToProductDetailWithId:banner.content_product];
+        }else if (banner.typedata == HJNavPushTypeList) {
+            [self pushToProductListWithId:0 activityId:banner.taobao_activity_id];
+        }
     }else if (indexPath.section == HJMainVCSectionTypeSection1){
         HJActivityModel *model = [self.activitys objectAtIndex:indexPath.row];
-        if (model.typedata == HJNavPushTypeUrl) {
-            [self pushToSDKWebWithUrl:model.content_url];
-        }else if (model.typedata == HJNavPushTypeDetail) {
-            [self pushToProductDetailWithId:model.content_product];
-        }else if (model.typedata == HJNavPushTypeList) {
-             [self pushToProductListWithId:model.content_list];
+        if (model.islogindata) {
+            
+        }else{
+            if (model.typedata == HJNavPushTypeUrl) {
+                [self pushToWebWithUrl:model.content_url];
+            }else if (model.typedata == HJNavPushTypeDetail) {
+                [self pushToProductDetailWithId:model.content_product];
+            }else if (model.typedata == HJNavPushTypeList) {
+                [self pushToProductListWithId:0 activityId:model.activityId];
+            }
         }
        
     }else if(indexPath.section == HJMainVCSectionTypeSection2){
@@ -406,12 +444,14 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 
-- (void)pushToProductListWithId:(NSInteger)categoryId {
+- (void)pushToProductListWithId:(NSInteger)categoryId activityId:(NSInteger)activityId{
     HJMainVC *productListVC = [[HJMainVC alloc] init];
     productListVC.hidesBottomBarWhenPushed = YES;
     productListVC.catteryId = categoryId;
+    productListVC.activityId = activityId;
     productListVC.headType  = HJMainVCProductListHeadTypeList;
     productListVC.listType = HJMainVCProductListTypeList;
+    [productListVC setNavBackItem];
     [self.navigationController pushViewController:productListVC animated:YES];
     
 }
@@ -420,12 +460,22 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
     productDetailVC.productId = productId;
     productDetailVC.hidesBottomBarWhenPushed = YES;
-
+    [productDetailVC setNavBackItem];
     [self.navigationController pushViewController:productDetailVC animated:YES];
 }
 
-- (void)pushToSDKWebWithUrl:(NSString *)url {
+- (void)pushToWebWithUrl:(NSString *)url {
+    if (![url containsString:@"https://"]) {
+        url = [NSString stringWithFormat:@"https://%@",url];
+    }
+    YFPolicyWebVC * policyWebVC = [[YFPolicyWebVC alloc] init];
+    [policyWebVC setNavBackItem];
+    policyWebVC.labTitle = @"";
+    policyWebVC.policyUrl = url;
+    [self.navigationController pushViewController:policyWebVC animated:YES];
+}
 
+- (void)pushToLoginVC {
 }
 
 @end

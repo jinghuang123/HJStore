@@ -21,7 +21,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 /* collectionView */
 @property (strong , nonatomic) UICollectionView *collectionView;
 /* recommends */
-@property (strong , nonatomic) NSMutableArray<HJSearchModel *> *searchmodels;
+@property (strong , nonatomic) NSMutableArray<HJRecommendModel *> *searchmodels;
 
 
 @property (assign , nonatomic) NSInteger pageNo;
@@ -41,7 +41,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     [self.collectionView.mj_header beginRefreshing];
 }
 
-- (NSMutableArray<HJSearchModel *> *)searchmodels {
+- (NSMutableArray<HJRecommendModel *> *)searchmodels {
     if (!_searchmodels) {
         _searchmodels = [[NSMutableArray alloc] init];
     }
@@ -66,14 +66,14 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
-    [[HJMainRequest shared] getListBySearchCodeCache:YES code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize sort:self.sort coupon:0 tmall:0 success:^(NSDictionary *response) {
+    [[HJMainRequest shared] getListBySearchCodeCache:YES code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize sort:self.sort success:^(NSDictionary *response) {
         if (self.pageNo > 1) {
-            [self.searchmodels addObjectsFromArray:[response objectForKey:@"searchModel"]];
+            [self.searchmodels addObjectsFromArray:[response objectForKey:@"recommends"]];
             if (self.searchmodels.count < 20) {
                 [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
             }
         }else{
-            self.searchmodels = [response objectForKey:@"searchModel"];
+            self.searchmodels = [response objectForKey:@"recommends"];
         }
         [self.collectionView reloadData];
         success(nil);
@@ -90,8 +90,10 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     searchBar.backgroundImage = [UIImage imageNamed:@"clearImage"];
     searchBar.delegate = self;
     searchBar.showsCancelButton = YES;
-    UIView *searchTextField = searchTextField = [searchBar valueForKey:@"_searchField"];
-    searchTextField.backgroundColor = [UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1];
+    UITextField *searchTextField = searchTextField = [searchBar valueForKey:@"_searchField"];
+    searchTextField.backgroundColor = RGBA(234, 235, 237, 1.0);
+    [searchTextField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    searchTextField.font = [UIFont systemFontOfSize:14];
     [searchBar setImage:[UIImage imageNamed:@"sort_magnifier"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     
     [titleView addSubview:searchBar];
@@ -99,13 +101,6 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     self.searchBar = searchBar;
     self.navigationItem.titleView = titleView;
     
-    UIImage *img = [UIImage imageNamed:@"NavBar_backImg"];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(-10, 10, 22, 22);
-    [btn setImage:img forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.leftBarButtonItem = backButton;
 
  
     UIButton *cancleBtn = [searchBar valueForKey:@"cancelButton"];
@@ -145,7 +140,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     [self headRefresh];
 }
 
-- (void)backButtonClick:(UISearchBar *)searchBar {
+- (void)backButtonClick {
     [self.searchBar resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -168,14 +163,14 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     if (self.showType == signleLineShowDoubleGoods) {
         HJGoodItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
-        HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
-        [cell setItemCellWithSearchItem:item];
+        HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+        [cell setItemCellWithItem:item];
         gridcell = cell;
     }else{
         HJGoodItemSingleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemSingleCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
-        HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
-        [cell setItemCellWithSearchItem:item];
+        HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+        [cell setItemCellWithItem:item];
         gridcell = cell;
     }
     return gridcell;
@@ -215,7 +210,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 #pragma mark - X间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return (section == HJMainVCSectionTypeSection3 && self.showType == signleLineShowDoubleGoods) ? 5 : 0;
+    return self.showType == signleLineShowDoubleGoods ? 5 : 0;
 }
 #pragma mark - Y间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
@@ -237,16 +232,15 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+    HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
     [self pushToProductDetailWithItem:item];
     
 }
 
-- (void)pushToProductDetailWithItem:(HJSearchModel *)item {
+- (void)pushToProductDetailWithItem:(HJRecommendModel *)item {
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
-    productDetailVC.searchModel = item;
+    productDetailVC.productId = item.product_id;
     productDetailVC.hidesBottomBarWhenPushed = YES;
-    
     [self.navigationController pushViewController:productDetailVC animated:YES];
 }
 

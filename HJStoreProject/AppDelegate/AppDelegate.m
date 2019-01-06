@@ -11,6 +11,7 @@
 #import "HJMainRequest.h"
 #import "HJCategoryRequest.h"
 #import "AlibcManager.h"
+#import "HJShareInstance.h"
 
 @interface AppDelegate ()
 
@@ -26,10 +27,12 @@
     [self.window makeKeyAndVisible];
     
     [AlibcManager shared];
-  
+    [[HJShareInstance shareInstance] registerShareSDK];
+    
     [[HJCategoryRequest shared] getCategoryCache:NO success:^(id responseObject) {
     } fail:^(NSError *error) {
     }];
+    
     [NSThread sleepForTimeInterval:0.5];
     self.window.rootViewController = [[HJTabBarVC alloc] init];
     return YES;

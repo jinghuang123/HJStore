@@ -73,9 +73,9 @@
     searchBar.delegate = self;
     searchBar.showsCancelButton = YES;
     UITextField *searchTextField = searchTextField = [searchBar valueForKey:@"_searchField"];
-    [searchTextField setValue:[UIFont systemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
-    searchTextField.font = [UIFont systemFontOfSize:16];
-    searchTextField.backgroundColor = [UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1];
+    [searchTextField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    searchTextField.font = [UIFont systemFontOfSize:14];
+    searchTextField.backgroundColor = RGBA(234, 235, 237, 1.0);;
     [searchBar setImage:[UIImage imageNamed:@"sort_magnifier"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     UIButton *cancleBtn = [searchBar valueForKey:@"cancelButton"];
     //修改标题和标题颜色
@@ -106,6 +106,7 @@
 
 - (void)pushToSearchResultWithSearchStr:(NSString *)str {
     HJSearchListVC *searchListVC = [[HJSearchListVC alloc] init];
+    [searchListVC setNavBackItem];
     searchListVC.searchTip = str;
     [self.navigationController pushViewController:searchListVC animated:NO];
 }

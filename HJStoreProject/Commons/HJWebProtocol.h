@@ -19,7 +19,8 @@ Declare(kUrlGetProductDetail, "api/goods/getProductDetails")  /**1.3 商品详�
 Declare(kUrlGetMainList, "api/index/getIndex")  /**1.4 主页精品页面数据列表 **/
 Declare(kUrlGetRandomList, "api/goods/getRandomProductList") /*1.5 猜你喜欢 */
 Declare(kUrlGetListSearch,"api/search/get") /* 1.6 搜索*/
-
+Declare(kUrlGetShareData,"api/goods/getShareInfo") /* 1.7 分享数据*/
+Declare(kUrlGetActivityList,"api/activity/getList") /* 1.8 活动类商品列表*/
 
 Declare(kUrlGetCategorys, "api/category/getCategory")  /**< 2.1 分类 */
 Declare(kUrlGetSubCategorys, "api/category/getCategory")  /**< 2.2 二级分类 */
