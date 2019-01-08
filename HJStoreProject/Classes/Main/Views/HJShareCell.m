@@ -204,6 +204,7 @@
         self.clipsToBounds = YES;
         UIButton *selectedBtn = [[UIButton alloc] init];
         _selBtn = selectedBtn;
+        [selectedBtn addTarget:self action:@selector(imageSelectedAction:) forControlEvents:UIControlEventTouchUpInside];
         [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_unselected"] forState:UIControlStateNormal];
         [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_selected"] forState:UIControlStateSelected];
         [self addSubview:selectedBtn];
@@ -216,6 +217,15 @@
     
     return self;
 }
+
+- (void)imageSelectedAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (self.imageSelectBlock) {
+        self.imageSelectBlock(sender.state);
+    }
+}
+
+
 @end
 
 @interface HJShareImagesCell () <XLPhotoBrowserDatasource>
@@ -255,16 +265,15 @@
     HJShareImageView *leftImageV = [[HJShareImageView alloc] init];
     _leftImageV = leftImageV;
     leftImageV.selBtn.selected = YES;
-    leftImageV.image = [UIImage imageNamed:@"default_share"];
     [self.contentView addSubview:leftImageV];
-    CGFloat wid = (MaxWidth - 30)/2;
+    CGFloat wid = (MaxWidth - 50)/2;
     [leftImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_offset(10);
+        make.left.top.mas_offset(20);
         make.width.mas_equalTo(wid);
         make.height.mas_equalTo(wid*1704/972);
     }];
     
-    CGFloat rightItemSize = (MaxWidth - 40)/4;
+    CGFloat rightItemSize = (MaxWidth - 60)/4;
     HJShareImageView *rightImage1 = [[HJShareImageView alloc] init];
     _rightImage1 = rightImage1;
     [self.contentView addSubview:rightImage1];
@@ -335,7 +344,8 @@
 }
     
 - (void)updateCellWithModel:(HJShareModel *)share {
-    [self.images addObject:_leftImageV.image];
+    _leftImageV.image = share.mainImage;
+    [self.images addObject:share.mainImage];
     [share.images enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL * _Nonnull stop) {
        HJShareImageView *imagV = [self.imageViews objectAtIndex:idx];
         [imagV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"list_holder"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {

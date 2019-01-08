@@ -21,12 +21,13 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 /* collectionView */
 @property (strong , nonatomic) UICollectionView *collectionView;
 /* recommends */
-@property (strong , nonatomic) NSMutableArray<HJRecommendModel *> *searchmodels;
+@property (strong , nonatomic) NSMutableArray<HJSearchModel *> *searchmodels;
 
 
 @property (assign , nonatomic) NSInteger pageNo;
 @property (assign , nonatomic) NSInteger pageSize;
 @property (assign , nonatomic) NSInteger sort;
+@property (strong , nonatomic) NSString *showCouponsOnly;
 
 @property (assign , nonatomic) GoodsListShowType showType;
 @end
@@ -36,16 +37,22 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBarButtonItem];
+    self.showCouponsOnly = @"false";
     self.showType = signleLineShowDoubleGoods;
     self.collectionView.backgroundColor = RGB(245, 245, 245);
     [self.collectionView.mj_header beginRefreshing];
 }
 
-- (NSMutableArray<HJRecommendModel *> *)searchmodels {
+- (NSMutableArray<HJSearchModel *> *)searchmodels {
     if (!_searchmodels) {
         _searchmodels = [[NSMutableArray alloc] init];
     }
     return _searchmodels;
+}
+
+- (void)switchChange:(BOOL)on {
+    self.showCouponsOnly = on ? @"true" : @"false";
+    [self.collectionView.mj_header beginRefreshing];
 }
 
 - (void)headRefresh {
@@ -66,14 +73,14 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
-    [[HJMainRequest shared] getListBySearchCodeCache:YES code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize sort:self.sort success:^(NSDictionary *response) {
+    [[HJMainRequest shared] getListBySearchCodeCache:YES code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize has_coupon:self.showCouponsOnly sort:self.sort success:^(NSDictionary *response) {
         if (self.pageNo > 1) {
-            [self.searchmodels addObjectsFromArray:[response objectForKey:@"recommends"]];
+            [self.searchmodels addObjectsFromArray:[response objectForKey:@"searchModel"]];
             if (self.searchmodels.count < 20) {
                 [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
             }
         }else{
-            self.searchmodels = [response objectForKey:@"recommends"];
+            self.searchmodels = [response objectForKey:@"searchModel"];
         }
         [self.collectionView reloadData];
         success(nil);
@@ -163,14 +170,14 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     if (self.showType == signleLineShowDoubleGoods) {
         HJGoodItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
-        HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
-        [cell setItemCellWithItem:item];
+        HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+        [cell setItemCellWithSearchItem:item];
         gridcell = cell;
     }else{
         HJGoodItemSingleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemSingleCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
-        HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
-        [cell setItemCellWithItem:item];
+        HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+        [cell setItemCellWithSearchItem:item];
         gridcell = cell;
     }
     return gridcell;
@@ -183,15 +190,20 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     headerView.layer.borderWidth = 0.5;
     headerView.backgroundColor = [UIColor whiteColor];
     weakify(self)
+    headerView.switchChangeBlock = ^(BOOL on) {
+        [self switchChange:on];
+    };
+
     headerView.sortTypeChengBlock = ^(id obj) {
         
     };
+    weakify(headerView)
     headerView.showModeChangedBlock = ^(id obj) {
         if (weak_self.showType == singleLineShowOneGoods) {
-            [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
+            [weak_headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
             weak_self.showType = signleLineShowDoubleGoods;
         }else{
-            [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
+            [weak_headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
             weak_self.showType = singleLineShowOneGoods;
         }
         [weak_self.collectionView reloadData];
@@ -223,7 +235,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 #pragma mark - head宽高
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(MaxWidth, 40); //section3高
+    return CGSizeMake(MaxWidth, 80); //section3高
 }
 
 //#pragma mark - foot宽高
@@ -232,14 +244,14 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+    HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
     [self pushToProductDetailWithItem:item];
     
 }
 
-- (void)pushToProductDetailWithItem:(HJRecommendModel *)item {
+- (void)pushToProductDetailWithItem:(HJSearchModel *)item {
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
-    productDetailVC.productId = item.product_id;
+    productDetailVC.searchModel = item;
     productDetailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:productDetailVC animated:YES];
 }

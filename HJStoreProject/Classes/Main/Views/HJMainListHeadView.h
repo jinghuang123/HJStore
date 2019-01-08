@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^itemClickBlock)(id obj);
+typedef void(^switchValueChangeBlock)(BOOL on);
 @interface HJMainListHeadView : UICollectionReusableView
 
 @end
@@ -17,6 +18,7 @@ typedef void(^itemClickBlock)(id obj);
 
 @property (nonatomic, copy) itemClickBlock showModeChangedBlock;
 @property (nonatomic, copy) itemClickBlock sortTypeChengBlock;
+@property (nonatomic, copy) switchValueChangeBlock switchChangeBlock;
 @property (nonatomic, strong) UIButton *rightBtn;
 
 

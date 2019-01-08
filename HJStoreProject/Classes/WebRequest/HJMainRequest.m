@@ -197,6 +197,7 @@
                           code:(NSString *)code
                               pageNo:(NSInteger)pageNo
                             pageSize:(NSInteger)pangeSize
+                          has_coupon:(NSString *)has_coupon
                                 sort:(NSInteger)sort
                              success:(CompletionSuccessBlock)success
                                 fail:(CompletionFailBlock)fail {
@@ -205,13 +206,17 @@
                             @"q":code,
                             @"pageNo" :@(pageNo),
                             @"pageSize":@(pangeSize),
+                            @"has_coupon":has_coupon,
                             @"sort":@(sort)
                             };
     [kHTTPManager tryPost:kUrlGetListSearch parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"getListBySearchCodeCache:%@",responseObject);
-        NSArray *recommends = [HJRecommendModel mj_objectArrayWithKeyValuesArray:responseObject];
+        NSDictionary *result = [responseObject objectForKey:@"result_list"];
+        NSArray *map_data = [result objectForKey:@"map_data"];
+        NSArray *searchModel = [HJSearchModel mj_objectArrayWithKeyValuesArray:map_data];
+        
         NSDictionary *response = @{
-                                   @"recommends":recommends,
+                                   @"searchModel":searchModel,
                                    };
         success(response);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {

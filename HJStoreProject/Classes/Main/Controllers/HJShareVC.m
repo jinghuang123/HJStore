@@ -17,13 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableview];
     // Do any additional setup after loading the view.
+    [self setupButtons];
 }
 
 - (UITableView *)tableview {
     if (!_tableview) {
-        UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight)];
+        UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight - 49)];
         _tableview = tableView;
         tableView.backgroundColor = RGB(245, 245, 245);;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -33,6 +35,40 @@
         tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
     }
     return _tableview;
+}
+
+- (void)setupButtons {
+    UIButton *copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [copyButton setTitle:@"复制淘口令" forState:UIControlStateNormal];
+    [copyButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    copyButton.layer.cornerRadius = 3;
+    copyButton.layer.borderColor = [UIColor redColor].CGColor;
+    copyButton.layer.borderWidth = 1.0;
+    copyButton.titleLabel.font = PFR13Font;
+    copyButton.clipsToBounds = YES;
+    [self.view addSubview:copyButton];
+    [copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(10);
+        make.bottom.mas_offset(-5);
+        make.width.mas_equalTo((MaxWidth - 30)/2);
+        make.height.mas_equalTo(39);
+    }];
+    
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setTitle:@"分享图片" forState:UIControlStateNormal];
+    [shareButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    shareButton.titleLabel.font = PFR13Font;
+    shareButton.layer.borderColor = [UIColor redColor].CGColor;
+    shareButton.layer.cornerRadius = 3;
+    shareButton.layer.borderWidth = 1.0;
+    shareButton.clipsToBounds = YES;
+    [self.view addSubview:shareButton];
+    [shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-10);
+        make.bottom.mas_offset(-5);
+        make.width.mas_equalTo((MaxWidth - 30)/2);
+        make.height.mas_equalTo(39);
+    }];
 }
 
 - (void)headRefresh {
@@ -92,7 +128,7 @@
     if (indexPath.section == 0) {
         return self.shareModel.showCoupon ? 240 : 225;
     }else{
-        return MaxHeight - 240 - 100;
+        return (MaxWidth - 50)/2 * 667/375 + 20;
     }
     
 }

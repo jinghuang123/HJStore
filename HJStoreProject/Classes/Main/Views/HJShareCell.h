@@ -10,6 +10,7 @@
 #import "HJShareModel.h"
 
 typedef void(^couponShowSelected)(id obj);
+typedef void(^imageViewSelected)(int state);
 @interface HJShareCell : UITableViewCell
 @property (nonatomic, copy) couponShowSelected couponShowBlock;
 - (void)updateCellWithModel:(HJShareModel *)share;
@@ -19,6 +20,7 @@ typedef void(^couponShowSelected)(id obj);
 
 @interface HJShareImageView : UIImageView
 @property (nonatomic,strong) UIButton *selBtn;
+@property (nonatomic, copy) imageViewSelected imageSelectBlock;
 @end
 
 @interface HJShareImagesCell : UITableViewCell

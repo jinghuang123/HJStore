@@ -19,6 +19,7 @@
 @property (nonatomic , copy) NSString *coupon_value;
 @property (nonatomic , copy) NSString *model;
 @property (nonatomic, assign) BOOL showCoupon;
+@property (nonatomic, strong) UIImage *mainImage;
 @property (nonatomic, strong) NSArray *images;
 @end
 

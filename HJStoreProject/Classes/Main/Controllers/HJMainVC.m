@@ -19,6 +19,7 @@
 #import "HJSegemengVC.h"
 #import "AlibcManager.h"
 #import "YFPolicyWebVC.h"
+#import "HJLoginVC.h"
 
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -83,10 +84,13 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                         [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
                     }
                 }else{
+                    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footRefresh)];
                     self.recommends = [response objectForKey:@"recommends"];
                 }
                 success(nil);
                 [self.collectionView reloadData];
+                
+       
             } fail:^(NSError *error) {
                 success(nil);
             }];
@@ -98,6 +102,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                         [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
                     }
                 }else{
+                    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footRefresh)];
                     self.recommends = [response objectForKey:@"recommends"];
                 }
                 success(nil);
@@ -115,6 +120,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                     [self.collectionView.mj_footer endRefreshingWithNoMoreData];//放到停止加载方法后面 不然会失效
                 }
             }else{
+                self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footRefresh)];
                 self.banners = [response objectForKey:@"banners"];
                 self.bannerImages = [response objectForKey:@"bannerImages"];
                 self.activitys = [response objectForKey:@"activitys"];
@@ -145,7 +151,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
 
-        CGFloat collectionH = self.listType == HJMainVCProductListTypeMain ? MaxHeight - HJTabH - HJTopNavH - 5 : MaxHeight;
+        CGFloat collectionH = self.listType == HJMainVCProductListTypeMain ? MaxHeight - HJTabH - HJTopNavH - 41 - 5 : MaxHeight;
         _collectionView.frame = CGRectMake(0, 0, MaxWidth, collectionH);
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.alwaysBounceVertical = YES;
@@ -166,7 +172,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         _collectionView.mj_footer.ignoredScrollViewContentInsetBottom = MaxHeight >= ENM_SCREEN_H_X ? 34 : 0;
         
         _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
-        _collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footRefresh)];
         
         [self.view addSubview:_collectionView];
     }
@@ -424,7 +429,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }else if (indexPath.section == HJMainVCSectionTypeSection1){
         HJActivityModel *model = [self.activitys objectAtIndex:indexPath.row];
         if (model.islogindata) {
-            
+            [self pushToLoginVC];
         }else{
             if (model.typedata == HJNavPushTypeUrl) {
                 [self pushToWebWithUrl:model.content_url];
@@ -476,6 +481,8 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 - (void)pushToLoginVC {
+    HJLoginVC *login = [[HJLoginVC alloc] init];
+    [self presentViewController:login animated:YES completion:nil];
 }
 
 @end

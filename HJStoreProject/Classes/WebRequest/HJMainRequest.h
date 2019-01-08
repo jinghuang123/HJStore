@@ -63,9 +63,10 @@
                             code:(NSString *)code
                           pageNo:(NSInteger)pageNo
                         pageSize:(NSInteger)pangeSize
+                      has_coupon:(NSString *)has_coupon
                             sort:(NSInteger)sort
                          success:(CompletionSuccessBlock)success
-                            fail:(CompletionFailBlock)fail ;
+                            fail:(CompletionFailBlock)fail;
 
 
 - (void)getShareDataCache:(BOOL)cache

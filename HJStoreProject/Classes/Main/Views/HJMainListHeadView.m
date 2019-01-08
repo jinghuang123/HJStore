@@ -122,7 +122,9 @@
         make.right.mas_offset(10);
         make.width.height.mas_equalTo(40);
     }];
-    
+    if(self.frame.size.height > 40){
+        [self addViewToBottom];
+    }
 }
 
 - (UIView *)createViewWithTitle:(NSString *)title icon:(NSString *)icon iconSize:(CGSize)size{
@@ -149,6 +151,34 @@
     }];
     
     return view;
+}
+
+- (void)addViewToBottom {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 40, MaxWidth, 40)];
+    view.layer.borderWidth = 0.5;
+    view.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
+    [self addSubview:view];
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10, 200, 20)];
+    tipLabel.font = PFR13Font;
+    tipLabel.textColor = [UIColor lightGrayColor];
+    tipLabel.text = @"仅显示优惠券商品";
+    [view addSubview:tipLabel];
+    UISwitch *swi = [[UISwitch alloc] init];
+    swi.tintColor = [UIColor orangeColor];
+    swi.onTintColor = [UIColor orangeColor];
+    swi.transform = CGAffineTransformMakeScale(0.8,0.8);
+    [view addSubview:swi];
+    [swi mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-20);
+        make.centerY.mas_equalTo(view.mas_centerY).offset(0);
+    }];
+    [swi addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)switchChange:(UISwitch *)swi{
+    if(self.switchChangeBlock){
+        self.switchChangeBlock(swi.on);
+    }
 }
 
 

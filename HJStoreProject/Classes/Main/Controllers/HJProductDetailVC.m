@@ -28,6 +28,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 @property (nonatomic, strong) NSMutableArray *randoms;
 @property (nonatomic, strong) HJProductDetailModel *detailmodel;
 @property (nonatomic, strong) UIButton *couponInfoBtn;
+@property (nonatomic, strong) HJShareMainImageView *shareMainImageV;
 @end
 
 @implementation HJProductDetailVC
@@ -67,7 +68,6 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
             self.detailmodel = detailModel;
             NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",detailModel.coupon_value];
             [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
-            
             [self getRamdoms];
         } fail:^(NSError *error) {
             
@@ -76,26 +76,27 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         
         self.detailmodel = [[HJProductDetailModel alloc] init];
         self.tableHeadView.imageGroupArray = self.searchModel.small_images.string;
-        self.detailmodel.small_images = self.searchModel.small_images.string;
-        self.detailmodel.product_id = self.searchModel.num_iid;
         self.detailmodel.title = self.searchModel.title;
         self.detailmodel.user_type = self.searchModel.user_type;
         self.detailmodel.zk_final_price = self.searchModel.zk_final_price;
         self.detailmodel.reserve_price = self.searchModel.reserve_price;
-        self.detailmodel.coupon_value = @"0";
         self.detailmodel.pict_url_image = self.searchModel.pict_url;
-        self.detailmodel.coupon_click_url = self.searchModel.coupon_share_url;
+        self.detailmodel.coupon_click_url = self.searchModel.coupon_share_url ? self.searchModel.coupon_share_url : @"";
         self.detailmodel.nick = self.searchModel.shop_title;
         self.detailmodel.volume = self.searchModel.volume;
-        self.detailmodel.item_url = self.searchModel.item_url;
+        self.detailmodel.coupon_value = self.searchModel.coupon_value;
         NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",self.detailmodel.coupon_value];
         [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
         [self getRamdoms];
     }
-  
 }
 
 - (void)getRamdoms {
+    
+    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, MaxHeight, 375, 667) andDetailModel:self.detailmodel];
+    self.shareMainImageV = imageV;
+    [self.view addSubview:imageV];
+    
     [[HJMainRequest shared] getRandomListCache:YES pageSize:10 success:^(NSArray *recommends) {
         [self.randoms setArray:recommends];
         [self.dataSource addObjectsFromArray:@[self.detailmodel,@(NO),@[],self.randoms]];
@@ -272,14 +273,20 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 }
 
-- (void)getShareImageSuccess:(CompletionSuccessBlock)suc {
-
+- (UIImage *)getShareImage {
+    // 创建拼接头部view
+    UIGraphicsBeginImageContextWithOptions(self.shareMainImageV.mj_size,NO, 0.0);//设置截屏大小
+    [self.shareMainImageV.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 
 - (void)shareAction {
     NSLog(@"shareAction");
-    
-    [[HJMainRequest shared] getShareDataCache:YES productId:self.productId title:self.detailmodel.title url:self.detailmodel.coupon_click_url success:^(HJShareModel *share) {
+    weakify(self)
+    NSInteger productId = self.productId > 0 ? self.productId : self.searchModel.num_iid;
+    [[HJMainRequest shared] getShareDataCache:YES productId:productId title:self.detailmodel.title url:self.detailmodel.coupon_click_url success:^(HJShareModel *share) {
         HJShareVC *shareVC = [[HJShareVC alloc] init];
         share.title = self.detailmodel.title;
         share.product_id = self.productId;
@@ -287,6 +294,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         share.zk_final_price = self.detailmodel.zk_final_price;
         share.coupon_value = self.detailmodel.coupon_value;
         share.images = self.detailmodel.small_images;
+        share.mainImage = [weak_self getShareImage];
         share.showCoupon = YES;
         shareVC.shareModel = share;
         [shareVC setNavBackItem];

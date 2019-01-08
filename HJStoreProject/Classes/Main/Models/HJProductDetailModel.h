@@ -35,5 +35,6 @@
 @property (nonatomic , copy) NSString              * coupon_click_url;
 @property (nonatomic , copy) NSString              * mm_coupon_info;
 @property (nonatomic , assign) NSInteger              mm_coupon_remain_count;
+
 @end
 

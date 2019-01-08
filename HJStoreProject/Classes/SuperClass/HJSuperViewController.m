@@ -8,7 +8,7 @@
 
 #import "HJSuperViewController.h"
 
-@interface HJSuperViewController ()
+@interface HJSuperViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -19,7 +19,8 @@
     self.view.backgroundColor = RGB(245, 245, 245);
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
-    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
 
 }
 
@@ -46,14 +47,11 @@
 - (void)backButtonClick {
     [self.navigationController popViewControllerAnimated:NO];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return YES;
 }
-*/
 
 @end

@@ -146,6 +146,33 @@
 }
 
 
+- (void)setItemCellWithSearchItem:(HJSearchModel *)item {
+    [_goodsImageView sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
+    //3.初始化NSTextAttachment对象
+    [_preIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"default_160"]];
+    [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    paragraphStyle.firstLineHeadIndent = 25.f; // 首行缩进
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, item.title.length)];
+    _goodsLabel.attributedText = attributedString;
+    
+    
+    NSInteger reserve_price_length = item.reserve_price.length;
+    NSMutableAttributedString *newPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",_priceLabel.text]];
+    [newPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
+    
+    [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 1)];
+    [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
+    [newPriceString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
+    _priceLabel.attributedText = newPriceString;
+}
+
 
 
 @end
@@ -293,6 +320,31 @@
     _priceLabel.attributedText = newPriceString;
 }
 
-
+- (void)setItemCellWithSearchItem:(HJSearchModel *)item {
+    [_goodsImageView sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
+    //3.初始化NSTextAttachment对象
+    [_preIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"default_160"]];
+    [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    paragraphStyle.firstLineHeadIndent = 25.f; // 首行缩进
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, item.title.length)];
+    _goodsLabel.attributedText = attributedString;
+    
+    
+    NSInteger reserve_price_length = item.reserve_price.length;
+    NSMutableAttributedString *newPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",_priceLabel.text]];
+    [newPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
+    
+    [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 1)];
+    [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
+    [newPriceString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
+    _priceLabel.attributedText = newPriceString;
+}
 
 @end

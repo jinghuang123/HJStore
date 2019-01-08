@@ -132,6 +132,8 @@
 		B8E086D121E1E62600792D40 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E086D021E1E62600792D40 /* libz.tbd */; };
 		B8E086D321E1E62F00792D40 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E086D221E1E62F00792D40 /* libsqlite3.tbd */; };
 		B8E086D521E1E63F00792D40 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E086D421E1E63F00792D40 /* Photos.framework */; };
+		B8E086D921E21D7700792D40 /* HJLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E086D821E21D7700792D40 /* HJLoginVC.m */; };
+		B8E086DD21E222BE00792D40 /* UIButton+init.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E086DC21E222BE00792D40 /* UIButton+init.m */; };
 		B8E38B5921C93BF0008C216F /* HJMainRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E38B5821C93BF0008C216F /* HJMainRequest.m */; };
 		B8E38B5C21C94076008C216F /* HJCategoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E38B5B21C94076008C216F /* HJCategoryRequest.m */; };
 /* End PBXBuildFile section */
@@ -340,6 +342,10 @@
 		B8E086D021E1E62600792D40 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B8E086D221E1E62F00792D40 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B8E086D421E1E63F00792D40 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		B8E086D721E21D7700792D40 /* HJLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJLoginVC.h; sourceTree = "<group>"; };
+		B8E086D821E21D7700792D40 /* HJLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJLoginVC.m; sourceTree = "<group>"; };
+		B8E086DB21E222BE00792D40 /* UIButton+init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+init.h"; sourceTree = "<group>"; };
+		B8E086DC21E222BE00792D40 /* UIButton+init.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+init.m"; sourceTree = "<group>"; };
 		B8E38B5721C93BF0008C216F /* HJMainRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMainRequest.h; sourceTree = "<group>"; };
 		B8E38B5821C93BF0008C216F /* HJMainRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMainRequest.m; sourceTree = "<group>"; };
 		B8E38B5A21C94076008C216F /* HJCategoryRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJCategoryRequest.h; sourceTree = "<group>"; };
@@ -608,6 +614,7 @@
 		B873DA5521B1155B008DBC66 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				B8E086DA21E2221C00792D40 /* Categorys */,
 				B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */,
 				B873DA5921B1160C008DBC66 /* Reachability.h */,
 				B873DA5A21B1160D008DBC66 /* Reachability.m */,
@@ -672,6 +679,7 @@
 				B8A9180B21AFCFBB006733BA /* Me */,
 				B8A9180A21AFCFAF006733BA /* TypeList */,
 				B8A9180921AFCFA6006733BA /* Main */,
+				B8E086D621E21D4700792D40 /* Login */,
 				B8A9180521AFC535006733BA /* NavTabbarVC */,
 			);
 			path = Classes;
@@ -851,6 +859,24 @@
 				B8E086BE21E1E59000792D40 /* MOBFoundation.framework */,
 			);
 			path = Required;
+			sourceTree = "<group>";
+		};
+		B8E086D621E21D4700792D40 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B8E086D721E21D7700792D40 /* HJLoginVC.h */,
+				B8E086D821E21D7700792D40 /* HJLoginVC.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B8E086DA21E2221C00792D40 /* Categorys */ = {
+			isa = PBXGroup;
+			children = (
+				B8E086DB21E222BE00792D40 /* UIButton+init.h */,
+				B8E086DC21E222BE00792D40 /* UIButton+init.m */,
+			);
+			path = Categorys;
 			sourceTree = "<group>";
 		};
 		E279B105CB3D6E55735CAFFB /* Pods */ = {
@@ -1048,6 +1074,7 @@
 				B8E38B5921C93BF0008C216F /* HJMainRequest.m in Sources */,
 				B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */,
 				B810EE4D21E0DF9F0059CACC /* YFPolicyWebVC.m in Sources */,
+				B8E086D921E21D7700792D40 /* HJLoginVC.m in Sources */,
 				B810EDF621E091510059CACC /* HJShareModel.m in Sources */,
 				B8A917E821AFB758006733BA /* AppDelegate.m in Sources */,
 				B873DA5B21B1160D008DBC66 /* Reachability.m in Sources */,
@@ -1075,6 +1102,7 @@
 				B821268021D9BC2E007828B2 /* SegmentView.m in Sources */,
 				B810EE4021E0C7A10059CACC /* FSActionSheetConfig.m in Sources */,
 				B8E0869F21E1E28100792D40 /* HJShareMainImageView.m in Sources */,
+				B8E086DD21E222BE00792D40 /* UIButton+init.m in Sources */,
 				B810EE4321E0C7A10059CACC /* FSActionSheetItem.m in Sources */,
 				B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */,
 				B811D7EC21CE1F4500FBED10 /* UIImageView+HHWebImage.m in Sources */,

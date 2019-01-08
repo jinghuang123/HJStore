@@ -138,8 +138,8 @@ static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorH
 - (void)setupMoveLineDefaultLocation {
     CGFloat firstCellWidth = [self getWidthWithContent:self.titleArray[0]];
     [self.moveLine mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(firstCellWidth);
-        make.left.mas_equalTo(CellSpacing);
+        make.width.mas_equalTo(firstCellWidth - 10);
+        make.left.mas_equalTo(CellSpacing + 5);
     }];
 }
 
@@ -162,7 +162,7 @@ static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorH
                                      attributes:@{NSFontAttributeName:NORMAL_FONT}
                                         context:nil
                    ];
-    return ceilf(rect.size.width);;
+    return ceilf(rect.size.width) + 10;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

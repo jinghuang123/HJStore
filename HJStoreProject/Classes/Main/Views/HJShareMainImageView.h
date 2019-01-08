@@ -11,7 +11,7 @@
 
 
 @interface HJShareMainImageView : HJSuperView
-
+- (instancetype)initWithFrame:(CGRect)frame andDetailModel:(HJProductDetailModel *)detail;
 @end
 
 

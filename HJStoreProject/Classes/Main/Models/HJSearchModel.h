@@ -49,5 +49,6 @@
 @property (nonatomic , assign) NSInteger              volume;
 @property (nonatomic , copy) NSString              * white_image;
 @property (nonatomic , copy) NSString              * zk_final_price;
+@property (nonatomic , copy) NSString  *coupon_value;
 @end
 
