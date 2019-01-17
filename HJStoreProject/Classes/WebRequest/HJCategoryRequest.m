@@ -35,6 +35,9 @@
             NSLog(@"getCategoryCache:%@",responseObject);
             NSArray *categorys = [HJCategoryModel mj_objectArrayWithKeyValuesArray:responseObject];
             self.categorys = categorys;
+            HJCategoryModelsSaved *categorysSaved = [[HJCategoryModelsSaved alloc] init];
+            categorysSaved.categorys = categorys;
+            [categorysSaved saveCategorysInfo2Phone];
             success(self.categorys);
         } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
             fail(error);

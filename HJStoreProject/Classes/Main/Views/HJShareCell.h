@@ -10,6 +10,7 @@
 #import "HJShareModel.h"
 
 typedef void(^couponShowSelected)(id obj);
+typedef void(^didImagesSelectedUpdate)(id obj);
 typedef void(^imageViewSelected)(int state);
 @interface HJShareCell : UITableViewCell
 @property (nonatomic, copy) couponShowSelected couponShowBlock;
@@ -24,7 +25,11 @@ typedef void(^imageViewSelected)(int state);
 @end
 
 @interface HJShareImagesCell : UITableViewCell
+
+@property (nonatomic, copy) didImagesSelectedUpdate didImagesSelectedUpdateBlock;
 - (void)updateCellWithModel:(HJShareModel *)share;
+
+- (NSArray *)getSelectedImages;
 @end
 
 

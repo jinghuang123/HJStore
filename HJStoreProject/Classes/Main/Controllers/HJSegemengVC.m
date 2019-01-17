@@ -20,23 +20,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[HJMainRequest shared] getMainCategoryCache:YES success:^(NSArray *categorys) {
-        NSMutableArray *datas = [[NSMutableArray alloc] init];
-        NSMutableArray *names = [[NSMutableArray alloc] init];
-        for (HJCategoryModel *category in categorys) {
-            HJMainVC *mainVC = [[HJMainVC alloc] init];
-            mainVC.listType = HJMainVCProductListTypeMain;
-            mainVC.headType = category.categoryId == 0 ? HJMainVCProductListHeadTypeMain : HJMainVCProductListHeadTypeList;
-            mainVC.showType = category.categoryId == 0 ? signleLineShowDoubleGoods : singleLineShowOneGoods;
-            mainVC.catteryId = category.categoryId;
-            [names addObject:category.name];
-            [datas addObject:mainVC];
-        }
-        [self setupUIWithCategorys:datas names:names];
-    } fail:^(NSError *error) {
-        
-    }];
+    if ([HJNetworkType isConnected]) {
+        [[HJMainRequest shared] getMainCategoryCache:YES success:^(NSArray *categorys) {
+            [self setTopItemsWithArray:categorys];
+        } fail:^(NSError *error) {
+            HJCategoryModelsSaved *savedCategorys = [HJCategoryModelsSaved getSavedCategoryModels];
+            [self setTopItemsWithArray:savedCategorys.categorys];
+        }];
+    }else{
+        HJCategoryModelsSaved *savedCategorys = [HJCategoryModelsSaved getSavedCategoryModels];
+        [self setTopItemsWithArray:savedCategorys.categorys];
+    }
     [self setupNavItems];
+}
+
+- (void)setTopItemsWithArray:(NSArray *)categorys {
+    NSMutableArray *totalCategorys = [[NSMutableArray alloc] init];
+    [totalCategorys setArray:categorys];
+    HJCategoryModel *mainOneCat = [[HJCategoryModel alloc] init];
+    mainOneCat.categoryId = 0;
+    mainOneCat.name = @"精选";
+    mainOneCat.parent_id = 0;
+    [totalCategorys insertObject:mainOneCat atIndex:0];
+    NSMutableArray *datas = [[NSMutableArray alloc] init];
+    NSMutableArray *names = [[NSMutableArray alloc] init];
+    for (HJCategoryModel *category in totalCategorys) {
+        HJMainVC *mainVC = [[HJMainVC alloc] init];
+        mainVC.listType = HJMainVCProductListTypeMain;
+        mainVC.headType = category.categoryId == 0 ? HJMainVCProductListHeadTypeMain : HJMainVCProductListHeadTypeList;
+        mainVC.showType = category.categoryId == 0 ? signleLineShowDoubleGoods : singleLineShowOneGoods;
+        mainVC.catteryId = category.categoryId;
+        [names addObject:category.name];
+        [datas addObject:mainVC];
+    }
+    [self setupUIWithCategorys:datas names:names];
 }
 
 - (void)setupUIWithCategorys:(NSArray *)Cacontrollers names:(NSArray *)names {

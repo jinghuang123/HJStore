@@ -91,8 +91,13 @@
         success(operation, result);
     }
     else {
-        NSLog(@"result message  --  %@",[responseObject objectForKey:@"message"]);
-        failure(operation, nil, resultCode);
+        NSString *errorMsg = [responseObject objectForKey:@"msg"];
+//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIScreen mainScreen].focusedView animated:YES];
+//        hud.label.text = errorMsg;
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [MBProgressHUD hideHUDForView:[UIScreen mainScreen].focusedView animated:YES];
+//        });
+        failure(operation, nil, errorMsg);
     }
 }
 

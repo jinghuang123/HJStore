@@ -19,5 +19,10 @@
 @property (nonatomic , assign) NSInteger              volume; //销量
 @property (nonatomic , copy) NSString              * max_commission_rate; //佣金比率
 @property (nonatomic , copy) NSString              * coupon_value; //优惠券金额
+@property (nonatomic , copy) NSString              * coupon_after_price; //卷后价格
+
+
+@property (nonatomic , assign) CGFloat    commission; ///佣金
+@property (nonatomic , assign) CGFloat    earning; ///收益
 @end
 

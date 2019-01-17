@@ -55,6 +55,9 @@
 #define HJStroeTabbarImgKey     @"imageName"
 #define HJStroeTabbarSelImgKey  @"selectedImageName"
 
+#define HJStoreTokenKey  @"kHJStoreTokenKey"
+#define kUserInfoKey @"kUserInfoKey"
+
 /***** consts ******/
 // 导航栏高度
 #define HJNavH  44

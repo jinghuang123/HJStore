@@ -41,11 +41,6 @@
             NSLog(@"getMainCategoryCache:%@",responseObject);
             NSArray *categorys = [HJCategoryModel mj_objectArrayWithKeyValuesArray:responseObject];
             [self.categorys setArray:categorys];
-            HJCategoryModel *mainOneCat = [[HJCategoryModel alloc] init];
-            mainOneCat.categoryId = 0;
-            mainOneCat.name = @"精选";
-            mainOneCat.parent_id = 0;
-            [self.categorys insertObject:mainOneCat atIndex:0];
             success(self.categorys);
         } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
             fail(error);
@@ -247,6 +242,17 @@
 
 
 
-
+- (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail {
+    
+    [kHTTPManager tryPost:kUrlEarningConfiger parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"getEarningConfigerSuccess:%@",responseObject);
+        HJEarningModel *model = [HJEarningModel shared];
+        model = [HJEarningModel mj_objectWithKeyValues:responseObject];
+        success(model);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
 
 @end

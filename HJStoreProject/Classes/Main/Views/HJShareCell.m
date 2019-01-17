@@ -202,12 +202,23 @@
         self.userInteractionEnabled = YES;
         self.contentMode = UIViewContentModeScaleToFill;
         self.clipsToBounds = YES;
+        UIView *selectedBgView = [[UIView alloc] init];
+        selectedBgView.backgroundColor = [UIColor clearColor];
+        [self addSubview:selectedBgView];
+        [selectedBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_offset(0);
+            make.right.mas_offset(0);
+            make.width.height.mas_equalTo(35);
+        }];
+        [selectedBgView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+            [self imageSelectedAction:self.selBtn];
+        }];
         UIButton *selectedBtn = [[UIButton alloc] init];
         _selBtn = selectedBtn;
         [selectedBtn addTarget:self action:@selector(imageSelectedAction:) forControlEvents:UIControlEventTouchUpInside];
         [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_unselected"] forState:UIControlStateNormal];
         [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_selected"] forState:UIControlStateSelected];
-        [self addSubview:selectedBtn];
+        [selectedBgView addSubview:selectedBtn];
         [selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_offset(5);
             make.right.mas_offset(-5);
@@ -317,7 +328,6 @@
         make.width.mas_equalTo(rightItemSize);
         make.height.mas_equalTo(rightItemSize);
     }];
-    
     [self.imageViews addObject:rightImage1];
     [self.imageViews addObject:rightImage2];
     [self.imageViews addObject:rightImage3];
@@ -327,35 +337,71 @@
     [leftImageV jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [weak_self showImage:weak_self.images index:0];
     }];
+    leftImageV.imageSelectBlock = ^(int state) {
+        [self didImagesSelectedStateUpdate];
+    };
     [rightImage1 jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [weak_self showImage:weak_self.images index:1];
     }];
+    rightImage1.imageSelectBlock = ^(int state) {
+        [self didImagesSelectedStateUpdate];
+    };
     [rightImage2 jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [weak_self showImage:weak_self.images index:2];
     }];
+    rightImage2.imageSelectBlock = ^(int state) {
+        [self didImagesSelectedStateUpdate];
+    };
     [rightImage3 jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [weak_self showImage:weak_self.images index:3];
     }];
+    rightImage3.imageSelectBlock = ^(int state) {
+        [self didImagesSelectedStateUpdate];
+    };
     [rightImage4 jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [weak_self showImage:weak_self.images index:4];
     }];
-    
-    
+    rightImage4.imageSelectBlock = ^(int state) {
+        [self didImagesSelectedStateUpdate];
+    };
+}
+
+- (void)didImagesSelectedStateUpdate {
+    NSArray *images = [self getSelectedImages];
+    if (self.didImagesSelectedUpdateBlock) {
+        self.didImagesSelectedUpdateBlock(images);
+    }
 }
     
 - (void)updateCellWithModel:(HJShareModel *)share {
     _leftImageV.image = share.mainImage;
-    [self.images addObject:share.mainImage];
     [share.images enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL * _Nonnull stop) {
        HJShareImageView *imagV = [self.imageViews objectAtIndex:idx];
         [imagV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"list_holder"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
     }];
+    [self.images addObject:share.mainImage];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         for (HJShareImageView *imageV in self.imageViews) {
             [self.images addObject:imageV.image];
         }
     });
+}
+
+- (NSArray *)getSelectedImages {
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    if (_leftImageV.selBtn.selected) {
+        UIImage *image = _leftImageV.image;
+        [images addObject:image];
+    }
+    for (HJShareImageView *imageV in self.imageViews) {
+        if (imageV.selBtn.selected) {
+            UIImage *image = imageV.image;
+            NSLog(@"size:%f,%f",image.size.width,image.size.height);
+            [images addObject:image];
+        }
+    }
+    return images;
 }
 
 - (void) showImage:(NSArray *)images index:(NSInteger)index{

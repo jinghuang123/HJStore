@@ -15,6 +15,7 @@
 #import "HJProductDetailModel.h"
 #import "HJSearchModel.h"
 #import "HJShareModel.h"
+#import "HJEarningModel.h"
 
 
 @interface HJMainRequest : NSObject
@@ -75,5 +76,8 @@
                       url:(NSString *)url
                   success:(CompletionSuccessBlock)success
                      fail:(CompletionFailBlock)fail;
+
+- (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
+                             fail:(CompletionFailBlock)fail;
 @end
 

@@ -8,9 +8,11 @@
 
 #import "HJShareVC.h"
 #import "HJShareCell.h"
+#import "HJShareInstance.h"
 
 @interface HJShareVC ()  <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) NSArray *selectedImages;
 @end
 
 @implementation HJShareVC
@@ -62,6 +64,7 @@
     shareButton.layer.cornerRadius = 3;
     shareButton.layer.borderWidth = 1.0;
     shareButton.clipsToBounds = YES;
+    [shareButton addTarget:self action:@selector(sharedAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:shareButton];
     [shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-10);
@@ -69,6 +72,37 @@
         make.width.mas_equalTo((MaxWidth - 30)/2);
         make.height.mas_equalTo(39);
     }];
+}
+
+
+- (void)sharedAction {
+//    [[HJShareInstance shareInstance] shareToWechat:NO images:self.selectedImages callback:^(NSString *errorMsg) {
+//
+//    }];
+    
+    NSArray * items =  self.selectedImages;    //分享图片 数组
+    
+    UIActivityViewController * activityCtl = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    
+    //去除一些不需要的图标选项
+    activityCtl.excludedActivityTypes = @[UIActivityTypePostToFacebook,
+                                          UIActivityTypeAirDrop,
+                                          UIActivityTypePostToTwitter,
+                                          UIActivityTypeMessage,
+                                          UIActivityTypeMail,
+                                          UIActivityTypePrint,
+                                          UIActivityTypeCopyToPasteboard,
+                                          UIActivityTypeAssignToContact,
+                                          UIActivityTypeSaveToCameraRoll,
+                                          UIActivityTypeAddToReadingList ,
+                                          UIActivityTypePostToFlickr ,
+                                          UIActivityTypePostToVimeo,
+                                          UIActivityTypePostToTencentWeibo,
+                                          UIActivityTypeAirDrop ,
+                                          UIActivityTypeOpenInIBooks];
+    
+    [self presentViewController:activityCtl animated:YES completion:nil];
+
 }
 
 - (void)headRefresh {
@@ -120,6 +154,10 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell updateCellWithModel:self.shareModel];
+        self.selectedImages = [cell getSelectedImages];
+        cell.didImagesSelectedUpdateBlock = ^(NSArray *images) {
+            self.selectedImages = images;
+        };
         return cell;
     }
 }

@@ -20,6 +20,7 @@
 #import "AlibcManager.h"
 #import "YFPolicyWebVC.h"
 #import "HJLoginVC.h"
+#import "HJNavigationVC.h"
 
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -482,7 +483,8 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 - (void)pushToLoginVC {
     HJLoginVC *login = [[HJLoginVC alloc] init];
-    [self presentViewController:login animated:YES completion:nil];
+    HJNavigationVC *nav = [[HJNavigationVC alloc] initWithRootViewController:login];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

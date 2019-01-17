@@ -111,7 +111,9 @@
     //获取二维码过滤器生成的二维码
     CIImage *image = [filter outputImage];
     
-    qrCodeImageView.image = [UIImage imageWithCIImage:image];;
+    qrCodeImageView.image = [UIImage imageWithCIImage:image];
+
 }
+
 
 @end

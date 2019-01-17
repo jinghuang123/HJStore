@@ -22,9 +22,10 @@
     [button setBackgroundImage:buttonImageDis forState:UIControlStateDisabled];
 
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:15];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     return button;
 }
+
 @end

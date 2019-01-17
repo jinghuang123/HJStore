@@ -76,6 +76,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         
         self.detailmodel = [[HJProductDetailModel alloc] init];
         self.tableHeadView.imageGroupArray = self.searchModel.small_images.string;
+        self.detailmodel.small_images = self.searchModel.small_images.string;
         self.detailmodel.title = self.searchModel.title;
         self.detailmodel.user_type = self.searchModel.user_type;
         self.detailmodel.zk_final_price = self.searchModel.zk_final_price;
@@ -93,7 +94,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 - (void)getRamdoms {
     
-    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, MaxHeight, 375, 667) andDetailModel:self.detailmodel];
+    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 667) andDetailModel:self.detailmodel];
     self.shareMainImageV = imageV;
     [self.view addSubview:imageV];
     
@@ -274,7 +275,6 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 }
 
 - (UIImage *)getShareImage {
-    // 创建拼接头部view
     UIGraphicsBeginImageContextWithOptions(self.shareMainImageV.mj_size,NO, 0.0);//设置截屏大小
     [self.shareMainImageV.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();

@@ -32,6 +32,30 @@
 				<string>tbopen25540430</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxc5798db4358400b7</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1108088074</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb3994717529</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -39,9 +63,25 @@
 	<array>
 		<string>tbopen</string>
 		<string>tmall</string>
+		<string>wechat</string>
+		<string>weixin</string>
+		<string>mqq</string>
+		<string>sinaweibo</string>
+		<string>sinaweibosso</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>wtloginmqq2</string>
+		<string>mqqapi</string>
+		<string>sinaweibohd</string>
+		<string>timapi</string>
+		<string>sinaweibohdsso</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MOBAppKey</key>
+	<string>2974692b32917</string>
+	<key>MOBAppSecret</key>
+	<string>7ee940ef2919ce8b576253d38cc50f01</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -66,9 +106,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MOBAppKey</key>
-	<string></string>
-	<key>MOBAppSecret</key>
-	<string></string>
 </dict>
 </plist>

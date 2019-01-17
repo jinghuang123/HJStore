@@ -36,5 +36,8 @@
 @property (nonatomic , copy) NSString              * mm_coupon_info;
 @property (nonatomic , assign) NSInteger              mm_coupon_remain_count;
 
+
+@property (nonatomic , assign) CGFloat    commission; ///佣金
+@property (nonatomic , assign) CGFloat    earning; ///收益
 @end
 

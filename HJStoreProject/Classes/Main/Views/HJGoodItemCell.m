@@ -24,6 +24,8 @@
 
 @property (strong , nonatomic)UIImageView *preIcon;
 @property (strong , nonatomic)UIImageView *couponIcon;
+
+@property (strong , nonatomic) UILabel *earningLabel;
 @end
 
 
@@ -62,6 +64,14 @@
     
     _couponIcon = [[UIImageView alloc] init];
     [self addSubview:_couponIcon];
+    
+    _earningLabel =  [[UILabel alloc] init];
+    _earningLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
+    _earningLabel.textColor = [UIColor redColor];
+    _earningLabel.font = [UIFont systemFontOfSize:10];
+    _earningLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:_earningLabel];
+
     
     _soldCountLabel =  [[UILabel alloc] init];
     _soldCountLabel.textColor = [UIColor jk_colorWithHexString:@"#8F8F8F"];
@@ -102,6 +112,13 @@
         make.height.mas_equalTo(15);
     }];
     
+    [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-5);
+        make.width.mas_equalTo(80);
+        make.top.mas_equalTo(weak_self.couponIcon.mas_top).offset(0);
+        make.height.mas_equalTo(15);
+    }];
+    
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(5);
         make.right.mas_offset(-5);
@@ -111,7 +128,7 @@
     [_soldCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-5);
         make.width.mas_equalTo(120);
-        make.centerY.mas_equalTo(_priceLabel.mas_centerY).offset(0);
+        make.centerY.mas_equalTo(weak_self.priceLabel.mas_centerY).offset(0);
     }];
     
 
@@ -122,6 +139,7 @@
     _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
     //3.初始化NSTextAttachment对象
     [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
+    _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
     [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
@@ -196,6 +214,9 @@
 
 @property (strong , nonatomic)UIImageView *preIcon;
 @property (strong , nonatomic)UIImageView *couponIcon;
+
+@property (strong , nonatomic) UILabel *earningLabel;
+
 @end
 
 
@@ -239,6 +260,13 @@
     _couponIcon = [[UIImageView alloc] init];
     [self addSubview:_couponIcon];
     
+    _earningLabel =  [[UILabel alloc] init];
+    _earningLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
+    _earningLabel.textColor = [UIColor redColor];
+    _earningLabel.font = [UIFont systemFontOfSize:10];
+    _earningLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:_earningLabel];
+    
     _soldCountLabel =  [[UILabel alloc] init];
     _soldCountLabel.textColor = [UIColor jk_colorWithHexString:@"#8F8F8F"];
     _soldCountLabel.font = [UIFont systemFontOfSize:13];
@@ -275,6 +303,13 @@
         make.left.mas_equalTo(weak_self.goodsImageView.mas_right).offset(10);
         make.bottom.mas_offset(-10);
         make.width.mas_equalTo(40);
+        make.height.mas_equalTo(15);
+    }];
+    
+    [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-15);
+        make.width.mas_equalTo(80);
+        make.top.mas_equalTo(weak_self.couponIcon.mas_top).offset(0);
         make.height.mas_equalTo(15);
     }];
     
@@ -326,6 +361,8 @@
     //3.初始化NSTextAttachment对象
     [_preIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"default_160"]];
     [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
+
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];

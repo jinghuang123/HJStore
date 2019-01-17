@@ -149,7 +149,7 @@
     //3.初始化NSTextAttachment对象
     [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
-    _earningLabel.text = @"预估收益1.53～5.32";
+    _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
     _storeName.text = item.nick;
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];

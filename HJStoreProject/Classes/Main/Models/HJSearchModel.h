@@ -50,5 +50,8 @@
 @property (nonatomic , copy) NSString              * white_image;
 @property (nonatomic , copy) NSString              * zk_final_price;
 @property (nonatomic , copy) NSString  *coupon_value;
+
+@property (nonatomic , assign) CGFloat    commission; ///佣金
+@property (nonatomic , assign) CGFloat    earning; ///收益
 @end
 

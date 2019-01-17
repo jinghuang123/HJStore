@@ -39,4 +39,14 @@
     }
     
 }
+
+
+- (CGFloat)commission {
+    return (([self.zk_final_price floatValue] - [self.coupon_value floatValue]) * [self.commission_rate floatValue])/10000;
+}
+
+- (CGFloat)earning {
+    HJEarningModel *earn = [HJEarningModel shared];
+    return (self.commission *  (100 - earn.taobao_service_fee)) * (100 - earn.app_service_fee) * earn.user_rate / (100 * 100 * 100);
+}
 @end

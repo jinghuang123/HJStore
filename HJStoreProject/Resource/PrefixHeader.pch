@@ -23,3 +23,6 @@
 #import "YFHTTPRequestOperationManager.h"
 #import "UIImageView+HHWebImage.h"
 #import "UIButton+init.h"
+#import "HJEarningModel.h"
+#import "UITextField+inputInit.h"
+#import <MBProgressHUD.h>

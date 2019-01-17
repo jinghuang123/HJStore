@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HJNavigationVC.h"
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface HJTabBarVC : UITabBarController
-
 @end
 
-NS_ASSUME_NONNULL_END
+

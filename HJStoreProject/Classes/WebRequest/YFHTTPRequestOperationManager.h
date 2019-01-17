@@ -16,7 +16,7 @@
 typedef void (^CompletionSuccessBlock)(id responseObject);
 typedef void (^CompletionSuccessBlock2)(id data1, id data2, NSInteger count);
 typedef void (^CompletionFailBlock)(NSError *error);
-typedef void (^CompletionFailBlock2)(NSError *error,int errorCode);
+typedef void (^CompletionFailBlock2)(NSError *error,NSString *errorMsg);
 
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 + (instancetype)shared;
