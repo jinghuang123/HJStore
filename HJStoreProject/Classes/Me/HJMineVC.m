@@ -9,6 +9,8 @@
 #import "HJMineVC.h"
 #import "HJSettingRequest.h"
 #import "HJMainRequest.h"
+#import "HJMeView.h"
+#import "HJUserInfoSetVC.h"
 
 @interface HJMineVC ()
 
@@ -19,6 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
         
     } fail:^(NSError *error) {
@@ -35,6 +38,18 @@
         
     }];
     
+    HJMeView *meView = [[HJMeView alloc] init];
+    [self.view addSubview:meView];
+    [meView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.mas_offset(0);
+    }];
+    
+    meView.settingClick = ^(id obj) {
+        HJUserInfoSetVC *setVC = [[HJUserInfoSetVC alloc] init];
+        [setVC setNavBackItem];
+        setVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:setVC animated:YES];
+    };
 
 }
 

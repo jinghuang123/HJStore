@@ -27,12 +27,16 @@ static NSString *cellReuseID = @"cellReuseID";
     [_headImageV sd_setImageWithURLString:model.avatar placeholderImage:[UIImage imageNamed:@"AppIcon"]];
     _nameLabel.text = model.nickname;
     _timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:model.createtime] jk_longDateString];
-    
+    _timeLabel.textColor = [UIColor jk_colorWithHexString:@"#4f4f4f"];
     NSString *htmlString = model.content;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     [attributedString addAttribute:NSFontAttributeName
                      value:[UIFont systemFontOfSize:13]
                      range:NSMakeRange(0,attributedString.length)];
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor jk_colorWithHexString:@"#4f4f4f"]
+                             range:NSMakeRange(0,attributedString.length)];
+    
     _contentLabel.attributedText = attributedString;
     [_contentLabel sizeToFit];
     
