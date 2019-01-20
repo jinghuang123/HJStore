@@ -30,13 +30,10 @@
     [[HJShareInstance shareInstance] registerShareSDK];
     
     [[HJCategoryRequest shared] getCategoryCache:NO success:^(id responseObject) {
-        
     } fail:^(NSError *error) {
     }];
     
-    [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
-    } fail:^(NSError *error) {
-    }];
+
     
     [NSThread sleepForTimeInterval:0.5];
     self.window.rootViewController = [[HJTabBarVC alloc] init];

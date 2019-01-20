@@ -32,7 +32,7 @@
     [mobileField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_offset(80);
+        make.top.mas_offset(180);
         make.height.mas_equalTo(fieldH);
     }];
     

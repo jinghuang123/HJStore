@@ -16,6 +16,7 @@ pod 'SDWebImage/GIF'
 pod 'WebViewJavascriptBridge', '~> 6.0'
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'UITableView+FDTemplateLayoutCell', '~> 1.6'
+pod 'HMSegmentedControl', '~> 1.5.5'
 
 target 'HJStoreProject' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks

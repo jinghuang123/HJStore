@@ -12,6 +12,8 @@
 @property (nonatomic, strong) UITextField *mobileField;
 @property (nonatomic, strong) UITextField *pwdField;
 @property (nonatomic, strong) UIButton *confirmBtn;
+@property (nonatomic, strong) MBProgressHUD *hud;
+
 @end
 
 @implementation HJMobileCodeLoginVC
@@ -77,8 +79,22 @@
     }];
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (_pwdField.text.length >= 5 && _mobileField.text.length == 11) {
+        self.confirmBtn.enabled = YES;
+    }else{
+        self.confirmBtn.enabled = NO;
+    }
+    return YES;
+}
+
 - (void)getCodeBtnClick {
-    [[HJLoginRegistRequest shared] getCodeWithMobile:_mobileField.text event:@"register" success:^(id responseObject) {
+
+    [[HJLoginRegistRequest shared] getCodeWithMobile:_mobileField.text event:@"mobilelogin" success:^(id responseObject) {
     } fail:^(NSError *error, NSString *errorMsg) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.label.text = errorMsg;
@@ -87,7 +103,14 @@
 }
 
 - (void)confirmBtnClick{
-    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[HJLoginRegistRequest shared] loginWithSMS:_mobileField.text code:_pwdField.text success:^(id responseObject) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.hud hideAnimated:YES];
+    } fail:^(NSError *error, NSString *errorMsg) {
+        self.hud.label.text = errorMsg;
+        [self.hud hideAnimated:YES afterDelay:1.5];
+    }];
 }
 
 /*

@@ -32,7 +32,6 @@
 - (void)getCategoryCache:(BOOL)cache success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
     if (self.categorys.count == 0 || !cache) {
         [kHTTPManager tryPost:kUrlGetCategorys parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
-            NSLog(@"getCategoryCache:%@",responseObject);
             NSArray *categorys = [HJCategoryModel mj_objectArrayWithKeyValuesArray:responseObject];
             self.categorys = categorys;
             HJCategoryModelsSaved *categorysSaved = [[HJCategoryModelsSaved alloc] init];
@@ -45,14 +44,12 @@
     }else{
         success(self.categorys);
     }
-    
 }
 
 
 - (void)getSubCategoryCache:(BOOL)cache parentId:(NSInteger)parentId success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
     NSDictionary *dic = @{@"categoryId": @(parentId)};
     [kHTTPManager tryPost:kUrlGetSubCategorys parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getSubCategoryCache:%@",responseObject);
         NSArray *categorys = [HJCategoryModel mj_objectArrayWithKeyValuesArray:responseObject];
         success(categorys);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {

@@ -20,7 +20,7 @@ typedef void (^CompletionFailBlock2)(NSError *error,NSString *errorMsg);
 
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 + (instancetype)shared;
-
+- (void)setValueForHead:(NSString *)value key:(NSString *)key;
 - (AFHTTPSessionManager *)tryPost:(NSString *)URLString
                         parameters:(id)parameters
                            success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success

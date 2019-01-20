@@ -8,9 +8,9 @@
 
 #ifndef ALiTradeWantViewController_h
 #define ALiTradeWantViewController_h
-
+#import "HJSuperViewController.h"
 #import <UIKit/UIKit.h>
-@interface ALiTradeWebViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDelegate>
+@interface ALiTradeWebViewController : HJSuperViewController<UIWebViewDelegate, NSURLConnectionDelegate>
 @property (nonatomic, copy) NSString *openUrl;
 @property (strong, nonatomic) UIWebView *webView;
 

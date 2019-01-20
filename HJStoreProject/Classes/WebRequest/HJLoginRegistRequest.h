@@ -34,6 +34,24 @@
                    userName:(NSString *)username
                     success:(CompletionSuccessBlock)success
                        fail:(CompletionFailBlock2)fail;
+
+
+
+- (void)loginWithSMS:(NSString *)account
+                code:(NSString *)code
+             success:(CompletionSuccessBlock)success
+                fail:(CompletionFailBlock2)fail;
+
+- (void)loginWithPsw:(NSString *)account
+                 psw:(NSString *)password
+             success:(CompletionSuccessBlock)success
+                fail:(CompletionFailBlock2)fail;
+
+- (void)reSetPasswordWithMobileNum:(NSString *)mobile
+                               psw:(NSString *)password
+                              Code:(NSString *)code
+                           success:(CompletionSuccessBlock)success
+                              fail:(CompletionFailBlock2)fail;
 @end
 
 

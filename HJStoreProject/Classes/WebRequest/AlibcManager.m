@@ -27,7 +27,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        [[AlibcTradeSDK sharedInstance] setDebugLogOpen:YES];//开发阶段打开日志开关，方便排查错误信息
+        [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];//开发阶段打开日志开关，方便排查错误信息
         
         [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
             
@@ -58,49 +58,35 @@
                            success:(AlibcTradeProcessSuccessCallback)success
                               fail:(AlibcTradeProcessFailedCallback)fail {
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
-    if(type == 0){
-        showParam.openType = AlibcOpenTypeNative;
-        showParam.backUrl = aliopenId;
-        showParam.isNeedPush = NO;
-        showParam.linkKey = @"taobao_scheme";//拉起淘宝
-        showParam.nativeFailMode=AlibcNativeFailModeJumpDownloadPage;
-        
+    if (webView) {
+        showParam.openType = AlibcOpenTypeH5;
     }else{
-        showParam.openType = AlibcOpenTypeNative;
-        showParam.backUrl = aliopenId;
-        showParam.isNeedPush = YES;
-        showParam.linkKey = @"tmall_scheme";//拉起天猫
+        if(type == 0){
+            showParam.openType = AlibcOpenTypeNative;
+            showParam.backUrl = aliopenId;
+            showParam.isNeedPush = YES;
+            showParam.linkKey = @"taobao_scheme";//拉起淘宝
+            showParam.nativeFailMode=AlibcNativeFailModeJumpH5;
+        }else{
+            showParam.openType = AlibcOpenTypeNative;
+            showParam.backUrl = aliopenId;
+            showParam.isNeedPush = YES;
+            showParam.linkKey = @"tmall_scheme";//拉起天猫
+            showParam.nativeFailMode=AlibcNativeFailModeJumpH5;
+        }
     }
+
     NSLog(@"showParam %@",showParam);
-    
-    //    NSString *itemId = [NSString stringWithFormat:@"%ld",productId];
-    
-    
-    
-    //打开商品详情页
-    //    id<AlibcTradePage> page = [AlibcTradePageFactory itemDetailPage:itemId];
-    
-    //    //添加商品到购物车
-    //    id<AlibcTradePage> page = [AlibcTradePageFactory addCartPage: @"123456"];
-    //
-    //    //根据链接打开页面
-//    url = @"https://uland.taobao.com/coupon/edetail?e=Hbm1TqAsaYQGQASttHIRqWKEsSqzwJ37%2BRUk6VVcjnFII08hgIYNwANsuTSkScbJevzI%2FQo1T713WG5EOOeoWW02%2F1k20DLubpZO0rSiF%2BIUdBQIEb3K%2BBemP0hpIIPvjDppvlX%2Bob8NlNJBuapvQ2MDg9t1zp0R8pjV3C9qcwRvxnR%2FP9frXPg1JsPjTcvU&traceId=0b14d34615463418465276399e&union_lens=lensId:0b156441_0cf5_16809280e2c_bb25";
-    NSString *targetUrl = [NSString stringWithFormat:@"https:%@",url];
+    NSString *targetUrl = [url containsString:@"https"] ? url : [NSString stringWithFormat:@"https:%@",url];
     id<AlibcTradePage> page = [AlibcTradePageFactory page:targetUrl];
-    //
-    //    //打开店铺
-    //    id<AlibcTradePage> page = [AlibcTradePageFactory shopPage: @”12333333”];
-    //
-    //    //打开我的订单页
-    //    id<AlibcTradePage> page = [AlibcTradePageFactory myOrdersPage:0 isAllOrder:YES];
-    //
-    //    //打开我的购物车
-    //    id<AlibcTradePage> page = [AlibcTradePageFactory myCartsPage];
+
     NSDictionary *trackParam = [NSDictionary dictionary];
     AlibcTradeTaokeParams *taoKeParams=[[AlibcTradeTaokeParams alloc] init];
     taoKeParams.pid=@"mm_12549758_288100257_78712850490";
     if (webView) {
         ALiTradeWebViewController* view = [[ALiTradeWebViewController alloc] init];
+        view.hidesBottomBarWhenPushed = YES;
+        [view setNavBackItem];
         NSInteger res = [[AlibcTradeSDK sharedInstance].tradeService show:view webView:view.webView page:page showParams:showParam taoKeParams:taoKeParams trackParam:trackParam tradeProcessSuccessCallback:success tradeProcessFailedCallback:fail];
         if (res == 1) {
             [parentController.navigationController pushViewController:view animated:YES];

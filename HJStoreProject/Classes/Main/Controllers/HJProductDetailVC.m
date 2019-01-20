@@ -265,7 +265,6 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"yOffset = %f",scrollView.mj_offsetY);
     if(scrollView.mj_offsetY < 200) {
         _navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:scrollView.mj_offsetY/200];
     }else{
@@ -301,9 +300,6 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         [self.navigationController pushViewController:shareVC animated:YES];
     } fail:^(NSError *error) {
     }];
-
-    
-
 }
 
 - (void)couponInfo {

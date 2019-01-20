@@ -35,9 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title=@"淘你喜欢";
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
                                                          forBarMetrics:UIBarMetricsDefault];
+
 }
 -(void)dealloc
 {

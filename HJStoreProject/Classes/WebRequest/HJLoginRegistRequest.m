@@ -88,8 +88,9 @@
                             };
     [kHTTPManager tryPost:kUrlRegist parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"registWithMobileNum:%@",responseObject);
-        HJUserInfoModel *userInfo = [HJUserInfoModel mj_objectWithKeyValues:responseObject];
-        [userInfo saveUserInfo2Phone];
+        NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
+        HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
+        [userInfoModel saveUserInfo2Phone];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
@@ -105,7 +106,47 @@
                             @"password":password,
                             };
     [kHTTPManager tryPost:kUrlLogin parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"registWithMobileNum:%@",responseObject);
+        NSLog(@"loginWithPsw:%@",responseObject);
+        NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
+        HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
+        [userInfoModel saveUserInfo2Phone];
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
+        fail(error,errorMsg);
+    }];
+}
+
+- (void)loginWithSMS:(NSString *)account
+                 code:(NSString *)code
+             success:(CompletionSuccessBlock)success
+                fail:(CompletionFailBlock2)fail  {
+    NSDictionary *parms = @{
+                            @"mobile":account,
+                            @"captcha":code,
+                            };
+    [kHTTPManager tryPost:kUrlLoginSMS parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"loginWithSMS:%@",responseObject);
+        NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
+        HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
+        [userInfoModel saveUserInfo2Phone];
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
+        fail(error,errorMsg);
+    }];
+}
+
+- (void)reSetPasswordWithMobileNum:(NSString *)mobile
+                               psw:(NSString *)password
+                              Code:(NSString *)code
+                           success:(CompletionSuccessBlock)success
+                              fail:(CompletionFailBlock2)fail  {
+    NSDictionary *parms = @{
+                            @"captcha":code,
+                            @"mobile":mobile,
+                            @"newpassword":password,
+                            };
+    [kHTTPManager tryPost:kUrlPassworldReset parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"reSetPasswordWithMobileNum:%@",responseObject);
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);

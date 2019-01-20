@@ -32,6 +32,11 @@
     return self;
 }
 
+- (void)setValueForHead:(NSString *)value key:(NSString *)key {
+    [self.manager.requestSerializer setValue:value forHTTPHeaderField:@"token"];
+    NSLog(@">>>>>>>>%@",[self.manager.requestSerializer HTTPRequestHeaders]);
+}
+
 
 - (NSURLSessionDataTask *)tryPost:(NSString *)URLString
                     parameters:(id)parameters
@@ -85,18 +90,12 @@
           success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
           failure:(void (^)(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode))failure {
     NSNumber *resultCode = [responseObject objectForKey:@"code"];
-    
     if ([resultCode integerValue] == 1) {
         NSDictionary *result = [responseObject objectForKey:@"data"];
         success(operation, result);
     }
     else {
         NSString *errorMsg = [responseObject objectForKey:@"msg"];
-//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIScreen mainScreen].focusedView animated:YES];
-//        hud.label.text = errorMsg;
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [MBProgressHUD hideHUDForView:[UIScreen mainScreen].focusedView animated:YES];
-//        });
         failure(operation, nil, errorMsg);
     }
 }

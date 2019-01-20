@@ -95,7 +95,7 @@
         make.left.mas_offset(5);
         make.top.mas_equalTo(weak_self.goodsImageView.mas_bottom).offset(15);
         make.width.mas_equalTo(20);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(13);
     }];
     
     [_goodsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -138,7 +138,11 @@
     [_goodsImageView sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
     //3.初始化NSTextAttachment对象
-    [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
+    if(item.user_type == 0) {
+        _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }
     _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
     [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
@@ -168,7 +172,11 @@
     [_goodsImageView sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
     //3.初始化NSTextAttachment对象
-    [_preIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"default_160"]];
+    if(item.user_type == 0) {
+        _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }
     [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
@@ -289,7 +297,7 @@
         make.left.mas_equalTo(weak_self.goodsImageView.mas_right).offset(10);
         make.top.mas_offset(20);
         make.width.mas_equalTo(20);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(13);
     }];
     
     [_goodsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -333,8 +341,11 @@
     NSString *type = item.user_type == 1 ? @"天猫价" : @"淘宝价";
     _priceLabel.text = [NSString stringWithFormat:@"%@ %@:%@",item.zk_final_price,type,item.reserve_price];
     //3.初始化NSTextAttachment对象
-    [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
-    [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    if(item.user_type == 0) {
+        _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }    [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
@@ -359,7 +370,11 @@
     [_goodsImageView sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
     //3.初始化NSTextAttachment对象
-    [_preIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"default_160"]];
+    if(item.user_type == 0) {
+        _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }
     [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
 

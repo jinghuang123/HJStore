@@ -7,6 +7,8 @@
 //
 
 #import "HJMineVC.h"
+#import "HJSettingRequest.h"
+#import "HJMainRequest.h"
 
 @interface HJMineVC ()
 
@@ -14,9 +16,26 @@
 
 @implementation HJMineVC
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[HJSettingRequest shared] getApplyCashListSuccess:^(id responseObject) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
+
 }
 
 /*

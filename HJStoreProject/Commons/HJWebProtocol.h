@@ -41,3 +41,13 @@ Declare(kUrlCheckModbileCode, "api/validate/check_code_or_mobile") /* 3.9 检测
 Declare(kUrlCheckModbile, "api/validate/check_mobile_exist") /* 3.10 检测手机号是否存在 */
 Declare(kUrlGetCode, "api/sms/send") /* 3.11 获取验证码 */
 Declare(kUrlCheckCode, "api/sms/check") /* 3.12 验证验证码 */
+
+
+Declare(kUrlRecommendTitles, "api/bbs/getBbsChannel") /* 4.1 社区分类 */
+Declare(kUrlRecommendList, "api/bbs/getBbsList") /* 4.2 社区列表数据 */
+
+Declare(kURLBindAlipay, "api/setting/bindZfb") /* 5.1 绑定支付宝 */
+Declare(kURLGetBindMsg, "api/setting/getBindZfb") /* 5.2 绑定信息获取 */
+Declare(kURLGetInvitationList, "api/setting/getInvitationInfo") /* 5.3 查询邀请页数据 */
+Declare(kURLApplyCash, "api/setting/applyCashWithdrawal") /* 5.4 申请提现 */
+Declare(kURLGetApplyCashList, "api/setting/getCashWithdrawalRecord") /* 5.4 提现记录 */

@@ -8,6 +8,7 @@
 
 #import "HJMobileLoginVC.h"
 #import "HJMobileCodeLoginVC.h"
+#import "HJResetPswVC.h"
 
 @interface HJMobileLoginVC () <UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *mobileField;
@@ -37,6 +38,9 @@
     
     UITextField *pwdField = [UITextField createFieldWithPreIcon:@"ic_login_input_pwd" placeHolder:@"请输入登录密码" sizeH:fieldH delegate:self];
     _pwdField = pwdField;
+    pwdField.clearButtonMode = UITextFieldViewModeAlways;
+    pwdField.returnKeyType = UIReturnKeySend;
+    pwdField.secureTextEntry = YES;
     pwdField.layer.cornerRadius = fieldH/2;
     pwdField.clipsToBounds = YES;
     pwdField.font = PFR13Font;
@@ -92,16 +96,25 @@
 }
 
 - (void)forgetBtnClick {
-    
+    HJResetPswVC *resetVC = [[HJResetPswVC alloc] init];
+    [resetVC setNavBackItem];
+    resetVC.title = @"重置密码";
+    [self.navigationController pushViewController:resetVC animated:YES];
 }
 
 - (void)codeLoginBtnClick {
     HJMobileCodeLoginVC *codeLogin = [[HJMobileCodeLoginVC alloc] init];
+    codeLogin.title = @"验证码登录";
+    [codeLogin setNavBackItem];
     [self.navigationController pushViewController:codeLogin animated:YES];
 }
 
 - (void)confirmBtnClick {
-    
+    [[HJLoginRegistRequest shared] loginWithPsw:_mobileField.text psw:_pwdField.text success:^(id responseObject) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } fail:^(NSError *error, NSString *errorMsg) {
+        
+    }];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {

@@ -63,7 +63,7 @@
         make.top.mas_equalTo(tip.mas_bottom).offset(15);
         make.left.mas_equalTo(tip.mas_left).offset(0);
         make.width.mas_equalTo(25);
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(17);
     }];
     
     UILabel *titleLabel = [[UILabel alloc] init];
@@ -147,7 +147,11 @@
     NSString *value = [NSString stringWithFormat:@"%.2f", final_value - couponValue];
     _priceLabel.text = [NSString stringWithFormat:@"%@   %@:%@",value,type,item.reserve_price];
     //3.初始化NSTextAttachment对象
-    [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
+    if(item.user_type == 0) {
+        _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
     _storeName.text = item.nick;
@@ -159,6 +163,9 @@
     paragraphStyle.alignment = NSTextAlignmentLeft;
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, item.title.length)];
     _titleLabel.attributedText = attributedString;
+    
+
+
     
     
     NSInteger final_price_length = value.length + 1;
@@ -359,7 +366,7 @@
         make.left.mas_equalTo(weak_self.goodsImageView.mas_right).offset(10);
         make.top.mas_offset(20);
         make.width.mas_equalTo(20);
-        make.height.mas_equalTo(10);
+        make.height.mas_equalTo(13);
     }];
     
     [_goodsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -396,7 +403,11 @@
     NSString *type = item.user_type == 1 ? @"天猫价" : @"淘宝价";
     _priceLabel.text = [NSString stringWithFormat:@"%@ %@:%@",item.zk_final_price,type,item.reserve_price];
     //3.初始化NSTextAttachment对象
-    [_preIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"default_160"]];
+    if(item.user_type == 0) {
+        _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }
     [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     

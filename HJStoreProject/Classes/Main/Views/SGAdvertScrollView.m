@@ -37,8 +37,8 @@ static NSInteger const advertScrollViewTitleFont = 13;
     
     CGFloat spacing = 5;
     
-    CGFloat signImageViewW = self.signImageView.image.size.width;
-    CGFloat signImageViewH = self.signImageView.image.size.height;
+    CGFloat signImageViewW = self.signImageView.image.size.width/2;
+    CGFloat signImageViewH = self.signImageView.image.size.height/2;
     CGFloat signImageViewX = 0;
     CGFloat signImageViewY = 0;
     self.signImageView.frame = CGRectMake(signImageViewX, signImageViewY, signImageViewW, signImageViewH);

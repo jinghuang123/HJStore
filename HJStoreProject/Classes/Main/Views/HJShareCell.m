@@ -98,8 +98,8 @@
     UIButton *selectedBtn = [[UIButton alloc] init];
     _selBtn = selectedBtn;
     [selectedBtn addTarget:self action:@selector(selectedBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_unselected"] forState:UIControlStateNormal];
-    [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_selected"] forState:UIControlStateSelected];
+    [selectedBtn setBackgroundImage:[UIImage imageNamed:@"post_right_unselect"] forState:UIControlStateNormal];
+    [selectedBtn setBackgroundImage:[UIImage imageNamed:@"post_right_selest"] forState:UIControlStateSelected];
     [self.contentView addSubview:selectedBtn];
     [selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);
@@ -216,8 +216,8 @@
         UIButton *selectedBtn = [[UIButton alloc] init];
         _selBtn = selectedBtn;
         [selectedBtn addTarget:self action:@selector(imageSelectedAction:) forControlEvents:UIControlEventTouchUpInside];
-        [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_unselected"] forState:UIControlStateNormal];
-        [selectedBtn setBackgroundImage:[UIImage imageNamed:@"icon_selected"] forState:UIControlStateSelected];
+        [selectedBtn setBackgroundImage:[UIImage imageNamed:@"post_right_unselect"] forState:UIControlStateNormal];
+        [selectedBtn setBackgroundImage:[UIImage imageNamed:@"post_right_selest"] forState:UIControlStateSelected];
         [selectedBgView addSubview:selectedBtn];
         [selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_offset(5);
@@ -286,9 +286,9 @@
     
     CGFloat rightItemSize = (MaxWidth - 60)/4;
     HJShareImageView *rightImage1 = [[HJShareImageView alloc] init];
+    rightImage1.hidden = YES;
     _rightImage1 = rightImage1;
     [self.contentView addSubview:rightImage1];
-    rightImage1.image = [UIImage imageNamed:@"default_share"];
     [rightImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(10);
         make.left.mas_equalTo(leftImageV.mas_right).offset(10);
@@ -298,8 +298,8 @@
     
     HJShareImageView *rightImage2 = [[HJShareImageView alloc] init];
     _rightImage2 = rightImage2;
+    rightImage2.hidden = YES;
     [self.contentView addSubview:rightImage2];
-    rightImage2.image = [UIImage imageNamed:@"default_share"];
     [rightImage2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(rightImage1.mas_bottom).offset(10);
         make.left.mas_equalTo(rightImage1.mas_left).offset(0);
@@ -309,6 +309,7 @@
     
     HJShareImageView *rightImage3 = [[HJShareImageView alloc] init];
     _rightImage3 = rightImage3;
+    rightImage3.hidden = YES;
     [self.contentView addSubview:rightImage3];
     rightImage3.image = [UIImage imageNamed:@"default_share"];
     [rightImage3 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -320,6 +321,7 @@
     
     HJShareImageView *rightImage4 = [[HJShareImageView alloc] init];
     _rightImage4 = rightImage4;
+    rightImage4.hidden = YES;
     [self.contentView addSubview:rightImage4];
     rightImage4.image = [UIImage imageNamed:@"default_share"];
     [rightImage4 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -377,6 +379,7 @@
     _leftImageV.image = share.mainImage;
     [share.images enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL * _Nonnull stop) {
        HJShareImageView *imagV = [self.imageViews objectAtIndex:idx];
+        imagV.hidden = NO;
         [imagV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"list_holder"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
     }];

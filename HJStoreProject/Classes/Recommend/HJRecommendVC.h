@@ -7,11 +7,12 @@
 //
 
 #import "HJSuperViewController.h"
+#import "HJRecommendRequest.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface HJRecommendVC : HJSuperViewController
+@property (nonatomic,strong) HJRecommendCategorys *category;
+@property (nonatomic,copy) void(^itemDidSelected)(GoodsItem *item);
 
 @end
 
-NS_ASSUME_NONNULL_END

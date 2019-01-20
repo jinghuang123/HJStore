@@ -18,24 +18,24 @@
     {
             
         case NotReachable:
-            NSLog(@"====当前网络状态不可达=======");
+//            NSLog(@"====当前网络状态不可达=======");
             //其他处理
             return 0;
             break;
             
         case ReachableViaWiFi:
-            NSLog(@"====当前网络状态为Wifi=======");
+//            NSLog(@"====当前网络状态为Wifi=======");
             
             //其他处理
             return 1;
             break;
         case ReachableViaWWAN:
-            NSLog(@"====当前网络状态为移动数据网络=======");
+//            NSLog(@"====当前网络状态为移动数据网络=======");
             return 2;
             break;
        
         default:
-            NSLog(@"你是外星来的吗？");
+//            NSLog(@"你是外星来的吗？");
             //其他处理
            
             break;

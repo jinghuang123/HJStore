@@ -7,7 +7,7 @@
 //
 
 #import "HJMainRequest.h"
-
+#import "HJUserInfoModel.h"
 
 @interface HJMainRequest ()
 @property (nonatomic,strong) NSMutableArray *categorys;
@@ -38,7 +38,6 @@
 - (void)getMainCategoryCache:(BOOL)cache success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
     if (self.categorys.count == 0 || !cache) {
         [kHTTPManager tryPost:kUrlGetCategorys parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
-            NSLog(@"getMainCategoryCache:%@",responseObject);
             NSArray *categorys = [HJCategoryModel mj_objectArrayWithKeyValuesArray:responseObject];
             [self.categorys setArray:categorys];
             success(self.categorys);
@@ -66,7 +65,6 @@
                             @"pageSize":@(20),
                             };
     [kHTTPManager tryPost:kUrlGetMainList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getMainListCache:%@",responseObject);
         NSDictionary *bannerDic = [responseObject objectForKey:@"banner"];
         NSDictionary *activityDic = [responseObject objectForKey:@"activity"];
         NSDictionary *rollingDic = [responseObject objectForKey:@"toutiao"];
@@ -116,7 +114,6 @@
                             @"sort":@(sort)
                             };
     [kHTTPManager tryPost:kUrlGetCategoryMainList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getMainListCache:%@",responseObject);
         NSArray *recommends = [HJRecommendModel mj_objectArrayWithKeyValuesArray:responseObject];
 
         NSDictionary *response = @{
@@ -137,7 +134,6 @@
                            fail:(CompletionFailBlock)fail {
     NSDictionary *parms = @{@"productId":@(productId)};
     [kHTTPManager tryPost:kUrlGetProductDetail parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getProductDetailCache:%@",responseObject);
         HJProductDetailModel *model = [HJProductDetailModel mj_objectWithKeyValues:responseObject];
         success(model);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
@@ -205,7 +201,6 @@
                             @"sort":@(sort)
                             };
     [kHTTPManager tryPost:kUrlGetListSearch parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getListBySearchCodeCache:%@",responseObject);
         NSDictionary *result = [responseObject objectForKey:@"result_list"];
         NSArray *map_data = [result objectForKey:@"map_data"];
         NSArray *searchModel = [HJSearchModel mj_objectArrayWithKeyValuesArray:map_data];
@@ -231,7 +226,6 @@
                             @"url":url,
                             };
     [kHTTPManager tryPost:kUrlGetShareData parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getShareDataCache:%@",responseObject);
         HJShareModel *shareModel = [HJShareModel mj_objectWithKeyValues:responseObject];
         success(shareModel);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
@@ -244,7 +238,8 @@
 
 - (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail {
-    
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    [kHTTPManager setValueForHead:userInfo.token key:@"token"];
     [kHTTPManager tryPost:kUrlEarningConfiger parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"getEarningConfigerSuccess:%@",responseObject);
         HJEarningModel *model = [HJEarningModel shared];

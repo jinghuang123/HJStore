@@ -12,7 +12,7 @@
 #import "HJUserInfoModel.h"
 
 @interface HJLoginVC ()
-
+@property (nonatomic, strong) UIImageView *iconImageView;
 @end
 
 @implementation HJLoginVC
@@ -46,12 +46,23 @@
     }];
     // Do any additional setup after loading the view.
     
+    UIImageView *iconImageView = [[UIImageView alloc] init];
+    UIImage *icon = [UIImage imageNamed:@"ic_login_top"];
+    iconImageView.image = icon;
+    [self.view addSubview:iconImageView];
+    [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX).offset(0);
+        make.top.mas_offset(40);
+        make.width.mas_equalTo(300);
+        make.height.mas_equalTo(300 * icon.size.height/icon.size.width);
+    }];
+    
     UIButton *regisButton = [UIButton createThemeButton:@"注册"];
     [self.view addSubview:regisButton];
     [regisButton addTarget:self action:@selector(regisButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [regisButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.mas_offset(MaxHeight * 0.6);
+        make.top.mas_equalTo(iconImageView.mas_bottom).offset(10);
         make.width.equalTo(@(MaxWidth - 40));
         make.height.equalTo(@(44));
     }];

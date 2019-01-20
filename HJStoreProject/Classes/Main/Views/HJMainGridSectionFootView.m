@@ -30,11 +30,22 @@
 }
 
 - (void)setUpUI {
+    
+    UIImageView *preIcon = [[UIImageView alloc] init];
+    preIcon.image = [UIImage imageNamed:@"ic_home_headmsg"];
+    [self addSubview:preIcon];
+    [preIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(10);
+        make.width.mas_equalTo(40);
+        make.height.mas_equalTo(10.5);
+        make.top.mas_offset(10);
+    }];
+    
     self.backgroundColor = [UIColor whiteColor];
     _advertScrollView = [[SGAdvertScrollView alloc] init];
     [self addSubview:_advertScrollView];
-
-    _advertScrollView.signImages = @[@"hot", @"", @"activity"];
+    
+    _advertScrollView.signImages = @[@"", @"", @""];
     _advertScrollView.titles = self.titles;
     _advertScrollView.textAlignment = NSTextAlignmentCenter;
 
@@ -49,7 +60,8 @@
     [super layoutSubviews];
     
     [_advertScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_offset(0);
+        make.left.mas_offset(50);
+        make.right.top.mas_offset(0);
         make.bottom.mas_offset(-1);
     }];
 }

@@ -47,7 +47,7 @@
                               HJStroeTabbarImgKey    : @"tabr_03_up",
                               HJStroeTabbarSelImgKey : @"tabr_03_down"},
                             
-                            @{HJStroeTabbarClassKey  : @"HJRecommendVC",
+                            @{HJStroeTabbarClassKey  : @"HJRecommendPagesVC",
                               HJStroeTabbarTitleKey  : @"社区",
                               HJStroeTabbarImgKey    : @"tabr_04_up",
                               HJStroeTabbarSelImgKey : @"tabr_04_down"},
