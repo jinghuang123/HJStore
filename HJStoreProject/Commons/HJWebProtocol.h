@@ -10,7 +10,7 @@
 
 #define Declare(NAME, REQ) extern NSString * const NAME;
 
-#define kHHWebServerBaseURL @"http://meizhi.2346.cc/"
+#define kHHWebServerBaseURL @"http://www.meizhi1000.com/"
 
 
 

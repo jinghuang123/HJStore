@@ -23,8 +23,11 @@ PODS:
   - JKCategories (1.7)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
+  - MJAlertManager (0.1.1):
+    - ModuleCapability
   - MJExtension (3.0.15)
   - MJRefresh (3.1.15.3)
+  - ModuleCapability (0.1.7)
   - SDCycleScrollView (1.75):
     - SDWebImage (>= 4.0.0)
   - SDWebImage (4.4.0):
@@ -33,6 +36,7 @@ PODS:
   - SDWebImage/GIF (4.4.0):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - TZImagePickerController (2.1.5)
   - "UITableView+FDTemplateLayoutCell (1.6)"
   - WebViewJavascriptBridge (6.0.3)
 
@@ -44,11 +48,13 @@ DEPENDENCIES:
   - JKCategories (~> 1.7)
   - Masonry (~> 1.1.0)
   - MBProgressHUD (~> 1.1.0)
+  - MJAlertManager
   - MJExtension (~> 3.0.15)
   - MJRefresh (~> 3.1.15.3)
   - SDCycleScrollView (~> 1.75)
   - SDWebImage (~> 4.0)
   - SDWebImage/GIF
+  - TZImagePickerController (~> 2.1.5)
   - "UITableView+FDTemplateLayoutCell (~> 1.6)"
   - WebViewJavascriptBridge (~> 6.0)
 
@@ -62,10 +68,13 @@ SPEC REPOS:
     - JKCategories
     - Masonry
     - MBProgressHUD
+    - MJAlertManager
     - MJExtension
     - MJRefresh
+    - ModuleCapability
     - SDCycleScrollView
     - SDWebImage
+    - TZImagePickerController
     - "UITableView+FDTemplateLayoutCell"
     - WebViewJavascriptBridge
 
@@ -78,13 +87,16 @@ SPEC CHECKSUMS:
   JKCategories: 5136d903ed6a17e700cac984db9fc9dcfaad2954
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJAlertManager: 4576999562c64189f6009974fc82e15eda09c409
   MJExtension: 3f039575db1b135a20699ad298713b26acec1528
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  ModuleCapability: c9d20a2f6070d9315531a94d51b1551a070662b6
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: b534502786e43dde36dfcaee89356fe6df30e203
+  TZImagePickerController: e60a73665cf665c18abd45cdf48e912094eefff5
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
 
-PODFILE CHECKSUM: 9d41264fbb1fde2fc730df2344d93b0b6356329e
+PODFILE CHECKSUM: ac4d6e2fd35c75e76a6e3e02f0c8bd20e2c3ff5d
 
 COCOAPODS: 1.5.3

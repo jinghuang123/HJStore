@@ -35,6 +35,7 @@
 		B811D7EF21CE7F7400FBED10 /* HJMainListHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B811D7EE21CE7F7400FBED10 /* HJMainListHeadView.m */; };
 		B815DC6321C3C8620093CCD3 /* YFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B815DC6221C3C8620093CCD3 /* YFHTTPRequestOperationManager.m */; };
 		B815DC6621C3DD740093CCD3 /* HJCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B815DC6521C3DD740093CCD3 /* HJCategoryModel.m */; };
+		B816E5D921F9BD57008EE594 /* HJUserInfoFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = B816E5D821F9BD57008EE594 /* HJUserInfoFootView.m */; };
 		B817AB9C21F43DDC00363C2F /* HJSettingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B817AB9B21F43DDC00363C2F /* HJSettingRequest.m */; };
 		B817AB9F21F46BAA00363C2F /* HJResetPswVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B817AB9E21F46BAA00363C2F /* HJResetPswVC.m */; };
 		B817ABA221F4732C00363C2F /* HJMeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B817ABA121F4732C00363C2F /* HJMeView.m */; };
@@ -105,6 +106,7 @@
 		B873DA5E21B11B76008DBC66 /* GoodsGrid.plist in Resources */ = {isa = PBXBuildFile; fileRef = B873DA5C21B11B76008DBC66 /* GoodsGrid.plist */; };
 		B873DA5F21B11B76008DBC66 /* HomeHighGoods.plist in Resources */ = {isa = PBXBuildFile; fileRef = B873DA5D21B11B76008DBC66 /* HomeHighGoods.plist */; };
 		B873DA6221B12F71008DBC66 /* HJGoodItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B873DA6121B12F71008DBC66 /* HJGoodItemCell.m */; };
+		B88057F521F87D02000DBEEF /* HJUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88057F421F87D02000DBEEF /* HJUserInfoCell.m */; };
 		B886D68B21E9885D00201231 /* HJEarningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B886D68A21E9885D00201231 /* HJEarningModel.m */; };
 		B886D68E21E9951500201231 /* HJLoginRegistRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B886D68D21E9951500201231 /* HJLoginRegistRequest.m */; };
 		B886D69121E9AE8A00201231 /* HJMobileLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B886D69021E9AE8A00201231 /* HJMobileLoginVC.m */; };
@@ -218,6 +220,8 @@
 		B815DC6221C3C8620093CCD3 /* YFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		B815DC6421C3DD740093CCD3 /* HJCategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJCategoryModel.h; sourceTree = "<group>"; };
 		B815DC6521C3DD740093CCD3 /* HJCategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJCategoryModel.m; sourceTree = "<group>"; };
+		B816E5D721F9BD57008EE594 /* HJUserInfoFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJUserInfoFootView.h; sourceTree = "<group>"; };
+		B816E5D821F9BD57008EE594 /* HJUserInfoFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJUserInfoFootView.m; sourceTree = "<group>"; };
 		B817AB9A21F43DDC00363C2F /* HJSettingRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSettingRequest.h; sourceTree = "<group>"; };
 		B817AB9B21F43DDC00363C2F /* HJSettingRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSettingRequest.m; sourceTree = "<group>"; };
 		B817AB9D21F46BAA00363C2F /* HJResetPswVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJResetPswVC.h; sourceTree = "<group>"; };
@@ -324,6 +328,8 @@
 		B873DA5D21B11B76008DBC66 /* HomeHighGoods.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HomeHighGoods.plist; sourceTree = "<group>"; };
 		B873DA6021B12F71008DBC66 /* HJGoodItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJGoodItemCell.h; sourceTree = "<group>"; };
 		B873DA6121B12F71008DBC66 /* HJGoodItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJGoodItemCell.m; sourceTree = "<group>"; };
+		B88057F321F87D02000DBEEF /* HJUserInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJUserInfoCell.h; sourceTree = "<group>"; };
+		B88057F421F87D02000DBEEF /* HJUserInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJUserInfoCell.m; sourceTree = "<group>"; };
 		B886D68921E9885D00201231 /* HJEarningModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJEarningModel.h; sourceTree = "<group>"; };
 		B886D68A21E9885D00201231 /* HJEarningModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJEarningModel.m; sourceTree = "<group>"; };
 		B886D68C21E9951500201231 /* HJLoginRegistRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJLoginRegistRequest.h; sourceTree = "<group>"; };
@@ -832,6 +838,10 @@
 				B817ABA421F49CB800363C2F /* HJUserInfoSetVC.m */,
 				B817ABA621F4AC6B00363C2F /* HJUserInfoView.h */,
 				B817ABA721F4AC6B00363C2F /* HJUserInfoView.m */,
+				B88057F321F87D02000DBEEF /* HJUserInfoCell.h */,
+				B88057F421F87D02000DBEEF /* HJUserInfoCell.m */,
+				B816E5D721F9BD57008EE594 /* HJUserInfoFootView.h */,
+				B816E5D821F9BD57008EE594 /* HJUserInfoFootView.m */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -1159,11 +1169,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1183,6 +1195,7 @@
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
 				B886D68E21E9951500201231 /* HJLoginRegistRequest.m in Sources */,
 				B8264A7321D8BFE100004420 /* MYColorBackView.m in Sources */,
+				B88057F521F87D02000DBEEF /* HJUserInfoCell.m in Sources */,
 				B8E38B5C21C94076008C216F /* HJCategoryRequest.m in Sources */,
 				B817AB9C21F43DDC00363C2F /* HJSettingRequest.m in Sources */,
 				B8A9181E21AFD334006733BA /* HJNavigationVC.m in Sources */,
@@ -1191,6 +1204,7 @@
 				B86E7ADF21B4D49F0094B82B /* HJMainTopToolView.m in Sources */,
 				B873DA4D21B0E29B008DBC66 /* HJGridCell.m in Sources */,
 				B8264A7121D8BFE100004420 /* MYPresentedController.m in Sources */,
+				B816E5D921F9BD57008EE594 /* HJUserInfoFootView.m in Sources */,
 				B8A917F621AFB75A006733BA /* main.m in Sources */,
 				B886D69421E9B99C00201231 /* HJInviteCodeInputVC.m in Sources */,
 				B811D7EF21CE7F7400FBED10 /* HJMainListHeadView.m in Sources */,
