@@ -11,6 +11,7 @@
 #import "HJMainRequest.h"
 #import "HJMeView.h"
 #import "HJUserInfoSetVC.h"
+#import "HJFencePageVC.h"
 
 @interface HJMineVC ()
 
@@ -50,6 +51,25 @@
         setVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:setVC animated:YES];
     };
+    
+    [meView.earnView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        
+    }];
+    
+    [meView.orderView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        
+    }];
+    
+    [meView.fenceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        HJFencePageVC *fenceVC = [[HJFencePageVC alloc] init];
+        [fenceVC setNavBackItem];
+        fenceVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:fenceVC animated:YES];
+    }];
+    
+    [meView.invitateView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        
+    }];
 
 }
 

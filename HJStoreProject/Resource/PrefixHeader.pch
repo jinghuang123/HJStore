@@ -26,3 +26,4 @@
 #import "HJEarningModel.h"
 #import "UITextField+inputInit.h"
 #import <MBProgressHUD.h>
+#import "HJTextField.h"

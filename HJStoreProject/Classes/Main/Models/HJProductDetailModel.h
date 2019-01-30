@@ -25,7 +25,7 @@
 @property (nonatomic , copy) NSString              * is_collection;
 @property (nonatomic , assign) NSInteger              weigh;
 @property (nonatomic , copy) NSString              * status;
-@property (nonatomic , strong) NSArray <NSString *>              * small_images;
+@property (nonatomic , strong) NSArray <NSString *>              *small_images;
 @property (nonatomic , copy) NSString              * item_url;
 @property (nonatomic , copy) NSString              * tk_item_url;
 @property (nonatomic , copy) NSString              * seller_id;

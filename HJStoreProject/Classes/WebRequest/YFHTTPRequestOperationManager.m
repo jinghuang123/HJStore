@@ -7,7 +7,7 @@
 
 #define BASE_URL @""
 #import "YFHTTPRequestOperationManager.h"
-
+#import "HJUserInfoModel.h"
 
 
 @implementation YFHTTPRequestOperationManager
@@ -27,7 +27,7 @@
         [self.manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
         self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json", @"text/html"]];
+        self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json", @"text/html", @"image/jpg", @"image/png", @"application/octet-stream", @"text/json",@"multipart/form-data", @"text/plain"]];
     }
     return self;
 }
@@ -60,6 +60,37 @@
 //                                                    CYLog(@"网络请求错误%@", error);
                                                 }
                                             }];
+    return operation;
+}
+
+- (NSURLSessionDataTask *)tryPostImg:(NSString *)URLString
+                         parameters:(id)parameters
+                              data:(NSData *)imagedata
+                            success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
+                            failure:(void (^)(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode))failure
+{
+    
+    NSURLSessionDataTask *operation = [self POST:URLString
+                                      parameters:parameters
+                       constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                           if (imagedata) {
+                               [formData appendPartWithFileData:imagedata name:@"file" fileName:@"userIcon.png" mimeType:@"image/jpg"];
+                           }
+                       } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+                           [self YFSuccess:responseObject
+                                 operation:operation
+                                   success:success
+                                   failure:failure];
+                       } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+                           if (operation.state == NSURLSessionTaskStateCanceling) {
+                               failure(operation, error, @"9999");
+                           }else if (error) {
+                               if (failure) {
+                                   failure(nil,error,nil);
+                               }
+                           }
+                       }];
+    
     return operation;
 }
 

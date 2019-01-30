@@ -11,6 +11,12 @@
 
 
 @interface HJMeView : HJSuperView
+
+@property (nonatomic, strong) UIView *earnView;
+@property (nonatomic, strong) UIView *orderView;
+@property (nonatomic, strong) UIView *fenceView;
+@property (nonatomic, strong) UIView *invitateView;
+
 @property (nonatomic,copy) void(^settingClick)(id obj);
 @end
 

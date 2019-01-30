@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIView *earningView;
 @property (nonatomic, strong) UIView *icomView;
+
+
 @end
 
 @implementation HJMeView
@@ -290,6 +292,7 @@
     CGFloat leftRightSpace = 20;
     CGFloat space = (MaxWidth - 60 - 40 * 4 - leftRightSpace * 2)/3;
     UIView *earnView = [self setItemWithIcon:@"icon_xd_discount" title:@"收益"];
+    _earnView = earnView;
     [_icomView addSubview:earnView];
     [earnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(leftRightSpace);
@@ -299,6 +302,7 @@
     }];
     
     UIView *orderView = [self setItemWithIcon:@"icon_xd_discount" title:@"订单"];
+    _orderView = orderView;
     [_icomView addSubview:orderView];
     [orderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(earnView.mas_right).offset(space);
@@ -308,6 +312,7 @@
     }];
     
     UIView *fenceView = [self setItemWithIcon:@"icon_xd_discount" title:@"粉丝"];
+    _fenceView = fenceView;
     [_icomView addSubview:fenceView];
     [fenceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(orderView.mas_right).offset(space);
@@ -317,6 +322,7 @@
     }];
     
     UIView *invitateView = [self setItemWithIcon:@"icon_xd_discount" title:@"邀请"];
+    _invitateView = invitateView;
     [_icomView addSubview:invitateView];
     [invitateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-leftRightSpace);

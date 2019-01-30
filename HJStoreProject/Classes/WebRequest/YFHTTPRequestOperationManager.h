@@ -27,9 +27,18 @@ typedef void (^CompletionFailBlock2)(NSError *error,NSString *errorMsg);
                            failure:(void (^)(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode))failure;
 
 
+- (NSURLSessionDataTask *)tryPostImg:(NSString *)URLString
+                         parameters:(id)parameters
+                               data:(NSData *)imagedata
+                            success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
+                            failure:(void (^)(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode))failure;
+
+
 - (AFHTTPSessionManager * )tryGet:(NSString *)URLString
                    parameters:(id)parameters
                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error,NSString *yfErrCode))failure;
+
+
 
 @end

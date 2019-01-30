@@ -14,8 +14,10 @@
 
 + (instancetype)shared;
 
+- (void)uploadFile:(NSData *)data success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
 
 - (void)getApplyCashListSuccess:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
+
 @end
 
 
