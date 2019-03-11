@@ -85,6 +85,14 @@
         searchvc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:searchvc animated:YES];
     }];
+    
+    UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2.5, MaxWidth, 25)];
+    tiplabel.text = @"粘粘宝贝标题，先领劵省钱再购物";
+    tiplabel.textColor = [UIColor grayColor];
+    tiplabel.textAlignment = NSTextAlignmentCenter;
+    tiplabel.font = [UIFont systemFontOfSize:13];
+    [bgView addSubview:tiplabel];
+    
     self.navigationItem.titleView = bgView;
 }
 

@@ -11,6 +11,9 @@
 		296F06B196B4CBA081E8D294 /* libPods-HJStoreProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */; };
 		B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */; };
 		B8052FAE21DE2E0300F125F4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */; };
+		B8086B8922354B8A00668E27 /* HJEarningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086B8822354B8A00668E27 /* HJEarningVC.m */; };
+		B8086B8C22354BA900668E27 /* HJOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086B8B22354BA900668E27 /* HJOrderListVC.m */; };
+		B8086B8F22354BE300668E27 /* HJInvitationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086B8E22354BE300668E27 /* HJInvitationListVC.m */; };
 		B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDE921E055920059CACC /* HJSearchListVC.m */; };
 		B810EDED21E058470059CACC /* LLSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDEC21E058470059CACC /* LLSearchView.m */; };
 		B810EDF021E072470059CACC /* HJSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDEF21E072470059CACC /* HJSearchModel.m */; };
@@ -181,6 +184,12 @@
 		B8052FAA21DE2DBB00F125F4 /* HJSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchVC.h; sourceTree = "<group>"; };
 		B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchVC.m; sourceTree = "<group>"; };
 		B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
+		B8086B8722354B8A00668E27 /* HJEarningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJEarningVC.h; sourceTree = "<group>"; };
+		B8086B8822354B8A00668E27 /* HJEarningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJEarningVC.m; sourceTree = "<group>"; };
+		B8086B8A22354BA900668E27 /* HJOrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJOrderListVC.h; sourceTree = "<group>"; };
+		B8086B8B22354BA900668E27 /* HJOrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJOrderListVC.m; sourceTree = "<group>"; };
+		B8086B8D22354BE300668E27 /* HJInvitationListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJInvitationListVC.h; sourceTree = "<group>"; };
+		B8086B8E22354BE300668E27 /* HJInvitationListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJInvitationListVC.m; sourceTree = "<group>"; };
 		B810EDE821E055920059CACC /* HJSearchListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchListVC.h; sourceTree = "<group>"; };
 		B810EDE921E055920059CACC /* HJSearchListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchListVC.m; sourceTree = "<group>"; };
 		B810EDEB21E058470059CACC /* LLSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSearchView.h; sourceTree = "<group>"; };
@@ -887,6 +896,12 @@
 				B8CE279E21FC84840059FB9E /* HJFenceListVC.m */,
 				B8CE27A321FC8E1B0059FB9E /* HJFenceItemCell.h */,
 				B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */,
+				B8086B8722354B8A00668E27 /* HJEarningVC.h */,
+				B8086B8822354B8A00668E27 /* HJEarningVC.m */,
+				B8086B8A22354BA900668E27 /* HJOrderListVC.h */,
+				B8086B8B22354BA900668E27 /* HJOrderListVC.m */,
+				B8086B8D22354BE300668E27 /* HJInvitationListVC.h */,
+				B8086B8E22354BE300668E27 /* HJInvitationListVC.m */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -1235,6 +1250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8E9B9AC21F2C60700745C17 /* HJRecommendRequest.m in Sources */,
+				B8086B8C22354BA900668E27 /* HJOrderListVC.m in Sources */,
 				B8626E7121DB5D5E00D7BA74 /* HJShareCell.m in Sources */,
 				B811D7E321CE1AB000FBED10 /* HJActivityModel.m in Sources */,
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
@@ -1284,6 +1300,7 @@
 				B8A9180F21AFD02C006733BA /* HJSuperViewController.m in Sources */,
 				B815DC6621C3DD740093CCD3 /* HJCategoryModel.m in Sources */,
 				B886D69E21EA10EB00201231 /* HJUserInfoModel.m in Sources */,
+				B8086B8F22354BE300668E27 /* HJInvitationListVC.m in Sources */,
 				B8A9180821AFC5B8006733BA /* HJTabBarVC.m in Sources */,
 				B873DA4A21B0E1C7008DBC66 /* HJSuperView.m in Sources */,
 				B8264A6621D8BAB600004420 /* HJProductDetailVC.m in Sources */,
@@ -1293,6 +1310,7 @@
 				B8CE27A221FC85F00059FB9E /* HJFencePageVC.m in Sources */,
 				B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */,
 				B8E9B9CF21F3121000745C17 /* HJRecommendItemCell.m in Sources */,
+				B8086B8922354B8A00668E27 /* HJEarningVC.m in Sources */,
 				B810EE3921E0C7A10059CACC /* XLProgressView.m in Sources */,
 				B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */,
 				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
@@ -1478,7 +1496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = WQVP8C8Z5H;
+				DEVELOPMENT_TEAM = 5N6PJKNJRG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1505,7 +1523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanfeng.HJMeizhi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0876eac5-4758-4e52-8a3e-64d01b32db26";
-				PROVISIONING_PROFILE_SPECIFIER = "App ID No Limited Profile";
+				PROVISIONING_PROFILE_SPECIFIER = MEIZHIAPP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1517,7 +1535,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = WQVP8C8Z5H;
+				DEVELOPMENT_TEAM = 5N6PJKNJRG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1544,7 +1562,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanfeng.HJMeizhi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0876eac5-4758-4e52-8a3e-64d01b32db26";
-				PROVISIONING_PROFILE_SPECIFIER = "App ID No Limited Profile";
+				PROVISIONING_PROFILE_SPECIFIER = MEIZHIAPP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

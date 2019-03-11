@@ -32,6 +32,8 @@
         [self setTopItemsWithArray:savedCategorys.categorys];
     }
     [self setupNavItems];
+    
+
 }
 
 - (void)setTopItemsWithArray:(NSArray *)categorys {
@@ -73,11 +75,11 @@
 }
 
 - (void)setupNavItems {
-    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickLeft)];
-    self.navigationItem.leftBarButtonItem = leftButtonItem;
-
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickRight)];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
+//    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickLeft)];
+//    self.navigationItem.leftBarButtonItem = leftButtonItem;
+//
+//    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"navRight"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickRight)];
+//    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
@@ -91,6 +93,14 @@
         searchvc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:searchvc animated:YES];
     }];
+    
+    UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2.5, MaxWidth, 25)];
+    tiplabel.text = @"粘粘宝贝标题，先领劵省钱再购物";
+    tiplabel.textColor = [UIColor grayColor];
+    tiplabel.textAlignment = NSTextAlignmentCenter;
+    tiplabel.font = [UIFont systemFontOfSize:13];
+    [bgView addSubview:tiplabel];
+
     
     self.navigationItem.titleView = bgView;
 }

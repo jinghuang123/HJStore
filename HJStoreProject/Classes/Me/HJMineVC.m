@@ -12,6 +12,9 @@
 #import "HJMeView.h"
 #import "HJUserInfoSetVC.h"
 #import "HJFencePageVC.h"
+#import "HJOrderListVC.h"
+#import "HJInvitationListVC.h"
+#import "HJEarningVC.h"
 
 @interface HJMineVC ()
 
@@ -53,11 +56,17 @@
     };
     
     [meView.earnView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        HJEarningVC *earningVC = [[HJEarningVC alloc] init];
+        [earningVC setNavBackItem];
+        earningVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:earningVC animated:YES];
     }];
     
     [meView.orderView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        HJOrderListVC *orderVC = [[HJOrderListVC alloc] init];
+        [orderVC setNavBackItem];
+        orderVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:orderVC animated:YES];
     }];
     
     [meView.fenceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -68,7 +77,10 @@
     }];
     
     [meView.invitateView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        HJInvitationListVC *invitationVC = [[HJInvitationListVC alloc] init];
+        [invitationVC setNavBackItem];
+        invitationVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:invitationVC animated:YES];
     }];
 
 }

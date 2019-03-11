@@ -27,7 +27,7 @@ static NSString *HJFenceItemCellIdentifier = @"HJFenceItemCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.pageSize = 20;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight - HJTopNavH) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, MaxWidth, MaxHeight - HJTopNavH) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = YES;

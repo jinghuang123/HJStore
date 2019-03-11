@@ -69,7 +69,6 @@
         NSDictionary *activityDic = [responseObject objectForKey:@"activity"];
         NSDictionary *rollingDic = [responseObject objectForKey:@"toutiao"];
         NSDictionary *recommendDic = [responseObject objectForKey:@"recommend"];
-        
         NSDictionary *hostDic = [responseObject objectForKey:@"host"];
         NSArray *banners = [HJBannerModel mj_objectArrayWithKeyValuesArray:bannerDic];
         NSArray *activitys = [HJActivityModel mj_objectArrayWithKeyValuesArray:activityDic];
@@ -135,6 +134,13 @@
     NSDictionary *parms = @{@"productId":@(productId)};
     [kHTTPManager tryPost:kUrlGetProductDetail parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         HJProductDetailModel *model = [HJProductDetailModel mj_objectWithKeyValues:responseObject];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:model.small_images];
+        for (NSArray *str in model.small_images) {
+            if ([str isEqual:@""]) {
+                [array removeObject:str];
+            }
+        }
+        model.small_images = array;
         success(model);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);

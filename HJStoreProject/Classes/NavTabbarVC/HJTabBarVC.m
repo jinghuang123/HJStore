@@ -39,23 +39,23 @@
     NSArray *childArray = @[
                             @{HJStroeTabbarClassKey  : @"HJSegemengVC",
                               HJStroeTabbarTitleKey  : @"首页",
-                              HJStroeTabbarImgKey    : @"tabr_02_up",
-                              HJStroeTabbarSelImgKey : @"tabr_02_down"},
+                              HJStroeTabbarImgKey    : @"icon_home_n",
+                              HJStroeTabbarSelImgKey : @"icon_home"},
                             
                             @{HJStroeTabbarClassKey  : @"HJStroeTypeListVC",
                               HJStroeTabbarTitleKey  : @"分类",
-                              HJStroeTabbarImgKey    : @"tabr_03_up",
-                              HJStroeTabbarSelImgKey : @"tabr_03_down"},
+                              HJStroeTabbarImgKey    : @"icon_category_n",
+                              HJStroeTabbarSelImgKey : @"icon_category"},
                             
                             @{HJStroeTabbarClassKey  : @"HJRecommendPagesVC",
-                              HJStroeTabbarTitleKey  : @"社区",
-                              HJStroeTabbarImgKey    : @"tabr_04_up",
-                              HJStroeTabbarSelImgKey : @"tabr_04_down"},
+                              HJStroeTabbarTitleKey  : @"美粉圈",
+                              HJStroeTabbarImgKey    : @"icon_Recommend_n",
+                              HJStroeTabbarSelImgKey : @"icon_Recommend"},
                             
                             @{HJStroeTabbarClassKey  : @"HJMineVC",
                               HJStroeTabbarTitleKey  : @"我的",
-                              HJStroeTabbarImgKey    : @"tabr_05_up",
-                              HJStroeTabbarSelImgKey : @"tabr_05_down"},
+                              HJStroeTabbarImgKey    : @"icon_me_n",
+                              HJStroeTabbarSelImgKey : @"icon_me"},
                             ];
     [childArray enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL * _Nonnull stop) {
         UIViewController *vc = [NSClassFromString(dict[HJStroeTabbarClassKey]) new];
@@ -63,7 +63,12 @@
         UITabBarItem *item = nav.tabBarItem;
         item.image = [UIImage imageNamed:dict[HJStroeTabbarImgKey]];
         item.selectedImage = [[UIImage imageNamed:dict[HJStroeTabbarSelImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        item.imageInsets = UIEdgeInsetsMake(6, 0,-6, 0);//（当只有图片的时候）需要自动调整
+        
+        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateSelected];
+        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]} forState:UIControlStateNormal];
+        [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} forState:UIControlStateNormal];
+        item.title = dict[HJStroeTabbarTitleKey];
+//        item.imageInsets = UIEdgeInsetsMake(6, 0,-6, 0);//（当只有图片的时候）需要自动调整
         [self addChildViewController:nav];
         // 添加tabBarItem至数组
         [self.tabBarItems addObject:vc.tabBarItem];

@@ -64,7 +64,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     [self setupButtons];
     if (self.productId > 0) {
         [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJProductDetailModel *detailModel) {
-            self.tableHeadView.imageGroupArray = detailModel.small_images;
+            self.tableHeadView.imageGroupArray = detailModel.small_images.count == 0 ? @[detailModel.pict_url_image] : detailModel.small_images;
             self.detailmodel = detailModel;
             NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",detailModel.coupon_value];
             [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];

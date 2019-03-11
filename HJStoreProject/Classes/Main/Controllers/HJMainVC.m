@@ -56,6 +56,17 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
        [self.collectionView.mj_header beginRefreshing];
     }
     // Do any additional setup after loading the view.
+    
+    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateNormal];
+    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateSelected];
+    
+    [self.view insertSubview:topButton atIndex:0];
+    [topButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-12);
+        make.bottom.mas_offset(-100);
+        make.width.height.mas_equalTo(28);
+    }];
 }
 
 - (void)headRefresh {

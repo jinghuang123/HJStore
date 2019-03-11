@@ -42,7 +42,7 @@
     HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:titles];
     _segment = segment;
     [segment addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    segment.backgroundColor = [UIColor clearColor];
+    segment.backgroundColor = [UIColor whiteColor];
     segment.selectionIndicatorColor = [UIColor redColor];
     segment.titleTextAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:13], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     segment.selectedTitleTextAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSForegroundColorAttributeName:[UIColor redColor]};

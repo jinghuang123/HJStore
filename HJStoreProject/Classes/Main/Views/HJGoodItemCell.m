@@ -19,11 +19,15 @@
 /* 价格 */
 @property (strong , nonatomic)UILabel *priceLabel;
 
+/* 价格 */
+@property (strong , nonatomic)UILabel *finalPriceLabel;
+
 /* 销售量 */
 @property (strong , nonatomic)UILabel *soldCountLabel;
 
 @property (strong , nonatomic)UIImageView *preIcon;
 @property (strong , nonatomic)UIImageView *couponIcon;
+@property (strong , nonatomic)UILabel *couponLabel;
 
 @property (strong , nonatomic) UILabel *earningLabel;
 @end
@@ -58,12 +62,19 @@
     
     
     _priceLabel = [[UILabel alloc] init];
+    _priceLabel.textAlignment = NSTextAlignmentLeft;
     _priceLabel.textColor = [UIColor redColor];
     _priceLabel.font = PFR15Font;
     [self addSubview:_priceLabel];
     
+    
     _couponIcon = [[UIImageView alloc] init];
     [self addSubview:_couponIcon];
+    
+    _couponLabel = [[UILabel alloc] init];
+    _couponLabel.font = [UIFont systemFontOfSize:9];
+    _couponLabel.textColor = [UIColor whiteColor];
+    [_couponIcon addSubview:_couponLabel];
     
     _earningLabel =  [[UILabel alloc] init];
     _earningLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
@@ -108,8 +119,15 @@
     [_couponIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(5);
         make.top.mas_equalTo(weak_self.goodsLabel.mas_bottom).offset(5);
-        make.width.mas_equalTo(40);
+        make.width.mas_equalTo(50);
         make.height.mas_equalTo(15);
+    }];
+    
+    [_couponLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(20);
+        make.top.mas_offset(2);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(10);
     }];
     
     [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,9 +139,10 @@
     
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(5);
-        make.right.mas_offset(-5);
+        make.right.mas_offset(0);
         make.bottom.mas_offset(-5);
     }];
+
     
     [_soldCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-5);
@@ -136,7 +155,7 @@
 
 - (void)setItemCellWithItem:(HJRecommendModel *)item {
     [_goodsImageView sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
-    _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
+    _priceLabel.text = [NSString stringWithFormat:@"%@ ¥%@",item.coupon_after_price,item.zk_final_price];
     //3.初始化NSTextAttachment对象
     if(item.user_type == 0) {
         _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
@@ -144,7 +163,9 @@
         _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
     }
     _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
-    [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    [_couponIcon setImage:[UIImage imageNamed:@"CouponIcon"]];
+    _couponLabel.text = item.coupon_value;
+//    [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
@@ -156,7 +177,7 @@
     _goodsLabel.attributedText = attributedString;
     
     
-    NSInteger reserve_price_length = item.reserve_price.length;
+    NSInteger reserve_price_length = item.zk_final_price.length+1;
     NSMutableAttributedString *newPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",_priceLabel.text]];
     [newPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
     
@@ -170,14 +191,17 @@
 
 - (void)setItemCellWithSearchItem:(HJSearchModel *)item {
     [_goodsImageView sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
-    _priceLabel.text = [NSString stringWithFormat:@"%@ %@",item.zk_final_price,item.reserve_price];
+    _priceLabel.text = [NSString stringWithFormat:@"%@ ¥%@",item.zk_final_price,item.reserve_price];
     //3.初始化NSTextAttachment对象
     if(item.user_type == 0) {
         _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
     }else{
         _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
     }
-    [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    
+    [_couponIcon setImage:[UIImage imageNamed:@"CouponIcon"]];
+    _couponLabel.text = item.coupon_value;
+
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
@@ -189,7 +213,7 @@
     _goodsLabel.attributedText = attributedString;
     
     
-    NSInteger reserve_price_length = item.reserve_price.length;
+    NSInteger reserve_price_length = item.reserve_price.length + 1;
     NSMutableAttributedString *newPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",_priceLabel.text]];
     [newPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
     
@@ -222,6 +246,7 @@
 
 @property (strong , nonatomic)UIImageView *preIcon;
 @property (strong , nonatomic)UIImageView *couponIcon;
+@property (strong , nonatomic)UILabel *couponLabel;
 
 @property (strong , nonatomic) UILabel *earningLabel;
 
@@ -268,6 +293,11 @@
     _couponIcon = [[UIImageView alloc] init];
     [self addSubview:_couponIcon];
     
+    _couponLabel = [[UILabel alloc] init];
+    _couponLabel.font = [UIFont systemFontOfSize:9];
+    _couponLabel.textColor = [UIColor whiteColor];
+    [_couponIcon addSubview:_couponLabel];
+    
     _earningLabel =  [[UILabel alloc] init];
     _earningLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
     _earningLabel.textColor = [UIColor redColor];
@@ -310,8 +340,15 @@
     [_couponIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weak_self.goodsImageView.mas_right).offset(10);
         make.bottom.mas_offset(-10);
-        make.width.mas_equalTo(40);
+        make.width.mas_equalTo(50);
         make.height.mas_equalTo(15);
+    }];
+    
+    [_couponLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(20);
+        make.top.mas_offset(2);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(10);
     }];
     
     [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -339,13 +376,16 @@
 - (void)setItemCellWithItem:(HJRecommendModel *)item {
     [_goodsImageView sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     NSString *type = item.user_type == 1 ? @"天猫价" : @"淘宝价";
-    _priceLabel.text = [NSString stringWithFormat:@"%@ %@:%@",item.zk_final_price,type,item.reserve_price];
+    _priceLabel.text = [NSString stringWithFormat:@"%@ %@:%@",item.coupon_after_price,type,item.zk_final_price];
     //3.初始化NSTextAttachment对象
     if(item.user_type == 0) {
         _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
     }else{
         _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
-    }    [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    }
+    [_couponIcon setImage:[UIImage imageNamed:@"CouponIcon"]];
+     _couponLabel.text = item.coupon_value;
+//    [_couponIcon sd_setImageWithURLString:item.pict_url_image placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
@@ -375,7 +415,8 @@
     }else{
         _preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
     }
-    [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
+    _couponIcon.image = [UIImage imageNamed:@"CouponIcon"];
+//    [_couponIcon sd_setImageWithURLString:item.pict_url placeholderImage:[UIImage imageNamed:@"list_holder"]];
     _earningLabel.text = [NSString stringWithFormat:@"预估收益%.2f",item.earning];
 
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
