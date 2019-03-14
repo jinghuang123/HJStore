@@ -114,13 +114,14 @@
     
     UIButton *rightBtn = [[UIButton alloc] init];
     _rightBtn = rightBtn;
-    [rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_liebiao"] forState:UIControlStateNormal];
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
+
     [self addSubview:rightBtn];
     [rightBtn addTarget:self action:@selector(showModeChange) forControlEvents:UIControlEventTouchUpInside];
     [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(0);
-        make.right.mas_offset(10);
-        make.width.height.mas_equalTo(40);
+        make.top.mas_offset(10);
+        make.right.mas_offset(-20);
+        make.width.height.mas_equalTo(20);
     }];
     if(self.frame.size.height > 40){
         [self addViewToBottom];

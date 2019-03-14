@@ -9,7 +9,7 @@
 #import "HJSuperViewController.h"
 #import "HJMainRequest.h"
 #import "HJSuperView.h"
-
+#import "HJMainPodVC.h"
 
 @interface HJMainVC : HJSuperViewController
 
@@ -33,7 +33,7 @@
 
 @property (assign , nonatomic) NSInteger pageNo;
 @property (assign , nonatomic) NSInteger pageSize;
-@property (assign , nonatomic) NSInteger sort;
+@property (assign , nonatomic) HJSortType sort;
 
 
 @property (nonatomic,assign) HJMainVCProductListHeadType headType;

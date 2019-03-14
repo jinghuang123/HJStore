@@ -27,6 +27,7 @@
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (strong , nonatomic) HJMainTopToolView *topToolView;
+@property(nonatomic,strong)  HJMainPodVC *sortTypePopVC;
 
 @end
 
@@ -47,7 +48,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sort = 1;
+    self.sort = HJSortTypeTotal;
     self.pageSize = 30;
     [HJNetworkType isConnected];
     [self setupUI];
@@ -235,6 +236,40 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     return _hosts;
 }
 
+- (void)podSortTypeView {
+    if(!self.sortTypePopVC.isPopState) {
+        weakify(self)
+        self.sortTypePopVC = [[HJMainPodVC alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
+                                                                    ShowStyle:MYPresentedViewShowStyleSuddenStyle
+                                                                     callback:^(id obj) {
+                                                                         weak_self.sortTypePopVC.isPopState = NO;
+                                                                         [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+                                                                     }];
+        self.sortTypePopVC.clearBack = YES;
+        NSArray *data = @[@"综合排序",@"优惠券面值由高到低",@"优惠券面值由低到高",@"预估收益由高到低"];
+        self.sortTypePopVC.dataSource = data;
+        self.sortTypePopVC.showViewPoint = CGPointMake(0, 145);
+        self.sortTypePopVC.viewSize = CGSizeMake(MaxWidth, 4 * 40);
+        self.sortTypePopVC.selectedIndex = self.sort--;
+        
+        self.sortTypePopVC.popDismissBlock = ^(BOOL state) {
+            weak_self.sortTypePopVC.isPopState = NO;
+            [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+        };
+        self.sortTypePopVC.didSelectedRowBlock = ^(NSInteger row) {
+            weak_self.sort = row++;
+            [weak_self headRefresh];
+            weak_self.sortTypePopVC.isPopState = NO;
+            [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+        };
+        self.sortTypePopVC.isPopState = YES;
+        [self presentViewController:self.sortTypePopVC animated:YES completion:nil];
+    }else{
+        self.sortTypePopVC.isPopState = NO;
+        [self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -324,16 +359,28 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 headerView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5].CGColor;
                 headerView.layer.borderWidth = (self.catteryId > 0 || self.activityId > 0) ? 0.5 : 0;
                 headerView.backgroundColor = [UIColor whiteColor];
+                
+             
                 weakify(self)
-                headerView.sortTypeChengBlock = ^(id obj) {
-                    
+                headerView.sortTypeChengBlock = ^(NSNumber *index) {
+                    if ([index integerValue] == 0) {
+                        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:3];
+                        [weak_self.collectionView scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+                        [weak_self podSortTypeView];
+                    }else if([index integerValue] == 1) {
+                        weak_self.sort = weak_self.sort == HJSortTypePriceHtoL ? HJSortTypePriceLtoH  : HJSortTypePriceHtoL;
+                        [weak_self headRefresh];
+                    }else if([index integerValue] == 2) {
+                        weak_self.sort = weak_self.sort == HJSortTypeShellCountHtoL ? HJSortTypeShellCountLtoH : HJSortTypeShellCountHtoL;
+                        [weak_self headRefresh];
+                    }
                 };
                 headerView.showModeChangedBlock = ^(id obj) {
                     if (weak_self.showType == singleLineShowOneGoods) {
-                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
+                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
                         weak_self.showType = signleLineShowDoubleGoods;
                     }else{
-                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
+                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
                         weak_self.showType = singleLineShowOneGoods;
                     }
                     [weak_self.collectionView reloadData];

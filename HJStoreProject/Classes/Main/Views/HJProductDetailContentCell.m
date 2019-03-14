@@ -93,7 +93,7 @@
     }];
     
     UIButton *collectionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [collectionBtn setBackgroundImage:[UIImage imageNamed:@"AppIcon"] forState:UIControlStateNormal];
+    [collectionBtn setBackgroundImage:[UIImage imageNamed:@"collected_n"] forState:UIControlStateNormal];
     [collectionBtn addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:collectionBtn];
     [collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {

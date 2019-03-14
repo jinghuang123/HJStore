@@ -94,7 +94,7 @@
         [self.navigationController pushViewController:searchvc animated:YES];
     }];
     
-    UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2.5, MaxWidth, 25)];
+    UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2.5, 320, 25)];
     tiplabel.text = @"粘粘宝贝标题，先领劵省钱再购物";
     tiplabel.textColor = [UIColor grayColor];
     tiplabel.textAlignment = NSTextAlignmentCenter;
