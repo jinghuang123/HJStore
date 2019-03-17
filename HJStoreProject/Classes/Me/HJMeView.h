@@ -8,7 +8,16 @@
 
 #import "HJSuperView.h"
 
-
+///点击类型
+typedef enum : NSUInteger {
+    HJClickItemTypeHead, //头像
+    HJClickItemTypeWithDrawal,  //提现
+    HJClickItemTypeEarn,  //收益
+    HJClickItemTypeOrder,  //订单
+    HJClickItemTypeFence, ///粉丝
+    HJClickItemTypeInvitation, ///邀请
+    HJClickItemTypeService, ///客服
+} HJClickItemType;
 
 @interface HJMeView : HJSuperView
 
@@ -17,7 +26,7 @@
 @property (nonatomic, strong) UIView *fenceView;
 @property (nonatomic, strong) UIView *invitateView;
 
-@property (nonatomic,copy) void(^settingClick)(id obj);
+@property (nonatomic,copy) void(^settingClick)(id obj,HJClickItemType type);
 @end
 
 

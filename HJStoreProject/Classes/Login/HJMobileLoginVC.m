@@ -97,7 +97,6 @@
 
 - (void)forgetBtnClick {
     HJResetPswVC *resetVC = [[HJResetPswVC alloc] init];
-    [resetVC setNavBackItem];
     resetVC.title = @"重置密码";
     [self.navigationController pushViewController:resetVC animated:YES];
 }
@@ -105,7 +104,6 @@
 - (void)codeLoginBtnClick {
     HJMobileCodeLoginVC *codeLogin = [[HJMobileCodeLoginVC alloc] init];
     codeLogin.title = @"验证码登录";
-    [codeLogin setNavBackItem];
     [self.navigationController pushViewController:codeLogin animated:YES];
 }
 

@@ -24,7 +24,7 @@ static NSString *cellReuseID = @"cellReuseID";
 
 - (void)setModel:(HJRecommendItemModel *)model{
     _model = model;
-    [_headImageV sd_setImageWithURLString:model.avatar placeholderImage:[UIImage imageNamed:@"AppIcon"]];
+    [_headImageV sd_setImageWithURLString:model.avatar placeholderImage:PLACEHOLDER_ITEM];
     _nameLabel.text = model.nickname;
     _timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:model.createtime] jk_longDateString];
     _timeLabel.textColor = [UIColor jk_colorWithHexString:@"#4f4f4f"];

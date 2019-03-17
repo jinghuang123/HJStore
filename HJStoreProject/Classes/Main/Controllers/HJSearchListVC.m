@@ -11,6 +11,7 @@
 #import "HJGoodItemCell.h"
 #import "HJMainListHeadView.h"
 #import "HJProductDetailVC.h"
+#import "HJMainPodVC.h"
 
 static NSString *const HJGoodItemCellIdentifier = @"HJGoodItemSearchCell";
 static NSString *const HJGoodItemSingleCellIdentifier =  @"HJGoodItemSingleSearchCell";
@@ -21,7 +22,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 /* collectionView */
 @property (strong , nonatomic) UICollectionView *collectionView;
 /* recommends */
-@property (strong , nonatomic) NSMutableArray<HJSearchModel *> *searchmodels;
+@property (strong , nonatomic) NSMutableArray<HJRecommendModel *> *searchmodels;
 
 
 @property (assign , nonatomic) NSInteger pageNo;
@@ -30,6 +31,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 @property (strong , nonatomic) NSString *showCouponsOnly;
 
 @property (assign , nonatomic) GoodsListShowType showType;
+@property(nonatomic,strong)  HJMainPodVC *sortTypePopVC;
 @end
 
 @implementation HJSearchListVC
@@ -43,7 +45,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     [self.collectionView.mj_header beginRefreshing];
 }
 
-- (NSMutableArray<HJSearchModel *> *)searchmodels {
+- (NSMutableArray<HJRecommendModel *> *)searchmodels {
     if (!_searchmodels) {
         _searchmodels = [[NSMutableArray alloc] init];
     }
@@ -91,8 +93,9 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 - (void)setBarButtonItem {
     // 创建搜索框
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(5, 7, self.view.frame.size.width, 30)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(5, 7, self.view.frame.size.width - 40, 30)];
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(titleView.frame) - 15, 30)];
+    _searchBar = searchBar;
     searchBar.placeholder = @"搜索内容";
     searchBar.backgroundImage = [UIImage imageNamed:@"clearImage"];
     searchBar.delegate = self;
@@ -112,6 +115,15 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
  
     UIButton *cancleBtn = [searchBar valueForKey:@"cancelButton"];
     cancleBtn.hidden = YES;
+    
+    UIButton *rightNav = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightNav setBackgroundImage:[UIImage imageNamed:@"search_Nav_right"] forState:UIControlStateNormal];
+    [rightNav setTitle:@"搜索" forState:UIControlStateNormal];
+    rightNav.titleLabel.font = [UIFont systemFontOfSize:11];
+    rightNav.titleLabel.textColor = [UIColor whiteColor];
+    [rightNav addTarget:self action:@selector(onClickSearch) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightNav];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
 - (UICollectionView *)collectionView {
@@ -143,7 +155,12 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searchTip = searchBar.text;
+    [self onClickSearch];
+}
+
+- (void)onClickSearch {
+    [self.searchBar resignFirstResponder];
+    self.searchTip = _searchBar.text;
     [self headRefresh];
 }
 
@@ -170,14 +187,14 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     if (self.showType == signleLineShowDoubleGoods) {
         HJGoodItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
-        HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
-        [cell setItemCellWithSearchItem:item];
+        HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+        [cell setItemCellWithItem:item];
         gridcell = cell;
     }else{
         HJGoodItemSingleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodItemSingleCellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor whiteColor];
-        HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
-        [cell setItemCellWithSearchItem:item];
+        HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+        [cell setItemCellWithItem:item];
         gridcell = cell;
     }
     return gridcell;
@@ -191,11 +208,13 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     headerView.backgroundColor = [UIColor whiteColor];
     weakify(self)
     headerView.switchChangeBlock = ^(BOOL on) {
-        [self switchChange:on];
+        [weak_self switchChange:on];
     };
 
-    headerView.sortTypeChengBlock = ^(id obj) {
-        
+    headerView.sortTypeChengBlock = ^(NSNumber *index) {
+        if ([index integerValue] == 0) {
+            [weak_self podSortTypeView];
+        }
     };
     weakify(headerView)
     headerView.showModeChangedBlock = ^(id obj) {
@@ -211,10 +230,45 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     return headerView;
 }
 
+
+- (void)podSortTypeView {
+    if(!self.sortTypePopVC.isPopState) {
+        weakify(self)
+        self.sortTypePopVC = [[HJMainPodVC alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
+                                                          ShowStyle:MYPresentedViewShowStyleSuddenStyle
+                                                           callback:^(id obj) {
+                                                               weak_self.sortTypePopVC.isPopState = NO;
+                                                               [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+                                                           }];
+        self.sortTypePopVC.clearBack = YES;
+        NSArray *data = @[@"综合排序",@"优惠券面值由高到低",@"优惠券面值由低到高",@"预估收益由高到低"];
+        self.sortTypePopVC.dataSource = data;
+        self.sortTypePopVC.showViewPoint = CGPointMake(0, 105);
+        self.sortTypePopVC.viewSize = CGSizeMake(MaxWidth, 4 * 40);
+        self.sortTypePopVC.selectedIndex = self.sort--;
+        
+        self.sortTypePopVC.popDismissBlock = ^(BOOL state) {
+            weak_self.sortTypePopVC.isPopState = NO;
+            [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+        };
+        self.sortTypePopVC.didSelectedRowBlock = ^(NSInteger row) {
+            weak_self.sort = row++;
+            [weak_self headRefresh];
+            weak_self.sortTypePopVC.isPopState = NO;
+            [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+        };
+        self.sortTypePopVC.isPopState = YES;
+        [self presentViewController:self.sortTypePopVC animated:YES completion:nil];
+    }else{
+        self.sortTypePopVC.isPopState = NO;
+        [self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark - item宽高
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.showType == signleLineShowDoubleGoods) {
-        return CGSizeMake((MaxWidth - 15)/2, (MaxWidth - 5)/2 + 90);
+        return CGSizeMake((MaxWidth - 15)/2, (MaxWidth - 5)/2 + 110);
     }else{
         return CGSizeMake(MaxWidth, 150);
     }
@@ -244,12 +298,12 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    HJSearchModel *item = [self.searchmodels objectAtIndex:indexPath.row];
+    HJRecommendModel *item = [self.searchmodels objectAtIndex:indexPath.row];
     [self pushToProductDetailWithItem:item];
     
 }
 
-- (void)pushToProductDetailWithItem:(HJSearchModel *)item {
+- (void)pushToProductDetailWithItem:(HJRecommendModel *)item {
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
     productDetailVC.searchModel = item;
     productDetailVC.hidesBottomBarWhenPushed = YES;

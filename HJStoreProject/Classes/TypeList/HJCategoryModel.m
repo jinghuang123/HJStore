@@ -18,7 +18,7 @@
 
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInteger:_categoryId forKey:@"categoryId"];
+    [aCoder encodeObject:_categoryId forKey:@"categoryId"];
     [aCoder encodeInteger:_parent_id forKey:@"parent_id"];
     [aCoder encodeObject:_name forKey:@"name"];
     [aCoder encodeObject:_image forKey:@"image"];
@@ -26,7 +26,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
-        self.categoryId = [aDecoder decodeIntForKey:@"categoryId"];
+        self.categoryId = [aDecoder decodeObjectForKey:@"categoryId"];
         self.parent_id = [aDecoder decodeIntForKey:@"parent_id"];
         self.name = [aDecoder decodeObjectForKey:@"name"];
         self.image = [aDecoder decodeObjectForKey:@"image"];

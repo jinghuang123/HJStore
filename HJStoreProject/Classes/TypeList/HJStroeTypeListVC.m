@@ -48,7 +48,6 @@
             productListVC.headType  = HJMainVCProductListHeadTypeList;
             productListVC.listType = HJMainVCProductListTypeList;
             productListVC.showType = singleLineShowOneGoods;
-            [productListVC setNavBackItem];
             [weak_self.navigationController pushViewController:productListVC animated:YES];
         };
     }

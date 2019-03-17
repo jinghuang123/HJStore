@@ -141,6 +141,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 self.activitys = [response objectForKey:@"activitys"];
                 self.rollings = [response objectForKey:@"rollings"];
                 self.recommends = [response objectForKey:@"recommends"];
+                self.activitys = self.activitys.count > 0 ? self.activitys : [response objectForKey:@"category"];
             }
             success(nil);
             [self.collectionView reloadData];
@@ -152,7 +153,9 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 
-
+- (void)setSort:(HJSortType)sort {
+    _sort = sort;
+}
 
 - (void)setupUI {
     self.collectionView.backgroundColor = RGB(245, 245, 245);
@@ -317,7 +320,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         if ([obj isKindOfClass:[HJActivityModel class]]) {
             HJActivityModel *item = (HJActivityModel *)obj;
             [cell updeteCellWithActivityItem:item];
-        }else{
+        }else if([obj isKindOfClass:[HJCategoryModel class]]){
             HJCategoryModel *item = (HJCategoryModel *)obj;
             [cell updeteCellWithGridItem:item];
         }
@@ -418,7 +421,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }
     if (indexPath.section == HJMainVCSectionTypeSection3) {//列表
         if (self.showType == signleLineShowDoubleGoods) {
-            return CGSizeMake((MaxWidth - 15)/2, (MaxWidth - 5)/2 + 90);
+            return CGSizeMake((MaxWidth - 15)/2, (MaxWidth - 5)/2 + 110);
         }else{
             return CGSizeMake(MaxWidth, 150);
         }
@@ -488,46 +491,51 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
             [self pushToProductListWithId:0 activityId:banner.taobao_activity_id];
         }
     }else if (indexPath.section == HJMainVCSectionTypeSection1){
-        HJActivityModel *model = [self.activitys objectAtIndex:indexPath.row];
+        id obj = [self.activitys objectAtIndex:indexPath.row];
         HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
-        if (model.islogindata && !userInfo.token) {
-            [self pushToLoginVC];
-        }else{
-            if (model.typedata == HJNavPushTypeUrl) {
-                [self pushToWebWithUrl:model.content_url];
-            }else if (model.typedata == HJNavPushTypeDetail) {
-                [self pushToProductDetailWithId:model.content_product];
-            }else if (model.typedata == HJNavPushTypeList) {
-                [self pushToProductListWithId:0 activityId:model.activityId];
+        if([obj isKindOfClass:[HJActivityModel class]]){
+            HJActivityModel *model = (HJActivityModel *)model;
+            if (model.islogindata && !userInfo.token) {
+                [self pushToLoginVC];
+            }else{
+                if (model.typedata == HJNavPushTypeUrl) {
+                    [self pushToWebWithUrl:model.content_url];
+                }else if (model.typedata == HJNavPushTypeDetail) {
+                    [self pushToProductDetailWithId:model.content_product];
+                }else if (model.typedata == HJNavPushTypeList) {
+                    [self pushToProductListWithId:0 activityId:model.activityId];
+                }
             }
+        }else{
+            HJCategoryModel *model = (HJCategoryModel *)model;
+            [self pushToProductListWithId:model.categoryId activityId:0];
         }
+    
        
     }else if(indexPath.section == HJMainVCSectionTypeSection2){
 
     }else if(indexPath.section == HJMainVCSectionTypeSection3){
         HJRecommendModel *item = [self.recommends objectAtIndex:indexPath.row];
-        [self pushToProductDetailWithId:item.product_id];
+        [self pushToProductDetailWithId:item.item_id];
     }
 }
 
 
-- (void)pushToProductListWithId:(NSInteger)categoryId activityId:(NSInteger)activityId{
+- (void)pushToProductListWithId:(NSString *)categoryId activityId:(NSInteger)activityId{
     HJMainVC *productListVC = [[HJMainVC alloc] init];
     productListVC.hidesBottomBarWhenPushed = YES;
     productListVC.catteryId = categoryId;
     productListVC.activityId = activityId;
     productListVC.headType  = HJMainVCProductListHeadTypeList;
     productListVC.listType = HJMainVCProductListTypeList;
-    [productListVC setNavBackItem];
     [self.navigationController pushViewController:productListVC animated:YES];
     
 }
 
-- (void)pushToProductDetailWithId:(NSInteger)productId {
+- (void)pushToProductDetailWithId:(NSString *)productId {
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
     productDetailVC.productId = productId;
     productDetailVC.hidesBottomBarWhenPushed = YES;
-    [productDetailVC setNavBackItem];
     [self.navigationController pushViewController:productDetailVC animated:YES];
 }
 

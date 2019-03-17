@@ -106,7 +106,6 @@
 
 - (void)pushToSearchResultWithSearchStr:(NSString *)str {
     HJSearchListVC *searchListVC = [[HJSearchListVC alloc] init];
-    [searchListVC setNavBackItem];
     searchListVC.searchTip = str;
     [self.navigationController pushViewController:searchListVC animated:NO];
 }

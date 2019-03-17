@@ -114,7 +114,6 @@
 
 - (void)regisButtonClick {
     HJInviteCodeInputVC *codeVC = [[HJInviteCodeInputVC alloc] init];
-    [codeVC setNavBackItem];
     [self.navigationController pushViewController:codeVC animated:YES];
 }
 
@@ -124,7 +123,6 @@
 
 - (void)phoneLoginClick {
     HJMobileLoginVC *mobileLoginVC = [[HJMobileLoginVC alloc] init];
-    [mobileLoginVC setNavBackItem];
     [self.navigationController pushViewController:mobileLoginVC animated:YES];
 }
 

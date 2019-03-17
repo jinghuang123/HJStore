@@ -24,7 +24,6 @@
     // Do any additional setup after loading the view.
     [self addChildViewContorller];
     self.selectedViewController = [self.viewControllers objectAtIndex:0]; //默认选择商城index为1
-
 }
 
 - (NSMutableArray *)tabBarItems {

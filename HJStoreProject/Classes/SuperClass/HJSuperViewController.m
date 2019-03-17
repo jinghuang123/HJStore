@@ -20,17 +20,27 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-
-
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    ///left、right-item color【左右item的颜色】
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+//    ///title颜色 Attributes 可以包含字体颜色和大小以及字体样式【中间Title字体】
+//    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName :[UIColor whiteColor]};
 }
 
 - (void)setNavBackItem {
+    UIView *backView = [[UIView alloc] init];
+    backView.frame = CGRectMake(0, 0, 60, 64);
+    backView.backgroundColor = [UIColor clearColor];
     UIImage *img = [UIImage imageNamed:@"NavBar_backImg"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(-10, 10, 22, 22);
+    btn.frame = CGRectMake(0, 10, 22, 22);
     [btn setImage:img forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    [backView addSubview:btn];
+    [backView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self backButtonClick];
+    }];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:backView];
     self.navigationItem.leftBarButtonItem = backButton;
 }
     

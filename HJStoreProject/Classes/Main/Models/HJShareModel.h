@@ -11,7 +11,7 @@
 
 
 @interface HJShareModel : NSObject
-@property (nonatomic , assign) NSInteger product_id;
+@property (nonatomic , copy) NSString *product_id;
 @property (nonatomic , copy) NSString *title;
 @property (nonatomic , copy) NSString *url;
 @property (nonatomic , copy) NSString *reserve_price;

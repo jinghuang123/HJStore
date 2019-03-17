@@ -141,7 +141,6 @@
     HJRegistVC *registVC = [[HJRegistVC alloc] init];
     registVC.title = @"注册";
     registVC.inviteCode = self.inviteCode;
-    [registVC setNavBackItem];
     [self.navigationController pushViewController:registVC animated:YES];
 }
 

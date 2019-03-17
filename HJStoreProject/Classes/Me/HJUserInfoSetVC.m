@@ -29,7 +29,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
+    
 }
 
 
@@ -52,7 +52,6 @@
         case USERNameUpdateClick:
             {
                 HJUserNameSetVC *nameSetVc = [[HJUserNameSetVC alloc] init];
-                [nameSetVc setNavBackItem];
                 [self.navigationController pushViewController:nameSetVc animated:YES];
             }
             break;
@@ -90,35 +89,30 @@
         case USERZFBBindClick:
         {
             HJZFBBindingVC *zfbVC = [[HJZFBBindingVC alloc] init];
-            [zfbVC setNavBackItem];
             [self.navigationController pushViewController:zfbVC animated:YES];
         }
             break;
         case USERWeChatBindClick:
         {
             HJWeChatBindingVC *wechatVC = [[HJWeChatBindingVC alloc] init];
-            [wechatVC setNavBackItem];
             [self.navigationController pushViewController:wechatVC animated:YES];
         }
             break;
         case USERTaoBaoBindClick:
         {
             HJTaoBaoBindingVC *taobaoVC = [[HJTaoBaoBindingVC alloc] init];
-            [taobaoVC setNavBackItem];
             [self.navigationController pushViewController:taobaoVC animated:YES];
         }
             break;
         case USERMobileUpdateClick:
         {
             HJMobileChangeVC *mobileVC = [[HJMobileChangeVC alloc] init];
-            [mobileVC setNavBackItem];
             [self.navigationController pushViewController:mobileVC animated:YES];
         }
             break;
         case USERPSWUpdateClick:
         {
             HJResetPswVC *pswVC = [[HJResetPswVC alloc] init];
-            [pswVC setNavBackItem];
             [self.navigationController pushViewController:pswVC animated:YES];
         }
             break;

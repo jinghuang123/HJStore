@@ -14,8 +14,8 @@
 
 @interface HJProductDetailContentCell : UITableViewCell
 @property (nonatomic,copy) cellItemClick collectionSaveBlock;
-
-- (void)setcontentWithModel:(HJProductDetailModel *)item;
+@property (nonatomic,copy) cellItemClick conponGetBlock;
+- (void)setcontentWithModel:(HJRecommendModel *)item;
 @end
 
 

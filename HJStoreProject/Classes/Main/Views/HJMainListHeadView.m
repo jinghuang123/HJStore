@@ -18,46 +18,52 @@
 }
 
 - (void)setupUI {
-    UIView *leftView = [[UIView alloc] init];
-    leftView.backgroundColor = [UIColor redColor];
-    UILabel *tipLabel = [[UILabel alloc] init];
-    tipLabel.textColor = [UIColor redColor];
-    tipLabel.font = [UIFont systemFontOfSize:15];
-    tipLabel.textAlignment = NSTextAlignmentCenter;
-    UIView *rightView = [[UIView alloc] init];
-    rightView.backgroundColor = [UIColor redColor];
     
-    
-    [self addSubview:leftView];
-    [self addSubview:rightView];
-    [self addSubview:tipLabel];
-    
-    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_offset(120);
-        make.height.mas_equalTo(25);
-        make.centerX.mas_equalTo(self.mas_centerX).offset(0);
-        make.centerY.mas_equalTo(self.mas_centerY).offset(0);
+    UIImageView *supportImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"supportTipImage"]];
+    [self addSubview:supportImageview];
+    [supportImageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.width.mas_offset(212);
+        make.height.mas_equalTo(24);
     }];
-    
-    [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_offset(60);
-        make.height.mas_equalTo(0.5);
-        make.right.mas_equalTo(tipLabel.mas_left).offset(0);
+}
+
+@end
+
+@implementation HJSortIcon
+
+- (instancetype)initWithTitle:(NSString *)title{
+    if (self = [super init]) {
+        [self makeUI:title];
+    }
+    return self;
+}
+
+- (void)makeUI:(NSString *)title {
+    UILabel *label = [[UILabel alloc] init];
+    _sortTitle = label;
+    [self addSubview:label];
+    label.font = PFR14Font;
+    label.text = title;
+    label.textColor = [UIColor lightGrayColor];
+    CGFloat wid = [NSString widthOfString:title font:label.font height:20] + 5;
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.mas_centerX).offset(15);
         make.centerY.mas_equalTo(self.mas_centerY).offset(0);
+        make.height.mas_equalTo(20);
+        make.width.mas_equalTo(wid);
     }];
-    
-    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_offset(60);
-        make.height.mas_equalTo(0.5);
-        make.left.mas_equalTo(tipLabel.mas_right).offset(0);
-        make.centerY.mas_equalTo(self.mas_centerY).offset(0);
+
+    UIImageView *imageView = [[UIImageView alloc] init];
+    _sortImageView = imageView;
+    imageView.image = [UIImage imageNamed:@"sortType_nomal"];
+    [self addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(label.mas_right).offset(0);
+        make.centerY.mas_equalTo(label.mas_centerY).offset(0);
+        make.width.mas_equalTo(7);
+        make.height.mas_equalTo(14);
     }];
-    
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"为你推荐"];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    paragraphStyle.firstLineHeadIndent = 25.f; // 首行缩进
-    tipLabel.attributedText = attributedString;
 }
 
 @end
@@ -72,27 +78,33 @@
 }
 
 - (void)setupUI {
-    UIView *view1 = [self createViewWithTitle:@"综合" icon:@"shouye_icon_scan_white" iconSize:CGSizeMake(10, 10)];
+    NSString *view1Title = @"综合";
+    NSString *view2Title = @"券后价";
+    NSString *view3Title = @"销量";
+    HJSortIcon *view1 = [[HJSortIcon alloc] initWithTitle:view1Title]; //  [self  createViewWithTitle:@"综合" icon:@"SortDown" iconSize:CGSizeMake(7, 5)];
+    _view1 = view1;
     [self addSubview:view1];
-    UIView *view2 = [self createViewWithTitle:@"券后价" icon:@"shouye_icon_scan_white" iconSize:CGSizeMake(10, 10)];
+    HJSortIcon *view2 = [[HJSortIcon alloc] initWithTitle:view2Title];//[self createViewWithTitle:@"券后价" icon:@"sortType_nomal" iconSize:CGSizeMake(7, 14)];
+    _view2 = view2;
     [self addSubview:view2];
-    UIView *view3 = [self createViewWithTitle:@"销量" icon:@"shouye_icon_scan_white" iconSize:CGSizeMake(10, 10)];
+    HJSortIcon *view3 = [[HJSortIcon alloc] initWithTitle:view3Title];
+    _view3 = view3;
     [self addSubview:view3];
     [view1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_offset(0);
-        make.width.mas_equalTo((MaxWidth - 60)/3);
+        make.width.mas_equalTo((MaxWidth - 80)/3);
         make.height.mas_equalTo(40);
     }];
     [view2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(0);
         make.left.mas_equalTo(view1.mas_right).offset(0);
-        make.width.mas_equalTo((MaxWidth - 60)/3);
+        make.width.mas_equalTo((MaxWidth - 80)/3);
         make.height.mas_equalTo(40);
     }];
     [view3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(0);
         make.left.mas_equalTo(view2.mas_right).offset(0);
-        make.width.mas_equalTo((MaxWidth - 60)/3);
+        make.width.mas_equalTo((MaxWidth - 80)/3);
         make.height.mas_equalTo(40);
     }];
     
@@ -133,19 +145,20 @@
     UILabel *label = [[UILabel alloc] init];
     [view addSubview:label];
     label.text = title;
-    label.font = PFR12Font;
+    label.font = PFR14Font;
     label.textColor = [UIColor lightGrayColor];
+    CGFloat wid = [NSString widthOfString:title font:label.font height:20] + 5;
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(view.mas_centerX).offset(15);
         make.centerY.mas_equalTo(view.mas_centerY).offset(0);
         make.height.mas_equalTo(20);
-        make.width.mas_equalTo(50);
+        make.width.mas_equalTo(wid);
     }];
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed:icon];
     [view addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(label.mas_right).offset(5);
+        make.left.mas_equalTo(label.mas_right).offset(0);
         make.centerY.mas_equalTo(label.mas_centerY).offset(0);
         make.width.mas_equalTo(size.width);
         make.height.mas_equalTo(size.height);
@@ -159,6 +172,10 @@
     view.layer.borderWidth = 0.5;
     view.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
     [self addSubview:view];
+    UIImageView *preImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Conpon_Shape"]];
+    preImageView.frame = CGRectMake(10, 10, 24, 20);
+    [view addSubview:preImageView];
+    
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10, 200, 20)];
     tipLabel.font = PFR13Font;
     tipLabel.textColor = [UIColor lightGrayColor];

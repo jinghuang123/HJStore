@@ -48,10 +48,14 @@
                                          parameters:parameters
                                            progress:nil
                                             success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                [self YFSuccess:responseObject
-                                                      operation:operation
-                                                        success:success
-                                                        failure:failure];
+                                                if([URLString containsString:@"search/get"]){
+                                                    success(operation,responseObject);
+                                                }else{
+                                                    [self YFSuccess:responseObject
+                                                          operation:operation
+                                                            success:success
+                                                            failure:failure];
+                                                }
                                             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                 if (error) {
                                                     if (failure) {

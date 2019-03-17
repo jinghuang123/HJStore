@@ -11,7 +11,7 @@
 #define kCategorysKey @"saveCategorysKey"
 
 @interface HJCategoryModel : NSObject
-@property (nonatomic , assign) NSInteger categoryId;
+@property (nonatomic , strong) NSString *categoryId;
 @property (nonatomic , assign) NSInteger parent_id;
 @property (nonatomic , copy) NSString *name;
 @property (nonatomic , copy) NSString *image;

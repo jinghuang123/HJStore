@@ -8,14 +8,14 @@
 
 #import "HJShareMainImageView.h"
 @interface HJShareMainImageView ()
-@property (nonatomic,strong) HJProductDetailModel *detail;
+@property (nonatomic,strong) HJRecommendModel *detail;
 @end
 
 
 
 @implementation HJShareMainImageView
 
-- (instancetype)initWithFrame:(CGRect)frame andDetailModel:(HJProductDetailModel *)detail {
+- (instancetype)initWithFrame:(CGRect)frame andDetailModel:(HJRecommendModel *)detail {
     if (self = [super initWithFrame:frame]) {
         self.detail = detail;
         self.backgroundColor = [UIColor whiteColor];
@@ -83,7 +83,7 @@
     imageView.layer.borderWidth = 5;
     imageView.clipsToBounds = YES;
     imageView.layer.borderColor = [UIColor redColor].CGColor;
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.detail.pict_url_image]];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.detail.pict_url]];
     [self addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);

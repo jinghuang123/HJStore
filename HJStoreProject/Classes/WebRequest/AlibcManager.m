@@ -86,7 +86,6 @@
     if (webView) {
         ALiTradeWebViewController* view = [[ALiTradeWebViewController alloc] init];
         view.hidesBottomBarWhenPushed = YES;
-        [view setNavBackItem];
         NSInteger res = [[AlibcTradeSDK sharedInstance].tradeService show:view webView:view.webView page:page showParams:showParam taoKeParams:taoKeParams trackParam:trackParam tradeProcessSuccessCallback:success tradeProcessFailedCallback:fail];
         if (res == 1) {
             [parentController.navigationController pushViewController:view animated:YES];

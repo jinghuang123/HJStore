@@ -7,11 +7,11 @@
 //
 
 #import "HJSuperViewController.h"
-#import "HJSearchModel.h"
+#import "HJRecommendModel.h"
 
 @interface HJProductDetailVC : HJSuperViewController
-@property (nonatomic, assign) NSInteger productId;
-@property (nonatomic, strong) HJSearchModel *searchModel;
+@property (nonatomic, strong) NSString *productId;
+@property (nonatomic, strong) HJRecommendModel *searchModel;
 @end
 
 

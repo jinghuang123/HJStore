@@ -10,6 +10,11 @@
 
 @implementation HJProductDetailModel
 
+//+ (NSDictionary *)mj_objectClassInArray {
+//    return @{@"small_images":[HJSmallImageModel class],
+//             };
+//}
+
 - (CGFloat)commission {
     return (([self.zk_final_price floatValue] - [self.coupon_value floatValue]) * [self.max_commission_rate floatValue])/10000;
 }

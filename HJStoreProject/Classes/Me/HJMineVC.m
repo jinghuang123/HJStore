@@ -33,6 +33,11 @@
     }];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -48,41 +53,59 @@
         make.left.right.top.bottom.mas_offset(0);
     }];
     
-    meView.settingClick = ^(id obj) {
-        HJUserInfoSetVC *setVC = [[HJUserInfoSetVC alloc] init];
-        [setVC setNavBackItem];
-        setVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:setVC animated:YES];
+    weakify(self)
+    meView.settingClick = ^(id obj,HJClickItemType type) {
+        [weak_self responsToItemClickWithType:type];
     };
-    
-    [meView.earnView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        HJEarningVC *earningVC = [[HJEarningVC alloc] init];
-        [earningVC setNavBackItem];
-        earningVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:earningVC animated:YES];
-    }];
-    
-    [meView.orderView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        HJOrderListVC *orderVC = [[HJOrderListVC alloc] init];
-        [orderVC setNavBackItem];
-        orderVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:orderVC animated:YES];
-    }];
-    
-    [meView.fenceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        HJFencePageVC *fenceVC = [[HJFencePageVC alloc] init];
-        [fenceVC setNavBackItem];
-        fenceVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:fenceVC animated:YES];
-    }];
-    
-    [meView.invitateView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        HJInvitationListVC *invitationVC = [[HJInvitationListVC alloc] init];
-        [invitationVC setNavBackItem];
-        invitationVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:invitationVC animated:YES];
-    }];
+}
 
+- (void)responsToItemClickWithType:(HJClickItemType)type {
+    switch (type) {
+        case HJClickItemTypeHead:
+        {
+            HJUserInfoSetVC *setVC = [[HJUserInfoSetVC alloc] init];
+            setVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:setVC animated:YES];
+        }
+            break;
+        case HJClickItemTypeWithDrawal:
+            
+            break;
+        case HJClickItemTypeEarn:
+        {
+            HJEarningVC *earningVC = [[HJEarningVC alloc] init];
+            earningVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:earningVC animated:YES];
+        }
+            break;
+        case HJClickItemTypeOrder:
+        {
+            HJOrderListVC *orderVC = [[HJOrderListVC alloc] init];
+            orderVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:orderVC animated:YES];
+        }
+            break;
+        case HJClickItemTypeFence:
+        {
+            HJFencePageVC *fenceVC = [[HJFencePageVC alloc] init];
+            fenceVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:fenceVC animated:YES];
+        }
+            
+            break;
+        case HJClickItemTypeInvitation:
+        {
+            HJInvitationListVC *invitationVC = [[HJInvitationListVC alloc] init];
+            invitationVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:invitationVC animated:YES];
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 /*

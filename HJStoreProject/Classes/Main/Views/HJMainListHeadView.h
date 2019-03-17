@@ -14,14 +14,21 @@ typedef void(^switchValueChangeBlock)(BOOL on);
 
 @end
 
+@interface HJSortIcon : UIView
+- (instancetype)initWithTitle:(NSString *)title;
+@property (nonatomic, strong) UILabel *sortTitle;
+@property (nonatomic, strong) UIImageView *sortImageView;
+@end
+
 @interface HJMainListHeadViewList : UICollectionReusableView
 
 @property (nonatomic, copy) itemClickBlock showModeChangedBlock;
 @property (nonatomic, copy) itemClickBlock sortTypeChengBlock;
 @property (nonatomic, copy) switchValueChangeBlock switchChangeBlock;
 @property (nonatomic, strong) UIButton *rightBtn;
-
-
+@property (nonatomic, strong) HJSortIcon *view1;
+@property (nonatomic, strong) HJSortIcon *view2;
+@property (nonatomic, strong) HJSortIcon *view3;
 @end
 
 

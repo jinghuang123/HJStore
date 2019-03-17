@@ -13,7 +13,7 @@
 #import "HJRecommendModel.h"
 #import "HJRollingModel.h"
 #import "HJProductDetailModel.h"
-#import "HJSearchModel.h"
+#import "HJRecommendModel.h"
 #import "HJShareModel.h"
 #import "HJEarningModel.h"
 
@@ -25,7 +25,7 @@
 - (void)getMainCategoryCache:(BOOL)cache success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
 
 - (void)getMainListCache:(BOOL)cache
-              categoryId:(NSInteger)categoryId
+              categoryId:(NSString *)categoryId
                     sort:(NSInteger)sort
                   pageNo:(NSInteger)pageNo
                 pageSize:(NSInteger)pangeSize
@@ -33,7 +33,7 @@
                     fail:(CompletionFailBlock)fail;
 
 - (void)getMainListByCategoryIdCache:(BOOL)cache
-                          categoryId:(NSInteger)categoryId
+                          categoryId:(NSString *)categoryId
                               pageNo:(NSInteger)pageNo
                             pageSize:(NSInteger)pageSize
                                 sort:(NSInteger)sort
@@ -42,7 +42,7 @@
 
 
 - (void)getProductDetailCache:(BOOL)cache
-                    productId:(NSInteger)productId
+                    productId:(NSString *)productId
                       success:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail;
 
@@ -71,7 +71,7 @@
 
 
 - (void)getShareDataCache:(BOOL)cache
-                productId:(NSInteger )productId
+                productId:(NSString *)productId
                     title:(NSString *)title
                       url:(NSString *)url
                   success:(CompletionSuccessBlock)success

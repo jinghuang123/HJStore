@@ -35,15 +35,16 @@
 
 - (void)setUpUI {
     self.backgroundColor = [UIColor whiteColor];
-    _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, MaxWidth, self.jk_height) delegate:self placeholderImage:nil];
+    _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.jk_width, self.jk_height) delegate:self placeholderImage:PLACEHOLDER_SCRO_ITEM];
     _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+    _cycleScrollView.backgroundColor = [UIColor clearColor];
     _cycleScrollView.autoScrollTimeInterval = 5.0;
     [self addSubview:_cycleScrollView];
 }
 
 - (void)setImageGroupArray:(NSArray *)imageGroupArray {
     _imageGroupArray = imageGroupArray;
-    _cycleScrollView.placeholderImage = [UIImage imageNamed:@"default_160"];
+    _cycleScrollView.placeholderImage = PLACEHOLDER_SCRO_ITEM;
     if (imageGroupArray.count == 0) return;
     _cycleScrollView.imageURLStringsGroup = _imageGroupArray;
 }
@@ -82,7 +83,7 @@
 
 - (void)setUpUI {
     self.backgroundColor = [UIColor whiteColor];
-    _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, MaxWidth, self.jk_height) delegate:self placeholderImage:nil];
+    _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.jk_width, self.jk_height) delegate:self placeholderImage:PLACEHOLDER_SCRO_ITEM];
     _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     _cycleScrollView.autoScrollTimeInterval = 5.0;
     [self addSubview:_cycleScrollView];
@@ -90,7 +91,7 @@
 
 - (void)setImageGroupArray:(NSArray *)imageGroupArray {
     _imageGroupArray = imageGroupArray;
-    _cycleScrollView.placeholderImage = [UIImage imageNamed:@"default_160"];
+    _cycleScrollView.placeholderImage = PLACEHOLDER_SCRO_ITEM;
     if (imageGroupArray.count == 0) return;
     _cycleScrollView.imageURLStringsGroup = _imageGroupArray;
 }

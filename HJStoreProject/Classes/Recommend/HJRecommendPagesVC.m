@@ -31,8 +31,7 @@
                 recommendVC.itemDidSelected = ^(GoodsItem *item) {
                     HJProductDetailVC *detailVC = [[HJProductDetailVC alloc] init];
                     detailVC.hidesBottomBarWhenPushed = YES;
-                    detailVC.productId = [item.product_id integerValue];
-                    [detailVC setNavBackItem];
+                    detailVC.productId = item.product_id;
                     [self.navigationController pushViewController:detailVC animated:YES];
                 };
                 recommendVC.category = model;

@@ -36,9 +36,9 @@
     [self addSubview:preIcon];
     [preIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);
-        make.width.mas_equalTo(40);
-        make.height.mas_equalTo(10.5);
-        make.top.mas_offset(10);
+        make.width.mas_equalTo(56);
+        make.height.mas_equalTo(16);
+        make.top.mas_offset(5);
     }];
     
     self.backgroundColor = [UIColor whiteColor];
@@ -60,7 +60,7 @@
     [super layoutSubviews];
     
     [_advertScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(50);
+        make.left.mas_offset(60);
         make.right.top.mas_offset(0);
         make.bottom.mas_offset(-1);
     }];

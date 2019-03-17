@@ -7,16 +7,19 @@
 //
 
 #import "HJMeView.h"
+#import "HJMainSliderCell.h"
 
 @interface HJMeView () <UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scroView;
 @property (nonatomic, strong) UIImageView *headImageView;
 @property (nonatomic, strong) UILabel *codeLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UIView *earningView;
+@property (nonatomic, strong) UIImageView *earningView;
+@property (nonatomic, strong) UIImageView *earningBottomView;
 @property (nonatomic, strong) UIView *icomView;
-
-
+@property (nonatomic, strong) UIView *serviceView;
+@property (nonatomic, strong) HJMainSliderView *adSliderCellView;
+@property (nonatomic, strong) UIView *toolsView;
 @end
 
 @implementation HJMeView
@@ -57,66 +60,40 @@
     CGFloat topViewH = MaxHeight > 600 ? 220 : 180;
     NSLog(@">>>>>>%f",MaxHeight);
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight)];
-    headView.backgroundColor = [UIColor jk_colorWithHexString:@"#f5f5f5"];
+    headView.backgroundColor = [UIColor jk_colorWithHexString:@"#F2F2F2"];
     [self.scroView addSubview:headView];
     
-    UIView *topColorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, topViewH * 0.8)];
-    topColorView.backgroundColor = [UIColor jk_colorWithHexString:@"#008B8B"];
+    UIImageView *topColorView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, topViewH * 0.8)];
+    topColorView.image = [UIImage imageNamed:@"me_topBgImage"];
     [headView addSubview:topColorView];
-    
-    UIButton *settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [settingBtn setBackgroundImage:[UIImage imageNamed:@"me_icon_setting"] forState:UIControlStateNormal];
-    [headView addSubview:settingBtn];
-    [settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_offset(30);
-        make.width.height.mas_equalTo(20);
-    }];
-    [settingBtn addTarget:self action:@selector(settingBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIView *bottomCornerView = [[UIView alloc] initWithFrame:CGRectMake(0, topViewH/2, MaxWidth, MaxHeight)];
-    bottomCornerView.backgroundColor = [UIColor jk_colorWithHexString:@"#f5f5f5"];
-    UIBezierPath *maskPath  = [[UIBezierPath alloc] init];
-    [maskPath addArcWithCenter:CGPointMake(MaxWidth/2, MaxHeight/2)
-                    radius:MaxHeight/2
-                startAngle:M_PI*1.0
-                  endAngle:M_PI*2.0
-                 clockwise:YES];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = bottomCornerView.bounds;
-    maskLayer.path = maskPath.CGPath;
-    bottomCornerView.layer.mask = maskLayer;
-    [headView addSubview:bottomCornerView];
-    [bottomCornerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_offset(0);
-        make.top.mas_offset(topViewH/2);
-    }];
     
     CGFloat headSize = 60;
     UIImageView *headImageView = [[UIImageView alloc] init];
     _headImageView = headImageView;
-    headImageView.image = [UIImage imageNamed:@"default_avatar"];
-    headImageView.layer.borderColor = [UIColor jk_colorWithHexString:@"#f5f5f5"].CGColor;
-    headImageView.layer.borderWidth = 3.0;
+    headImageView.userInteractionEnabled = YES;
+    headImageView.image = [UIImage imageNamed:@"head_imageDefalut.jpg"]; //PLACEHOLDER_HEAD
     headImageView.layer.cornerRadius = headSize/2;
     headImageView.clipsToBounds = YES;
     [headView addSubview:headImageView];
     [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(headView.mas_centerX).offset(0);
-        make.top.mas_offset(topViewH/2 - headSize/2);
+        make.left.mas_offset(10);
+        make.top.mas_offset(35);
         make.width.height.mas_equalTo(headSize);
     }];
-    
+    [headImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeHead];
+    }];
     
     UILabel *nameLabel = [[UILabel alloc] init];
     _nameLabel = nameLabel;
     nameLabel.text = @"杨老板是大傻B";
-    nameLabel.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-    nameLabel.font = [UIFont systemFontOfSize:11];
-    nameLabel.textAlignment = NSTextAlignmentCenter;
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.font = [UIFont systemFontOfSize:16];
+    nameLabel.textAlignment = NSTextAlignmentLeft;
     [headView addSubview:nameLabel];
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(headImageView.mas_bottom).offset(20);
-        make.centerX.mas_equalTo(headImageView.mas_centerX).offset(0);
+        make.top.mas_equalTo(headImageView.mas_top).offset(5);
+        make.left.mas_equalTo(headImageView.mas_right).offset(10);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(20);
     }];
@@ -124,184 +101,242 @@
     UILabel *codeLabel = [[UILabel alloc] init];
     _codeLabel = codeLabel;
     codeLabel.text = @"邀请码:x5s7DdgyZ";
-    codeLabel.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
+    codeLabel.textColor = [UIColor whiteColor];
     codeLabel.font = [UIFont systemFontOfSize:11];
-    codeLabel.textAlignment = NSTextAlignmentCenter;
+    codeLabel.textAlignment = NSTextAlignmentLeft;
     [headView addSubview:codeLabel];
     [codeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(nameLabel.mas_bottom).offset(5);
-        make.centerX.mas_equalTo(nameLabel.mas_centerX).offset(0);
+        make.left.mas_equalTo(nameLabel.mas_left).offset(0);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(20);
     }];
-    UIView *hline = [[UIView alloc] init];
-    hline.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
-    [headView addSubview:hline];
-    [hline mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(30);
-        make.right.mas_offset(-30);
-        make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(codeLabel.mas_bottom).offset(10);
-    }];
+
     
-    UIView *earningView = [[UIView alloc] init];
+    UIImageView *earningView = [[UIImageView alloc] init];
+    earningView.image = [UIImage imageNamed:@"me_top_yellow"];
     _earningView = earningView;
-    earningView.backgroundColor = [UIColor whiteColor];
-    earningView.layer.cornerRadius = 5;
-    earningView.clipsToBounds = YES;
     [headView addSubview:earningView];
     [earningView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(30);
-        make.right.mas_offset(-30);
-        make.top.mas_equalTo(hline.mas_bottom).mas_offset(15);
-        make.height.mas_equalTo(120);
+        make.left.mas_offset(8);
+        make.right.mas_offset(-8);
+        make.bottom.mas_equalTo(topColorView.mas_bottom).mas_offset(0);
+        make.height.mas_equalTo(60);
+    }];
+    UIImageView *earningBottomView = [[UIImageView alloc] init];
+    earningBottomView.image = [UIImage imageNamed:@"me_bottom_yellow"];
+    _earningBottomView = earningBottomView;
+    [headView addSubview:earningBottomView];
+    [earningBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(8);
+        make.right.mas_offset(-8);
+        make.top.mas_equalTo(topColorView.mas_bottom).mas_offset(0);
+        make.height.mas_equalTo(67);
     }];
     [self addEarningViewItems];
     
-    UIView *hline2 = [[UIView alloc] init];
-    hline2.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
-    [headView addSubview:hline2];
-    [hline2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(30);
-        make.right.mas_offset(-30);
-        make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(earningView.mas_bottom).offset(10);
-    }];
+
     
     UIView *icomView = [[UIView alloc] init];
     _icomView = icomView;
     icomView.backgroundColor = [UIColor whiteColor];
-    icomView.layer.cornerRadius = 5;
+    icomView.layer.cornerRadius = 10;
     icomView.clipsToBounds = YES;
     [headView addSubview:icomView];
     [icomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(30);
-        make.right.mas_offset(-30);
-        make.top.mas_equalTo(hline2.mas_bottom).mas_offset(15);
-        make.height.mas_equalTo(80);
+        make.left.mas_offset(8);
+        make.right.mas_offset(-8);
+        make.top.mas_equalTo(earningBottomView.mas_bottom).mas_offset(5);
+        make.height.mas_equalTo(60);
     }];
     [self addItomViewItems];
+    
+    HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth - 16, 100)];
+    _adSliderCellView = adSliderCellView;
+    adSliderCellView.backgroundColor = [UIColor clearColor];
+    adSliderCellView.imageGroupArray = @[@"me_banner"];
+    [headView addSubview:adSliderCellView];
+    [adSliderCellView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(8);
+        make.right.mas_offset(-8);
+        make.height.mas_equalTo(100);
+        make.top.mas_equalTo(icomView.mas_bottom).offset(8);
+    }];
+    
+    UIView *toolsView = [[UIView alloc] init];
+    _toolsView = toolsView;
+    toolsView.backgroundColor = [UIColor whiteColor];
+    toolsView.layer.cornerRadius = 10;
+    toolsView.clipsToBounds = YES;
+    [headView addSubview:toolsView];
+    [toolsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(8);
+        make.right.mas_offset(-8);
+        make.top.mas_equalTo(adSliderCellView.mas_bottom).mas_offset(8);
+        make.height.mas_equalTo(158);
+    }];
+    [self addToolItems];
+    
 }
 
 - (void)addEarningViewItems {
     UILabel *remainMoneyLabel = [[UILabel alloc] init];
-    remainMoneyLabel.text = @"余额 ¥ 20";
-    remainMoneyLabel.textColor = [UIColor jk_colorWithHexString:@"#262f42"];
-    remainMoneyLabel.font = [UIFont boldSystemFontOfSize:13];
-    remainMoneyLabel.textAlignment = NSTextAlignmentLeft;
+    remainMoneyLabel.text = @"余额(元)";
+    remainMoneyLabel.textColor = [UIColor whiteColor];
+    remainMoneyLabel.font = [UIFont boldSystemFontOfSize:12];
+    remainMoneyLabel.textAlignment = NSTextAlignmentCenter;
     [_earningView addSubview:remainMoneyLabel];
     
     [remainMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(20);
-        make.top.mas_offset(10);
-        make.width.mas_equalTo(150);
+        make.left.mas_offset(0);
+        make.top.mas_offset(8);
+        make.right.mas_equalTo(-MaxWidth/2);
         make.height.mas_equalTo(20);
     }];
     
     UIButton *applyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [applyBtn setTitle:@"立即提现" forState:UIControlStateNormal];
-    [applyBtn setTitleColor:[UIColor jk_colorWithHexString:@"#262f42"] forState:UIControlStateNormal];
+    [applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     applyBtn.titleLabel.font = [UIFont boldSystemFontOfSize:10];
-    applyBtn.layer.borderColor = [[UIColor redColor] colorWithAlphaComponent:0.5].CGColor;
+    applyBtn.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor;
     applyBtn.layer.borderWidth = 1.0;
-    applyBtn.layer.cornerRadius = 2;
+    applyBtn.layer.cornerRadius = 10;
     applyBtn.clipsToBounds = YES;
     [_earningView addSubview:applyBtn];
     [applyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_offset(-20);
-        make.height.mas_equalTo(15);
-        make.width.mas_equalTo(50);
-        make.top.mas_offset(12);
+        make.right.mas_offset(-51);
+        make.height.mas_equalTo(20);
+        make.width.mas_equalTo(72);
+        make.top.mas_offset(8);
     }];
-    
-    UIView *hline = [[UIView alloc] init];
-    hline.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
-    [_earningView addSubview:hline];
-    [hline mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_offset(0);
-        make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(remainMoneyLabel.mas_bottom).offset(5);
+    [applyBtn jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeWithDrawal];
     }];
-    
- 
-    
-    UIView *vline = [[UIView alloc] init];
-    vline.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
-    [_earningView addSubview:vline];
-    [vline mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(hline.mas_centerX).offset(0);
-        make.width.mas_equalTo(0.5);
-        make.top.mas_equalTo(hline.mas_bottom).offset(20);
-        make.bottom.mas_offset(-20);
-    }];
+
     
     UILabel *monthEarnLabel = [[UILabel alloc] init];
-    monthEarnLabel.text = @"¥ 20";
-    monthEarnLabel.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-    monthEarnLabel.font = [UIFont systemFontOfSize:11];
+    monthEarnLabel.text = @"¥ 10120";
+    monthEarnLabel.textColor = [UIColor whiteColor];
+    monthEarnLabel.font = [UIFont systemFontOfSize:18];
     monthEarnLabel.textAlignment = NSTextAlignmentCenter;
     [_earningView addSubview:monthEarnLabel];
     [monthEarnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(20);
-        make.right.mas_equalTo(vline.mas_left).offset(-20);
+        make.left.mas_offset(0);
+        make.right.mas_offset(-MaxWidth/2);
         make.height.mas_equalTo(15);
-        make.top.mas_equalTo(hline.mas_bottom).offset(20);
+        make.top.mas_equalTo(remainMoneyLabel.mas_bottom).offset(10);
+    }];
+    
+    UILabel *earnTip = [[UILabel alloc] init];
+    earnTip.text = @"（每月25号可提现上月结算收益）";
+    earnTip.textColor = [UIColor whiteColor];
+    earnTip.font = [UIFont systemFontOfSize:8];
+    earnTip.textAlignment = NSTextAlignmentCenter;
+    [_earningView addSubview:earnTip];
+    [earnTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(MaxWidth/2);
+        make.right.mas_offset(0);
+        make.height.mas_equalTo(8);
+        make.bottom.mas_offset(-10);
     }];
     
     UILabel *monthEarnTip = [[UILabel alloc] init];
-    monthEarnTip.text = @"本月预估";
-    monthEarnTip.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-    monthEarnTip.font = [UIFont systemFontOfSize:11];
+    monthEarnTip.text = @"本月预估 ¥ 1509";
+    monthEarnTip.textColor = [UIColor blackColor];
+    monthEarnTip.font = [UIFont systemFontOfSize:12];
     monthEarnTip.textAlignment = NSTextAlignmentCenter;
-    [_earningView addSubview:monthEarnTip];
+    [_earningBottomView addSubview:monthEarnTip];
     [monthEarnTip mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(20);
-        make.right.mas_equalTo(vline.mas_left).offset(-20);
-        make.height.mas_equalTo(15);
-        make.top.mas_equalTo(monthEarnLabel.mas_bottom).offset(10);
+        make.left.mas_offset(10);
+        make.right.mas_offset(-MaxWidth/2+10);
+        make.height.mas_equalTo(20);
+        make.top.mas_offset(8);
     }];
-    
-    UILabel *todayEarnLabel = [[UILabel alloc] init];
-    todayEarnLabel.text = @"¥ 5";
-    todayEarnLabel.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-    todayEarnLabel.font = [UIFont systemFontOfSize:11];
-    todayEarnLabel.textAlignment = NSTextAlignmentCenter;
-    [_earningView addSubview:todayEarnLabel];
-    [todayEarnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(vline.mas_right).offset(20);
-        make.right.mas_offset(-20);
-        make.height.mas_equalTo(15);
-        make.top.mas_equalTo(hline.mas_bottom).offset(20);
-    }];
-    
+
     UILabel *todayEarnTip = [[UILabel alloc] init];
-    todayEarnTip.text = @"今日收益";
-    todayEarnTip.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-    todayEarnTip.font = [UIFont systemFontOfSize:11];
+    todayEarnTip.text = @"今日收益 ¥28";
+    todayEarnTip.textColor = [UIColor blackColor];
+    todayEarnTip.font = [UIFont systemFontOfSize:12];
     todayEarnTip.textAlignment = NSTextAlignmentCenter;
-    [_earningView addSubview:todayEarnTip];
+    [_earningBottomView addSubview:todayEarnTip];
     [todayEarnTip mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(vline.mas_right).offset(20);
-        make.right.mas_offset(-20);
-        make.height.mas_equalTo(15);
-        make.top.mas_equalTo(monthEarnLabel.mas_bottom).offset(10);
+        make.left.mas_offset(MaxWidth/2);
+        make.right.mas_offset(0);
+        make.height.mas_equalTo(20);
+        make.top.mas_offset(8);
+    }];
+    
+    UILabel *lastMonthEarnTip = [[UILabel alloc] init];
+    lastMonthEarnTip.text = @"上月结算";
+    lastMonthEarnTip.textColor = [UIColor blackColor];
+    lastMonthEarnTip.font = [UIFont systemFontOfSize:10];
+    lastMonthEarnTip.textAlignment = NSTextAlignmentCenter;
+    [_earningBottomView addSubview:lastMonthEarnTip];
+    [lastMonthEarnTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(10);
+        make.right.mas_offset(-MaxWidth/2 + 10);
+        make.height.mas_equalTo(10);
+        make.top.mas_equalTo(monthEarnTip.mas_bottom).offset(5);
+    }];
+    
+    UILabel *lastMonthEarnCount = [[UILabel alloc] init];
+    lastMonthEarnCount.text = @"¥200";
+    lastMonthEarnCount.textColor = [UIColor blackColor];
+    lastMonthEarnCount.font = [UIFont systemFontOfSize:11];
+    lastMonthEarnCount.textAlignment = NSTextAlignmentCenter;
+    [_earningBottomView addSubview:lastMonthEarnCount];
+    [lastMonthEarnCount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(10);
+        make.right.mas_offset(-MaxWidth/2+10);
+        make.height.mas_equalTo(10);
+        make.top.mas_equalTo(lastMonthEarnTip.mas_bottom).offset(5);
+    }];
+    
+    
+    UILabel *lastMonthTip = [[UILabel alloc] init];
+    lastMonthTip.text = @"上月预估";
+    lastMonthTip.textColor = [UIColor blackColor];
+    lastMonthTip.font = [UIFont systemFontOfSize:10];
+    lastMonthTip.textAlignment = NSTextAlignmentCenter;
+    [_earningBottomView addSubview:lastMonthTip];
+    [lastMonthTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(MaxWidth/2);
+        make.right.mas_offset(0);
+        make.height.mas_equalTo(10);
+        make.top.mas_equalTo(todayEarnTip.mas_bottom).offset(5);
+    }];
+    
+    UILabel *lastMonthCount = [[UILabel alloc] init];
+    lastMonthCount.text = @"¥180";
+    lastMonthCount.textColor = [UIColor blackColor];
+    lastMonthCount.font = [UIFont systemFontOfSize:11];
+    lastMonthCount.textAlignment = NSTextAlignmentCenter;
+    [_earningBottomView addSubview:lastMonthCount];
+    [lastMonthCount mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(MaxWidth/2);
+        make.right.mas_offset(0);
+        make.height.mas_equalTo(10);
+        make.top.mas_equalTo(lastMonthTip.mas_bottom).offset(5);
     }];
 }
 
 - (void)addItomViewItems {
-    CGFloat leftRightSpace = 20;
-    CGFloat space = (MaxWidth - 60 - 40 * 4 - leftRightSpace * 2)/3;
-    UIView *earnView = [self setItemWithIcon:@"icon_xd_discount" title:@"收益"];
+    CGFloat leftRightSpace = 10;
+    CGFloat space = (MaxWidth - 20 - 40 * 5 - leftRightSpace * 2)/4;
+    UIView *earnView = [self setItemWithIcon:@"shouyiicon" title:@"收益"];
     _earnView = earnView;
     [_icomView addSubview:earnView];
     [earnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(leftRightSpace);
-        make.top.mas_offset(10);
+        make.top.mas_offset(8);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [earnView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeEarn];
+    }];
     
-    UIView *orderView = [self setItemWithIcon:@"icon_xd_discount" title:@"订单"];
+    UIView *orderView = [self setItemWithIcon:@"shouyiicon" title:@"订单"];
     _orderView = orderView;
     [_icomView addSubview:orderView];
     [orderView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -311,7 +346,7 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *fenceView = [self setItemWithIcon:@"icon_xd_discount" title:@"粉丝"];
+    UIView *fenceView = [self setItemWithIcon:@"shouyiicon" title:@"粉丝"];
     _fenceView = fenceView;
     [_icomView addSubview:fenceView];
     [fenceView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -321,10 +356,20 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *invitateView = [self setItemWithIcon:@"icon_xd_discount" title:@"邀请"];
+    UIView *invitateView = [self setItemWithIcon:@"shouyiicon" title:@"邀请"];
     _invitateView = invitateView;
     [_icomView addSubview:invitateView];
     [invitateView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(fenceView.mas_right).offset(space);
+        make.top.mas_offset(10);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    UIView *serviceView = [self setItemWithIcon:@"shouyiicon" title:@"专属客服"];
+    _serviceView = serviceView;
+    [_icomView addSubview:serviceView];
+    [serviceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-leftRightSpace);
         make.top.mas_offset(10);
         make.width.mas_equalTo(40);
@@ -339,28 +384,117 @@
     iconImageV.image = [UIImage imageNamed:icon];
     [view addSubview:iconImageV];
     [iconImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(20);
-        make.centerX.mas_equalTo(view.mas_centerX).offset(0);
-        make.width.height.mas_equalTo(15);
+        make.top.mas_offset(0);
+        make.left.mas_offset(0);
+        make.width.mas_equalTo(40);
+        make.height.mas_equalTo(32);
     }];
     UILabel *titleLab = [[UILabel alloc] init];
     titleLab.text = title;
-    titleLab.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-    titleLab.font = [UIFont systemFontOfSize:11];
+    titleLab.textColor = [UIColor jk_colorWithHexString:@"#515151"];
+    titleLab.font = [UIFont systemFontOfSize:8];
     titleLab.textAlignment = NSTextAlignmentCenter;
     [view addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(iconImageV.mas_bottom).offset(5);
+        make.top.mas_equalTo(iconImageV.mas_bottom).offset(3);
         make.left.right.mas_offset(0);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(10);
     }];
     return view;
 }
 
+- (void)addToolItems {
+    UILabel *deviceTip = [[UILabel alloc] init];
+    deviceTip.text = @"必备工具";
+    deviceTip.font = [UIFont systemFontOfSize:12];
+    [_toolsView addSubview:deviceTip];
+    [deviceTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(15);
+        make.top.mas_offset(10);
+        make.height.mas_equalTo(20);
+        make.right.mas_offset(15);
+    }];
+    UIView *vline = [[UIView alloc] init];
+    vline.backgroundColor = [UIColor jk_colorWithHexString:@"#F2F2F2"];
+    [_toolsView addSubview:vline];
+    [vline mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_offset(0);
+        make.top.mas_equalTo(36);
+        make.height.mas_equalTo(1);
+    }];
+    
+    CGFloat leftRightSpace = 10;
+    CGFloat top = 45;
+    CGFloat space = (MaxWidth - 20 - 40 * 5 - leftRightSpace * 2)/4;
+    UIView *guideItemView = [self setItemWithIcon:@"shouyiicon" title:@"专属客服"];
+    [_toolsView addSubview:guideItemView];
+    [guideItemView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(leftRightSpace);
+        make.top.mas_offset(top);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    UIView *problemView = [self setItemWithIcon:@"shouyiicon" title:@"常见问题"];
+    [_toolsView addSubview:problemView];
+    [problemView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(guideItemView.mas_right).offset(space);
+        make.top.mas_offset(top);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    UIView *collectedView = [self setItemWithIcon:@"shouyiicon" title:@"收藏"];
+    [_toolsView addSubview:collectedView];
+    [collectedView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(problemView.mas_right).offset(space);
+        make.top.mas_offset(top);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    UIView *feedBackView = [self setItemWithIcon:@"shouyiicon" title:@"意见反馈"];
+    [_toolsView addSubview:feedBackView];
+    [feedBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(collectedView.mas_right).offset(space);
+        make.top.mas_offset(top);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    UIView *signView = [self setItemWithIcon:@"shouyiicon" title:@"官方公告"];
+    [_toolsView addSubview:signView];
+    [signView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(feedBackView.mas_right).offset(space);
+        make.top.mas_offset(top);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    UIView *settingView = [self setItemWithIcon:@"shouyiicon" title:@"设置"];
+    [_toolsView addSubview:settingView];
+    [settingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(leftRightSpace);
+        make.top.mas_equalTo(guideItemView.mas_bottom).offset(0);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+    
+    
+    UIView *aboutUsView = [self setItemWithIcon:@"shouyiicon" title:@"关于我们"];
+    [_toolsView addSubview:aboutUsView];
+    [aboutUsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(settingView.mas_right).offset(space);
+        make.top.mas_equalTo(problemView.mas_bottom).offset(0);
+        make.width.mas_equalTo(40);
+        make.height.mas_offset(60);
+    }];
+}
 
-- (void)settingBtnClick {
+
+- (void)onItemClickWithType:(HJClickItemType)type {
     if (self.settingClick) {
-        self.settingClick(nil);
+        self.settingClick(nil,type);
     }
 }
 

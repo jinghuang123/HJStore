@@ -16,7 +16,6 @@
 		B8086B8F22354BE300668E27 /* HJInvitationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086B8E22354BE300668E27 /* HJInvitationListVC.m */; };
 		B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDE921E055920059CACC /* HJSearchListVC.m */; };
 		B810EDED21E058470059CACC /* LLSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDEC21E058470059CACC /* LLSearchView.m */; };
-		B810EDF021E072470059CACC /* HJSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDEF21E072470059CACC /* HJSearchModel.m */; };
 		B810EDF621E091510059CACC /* HJShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EDF421E091510059CACC /* HJShareModel.m */; };
 		B810EE3921E0C7A10059CACC /* XLProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EE1921E0C7A10059CACC /* XLProgressView.m */; };
 		B810EE3A21E0C7A10059CACC /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B810EE1B21E0C7A10059CACC /* UIView+XLExtension.m */; };
@@ -138,6 +137,7 @@
 		B8CE279F21FC84840059FB9E /* HJFenceListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE279E21FC84840059FB9E /* HJFenceListVC.m */; };
 		B8CE27A221FC85F00059FB9E /* HJFencePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE27A121FC85F00059FB9E /* HJFencePageVC.m */; };
 		B8CE27A521FC8E1B0059FB9E /* HJFenceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */; };
+		B8D2F6B5223C9D5800DD6D99 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D2F6B4223C9D5800DD6D99 /* NSString+Extension.m */; };
 		B8DCD2F021EE281B003964DA /* HJMobileCodeLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DCD2EF21EE281B003964DA /* HJMobileCodeLoginVC.m */; };
 		B8E0869C21E1D88800792D40 /* SGAdvertScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E0869A21E1D88800792D40 /* SGAdvertScrollView.m */; };
 		B8E0869F21E1E28100792D40 /* HJShareMainImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E0869E21E1E28100792D40 /* HJShareMainImageView.m */; };
@@ -194,8 +194,6 @@
 		B810EDE921E055920059CACC /* HJSearchListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchListVC.m; sourceTree = "<group>"; };
 		B810EDEB21E058470059CACC /* LLSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSearchView.h; sourceTree = "<group>"; };
 		B810EDEC21E058470059CACC /* LLSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSearchView.m; sourceTree = "<group>"; };
-		B810EDEE21E072470059CACC /* HJSearchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchModel.h; sourceTree = "<group>"; };
-		B810EDEF21E072470059CACC /* HJSearchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchModel.m; sourceTree = "<group>"; };
 		B810EDF421E091510059CACC /* HJShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJShareModel.m; sourceTree = "<group>"; };
 		B810EDF521E091510059CACC /* HJShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJShareModel.h; sourceTree = "<group>"; };
 		B810EE1721E0C7A10059CACC /* UIImage+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XLExtension.h"; sourceTree = "<group>"; };
@@ -405,6 +403,8 @@
 		B8CE27A121FC85F00059FB9E /* HJFencePageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJFencePageVC.m; sourceTree = "<group>"; };
 		B8CE27A321FC8E1B0059FB9E /* HJFenceItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJFenceItemCell.h; sourceTree = "<group>"; };
 		B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJFenceItemCell.m; sourceTree = "<group>"; };
+		B8D2F6B3223C9D5700DD6D99 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		B8D2F6B4223C9D5800DD6D99 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		B8DCD2EE21EE281B003964DA /* HJMobileCodeLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMobileCodeLoginVC.h; sourceTree = "<group>"; };
 		B8DCD2EF21EE281B003964DA /* HJMobileCodeLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMobileCodeLoginVC.m; sourceTree = "<group>"; };
 		B8E0869A21E1D88800792D40 /* SGAdvertScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAdvertScrollView.m; sourceTree = "<group>"; };
@@ -689,8 +689,6 @@
 				B811D7E821CE1D0300FBED10 /* HJRollingModel.m */,
 				B840430121DA064A0025B0CC /* HJProductDetailModel.h */,
 				B840430221DA064A0025B0CC /* HJProductDetailModel.m */,
-				B810EDEE21E072470059CACC /* HJSearchModel.h */,
-				B810EDEF21E072470059CACC /* HJSearchModel.m */,
 				B810EDF521E091510059CACC /* HJShareModel.h */,
 				B810EDF421E091510059CACC /* HJShareModel.m */,
 				B886D68921E9885D00201231 /* HJEarningModel.h */,
@@ -1062,6 +1060,8 @@
 		B8E086DA21E2221C00792D40 /* Categorys */ = {
 			isa = PBXGroup;
 			children = (
+				B8D2F6B3223C9D5700DD6D99 /* NSString+Extension.h */,
+				B8D2F6B4223C9D5800DD6D99 /* NSString+Extension.m */,
 				B8E086DB21E222BE00792D40 /* UIButton+init.h */,
 				B8E086DC21E222BE00792D40 /* UIButton+init.m */,
 				B886D69521E9C5D700201231 /* UITextField+inputInit.h */,
@@ -1286,7 +1286,6 @@
 				B8A917E821AFB758006733BA /* AppDelegate.m in Sources */,
 				B873DA5B21B1160D008DBC66 /* Reachability.m in Sources */,
 				B8CE27A521FC8E1B0059FB9E /* HJFenceItemCell.m in Sources */,
-				B810EDF021E072470059CACC /* HJSearchModel.m in Sources */,
 				B8E9B9B821F2D81400745C17 /* HJRecommendItemModel.m in Sources */,
 				B873DA6221B12F71008DBC66 /* HJGoodItemCell.m in Sources */,
 				B810EE3D21E0C7A10059CACC /* XLPhotoBrowser.m in Sources */,
@@ -1304,6 +1303,7 @@
 				B8A9180821AFC5B8006733BA /* HJTabBarVC.m in Sources */,
 				B873DA4A21B0E1C7008DBC66 /* HJSuperView.m in Sources */,
 				B8264A6621D8BAB600004420 /* HJProductDetailVC.m in Sources */,
+				B8D2F6B5223C9D5800DD6D99 /* NSString+Extension.m in Sources */,
 				B811D7E621CE1B9A00FBED10 /* HJRecommendModel.m in Sources */,
 				B8A9181221AFD073006733BA /* HJMainVC.m in Sources */,
 				B82126E721D9D013007828B2 /* AlibcManager.m in Sources */,
