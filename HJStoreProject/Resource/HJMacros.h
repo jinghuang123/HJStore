@@ -47,7 +47,7 @@
 #define PLACEHOLDER_ITEM  [UIImage imageNamed:@"placeHoder_item"]
 #define PLACEHOLDER_SCRO_ITEM   [UIImage imageNamed:@"PLACEHOLDER_SCRO_SLIDER"]
 #define PLACEHOLDER_HEAD   [UIImage imageNamed:@"placeholder_head"]
-
+#define PLACEHOLDER_160X240   [UIImage imageNamed:@"placeHoderBlog"]
 
 ///弱引用
 #define weakify(object) __weak __typeof__(object) weak##_##object = object;

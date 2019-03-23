@@ -15,6 +15,7 @@
 #import "HJOrderListVC.h"
 #import "HJInvitationListVC.h"
 #import "HJEarningVC.h"
+#import "HJOrderPageVC.h"
 
 @interface HJMineVC ()
 
@@ -69,7 +70,9 @@
         }
             break;
         case HJClickItemTypeWithDrawal:
+        {
             
+        }
             break;
         case HJClickItemTypeEarn:
         {
@@ -80,7 +83,7 @@
             break;
         case HJClickItemTypeOrder:
         {
-            HJOrderListVC *orderVC = [[HJOrderListVC alloc] init];
+            HJOrderPageVC *orderVC = [[HJOrderPageVC alloc] init];
             orderVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:orderVC animated:YES];
         }

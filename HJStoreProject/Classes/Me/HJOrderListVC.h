@@ -8,10 +8,15 @@
 
 #import "HJSuperViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    HJListTypeAll,
+    HJListTypePayed,
+    HJListTypeSettlemented,
+    HJListTypeFailed,
+} HJListType;
 
 @interface HJOrderListVC : HJSuperViewController
-
+@property (nonatomic, assign) HJListType type;
 @end
 
-NS_ASSUME_NONNULL_END
+

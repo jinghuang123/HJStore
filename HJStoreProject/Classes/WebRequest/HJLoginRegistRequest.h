@@ -52,6 +52,9 @@
                               Code:(NSString *)code
                            success:(CompletionSuccessBlock)success
                               fail:(CompletionFailBlock2)fail;
+
+- (void)getInvitationInfoSuccess:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail;
 @end
 
 

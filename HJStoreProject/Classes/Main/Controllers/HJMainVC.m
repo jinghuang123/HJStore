@@ -543,11 +543,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     if (![url containsString:@"https://"]) {
         url = [NSString stringWithFormat:@"https://%@",url];
     }
-//    YFPolicyWebVC * policyWebVC = [[YFPolicyWebVC alloc] init];
-//    [policyWebVC setNavBackItem];
-//    policyWebVC.labTitle = @"";
-//    policyWebVC.policyUrl = url;
-//    [self.navigationController pushViewController:policyWebVC animated:YES];
     ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
     [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
 

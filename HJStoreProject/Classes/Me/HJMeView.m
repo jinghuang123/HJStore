@@ -34,11 +34,13 @@
 }
 
 - (void)setupUI {
+    CGFloat scroH = MaxHeight > 600 ? MaxHeight: 600;
+    BOOL scrEnable = MaxHeight > 600 ? NO : YES;
     self.scroView = [[UIScrollView alloc] init];
-    self.scroView.contentSize = CGSizeMake(0, MaxHeight);
+    self.scroView.contentSize = CGSizeMake(0, scroH);
     self.scroView.delegate = self;
     self.scroView.pagingEnabled = YES;
-    self.scroView.scrollEnabled = NO;
+    self.scroView.scrollEnabled = scrEnable;
     self.scroView.bounces = NO;
     self.scroView.showsVerticalScrollIndicator = NO;
     self.scroView.showsHorizontalScrollIndicator = NO;
@@ -57,13 +59,15 @@
 }
 
 - (void)addScroViewTop {
-    CGFloat topViewH = MaxHeight > 600 ? 220 : 180;
+    CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? 20 : 0;
+    CGFloat topViewH = MaxHeight > 600 ? 200 : 180;
+    CGFloat contentH = MaxHeight > 600 ? MaxHeight: 600;
     NSLog(@">>>>>>%f",MaxHeight);
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, contentH)];
     headView.backgroundColor = [UIColor jk_colorWithHexString:@"#F2F2F2"];
     [self.scroView addSubview:headView];
     
-    UIImageView *topColorView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, topViewH * 0.8)];
+    UIImageView *topColorView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, topViewH)];
     topColorView.image = [UIImage imageNamed:@"me_topBgImage"];
     [headView addSubview:topColorView];
     
@@ -77,7 +81,7 @@
     [headView addSubview:headImageView];
     [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);
-        make.top.mas_offset(35);
+        make.top.mas_offset(35 + topOffSet);
         make.width.height.mas_equalTo(headSize);
     }];
     [headImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -108,10 +112,46 @@
     [codeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(nameLabel.mas_bottom).offset(5);
         make.left.mas_equalTo(nameLabel.mas_left).offset(0);
-        make.width.mas_equalTo(120);
+        make.width.mas_equalTo(100);
         make.height.mas_equalTo(20);
     }];
-
+    
+    UIButton *copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [copyButton setTitle:@"复制" forState:UIControlStateNormal];
+    [copyButton jk_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [copyButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    copyButton.titleLabel.font = [UIFont systemFontOfSize:9];
+    copyButton.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor;
+    copyButton.layer.borderWidth = 1.0;
+    copyButton.layer.cornerRadius = 7.5;
+    copyButton.clipsToBounds = YES;
+    [headView addSubview:copyButton];
+    [copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(codeLabel.mas_right).offset(0);
+        make.height.mas_equalTo(15);
+        make.width.mas_equalTo(32);
+        make.centerY.mas_equalTo(codeLabel.mas_centerY).offset(0);
+    }];
+    [copyButton jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        
+    }];
+    
+    UIButton *messageIcon = [UIButton buttonWithType:UIButtonTypeCustom];
+    [messageIcon setBackgroundImage:[UIImage imageNamed:@"me_message"] forState:UIControlStateNormal];
+    [messageIcon setBackgroundImage:[UIImage imageNamed:@"me_message"] forState:UIControlStateSelected];
+    [headView addSubview:messageIcon];
+    [messageIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-16);
+        make.height.mas_equalTo(24);
+        make.width.mas_equalTo(21);
+        make.top.mas_equalTo(headImageView.mas_top).offset(0);
+    }];
+    [messageIcon jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        
+    }];
+    
+    
+    
     
     UIImageView *earningView = [[UIImageView alloc] init];
     earningView.image = [UIImage imageNamed:@"me_top_yellow"];
@@ -336,7 +376,7 @@
         [self onItemClickWithType:HJClickItemTypeEarn];
     }];
     
-    UIView *orderView = [self setItemWithIcon:@"shouyiicon" title:@"订单"];
+    UIView *orderView = [self setItemWithIcon:@"dingdanicon" title:@"订单"];
     _orderView = orderView;
     [_icomView addSubview:orderView];
     [orderView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -345,8 +385,11 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [orderView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeOrder];
+    }];
     
-    UIView *fenceView = [self setItemWithIcon:@"shouyiicon" title:@"粉丝"];
+    UIView *fenceView = [self setItemWithIcon:@"fensiicon" title:@"粉丝"];
     _fenceView = fenceView;
     [_icomView addSubview:fenceView];
     [fenceView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -355,8 +398,11 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [fenceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeFence];
+    }];
     
-    UIView *invitateView = [self setItemWithIcon:@"shouyiicon" title:@"邀请"];
+    UIView *invitateView = [self setItemWithIcon:@"yaoqingicon" title:@"邀请"];
     _invitateView = invitateView;
     [_icomView addSubview:invitateView];
     [invitateView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -365,8 +411,11 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [invitateView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeInvitation];
+    }];
     
-    UIView *serviceView = [self setItemWithIcon:@"shouyiicon" title:@"专属客服"];
+    UIView *serviceView = [self setItemWithIcon:@"kefucion" title:@"专属客服"];
     _serviceView = serviceView;
     [_icomView addSubview:serviceView];
     [serviceView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -374,6 +423,9 @@
         make.top.mas_offset(10);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
+    }];
+    [serviceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeService];
     }];
 }
 
@@ -426,7 +478,7 @@
     CGFloat leftRightSpace = 10;
     CGFloat top = 45;
     CGFloat space = (MaxWidth - 20 - 40 * 5 - leftRightSpace * 2)/4;
-    UIView *guideItemView = [self setItemWithIcon:@"shouyiicon" title:@"专属客服"];
+    UIView *guideItemView = [self setItemWithIcon:@"xinshouicon" title:@"新手攻略"];
     [_toolsView addSubview:guideItemView];
     [guideItemView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(leftRightSpace);
@@ -435,7 +487,7 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *problemView = [self setItemWithIcon:@"shouyiicon" title:@"常见问题"];
+    UIView *problemView = [self setItemWithIcon:@"changjianwentiicon" title:@"常见问题"];
     [_toolsView addSubview:problemView];
     [problemView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(guideItemView.mas_right).offset(space);
@@ -444,7 +496,7 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *collectedView = [self setItemWithIcon:@"shouyiicon" title:@"收藏"];
+    UIView *collectedView = [self setItemWithIcon:@"shouchangcion" title:@"收藏"];
     [_toolsView addSubview:collectedView];
     [collectedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(problemView.mas_right).offset(space);
@@ -453,7 +505,7 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *feedBackView = [self setItemWithIcon:@"shouyiicon" title:@"意见反馈"];
+    UIView *feedBackView = [self setItemWithIcon:@"yijianfankuiicon" title:@"意见反馈"];
     [_toolsView addSubview:feedBackView];
     [feedBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(collectedView.mas_right).offset(space);
@@ -462,7 +514,7 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *signView = [self setItemWithIcon:@"shouyiicon" title:@"官方公告"];
+    UIView *signView = [self setItemWithIcon:@"guanfangicon" title:@"官方公告"];
     [_toolsView addSubview:signView];
     [signView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(feedBackView.mas_right).offset(space);
@@ -471,7 +523,7 @@
         make.height.mas_offset(60);
     }];
     
-    UIView *settingView = [self setItemWithIcon:@"shouyiicon" title:@"设置"];
+    UIView *settingView = [self setItemWithIcon:@"shezhiicon" title:@"设置"];
     [_toolsView addSubview:settingView];
     [settingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(leftRightSpace);
@@ -481,7 +533,7 @@
     }];
     
     
-    UIView *aboutUsView = [self setItemWithIcon:@"shouyiicon" title:@"关于我们"];
+    UIView *aboutUsView = [self setItemWithIcon:@"guanyuwomengicon" title:@"关于我们"];
     [_toolsView addSubview:aboutUsView];
     [aboutUsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(settingView.mas_right).offset(space);

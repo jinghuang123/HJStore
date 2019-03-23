@@ -97,6 +97,7 @@
                                    @"category":categorys
                                    };
         success(response);
+        NSLog(@">>>>>>>>>>>>>>%@",response);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
@@ -246,7 +247,7 @@
 
 - (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail {
-    NSString *url = [self getTokenUrl:kUrlEarningConfiger];
+    NSString *url = [kHTTPManager getTokenUrl:kUrlEarningConfiger];
     [kHTTPManager tryPost:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"getEarningConfigerSuccess:%@",responseObject);
         HJEarningModel *model = [HJEarningModel shared];
@@ -257,10 +258,6 @@
     }];
 }
 
-- (NSString *)getTokenUrl:(NSString *)baseUrl {
-    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
-    NSString *url = [NSString stringWithFormat:@"%@?token=%@",baseUrl,userInfo.token];
-    return url;
-}
+
 
 @end
