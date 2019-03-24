@@ -7,7 +7,7 @@
 //
 
 #import "HJMeView.h"
-#import "HJMainSliderCell.h"
+
 
 @interface HJMeView () <UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scroView;
@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UIImageView *earningBottomView;
 @property (nonatomic, strong) UIView *icomView;
 @property (nonatomic, strong) UIView *serviceView;
-@property (nonatomic, strong) HJMainSliderView *adSliderCellView;
+
 @property (nonatomic, strong) UIView *toolsView;
 @end
 
@@ -60,7 +60,7 @@
 
 - (void)addScroViewTop {
     CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? 20 : 0;
-    CGFloat topViewH = MaxHeight > 600 ? 200 : 180;
+    CGFloat topViewH = 180;
     CGFloat contentH = MaxHeight > 600 ? MaxHeight: 600;
     NSLog(@">>>>>>%f",MaxHeight);
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, contentH)];
@@ -133,7 +133,8 @@
         make.centerY.mas_equalTo(codeLabel.mas_centerY).offset(0);
     }];
     [copyButton jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.code;
     }];
     
     UIButton *messageIcon = [UIButton buttonWithType:UIButtonTypeCustom];

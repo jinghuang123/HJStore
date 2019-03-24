@@ -11,6 +11,7 @@
 
 @interface HJMainRequest ()
 @property (nonatomic,strong) NSMutableArray *categorys;
+@property (nonatomic,strong) HJEarningModel *earnningModel;
 @end
 
 @implementation HJMainRequest
@@ -248,14 +249,18 @@
 - (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail {
     NSString *url = [kHTTPManager getTokenUrl:kUrlEarningConfiger];
-    [kHTTPManager tryPost:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"getEarningConfigerSuccess:%@",responseObject);
-        HJEarningModel *model = [HJEarningModel shared];
-        model = [HJEarningModel mj_objectWithKeyValues:responseObject];
-        success(model);
-    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
-        fail(error);
-    }];
+    if(self.earnningModel) {
+        success(self.earnningModel);
+    }else{
+        [kHTTPManager tryPost:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+            NSLog(@"getEarningConfigerSuccess:%@",responseObject);
+            HJEarningModel *model = [HJEarningModel shared];
+            model = [HJEarningModel mj_objectWithKeyValues:responseObject];
+            success(model);
+        } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+            fail(error);
+        }];
+    }
 }
 
 

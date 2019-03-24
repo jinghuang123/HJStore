@@ -12,6 +12,7 @@
 #import "SegmentView.h"
 #import "HJSearchVC.h"
 
+
 @interface HJSegemengVC()
 @property (strong , nonatomic) UITextField *textField;
 @property (strong , nonatomic) SegmentView *segmentView;
@@ -34,6 +35,9 @@
     [self setupNavItems];
     
 
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSLog(@">>>>>>>>>>>%@",pasteboard.string);
 }
 
 - (void)setTopItemsWithArray:(NSArray *)categorys {

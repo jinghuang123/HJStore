@@ -8,10 +8,10 @@
 
 #import "HJSuperViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface HJInvitationListVC : HJSuperViewController
-
+@property (nonatomic, strong) NSString *invitationCode;
 @end
 
-NS_ASSUME_NONNULL_END
+

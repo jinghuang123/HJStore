@@ -16,9 +16,10 @@
 #import "HJInvitationListVC.h"
 #import "HJEarningVC.h"
 #import "HJOrderPageVC.h"
+#import "HJMeizhiCustomServiceVC.h"
 
 @interface HJMineVC ()
-
+@property (nonatomic,strong) HJEarningModel *earning;
 @end
 
 @implementation HJMineVC
@@ -27,11 +28,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
-        
-    } fail:^(NSError *error) {
-        
-    }];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -58,6 +55,25 @@
     meView.settingClick = ^(id obj,HJClickItemType type) {
         [weak_self responsToItemClickWithType:type];
     };
+    
+    [[HJSettingRequest shared] getBannersWithType:4 Success:^(NSArray *banners) {
+        meView.adSliderCellView.bannerItems = banners;
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        for (HJBannerModel *banner in banners) {
+            NSString *realUrl = [banner.banner_image hasPrefix:@"http"] ? banner.banner_image : [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
+            [images addObject:realUrl];
+        }
+        meView.adSliderCellView.imageGroupArray = images;
+    } fail:^(NSError *error) {
+        
+    }];
+    
+    [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
+        self.earning = earning;
+        meView.code = earning.member_invitecode;
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 - (void)responsToItemClickWithType:(HJClickItemType)type {
@@ -99,10 +115,19 @@
         case HJClickItemTypeInvitation:
         {
             HJInvitationListVC *invitationVC = [[HJInvitationListVC alloc] init];
+            invitationVC.invitationCode = self.earning.member_invitecode;
             invitationVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:invitationVC animated:YES];
         }
             
+            break;
+            
+        case HJClickItemTypeService:
+        {
+            HJMeizhiCustomServiceVC *service = [[HJMeizhiCustomServiceVC alloc] init];
+            service.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:service animated:YES];
+        }
             break;
             
         default:

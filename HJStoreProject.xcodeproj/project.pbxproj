@@ -13,6 +13,8 @@
 		1815144E224617D40069AF5C /* HJOrderListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1815144D224617D40069AF5C /* HJOrderListItemModel.m */; };
 		18151451224656790069AF5C /* HJFenceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18151450224656790069AF5C /* HJFenceRequest.m */; };
 		187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7FA21C13639005B9D77 /* HJSegemengVC.m */; };
+		18D57DF2224769A200D970F7 /* HJMeizhiCustomServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */; };
+		18D57DF52247738300D970F7 /* HJFenceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D57DF42247738300D970F7 /* HJFenceModel.m */; };
 		296F06B196B4CBA081E8D294 /* libPods-HJStoreProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */; };
 		B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */; };
 		B8052FAE21DE2E0300F125F4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */; };
@@ -193,6 +195,10 @@
 		18151450224656790069AF5C /* HJFenceRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJFenceRequest.m; sourceTree = "<group>"; };
 		187CE7F921C13639005B9D77 /* HJSegemengVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSegemengVC.h; sourceTree = "<group>"; };
 		187CE7FA21C13639005B9D77 /* HJSegemengVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSegemengVC.m; sourceTree = "<group>"; };
+		18D57DF0224769A200D970F7 /* HJMeizhiCustomServiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMeizhiCustomServiceVC.h; sourceTree = "<group>"; };
+		18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMeizhiCustomServiceVC.m; sourceTree = "<group>"; };
+		18D57DF32247738300D970F7 /* HJFenceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJFenceModel.h; sourceTree = "<group>"; };
+		18D57DF42247738300D970F7 /* HJFenceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJFenceModel.m; sourceTree = "<group>"; };
 		2A9627EBDD40F69EA553FBA1 /* Pods-HJStoreProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.debug.xcconfig"; sourceTree = "<group>"; };
 		2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.release.xcconfig"; sourceTree = "<group>"; };
 		4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJStoreProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -913,6 +919,8 @@
 				B8CE279E21FC84840059FB9E /* HJFenceListVC.m */,
 				B8CE27A321FC8E1B0059FB9E /* HJFenceItemCell.h */,
 				B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */,
+				18D57DF32247738300D970F7 /* HJFenceModel.h */,
+				18D57DF42247738300D970F7 /* HJFenceModel.m */,
 				B8086B8722354B8A00668E27 /* HJEarningVC.h */,
 				B8086B8822354B8A00668E27 /* HJEarningVC.m */,
 				181514432246094D0069AF5C /* HJOrderPageVC.h */,
@@ -925,6 +933,8 @@
 				1815144D224617D40069AF5C /* HJOrderListItemModel.m */,
 				B8086B8D22354BE300668E27 /* HJInvitationListVC.h */,
 				B8086B8E22354BE300668E27 /* HJInvitationListVC.m */,
+				18D57DF0224769A200D970F7 /* HJMeizhiCustomServiceVC.h */,
+				18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -1305,6 +1315,7 @@
 				B8E38B5921C93BF0008C216F /* HJMainRequest.m in Sources */,
 				B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */,
 				B8E9B9B521F2D44900745C17 /* HMSegmentedControl+SelectionIndicatorLayer.m in Sources */,
+				18D57DF2224769A200D970F7 /* HJMeizhiCustomServiceVC.m in Sources */,
 				B817ABA521F49CB800363C2F /* HJUserInfoSetVC.m in Sources */,
 				B886D69A21E9C87000201231 /* HJRegistVC.m in Sources */,
 				B810EE4D21E0DF9F0059CACC /* YFPolicyWebVC.m in Sources */,
@@ -1341,6 +1352,7 @@
 				B8086B8922354B8A00668E27 /* HJEarningVC.m in Sources */,
 				B810EE3921E0C7A10059CACC /* XLProgressView.m in Sources */,
 				B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */,
+				18D57DF52247738300D970F7 /* HJFenceModel.m in Sources */,
 				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
 				B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */,
 				B848BC6E21F0180700AAE751 /* HJRecommendPagesVC.m in Sources */,
@@ -1525,8 +1537,9 @@
 			baseConfigurationReference = 2A9627EBDD40F69EA553FBA1 /* Pods-HJStoreProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 5N6PJKNJRG;
+				DEVELOPMENT_TEAM = WQVP8C8Z5H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1553,7 +1566,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuanfeng.HJMeizhi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0876eac5-4758-4e52-8a3e-64d01b32db26";
-				PROVISIONING_PROFILE_SPECIFIER = MEIZHIAPP;
+				PROVISIONING_PROFILE_SPECIFIER = "App ID No Limited Profile";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;

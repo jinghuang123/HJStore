@@ -18,6 +18,10 @@
 
 - (void)getApplyCashListSuccess:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
 
+- (void)getBannersWithType:(NSInteger)type
+                   Success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail;
+
 @end
 
 

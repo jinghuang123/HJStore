@@ -14,8 +14,12 @@
 @property (nonatomic , assign) CGFloat  user_rate;
 @property (nonatomic , assign) CGFloat  parent_user_rate;
 @property (nonatomic , assign) CGFloat  parent_parent_user_rate;
+@property (nonatomic , copy) NSString  *appkey;
 @property (nonatomic , copy) NSString   *adzone_id;
 @property (nonatomic , copy) NSString   *pid;
+@property (nonatomic , copy) NSString   *member_invitecode;
+
+
 
 + (instancetype)shared;
 @end

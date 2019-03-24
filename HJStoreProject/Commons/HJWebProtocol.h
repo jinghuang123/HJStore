@@ -55,7 +55,7 @@ Declare(kURLGetInvitationList, "api/setting/getInvitationInfo") /* 5.3 查询邀
 Declare(kURLApplyCash, "api/setting/applyCashWithdrawal") /* 5.4 申请提现 */
 Declare(kURLGetApplyCashList, "api/setting/getCashWithdrawalRecord") /* 5.4 提现记录 */
 Declare(kURLFileUpload, @"/api/common/upload") /* 5.5 文件上传*/
-
+Declare(kURLGetBanners, @"api/common/getBanner") /*5.6 获取banners*/
 
 Declare(kURLGetOrderList, @"api/order/getOrder") /* 6.1 获取订单*/
 
