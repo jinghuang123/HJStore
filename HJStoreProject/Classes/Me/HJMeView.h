@@ -17,6 +17,14 @@ typedef enum : NSUInteger {
     HJClickItemTypeFence, ///粉丝
     HJClickItemTypeInvitation, ///邀请
     HJClickItemTypeService, ///客服
+    HJClickItemTypeGuide, ///新手引导
+    HJClickItemTypeProblem, ///常见问题
+    HJClickItemTypeCollected, ///收藏
+    HJClickItemTypeFeedBack, ///意见反馈
+    HJClickItemTypeSign, ///官方公告
+    HJClickItemTypeSetting, ///设置
+    HJClickItemTypeAboutUS, ///关于我们
+    HJClickItemTypeADS, ///广告位
 } HJClickItemType;
 
 @interface HJMeView : HJSuperView

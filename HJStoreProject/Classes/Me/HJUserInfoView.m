@@ -24,6 +24,7 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor jk_colorWithHexString:@"#fafafa"];
         [self setupUI];
     }
     return self;
@@ -35,11 +36,11 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.showsHorizontalScrollIndicator = NO;
-    self.tableView.backgroundColor = [UIColor jk_colorWithHexString:@"#f5f5f5"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.backgroundColor = [UIColor jk_colorWithHexString:@"#fafafa"];;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addSubview:self.tableView];
     
-    [self.dataSource setArray:@[@[@{@"昵称":@"呵呵"}],@[@{@"支付宝绑定":@""},@{@"微信绑定":@""},@{@"淘宝绑定":@""}],@[@{@"修改手机号":@""},@{@"修改密码":@""},@{@"清理缓存":@""}]]];
+    [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":@"呵呵"},@{@"支付宝绑定":@"绑定"},@{@"微信绑定":@"绑定"},@{@"淘宝绑定":@"绑定"}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"},@{@"收益消息":@""}],@[@{@"清理缓存":@"110.3M"},@{@"关于我们":@""}]]];
 }
 
 - (NSMutableArray *)dataSource {
@@ -59,6 +60,9 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0 && indexPath.section == 0) {
+        return 50;
+    }
     return 44;
 }
 
@@ -72,82 +76,43 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     NSString *title = [keys objectAtIndex:0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.titleLab.text = title;
+    cell.headImageV.hidden = ![title isEqualToString:@""];
+    cell.headImageV.image = [title isEqualToString:@""] ? [UIImage imageNamed:@"head_imageDefalut"] : nil;
     cell.valueLab.text = [dic valueForKey:title];
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UITableViewHeaderFooterView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HJUserInfoHeadIdentifier];
-    if (!headView) {
-        headView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:HJUserInfoHeadIdentifier];
-        headView.frame = CGRectMake(0, 0, MaxWidth, 150);
-        CGFloat headSize = 60;
-        UIImageView *headImageView = [[UIImageView alloc] init];
-        _headImageView = headImageView;
-        headImageView.image = [UIImage imageNamed:@"default_avatar"];
-        headImageView.layer.borderColor = [UIColor jk_colorWithHexString:@"#f5f5f5"].CGColor;
-        headImageView.layer.borderWidth = 3.0;
-        headImageView.layer.cornerRadius = headSize/2;
-        headImageView.clipsToBounds = YES;
-        [headView addSubview:headImageView];
-        [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(headView.mas_centerX).offset(0);
-            make.top.mas_offset(30);
-            make.width.height.mas_equalTo(headSize);
-        }];
-        UILabel *tip = [[UILabel alloc] init];
-        tip.text = @"点击修改头像";
-        tip.textAlignment = NSTextAlignmentCenter;
-        tip.font = [UIFont systemFontOfSize:13];
-        tip.textColor = [UIColor jk_colorWithHexString:@"#8e8e8e"];
-        [headView addSubview:tip];
-        [tip mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(headView.mas_centerX).offset(0);
-            make.top.mas_equalTo(headImageView.mas_bottom).offset(15);
-            make.width.mas_equalTo(120);
-            make.height.mas_equalTo(20);
-        }];
-        [headView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            if ([self.delegate respondsToSelector:@selector(cellDidSelected:args:)]) {
-                [self.delegate cellDidSelected:USERHeadImageClick args:nil];
-            }
-        }];
-        [tip jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            if ([self.delegate respondsToSelector:@selector(cellDidSelected:args:)]) {
-                [self.delegate cellDidSelected:USERHeadImageClick args:nil];
-            }
-        }];
-    }
-    headView.contentView.backgroundColor = [UIColor whiteColor];
-    return headView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 150;
-    }
-    return 0;
-}
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     HJUserInfoFootView *footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HJUserInfoFootIdentifier];
     if (!footView) {
         footView = [[HJUserInfoFootView alloc] initWithReuseIdentifier:HJUserInfoFootIdentifier];
     }
-    footView.commitBtn.hidden = section != 2;
+    footView.quiteButton.hidden = section != 3;
     footView.commitBlock = ^(id obj) {
         if ([self.delegate respondsToSelector:@selector(cellDidSelected:args:)]) {
-            [self.delegate cellDidSelected:USERInfoSaveClick args:nil];
+            [self.delegate cellDidSelected:USERQuiteClick args:nil];
         }
     };
     return footView;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *view = [tableView dequeueReusableCellWithIdentifier:HJUserInfoHeadIdentifier];
+    if (!view) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, 0.1)];
+    }
+    return view;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 2) {
+    if (section == 3) {
         return 90;
     }
     return 10;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -155,17 +120,20 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     switch (indexPath.section) {
         case 0:
             if(indexPath.row == 0){
-                tag = USERNameUpdateClick;
+                tag = USERHeadImageClick;
             }
             break;
         case 1:
             if(indexPath.row == 0){
-                tag = USERZFBBindClick;
+                tag = USERNameUpdateClick;
             }
             if(indexPath.row == 1){
-                tag = USERWeChatBindClick;
+                tag = USERZFBBindClick;
             }
             if(indexPath.row == 2){
+                tag = USERWeChatBindClick;
+            }
+            if(indexPath.row == 3){
                 tag = USERTaoBaoBindClick;
             }
             break;
@@ -181,6 +149,14 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
             }
             break;
         default:
+            case 3:
+        {
+            if(indexPath.row == 0){
+                tag = USERCacheClearClick;
+            }else if(indexPath.row == 1){
+                tag = USERAboutUsClick;
+            }
+        }
             break;
     }
     if ([self.delegate respondsToSelector:@selector(cellDidSelected:args:)]) {

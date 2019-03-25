@@ -36,8 +36,6 @@
     [super viewDidLoad];
     [self setUpUI];
     // Do any additional setup after loading the view.
-    
-    
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
     [self.bridge setWebViewDelegate:self];
 }

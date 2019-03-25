@@ -11,7 +11,7 @@
 
 
 @interface HJUserInfoFootView : UITableViewHeaderFooterView
-@property (nonatomic,strong) UIButton *commitBtn;
+@property (nonatomic,strong) UIButton *quiteButton;
 @property (nonatomic,copy) void(^commitBlock)(id obj);
 @end
 

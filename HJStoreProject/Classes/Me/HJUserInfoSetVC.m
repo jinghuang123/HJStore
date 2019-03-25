@@ -75,6 +75,7 @@
                 imagePickerVc.didFinishPickingPhotosHandle = ^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                     if (photos.count > 0) {
                         self.selfView.headImageView.image = [photos firstObject];
+                        [self saveImageUser];
                     }
                 };
                 [self presentViewController:imagePickerVc animated:YES completion:nil];
@@ -121,16 +122,18 @@
             
         }
             break;
-        case USERInfoSaveClick:
+        case USERAboutUsClick:
         {
-            NSData *data = UIImageJPEGRepresentation(self.selfView.headImageView.image, 0.5);
-            [[HJSettingRequest shared] uploadFile:data success:^(id responseObject) {
-                NSLog(@"responseObject:%@",responseObject);
-            } fail:^(NSError *error) {
-                
-            }];
+            
         }
             break;
+        case USERQuiteClick:
+        {
+            NSLog(@"退出登录");
+
+        }
+            break;
+
             
         default:
             break;
@@ -139,6 +142,15 @@
 
 - (void)viewSendMsg:(long)msgType args:(NSObject *)args {
     
+}
+
+- (void)saveImageUser {
+    NSData *data = UIImageJPEGRepresentation(self.selfView.headImageView.image, 0.5);
+    [[HJSettingRequest shared] uploadFile:data success:^(id responseObject) {
+        NSLog(@"responseObject:%@",responseObject);
+    } fail:^(NSError *error) {
+
+    }];
 }
 
 
@@ -151,6 +163,7 @@
     NSLog(@"info:%@",info);
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     self.selfView.headImageView.image = image;
+    [self saveImageUser];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

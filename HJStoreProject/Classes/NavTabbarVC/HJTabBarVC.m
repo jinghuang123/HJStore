@@ -72,8 +72,6 @@
         // 添加tabBarItem至数组
         [self.tabBarItems addObject:vc.tabBarItem];
     }];
-    
 }
-
 
 @end

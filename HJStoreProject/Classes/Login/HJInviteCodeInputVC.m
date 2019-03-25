@@ -22,20 +22,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    UILabel *inputTip = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, MaxWidth - 40, 30)];
-    inputTip.text = @"请输入邀请信息";
-    inputTip.textColor = [UIColor lightGrayColor];
-    inputTip.font = PFR16Font;
-    [self.view addSubview:inputTip];
+    self.title = @"邀请码";
     
     
     UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(20, 150, MaxWidth - 40, 20)];
     _field = field;
-    field.font = PFR13Font
+    field.font = PFR16Font
     field.delegate = self;
-    field.placeholder = @"请输入邀请码或者邀请人的手机号";
+    field.placeholder = @"请输入邀请码";
     [self.view addSubview:field];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 170, MaxWidth - 40, 1)];
+    line.backgroundColor = [UIColor jk_colorWithHexString:@"#D8D8D8"];
+    [self.view addSubview:line];
     
     UIView *inviteView = [[UIView alloc] init];
     _inviteView = inviteView;
@@ -54,11 +52,7 @@
     }];
     
     
-    UIButton *confirmBtn = [UIButton createThemeButton:@"请输入正确的邀请码"];
-    [confirmBtn setTitle:@"下一步" forState:UIControlStateNormal];
-    [confirmBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [confirmBtn setTitle:@"请输入正确的邀请码" forState:UIControlStateDisabled];
-    [confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+    UIButton *confirmBtn = [UIButton createThemeButton:@"确认"];
     _confirmBtn = confirmBtn;
     confirmBtn.enabled = NO;
     [self.view addSubview:confirmBtn];
@@ -116,6 +110,7 @@
 - (void)check {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.field resignFirstResponder];
         [[HJLoginRegistRequest shared] checkMobileOrCode:self.field.text success:^(id responseObject) {
             self.inviteCode = self.field.text;
             self.confirmBtn.enabled = YES;

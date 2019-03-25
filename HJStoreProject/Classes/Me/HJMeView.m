@@ -162,6 +162,9 @@
         make.height.mas_equalTo(100);
         make.top.mas_equalTo(icomView.mas_bottom).offset(8);
     }];
+    adSliderCellView.bannerCellItemClick = ^(id obj) {
+        [self onItemClickWithType:HJClickItemTypeADS];
+    };
     
     UIView *toolsView = [[UIView alloc] init];
     _toolsView = toolsView;
@@ -345,6 +348,9 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [orderView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeOrder];
+    }];
     
     UIView *fenceView = [self setItemWithIcon:@"shouyiicon" title:@"粉丝"];
     _fenceView = fenceView;
@@ -354,6 +360,9 @@
         make.top.mas_offset(10);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
+    }];
+    [fenceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeFence];
     }];
     
     UIView *invitateView = [self setItemWithIcon:@"shouyiicon" title:@"邀请"];
@@ -365,6 +374,9 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [invitateView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeInvitation];
+    }];
     
     UIView *serviceView = [self setItemWithIcon:@"shouyiicon" title:@"专属客服"];
     _serviceView = serviceView;
@@ -374,6 +386,9 @@
         make.top.mas_offset(10);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
+    }];
+    [serviceView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeService];
     }];
 }
 
@@ -426,13 +441,16 @@
     CGFloat leftRightSpace = 10;
     CGFloat top = 45;
     CGFloat space = (MaxWidth - 20 - 40 * 5 - leftRightSpace * 2)/4;
-    UIView *guideItemView = [self setItemWithIcon:@"shouyiicon" title:@"专属客服"];
+    UIView *guideItemView = [self setItemWithIcon:@"shouyiicon" title:@"新手攻略"];
     [_toolsView addSubview:guideItemView];
     [guideItemView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(leftRightSpace);
         make.top.mas_offset(top);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
+    }];
+    [guideItemView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeGuide];
     }];
     
     UIView *problemView = [self setItemWithIcon:@"shouyiicon" title:@"常见问题"];
@@ -443,6 +461,9 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [problemView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeProblem];
+    }];
     
     UIView *collectedView = [self setItemWithIcon:@"shouyiicon" title:@"收藏"];
     [_toolsView addSubview:collectedView];
@@ -451,6 +472,9 @@
         make.top.mas_offset(top);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
+    }];
+    [collectedView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeCollected];
     }];
     
     UIView *feedBackView = [self setItemWithIcon:@"shouyiicon" title:@"意见反馈"];
@@ -461,6 +485,9 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [feedBackView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeFeedBack];
+    }];
     
     UIView *signView = [self setItemWithIcon:@"shouyiicon" title:@"官方公告"];
     [_toolsView addSubview:signView];
@@ -469,6 +496,9 @@
         make.top.mas_offset(top);
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
+    }];
+    [signView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeSign];
     }];
     
     UIView *settingView = [self setItemWithIcon:@"shouyiicon" title:@"设置"];
@@ -479,16 +509,22 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
-    
-    
-    UIView *aboutUsView = [self setItemWithIcon:@"shouyiicon" title:@"关于我们"];
-    [_toolsView addSubview:aboutUsView];
-    [aboutUsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(settingView.mas_right).offset(space);
-        make.top.mas_equalTo(problemView.mas_bottom).offset(0);
-        make.width.mas_equalTo(40);
-        make.height.mas_offset(60);
+    [settingView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeSetting];
     }];
+    
+    
+//    UIView *aboutUsView = [self setItemWithIcon:@"shouyiicon" title:@"关于我们"];
+//    [_toolsView addSubview:aboutUsView];
+//    [aboutUsView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(settingView.mas_right).offset(space);
+//        make.top.mas_equalTo(problemView.mas_bottom).offset(0);
+//        make.width.mas_equalTo(40);
+//        make.height.mas_offset(60);
+//    }];
+//    [settingView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+//        [self onItemClickWithType:HJClickItemTypeAboutUS];
+//    }];
 }
 
 

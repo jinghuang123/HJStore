@@ -16,7 +16,9 @@
 #define USERMobileUpdateClick         0x00006
 #define USERPSWUpdateClick            0x00007
 #define USERCacheClearClick           0x00008
-#define USERInfoSaveClick             0x00009
+#define USERAboutUsClick             0x00009
+#define USERQuiteClick             0x000010
+
 
 @protocol HJUserInfoViewDelegate <NSObject>
 @required

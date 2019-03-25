@@ -64,35 +64,16 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     [self.view addSubview:self.tableView];
     [self setupNavItems];
     [self setupButtons];
-//    if (self.productId > 0) {
-        [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJRecommendModel *recommendModel) {
-            self.tableHeadView.imageGroupArray = recommendModel.small_images.count == 0 ? @[recommendModel.pict_url] : recommendModel.small_images;
-            self.detailmodel = recommendModel;
-            NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",recommendModel.coupon_amount];
-            [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
-            self.earningLabel.text = @"赚¥6.88";
-            [self getRamdoms];
-        } fail:^(NSError *error) {
-            
-        }];
-//    }else if(self.searchModel){
-//        self.detailmodel = [[HJRecommendModel alloc] init];
-//        self.tableHeadView.imageGroupArray = self.searchModel.small_images;
-//        self.detailmodel.small_images = self.searchModel.small_images;
-//        self.detailmodel.title = self.searchModel.title;
-//        self.detailmodel.user_type = self.searchModel.user_type;
-//        self.detailmodel.zk_final_price = self.searchModel.zk_final_price;
-//        self.detailmodel.reserve_price = self.searchModel.reserve_price;
-//        self.detailmodel.pict_url = self.searchModel.pict_url;
-//        self.detailmodel.coupon_share_url = self.searchModel.coupon_share_url ? self.searchModel.coupon_share_url : @"";
-//        self.detailmodel.nick = self.searchModel.shop_title;
-//        self.detailmodel.volume = self.searchModel.volume;
-//        self.detailmodel.coupon_amount = self.searchModel.coupon_amount;
-//        NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",self.detailmodel.coupon_amount];
-//        [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
-//        self.earningLabel.text = @"赚¥6.88";
-//        [self getRamdoms];
-//    }
+    [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJRecommendModel *recommendModel) {
+        self.tableHeadView.imageGroupArray = recommendModel.small_images.count == 0 ? @[recommendModel.pict_url] : recommendModel.small_images;
+        self.detailmodel = recommendModel;
+        NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",recommendModel.coupon_amount];
+        [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
+        self.earningLabel.text = @"赚¥6.88";
+        [self getRamdoms];
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 - (void)getRamdoms {

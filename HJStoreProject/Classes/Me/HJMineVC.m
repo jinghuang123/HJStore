@@ -15,6 +15,9 @@
 #import "HJOrderListVC.h"
 #import "HJInvitationListVC.h"
 #import "HJEarningVC.h"
+#import "HJUserInfoModel.h"
+#import "HJLoginVC.h"
+#import "HJNavigationVC.h"
 
 @interface HJMineVC ()
 
@@ -26,6 +29,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if (!userInfo.token) {
+        HJLoginVC *login = [[HJLoginVC alloc] init];
+        login.closeButton.hidden = YES;
+        HJNavigationVC *nav = [[HJNavigationVC alloc] initWithRootViewController:login];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
     [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
         
     } fail:^(NSError *error) {
@@ -69,6 +79,8 @@
         }
             break;
         case HJClickItemTypeWithDrawal:
+        {
+        }
             
             break;
         case HJClickItemTypeEarn:
@@ -100,6 +112,42 @@
             [self.navigationController pushViewController:invitationVC animated:YES];
         }
             
+            break;
+        case HJClickItemTypeService:
+        {
+        }
+            break;
+        case HJClickItemTypeGuide:
+        {
+        }
+            break;
+        case HJClickItemTypeProblem:
+        {
+        }
+            break;
+        case HJClickItemTypeCollected:
+        {
+        }
+            break;
+        case HJClickItemTypeFeedBack:
+        {
+        }
+            break;
+        case HJClickItemTypeSign:
+        {
+        }
+            break;
+        case HJClickItemTypeSetting:
+        {
+        }
+            break;
+        case HJClickItemTypeAboutUS:
+        {
+        }
+            break;
+        case HJClickItemTypeADS:
+        {
+        }
             break;
             
         default:

@@ -18,19 +18,23 @@
 }
 
 - (void)initUI {
-    self.contentView.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor jk_colorWithHexString:@"#fafafa"];;
     
-    UIButton *commitBtn = [UIButton createThemeButton:@"保存"];
-    _commitBtn = commitBtn;
-    commitBtn.hidden = YES;
-    [self.contentView addSubview:commitBtn];
-    [commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *quiteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [quiteButton setTitle:@"退出登录" forState:UIControlStateNormal];
+    quiteButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [quiteButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [quiteButton jk_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _quiteButton = quiteButton;
+    quiteButton.hidden = YES;
+    [self.contentView addSubview:quiteButton];
+    [quiteButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(40);
-        make.left.mas_offset(30);
-        make.right.mas_offset(-30);
+        make.left.mas_offset(0);
+        make.right.mas_offset(0);
         make.height.mas_equalTo(44);
     }];
-    [commitBtn addTarget:self action:@selector(commitBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [quiteButton addTarget:self action:@selector(commitBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)commitBtnClick {

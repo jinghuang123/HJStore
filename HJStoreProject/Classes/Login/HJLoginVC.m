@@ -36,13 +36,14 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIButton *closeButton = [[UIButton alloc] init];
+    _closeButton = closeButton;
     [closeButton setBackgroundImage:[UIImage imageNamed:@"ic_login_close"] forState:UIControlStateNormal];
     [self.view addSubview:closeButton];
     [closeButton addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(64);
+        make.top.mas_offset(40);
         make.right.mas_offset(-25);
-        make.width.height.mas_equalTo(20);
+        make.width.height.mas_equalTo(24);
     }];
     // Do any additional setup after loading the view.
     
@@ -52,62 +53,68 @@
     [self.view addSubview:iconImageView];
     [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX).offset(0);
-        make.top.mas_offset(40);
-        make.width.mas_equalTo(300);
-        make.height.mas_equalTo(300 * icon.size.height/icon.size.width);
+        make.top.mas_offset(120);
+        make.width.mas_equalTo(120);
+        make.height.mas_equalTo(120);
     }];
     
-    UIButton *regisButton = [UIButton createThemeButton:@"注册"];
+    UIImageView *tipImageView = [[UIImageView alloc] init];
+    UIImage *tipIcon = [UIImage imageNamed:@"ic_login_tip"];
+    tipImageView.image = tipIcon;
+    [self.view addSubview:tipImageView];
+    [tipImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX).offset(0);
+        make.top.mas_equalTo(iconImageView.mas_bottom).offset(40);
+        make.width.mas_equalTo(198);
+        make.height.mas_equalTo(23);
+    }];
+    
+    UIButton *regisButton = [UIButton createThemeButtonRegist:@"注册"];
     [self.view addSubview:regisButton];
     [regisButton addTarget:self action:@selector(regisButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [regisButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.mas_equalTo(iconImageView.mas_bottom).offset(10);
-        make.width.equalTo(@(MaxWidth - 40));
-        make.height.equalTo(@(44));
+        make.top.mas_equalTo(tipImageView.mas_bottom).offset(71);
+        make.width.equalTo(@(192));
+        make.height.equalTo(@(32));
     }];
     
-    UIButton *mobileLogin = [self creatViewWithIcon:@"ic_login_phone" title:@"手机登录" width:(MaxWidth - 80)/2];
+    UIButton *mobileLogin = [self creatViewWithIcon:@"ic_login_phone" title:@"手机登录" width:192];
     [self.view addSubview:mobileLogin];
     [mobileLogin mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(30);
+        make.centerX.equalTo(self.view);
         make.top.mas_equalTo(regisButton.mas_bottom).offset(30);
-        make.width.mas_equalTo((MaxWidth - 80)/2);
-        make.height.equalTo(@(40));
+        make.width.mas_equalTo(192);
+        make.height.equalTo(@(32));
     }];
     [mobileLogin addTarget:self action:@selector(phoneLoginClick) forControlEvents:UIControlEventTouchUpInside];
 
     
-    UIButton *wechatLogin = [self creatViewWithIcon:@"ic_login_wechat" title:@"微信登录" width:(MaxWidth - 80)/2];
+    UIButton *wechatLogin = [self creatViewWithIcon:@"ic_login_wechat" title:@"微信登录" width:192];
     [self.view addSubview:wechatLogin];
     [wechatLogin mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_offset(-30);
-        make.top.mas_equalTo(regisButton.mas_bottom).offset(30);
-        make.width.mas_equalTo((MaxWidth - 80)/2);
-        make.height.equalTo(@(40));
+        make.centerX.equalTo(self.view);
+        make.top.mas_equalTo(mobileLogin.mas_bottom).offset(16);
+        make.width.mas_equalTo(192);
+        make.height.equalTo(@(32));
     }];
     [wechatLogin addTarget:self action:@selector(wechatLoginClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
 - (UIButton *)creatViewWithIcon:(NSString *)icon title:(NSString *)title width:(CGFloat)wid{
-    UIButton *view = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, wid, 40)];
-    view.layer.cornerRadius = 22;
-    view.clipsToBounds = YES;
-    [view jk_setBackgroundColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.2] forState:UIControlStateNormal];
-    [view jk_setBackgroundColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.7] forState:UIControlStateSelected];
-    UIImageView *preIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
+    UIButton *view = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, wid, 32)];
+    [view setBackgroundImage:[UIImage imageNamed:@"mobile_login_icon"] forState:UIControlStateNormal];
+    UIImageView *preIcon = [[UIImageView alloc] initWithFrame:CGRectMake(42, 5, 22, 22)];
     preIcon.image = [UIImage imageNamed:icon];
     [view addSubview:preIcon];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10, wid - 60, 20)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 5, wid - 95, 22)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = PFR14Font;
     titleLabel.text = title;
-    titleLabel.textColor = [UIColor lightGrayColor];
+    titleLabel.textColor = [UIColor jk_colorWithHexString:@"#333333"];
     [view addSubview:titleLabel];
-    
-    
     return view;
 }
 

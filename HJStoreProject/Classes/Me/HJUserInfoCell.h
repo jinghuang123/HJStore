@@ -13,6 +13,7 @@
 @interface HJUserInfoCell : UITableViewCell
 @property (nonatomic,strong) UILabel *titleLab;
 @property (nonatomic,strong) UILabel *valueLab;
+@property (nonatomic,strong) UIImageView *headImageV;
 @property (nonatomic,strong) UIImageView *nextImageV;
 @end
 

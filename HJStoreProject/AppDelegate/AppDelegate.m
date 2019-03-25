@@ -13,6 +13,7 @@
 #import "AlibcManager.h"
 #import "HJShareInstance.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -36,9 +37,14 @@
 
     
     [NSThread sleepForTimeInterval:0.5];
-    self.window.rootViewController = [[HJTabBarVC alloc] init];
+    HJTabBarVC *tabbarVc = [[HJTabBarVC alloc] init];
+    self.window.rootViewController = tabbarVc;
+    
     return YES;
 }
+
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

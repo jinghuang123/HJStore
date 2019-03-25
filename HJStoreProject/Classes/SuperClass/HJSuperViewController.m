@@ -20,12 +20,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    ///left、right-item color【左右item的颜色】
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-//    ///title颜色 Attributes 可以包含字体颜色和大小以及字体样式【中间Title字体】
-//    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName :[UIColor whiteColor]};
 }
 
 - (void)setNavBackItem {

@@ -19,11 +19,23 @@
 
 
 - (void)initUI {
+    
+    UIImageView *headImageV = [[UIImageView alloc] init];
+    _headImageV = headImageV;
+    headImageV.layer.cornerRadius = 22;
+    headImageV.clipsToBounds = YES;
+    [self.contentView addSubview:headImageV];
+    [headImageV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(15);
+        make.top.mas_offset(3);
+        make.height.width.mas_equalTo(44);
+    }];
+    
     UILabel *titleLab = [[UILabel alloc] init];
     _titleLab = titleLab;
     titleLab.textAlignment = NSTextAlignmentLeft;
-    titleLab.font = [UIFont systemFontOfSize:15];
-    titleLab.textColor = [UIColor jk_colorWithHexString:@"#4f4f4f"];
+    titleLab.font = [UIFont systemFontOfSize:12];
+    titleLab.textColor = [UIColor jk_colorWithHexString:@"#333333"];
     [self.contentView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(15);
@@ -46,8 +58,8 @@
     UILabel *valueLabel = [[UILabel alloc] init];
     _valueLab = valueLabel;
     valueLabel.textAlignment = NSTextAlignmentRight;
-    valueLabel.font = [UIFont systemFontOfSize:15];
-    valueLabel.textColor = [UIColor jk_colorWithHexString:@"#4f4f4f"];
+    valueLabel.font = [UIFont systemFontOfSize:12];
+    valueLabel.textColor = [UIColor lightGrayColor];
     [self.contentView addSubview:valueLabel];
     [valueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-30);

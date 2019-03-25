@@ -11,6 +11,7 @@
 
 
 @interface UIButton (init)
++ (UIButton *)createThemeButtonRegist:(NSString *)title;
 + (UIButton *)createThemeButton:(NSString *)title;
 @end
 
