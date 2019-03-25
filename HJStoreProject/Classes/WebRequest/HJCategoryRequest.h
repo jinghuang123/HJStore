@@ -14,7 +14,7 @@
 + (instancetype)shared;
 - (void)getCategoryCache:(BOOL)cache success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
 
-- (void)getSubCategoryCache:(BOOL)cache parentId:(NSInteger)parentId success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
+- (void)getSubCategoryCache:(BOOL)cache parentId:(NSString *)parentId success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail;
 
 @end
 

@@ -37,7 +37,7 @@
     for (HJCategoryModel *category in self.dataSource) {
         OneView *rightView = [[OneView alloc] init];
         rightView.categoryId = category.categoryId;
-        rightView.tag = category.categoryId;
+        rightView.tag = [category.categoryId integerValue];
         [menutitles addObject:category.name];
         [rightViews addObject:rightView];
         weakify(self)

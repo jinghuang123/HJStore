@@ -22,37 +22,40 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 - (instancetype)init {
     if(self = [super init]) {
         for (NSInteger i = 0; i < 3; i++) {
             HJFenceListVC *fenceListVC = [[HJFenceListVC alloc] init];
+            fenceListVC.type = i;
             [self.viewControllers addObject:fenceListVC];
         }
-        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"粉丝";
     // Do any additional setup after loading the view.
+    CGFloat originY = MaxHeight >= ENM_SCREEN_H_X ? 84 : 64;
     NSArray *titles = @[@"全部粉丝",@"直属粉丝",@"推荐粉丝"];
     HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:titles];
     _segment = segment;
     [segment addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     segment.backgroundColor = [UIColor whiteColor];
     segment.selectionIndicatorColor = [UIColor redColor];
-    segment.titleTextAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:13], NSForegroundColorAttributeName:[UIColor lightGrayColor]};
-    segment.selectedTitleTextAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSForegroundColorAttributeName:[UIColor redColor]};
+    segment.titleTextAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor jk_colorWithHexString:@"#333333"],NSBaselineOffsetAttributeName:@(-10)};
+    segment.selectedTitleTextAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSForegroundColorAttributeName:[UIColor jk_colorWithHexString:@"#E32828"]};
     segment.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segment.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     CALayer *layer = segment.selectionIndicatorStripLayer;
-    layer.cornerRadius = 2;
+    layer.cornerRadius = 0.5;
     layer.masksToBounds = YES;
-    segment.selectionIndicatorHeight = 3;
-    segment.frame = CGRectMake(0, 64, MaxWidth, 44);
+    segment.selectionIndicatorHeight = 1;
+    segment.frame = CGRectMake(0, originY, MaxWidth, 40);
     [self.view addSubview:segment];
 }
 

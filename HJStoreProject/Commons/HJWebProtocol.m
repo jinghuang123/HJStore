@@ -34,10 +34,13 @@ Declare(kUrlMobileUpdate, "api/user/changemobile") /* 3.5 修改手机号*/
 Declare(kUrlPassworldReset, "api/user/resetpwd") /* 3.6 重置密码*/
 Declare(kUrlGetAllChildren, "api/user/getAllChildren") /* 3.7 粉丝列表*/
 Declare(kUrlGetChildren, "api/user/getChildren") /* 3.8 直接粉丝*/
+Declare(kUrlGetRecommendChildren, "api/user/getRecommendChildren") /* 3.81 推荐粉丝*/
 Declare(kUrlCheckModbileCode, "api/validate/check_code_or_mobile") /* 3.9 检测手机号或邀请码是否存在 */
 Declare(kUrlCheckModbile, "api/validate/check_mobile_exist") /* 3.10 检测手机号是否存在 */
 Declare(kUrlGetCode, "api/sms/send") /* 3.11 获取验证码 */
 Declare(kUrlCheckCode, "api/sms/check") /* 3.12 验证验证码 */
+Declare(kUrlWechatLogin, "api/user/wechatlogin") /*3.13 微信登陆*/
+Declare(kUrlWechatBonding, "api/user/wechatbind") /*3.14 微信绑定*/
 
 Declare(kUrlRecommendTitles, "api/bbs/getBbsChannel") /* 4.1 社区分类 */
 Declare(kUrlRecommendList, "api/bbs/getBbsList") /* 4.2 社区列表数据 */
@@ -48,5 +51,9 @@ Declare(kURLGetInvitationList, "api/setting/getInvitationInfo") /* 5.3 查询邀
 Declare(kURLApplyCash, "api/setting/applyCashWithdrawal") /* 5.4 申请提现 */
 Declare(kURLGetApplyCashList, "api/setting/getCashWithdrawalRecord") /* 5.4 提现记录 */
 Declare(kURLFileUpload, @"api/common/upload") /* 5.5 文件上传*/
+Declare(kURLGetBanners, @"api/common/getBanner") /*5.6 获取banners*/
 
 
+Declare(kURLGetOrderList, @"api/order/getOrder") /* 6.1 获取订单*/
+
+Declare(kURLGetInvitationInfo, @"api/setting/getInvitationInfo") /*7.1 获取邀请数据*/

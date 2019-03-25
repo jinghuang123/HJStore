@@ -47,8 +47,8 @@
 }
 
 
-- (void)getSubCategoryCache:(BOOL)cache parentId:(NSInteger)parentId success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
-    NSDictionary *dic = @{@"categoryId": @(parentId)};
+- (void)getSubCategoryCache:(BOOL)cache parentId:(NSString *)parentId success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{@"categoryId": parentId};
     [kHTTPManager tryPost:kUrlGetSubCategorys parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *categorys = [HJCategoryModel mj_objectArrayWithKeyValuesArray:responseObject];
         success(categorys);

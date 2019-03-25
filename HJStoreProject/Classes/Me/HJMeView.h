@@ -7,7 +7,7 @@
 //
 
 #import "HJSuperView.h"
-
+#import "HJMainSliderCell.h"
 ///点击类型
 typedef enum : NSUInteger {
     HJClickItemTypeHead, //头像
@@ -33,6 +33,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIView *orderView;
 @property (nonatomic, strong) UIView *fenceView;
 @property (nonatomic, strong) UIView *invitateView;
+@property (nonatomic, strong) HJMainSliderView *adSliderCellView;
+@property (nonatomic,strong) NSString *code;
 
 @property (nonatomic,copy) void(^settingClick)(id obj,HJClickItemType type);
 @end

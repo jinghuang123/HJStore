@@ -12,7 +12,7 @@
 
 
 @interface OneView : HJSuperView <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property (nonatomic, assign) NSInteger categoryId;
+@property (nonatomic, strong) NSString *categoryId;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, copy) cellItemClick subCategoryCellClick;

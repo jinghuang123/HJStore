@@ -9,6 +9,7 @@
 #import "HJFenceListVC.h"
 #import <HMSegmentedControl.h>
 #import "HJFenceItemCell.h"
+#import "HJFenceRequest.h"
 
 static NSString *HJFenceItemCellIdentifier = @"HJFenceItemCell";
 
@@ -26,8 +27,9 @@ static NSString *HJFenceItemCellIdentifier = @"HJFenceItemCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.pageSize = 20;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, MaxWidth, MaxHeight - HJTopNavH) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, MaxWidth, MaxHeight - HJTopNavH) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = YES;
@@ -35,7 +37,6 @@ static NSString *HJFenceItemCellIdentifier = @"HJFenceItemCell";
     self.tableView.backgroundColor = [UIColor jk_colorWithHexString:@"#f5f5f5"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-    [self.tableView registerNib:[UINib nibWithNibName:@"HJFenceItemCel" bundle:nil] forCellReuseIdentifier:HJFenceItemCellIdentifier];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headRefresh)];
     [self.tableView.mj_header beginRefreshing];
 
@@ -63,6 +64,15 @@ static NSString *HJFenceItemCellIdentifier = @"HJFenceItemCell";
 }
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
+    [[HJFenceRequest shared] getFenceListWithType:self.type success:^(id responseObject) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            success(nil);
+        });
+    } fail:^(NSError *error) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            success(nil);
+        });
+    }];
 
 }
 
@@ -70,22 +80,25 @@ static NSString *HJFenceItemCellIdentifier = @"HJFenceItemCell";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    return 3;
+//    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 65;
+    return 58;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HJFenceItemCell *cell = [tableView dequeueReusableCellWithIdentifier:HJFenceItemCellIdentifier];
+    if(!cell){
+        cell = [[HJFenceItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HJFenceItemCellIdentifier];
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-    cell.itemDidSelected = ^(id obj) {
-
-    };
     return cell;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 @end

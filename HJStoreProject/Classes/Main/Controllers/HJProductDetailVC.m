@@ -74,6 +74,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     } fail:^(NSError *error) {
         
     }];
+
 }
 
 - (void)getRamdoms {

@@ -8,9 +8,14 @@
 
 #import "HJSuperViewController.h"
 
-
+typedef enum : NSUInteger {
+    HJFenceListTypeAll,
+    HJFenceListTypeDirectly,
+    HJFenceListTypeRecommend,
+} HJFenceListType;
 
 @interface HJFenceListVC : HJSuperViewController
+@property (nonatomic, assign) HJFenceListType type;
 
 @end
 

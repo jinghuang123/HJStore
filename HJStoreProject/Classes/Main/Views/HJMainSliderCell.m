@@ -44,7 +44,7 @@
 
 - (void)setImageGroupArray:(NSArray *)imageGroupArray {
     _imageGroupArray = imageGroupArray;
-    _cycleScrollView.placeholderImage = PLACEHOLDER_SCRO_ITEM;
+    _cycleScrollView.placeholderImage = PLACEHOLDER_344X150;
     if (imageGroupArray.count == 0) return;
     _cycleScrollView.imageURLStringsGroup = _imageGroupArray;
 }

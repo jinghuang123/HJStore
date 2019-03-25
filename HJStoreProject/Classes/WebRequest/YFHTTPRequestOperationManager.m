@@ -32,6 +32,13 @@
     return self;
 }
 
+
+- (NSString *)getTokenUrl:(NSString *)baseUrl {
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@",baseUrl,userInfo.token];
+    return url;
+}
+
 - (void)setValueForHead:(NSString *)value key:(NSString *)key {
     [self.manager.requestSerializer setValue:value forHTTPHeaderField:@"token"];
     NSLog(@">>>>>>>>%@",[self.manager.requestSerializer HTTPRequestHeaders]);

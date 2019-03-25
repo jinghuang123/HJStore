@@ -8,6 +8,8 @@
 
 #import "HJSettingRequest.h"
 #import "HJUserInfoModel.h"
+#import "HJBannerModel.h"
+#import <MJExtension.h>
 
 @implementation HJSettingRequest
 
@@ -37,12 +39,26 @@
 
 - (void)getApplyCashListSuccess:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
     NSDictionary *dic = @{};
-    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
-    [kHTTPManager setValueForHead:userInfo.token key:@"token"];
-    [kHTTPManager tryPost:kURLGetApplyCashList parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+    NSString *url = [kHTTPManager getTokenUrl:kURLGetApplyCashList];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
 }
+
+
+- (void)getBannersWithType:(NSInteger)type
+                   Success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{@"status":@(type)};
+    [kHTTPManager tryPost:kURLGetBanners parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSArray *models = [HJBannerModel mj_objectArrayWithKeyValuesArray:responseObject];
+        success(models);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
 @end

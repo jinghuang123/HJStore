@@ -15,6 +15,10 @@
 @property (nonatomic, strong) NSString *content_url;
 @property (nonatomic, assign) NSInteger taobao_activity_id;
 @property (nonatomic, assign) NSInteger typedata;
+@property (nonatomic, assign) NSInteger  createtime;
+@property (nonatomic, strong) NSString *status_text;
+@property (nonatomic, strong) NSString *typedata_text;
+@property (nonatomic, strong) NSString *item_id;
 @end
 
 

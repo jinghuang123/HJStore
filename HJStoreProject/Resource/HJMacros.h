@@ -47,6 +47,8 @@
 #define PLACEHOLDER_ITEM  [UIImage imageNamed:@"placeHoder_item"]
 #define PLACEHOLDER_SCRO_ITEM   [UIImage imageNamed:@"PLACEHOLDER_SCRO_SLIDER"]
 #define PLACEHOLDER_HEAD   [UIImage imageNamed:@"placeholder_head"]
+#define PLACEHOLDER_160X240   [UIImage imageNamed:@"placeHoderBlog"]
+#define PLACEHOLDER_344X150   [UIImage imageNamed:@"bannerholder344"]
 
 
 ///弱引用

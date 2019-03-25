@@ -69,6 +69,11 @@
 - (void)setTitles:(NSArray *)titles {
     _titles = titles;
     _advertScrollView.titles = titles;
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < titles.count; i++) {
+        [images addObject:@""];
+    }
+    _advertScrollView.signImages = images;
 }
 
 /// 代理方法

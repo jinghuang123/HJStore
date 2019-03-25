@@ -8,10 +8,10 @@
 
 #import "HJSuperViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface HJEarningVC : HJSuperViewController
 
 @end
 
-NS_ASSUME_NONNULL_END
+
