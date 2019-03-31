@@ -79,5 +79,8 @@
 
 - (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
                              fail:(CompletionFailBlock)fail;
+
+- (void)getCellBannersSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail;
 @end
 

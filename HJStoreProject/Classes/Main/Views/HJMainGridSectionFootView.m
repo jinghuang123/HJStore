@@ -43,6 +43,7 @@
     
     self.backgroundColor = [UIColor whiteColor];
     _advertScrollView = [[SGAdvertScrollView alloc] init];
+    _advertScrollView.delegate = self;
     [self addSubview:_advertScrollView];
     
     _advertScrollView.signImages = @[@"", @"", @""];

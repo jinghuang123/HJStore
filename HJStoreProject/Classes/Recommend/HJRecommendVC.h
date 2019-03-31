@@ -12,7 +12,7 @@
 
 @interface HJRecommendVC : HJSuperViewController
 @property (nonatomic,strong) HJRecommendCategorys *category;
-@property (nonatomic,copy) void(^itemDidSelected)(GoodsItem *item);
+@property (nonatomic,copy) void(^itemDidSelected)(HJRecommendModel *item);
 
 @end
 

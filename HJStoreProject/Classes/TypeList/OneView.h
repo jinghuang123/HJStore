@@ -10,10 +10,14 @@
 #import "HJCategoryModel.h"
 
 
+@interface HJOneViewHead : UICollectionReusableView
+@property (nonatomic, strong) UILabel *titleLabel;
+@end
 
 @interface OneView : HJSuperView <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) NSString *categoryId;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, copy) cellItemClick subCategoryCellClick;
+@property (nonatomic, strong) NSString *title;
 @end

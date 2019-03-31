@@ -18,6 +18,7 @@
 #import "HJMobileChangeVC.h"
 #import "HJResetPswVC.h"
 #import "HJSettingRequest.h"
+#import "HJAboutUSVC.h"
 
 
 @interface HJUserInfoSetVC () <HJUserInfoViewDelegate,TZImagePickerControllerDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -125,6 +126,8 @@
             break;
         case USERAboutUsClick:
         {
+            HJAboutUSVC *aboutUs = [[HJAboutUSVC alloc] init];
+            [self.navigationController pushViewController:aboutUs animated:YES];
             
         }
             break;

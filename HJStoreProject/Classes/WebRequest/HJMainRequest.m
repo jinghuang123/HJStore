@@ -8,6 +8,7 @@
 
 #import "HJMainRequest.h"
 #import "HJUserInfoModel.h"
+#import "HJSettingRequest.h"
 
 @interface HJMainRequest ()
 @property (nonatomic,strong) NSMutableArray *categorys;
@@ -103,6 +104,27 @@
         fail(error);
     }];
 }
+
+
+- (void)getCellBannersSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail {
+    [[HJSettingRequest shared] getBannersWithType:1 Success:^(NSArray *banners) {
+        NSMutableArray *bannerImages = [[NSMutableArray alloc] init];
+        for (HJBannerModel *banner in banners) {
+            NSString *url = [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
+            [bannerImages addObject:url];
+        }
+        NSDictionary *response = @{
+                                   @"cellBanners":banners,
+                                   @"cellbannerImages":bannerImages,
+                                   };
+        success(response);
+    } fail:^(NSError *error) {
+        fail(error);
+    }];
+}
+
+
 
 - (void)getMainListByCategoryIdCache:(BOOL)cache
                           categoryId:(NSString *)categoryId

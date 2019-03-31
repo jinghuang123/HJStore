@@ -9,13 +9,6 @@
 #import "HJRecommendItemModel.h"
 
 
-
-@implementation GoodsItem
-
-@end
-
-
-
 @implementation HJRecommendItemModel
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
@@ -26,7 +19,7 @@
 
 
 + (NSDictionary *)mj_objectClassInArray {
-    return @{@"goods":[GoodsItem class],
+    return @{@"goods":[HJRecommendModel class],
              };
 }
 

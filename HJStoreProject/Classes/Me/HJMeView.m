@@ -148,7 +148,7 @@
         make.top.mas_equalTo(headImageView.mas_top).offset(0);
     }];
     [messageIcon jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        [self onItemClickWithType:HJClickItemTypeMessage];
     }];
     
     
@@ -203,8 +203,8 @@
         make.height.mas_equalTo(100);
         make.top.mas_equalTo(icomView.mas_bottom).offset(8);
     }];
-    adSliderCellView.bannerCellItemClick = ^(id obj) {
-        [self onItemClickWithType:HJClickItemTypeADS];
+    adSliderCellView.bannerCellItemClick = ^(HJBannerModel *banner) {
+        [self onItemClickWithType:HJClickItemTypeADS params:banner];
     };
     
     UIView *toolsView = [[UIView alloc] init];
@@ -564,6 +564,15 @@
         make.width.mas_equalTo(40);
         make.height.mas_offset(60);
     }];
+    [aboutUsView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self onItemClickWithType:HJClickItemTypeAboutUS];
+    }];
+}
+
+- (void)onItemClickWithType:(HJClickItemType)type params:(id)obj{
+    if (self.settingClick) {
+        self.settingClick(obj,type);
+    }
 }
 
 

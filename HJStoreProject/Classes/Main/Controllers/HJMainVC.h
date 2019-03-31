@@ -19,12 +19,14 @@
 
 /* banners */
 @property (strong , nonatomic) NSMutableArray<HJBannerModel *> *banners;
+@property (strong , nonatomic) NSMutableArray<HJBannerModel *> *cellBanners;
 @property (strong , nonatomic) NSMutableArray<NSString *> *bannerImages;
-
+@property (strong , nonatomic) NSMutableArray<NSString *> *cellBannerImages;
 /* activitys */
 @property (strong , nonatomic) NSMutableArray *activitys;
 /* rollings */
 @property (strong , nonatomic) NSMutableArray<HJRollingModel *> *rollings;
+
 /* recommends */
 @property (strong , nonatomic) NSMutableArray<HJRecommendModel *> *recommends;
 /* hosts */
@@ -43,6 +45,8 @@
 @property (nonatomic,assign) NSInteger activityId;
 @property (assign , nonatomic) GoodsListShowType showType;
 @property (nonatomic,assign) BOOL isSearch;
+
+@property (nonatomic,assign) CGPoint showPopPoint;
 @end
 
 

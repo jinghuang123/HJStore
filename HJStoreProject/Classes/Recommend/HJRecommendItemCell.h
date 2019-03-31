@@ -13,6 +13,7 @@
 @interface HJRecommendItemCell : UITableViewCell <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIView *copyedView;
 @property (weak, nonatomic) IBOutlet UIImageView *headImageV;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
@@ -23,8 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *earningLabel;
 @property (nonatomic, strong) HJRecommendItemModel *model;
 
-@property (nonatomic,copy) void(^itemDidSelected)(GoodsItem *item);
-@property (nonatomic,copy) void(^shareClickBlock)(GoodsItem *item);
+@property (nonatomic,copy) void(^itemDidSelected)(HJRecommendModel *item);
+@property (nonatomic,copy) void(^shareClickBlock)(HJRecommendModel *item);
 @end
 
 

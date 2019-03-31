@@ -12,6 +12,7 @@
 #import "HJRecommendRequest.h"
 #import "HJRecommendVC.h"
 #import "HJProductDetailVC.h"
+#import "HJRecommendModel.h"
 
 
 @interface HJRecommendPagesVC ()
@@ -28,10 +29,10 @@
             self.categorys = categorys;
             for (HJRecommendCategorys *model in categorys) {
                 HJRecommendVC *recommendVC = [[HJRecommendVC alloc] init];
-                recommendVC.itemDidSelected = ^(GoodsItem *item) {
+                recommendVC.itemDidSelected = ^(HJRecommendModel *item) {
                     HJProductDetailVC *detailVC = [[HJProductDetailVC alloc] init];
                     detailVC.hidesBottomBarWhenPushed = YES;
-                    detailVC.productId = item.product_id;
+                    detailVC.productId = item.item_id;
                     [self.navigationController pushViewController:detailVC animated:YES];
                 };
                 recommendVC.category = model;

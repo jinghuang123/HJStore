@@ -36,6 +36,7 @@
     NSMutableArray *menutitles = [[NSMutableArray alloc] init];
     for (HJCategoryModel *category in self.dataSource) {
         OneView *rightView = [[OneView alloc] init];
+        rightView.title = category.name;
         rightView.categoryId = category.categoryId;
         rightView.tag = [category.categoryId integerValue];
         [menutitles addObject:category.name];
@@ -48,6 +49,8 @@
             productListVC.headType  = HJMainVCProductListHeadTypeList;
             productListVC.listType = HJMainVCProductListTypeList;
             productListVC.showType = singleLineShowOneGoods;
+            CGFloat pointY = MaxHeight >= ENM_SCREEN_H_X ? 128 : 103;
+            productListVC.showPopPoint = CGPointMake(0, pointY);
             [weak_self.navigationController pushViewController:productListVC animated:YES];
         };
     }

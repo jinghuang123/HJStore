@@ -7,28 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface GoodsItem :NSObject
-@property (nonatomic , copy) NSString              * product_id;
-@property (nonatomic , copy) NSString              * pict_url_image;
-@property (nonatomic , copy) NSString              * coupon_after_price;
-@property (nonatomic , assign) NSInteger              max_commission_rate;
-
-@end
+#import "HJRecommendModel.h"
 
 
-
-
-
-@interface HJRecommendItemModel : NSObject
-@property (nonatomic , assign) NSInteger              itemId;
+@interface HJRecommendItemModel :NSObject
+@property (nonatomic , assign) NSInteger              id;
+@property (nonatomic , copy) NSString              * image;
 @property (nonatomic , assign) NSInteger              createtime;
 @property (nonatomic , assign) NSInteger              share;
 @property (nonatomic , copy) NSString              * content;
 @property (nonatomic , copy) NSString              * avatar;
 @property (nonatomic , copy) NSString              * nickname;
-@property (nonatomic , strong) NSArray <GoodsItem *>              * goods;
-@property (nonatomic , copy) NSString              * type;
+@property (nonatomic , copy) NSString              * taobao_items;
 @property (nonatomic , assign) NSInteger              goods_count;
+@property (nonatomic , strong) NSArray <HJRecommendModel *>              * goods;
+@property (nonatomic , strong) NSArray <NSString *>              * images;
+
 @end
 

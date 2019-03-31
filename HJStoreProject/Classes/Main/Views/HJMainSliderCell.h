@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HJSuperView.h"
+#import "HJBannerModel.h"
 
 @interface HJMainSliderView : UICollectionReusableView
 /* 轮播图数组 url*/
@@ -25,6 +26,8 @@
 @property (copy , nonatomic) NSArray *bannerItems;
 
 @property (copy , nonatomic) cellItemClick bannerCellItemClick;
+
+@property (assign , nonatomic) BOOL showPageControl;
 @end
 
 

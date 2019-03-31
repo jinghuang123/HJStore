@@ -18,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    HJTextField *field = [[HJTextField alloc] initWithFrame:CGRectMake(0, 70, MaxWidth, 44)];
+    
+    CGFloat yoffSet = MaxHeight >= ENM_SCREEN_H_X ? 110 : 90;
+    HJTextField *field = [[HJTextField alloc] initWithFrame:CGRectMake(0, yoffSet, MaxWidth, 44)];
     field.edgeInsets = UIEdgeInsetsMake(5, 10, 5, 0);
     field.backgroundColor = [UIColor whiteColor];
     field.textColor = [UIColor jk_colorWithHexString:@"#262f42"];

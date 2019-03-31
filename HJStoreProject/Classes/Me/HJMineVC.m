@@ -20,6 +20,12 @@
 #import "HJNavigationVC.h"
 #import "HJOrderPageVC.h"
 #import "HJMeizhiCustomServiceVC.h"
+#import "HJAboutUSVC.h"
+#import "HJUserInfoSetVC.h"
+#import "HJMainVC.h"
+#import "ALiTradeWebViewController.h"
+#import "HJProductDetailVC.h"
+#import "AlibcManager.h"
 
 @interface HJMineVC ()
 @property (nonatomic,strong) HJEarningModel *earning;
@@ -62,7 +68,7 @@
     
     weakify(self)
     meView.settingClick = ^(id obj,HJClickItemType type) {
-        [weak_self responsToItemClickWithType:type];
+        [weak_self responsToItemClickWithType:type params:obj];
     };
     
     [[HJSettingRequest shared] getBannersWithType:4 Success:^(NSArray *banners) {
@@ -85,8 +91,9 @@
     }];
 }
 
-- (void)responsToItemClickWithType:(HJClickItemType)type {
+- (void)responsToItemClickWithType:(HJClickItemType)type params:(id)obj{
     switch (type) {
+        case HJClickItemTypeSetting:
         case HJClickItemTypeHead:
         {
             HJUserInfoSetVC *setVC = [[HJUserInfoSetVC alloc] init];
@@ -158,15 +165,28 @@
         {
         }
             break;
-        case HJClickItemTypeSetting:
-        {
-        }
-            break;
+
         case HJClickItemTypeAboutUS:
         {
+            HJAboutUSVC *aboutUs = [[HJAboutUSVC alloc] init];
+            aboutUs.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aboutUs animated:YES];
         }
             break;
         case HJClickItemTypeADS:
+        {
+            HJBannerModel *banner = (HJBannerModel *)obj;
+            if (banner.typedata == HJNavPushTypeUrl) {
+                [self pushToWebWithUrl:banner.content_url];
+            }else if (banner.typedata == HJNavPushTypeDetail) {
+                [self pushToProductDetailWithId:banner.item_id];
+            }else if (banner.typedata == HJNavPushTypeList) {
+                [self pushToProductListWithId:0 activityId:banner.taobao_activity_id];
+            }
+            
+        }
+            break;
+        case HJClickItemTypeMessage:
         {
         }
             break;
@@ -176,6 +196,33 @@
         default:
             break;
     }
+    
+}
+
+- (void)pushToProductListWithId:(NSString *)categoryId activityId:(NSInteger)activityId{
+    HJMainVC *productListVC = [[HJMainVC alloc] init];
+    productListVC.hidesBottomBarWhenPushed = YES;
+    productListVC.catteryId = categoryId;
+    productListVC.activityId = activityId;
+    productListVC.headType  = HJMainVCProductListHeadTypeList;
+    productListVC.listType = HJMainVCProductListTypeList;
+    [self.navigationController pushViewController:productListVC animated:YES];
+    
+}
+
+- (void)pushToProductDetailWithId:(NSString *)productId {
+    HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
+    productDetailVC.productId = productId;
+    productDetailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:productDetailVC animated:YES];
+}
+
+- (void)pushToWebWithUrl:(NSString *)url {
+    if (![url containsString:@"https://"]) {
+        url = [NSString stringWithFormat:@"https://%@",url];
+    }
+    ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
+    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
     
 }
 

@@ -25,6 +25,7 @@ typedef enum : NSUInteger {
     HJClickItemTypeSetting, ///设置
     HJClickItemTypeAboutUS, ///关于我们
     HJClickItemTypeADS, ///广告位
+    HJClickItemTypeMessage, ///消息列表
 } HJClickItemType;
 
 @interface HJMeView : HJSuperView

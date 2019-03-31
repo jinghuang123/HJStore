@@ -12,7 +12,8 @@
 #import "HJShareMainImageView.h"
 #import "HJProductDetailModel.h"
 #import "HJMainRequest.h"
-
+#import "HJMainSliderCell.h"
+#import "HJSettingRequest.h"
 
 static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 
@@ -22,6 +23,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) UIImage *shareImage;
+@property (nonatomic, strong) HJMainSliderView *adSliderCellView;
 @end
 
 @implementation HJRecommendVC
@@ -35,8 +37,10 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    CGFloat navH = MaxHeight >= ENM_SCREEN_H_X ? HJTopNavH + 60 : HJTopNavH;
     self.pageSize = 20;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight - HJTopNavH) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight - navH) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = YES;
@@ -50,13 +54,10 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 
 }
 
-- (void)setShareViewWithModel:(GoodsItem *)goodItem {
-    HJProductDetailModel *detail = [[HJProductDetailModel alloc] init];
-    detail.pict_url_image = goodItem.pict_url_image;
-    detail.zk_final_price = goodItem.coupon_after_price;
-    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 667) andDetailModel:detail];
+- (void)setShareViewWithModel:(HJRecommendModel *)goodItem {
+    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 667) andDetailModel:goodItem];
     [self.view addSubview:imageV];
-    [self shareDataGet:[goodItem.product_id integerValue]];
+    [self shareDataGet:[goodItem.item_id integerValue]];
 }
 
 - (void)shareDataGet:(NSInteger)productid {
@@ -139,34 +140,76 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
     } fail:^(NSError *error) {
         
     }];
+    
+    [[HJSettingRequest shared] getBannersWithType:3 Success:^(NSArray *banners) {
+        self.adSliderCellView.bannerItems = banners;
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        for (HJBannerModel *banner in banners) {
+            NSString *realUrl = [banner.banner_image hasPrefix:@"http"] ? banner.banner_image : [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
+            [images addObject:realUrl];
+        }
+        self.adSliderCellView.imageGroupArray = images;
+        [self.tableView reloadData];
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataSource.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 150;
+    }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    CGFloat adViewH = 150;
+    if (!self.adSliderCellView) {
+        HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth, adViewH)];
+        _adSliderCellView = adSliderCellView;
+        adSliderCellView.backgroundColor = [UIColor clearColor];
+        adSliderCellView.imageGroupArray = @[@""];
+        [self.view addSubview:adSliderCellView];
+        [adSliderCellView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(0);
+            make.right.mas_offset(0);
+            make.height.mas_equalTo(adViewH);
+            make.top.mas_offset(0);
+        }];
+        adSliderCellView.bannerCellItemClick = ^(HJBannerModel *banner) {
+            //        [self onItemClickWithType:HJClickItemTypeADS params:banner];
+        };
+    }
+    return self.adSliderCellView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self.tableView fd_heightForCellWithIdentifier:HJRecmomendItemCellIdentifier cacheByIndexPath:indexPath configuration:^(HJRecommendItemCell *cell) {
         [self setupModelOfCell:cell atIndexPath:indexPath];
-    }];
+    }] + 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HJRecommendItemCell *cell = [tableView dequeueReusableCellWithIdentifier:HJRecmomendItemCellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-    cell.itemDidSelected = ^(GoodsItem *item) {
+    cell.itemDidSelected = ^(HJRecommendModel *item) {
         if (self.itemDidSelected) {
             self.itemDidSelected(item);
         }
     };
-    cell.shareClickBlock = ^(GoodsItem *item) {
+    cell.shareClickBlock = ^(HJRecommendModel *item) {
         [self setShareViewWithModel:item];
     };
+
     [self setupModelOfCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -182,7 +225,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 }
 
 - (void)setupModelOfCell:(HJRecommendItemCell *) cell atIndexPath:(NSIndexPath *) indexPath {
-    cell.model = self.dataSource[indexPath.section];
+    cell.model = self.dataSource[indexPath.row];
     [cell.collectionView reloadData];
 }
 

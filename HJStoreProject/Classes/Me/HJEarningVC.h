@@ -8,7 +8,9 @@
 
 #import "HJSuperViewController.h"
 
+@interface CardView : UIView
 
+@end
 
 @interface HJEarningVC : HJSuperViewController
 

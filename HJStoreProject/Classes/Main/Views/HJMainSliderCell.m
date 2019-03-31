@@ -8,7 +8,7 @@
 
 #import "HJMainSliderCell.h"
 #import <SDCycleScrollView.h>
-#import "HJBannerModel.h"
+
 
 
 @interface HJMainSliderView ()<SDCycleScrollViewDelegate>

@@ -54,12 +54,14 @@
         make.bottom.mas_offset(-40);
     }];
     
+    CGFloat bottomH = MaxHeight >= ENM_SCREEN_H_X ? 74 : 44;
     UIView *bottomView = [[UIView alloc] init];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_offset(0);
-        make.height.mas_equalTo(44);
+        make.bottom.mas_offset(0);
+        make.height.mas_equalTo(bottomH);
     }];
     
     UIImageView *copyPreicon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Invitation_copy"]];
@@ -77,7 +79,7 @@
         make.left.mas_offset(20);
         make.right.mas_offset(-MaxWidth/2 - 20);
         make.top.mas_offset(8);
-        make.bottom.mas_offset(-8);
+        make.height.mas_equalTo(28);
     }];
     [copyPreicon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(13);
@@ -98,7 +100,7 @@
         make.right.mas_offset(-20);
         make.left.mas_offset(MaxWidth/2 + 20);
         make.top.mas_offset(8);
-        make.bottom.mas_offset(-8);
+        make.height.mas_equalTo(28);
     }];
     [sharPreIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(13);
@@ -133,7 +135,7 @@
     self.scroView.contentSize = CGSizeMake(images.count * MaxWidth, 0);
     for (NSInteger i = 0; i < images.count; i++) {
         NSString *url = [images objectAtIndex:i];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(MaxWidth * i + 48,  32, MaxWidth - 96, MaxHeight - 210)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(MaxWidth * i + 48,  32, MaxWidth - 96, 455)];
         imageView.layer.cornerRadius = 5;
         imageView.clipsToBounds = YES;
         [imageView sd_setImageWithURLString:url placeholderImage:PLACEHOLDER_160X240];

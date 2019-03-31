@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString *pic_image;
 @property (nonatomic, assign) NSInteger product;
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *item_id;
 @end
 

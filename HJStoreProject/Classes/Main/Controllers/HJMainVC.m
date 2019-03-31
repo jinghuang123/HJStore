@@ -38,6 +38,7 @@ static NSString *const HJGoodItemCellIdentifier = @"HJGoodItemCell";
 static NSString *const HJGoodItemSingleCellIdentifier =  @"HJGoodItemSingleCell";
 
 static NSString *const HJMainSliderCellIdentifier = @"HJMainSliderCellI";
+static NSString *const HJMainSliderBannerCellIdentifier = @"HJMainSliderBannerCell";
 
 static NSString *const HJMainListHeadViewIdentifier = @"HJMainListHeadView";
 static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2";
@@ -148,6 +149,15 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         } fail:^(NSError *error) {
             success(nil);
         }];
+        if(self.catteryId == 0) {
+            [[HJMainRequest shared] getCellBannersSuccess:^(NSDictionary *response) {
+                self.cellBanners = [response objectForKey:@"cellBanners"];
+                self.cellBannerImages = [response objectForKey:@"cellbannerImages"];
+                [self.collectionView reloadData];
+            } fail:^(NSError *error) {
+                
+            }];
+        }
     }
 
 }
@@ -175,6 +185,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         _collectionView.alwaysBounceVertical = YES;
         
         [_collectionView registerClass:[HJMainSliderCell class] forCellWithReuseIdentifier:HJMainSliderCellIdentifier];
+        [_collectionView registerClass:[HJMainSliderCell class] forCellWithReuseIdentifier:HJMainSliderBannerCellIdentifier];
         [_collectionView registerClass:[HJGridCell class] forCellWithReuseIdentifier:HJGridCellIdentifier];
         [_collectionView registerClass:[HJGoodItemCell class] forCellWithReuseIdentifier:HJGoodItemCellIdentifier];
         [_collectionView registerClass:[HJGoodItemSingleCell class] forCellWithReuseIdentifier:HJGoodItemSingleCellIdentifier];
@@ -204,11 +215,25 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     return _banners;
 }
 
+- (NSMutableArray<HJBannerModel *> *)cellBanners {
+    if(!_cellBanners){
+        _cellBanners = [[NSMutableArray alloc] init];
+    }
+    return _cellBanners;
+}
+
 - (NSMutableArray<NSString *> *)bannerImages {
     if(!_bannerImages){
         _bannerImages = [[NSMutableArray alloc] init];
     }
     return _bannerImages;
+}
+
+- (NSMutableArray<NSString *> *)cellBannerImages {
+    if(!_cellBannerImages){
+        _cellBannerImages = [[NSMutableArray alloc] init];
+    }
+    return _cellBannerImages;
 }
 
 - (NSMutableArray *)activitys {
@@ -240,6 +265,10 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 - (void)podSortTypeView {
+    if (self.showPopPoint.y == 0) {
+        CGFloat pointY = MaxHeight >= ENM_SCREEN_H_X ? 165 : 145;
+        self.showPopPoint = CGPointMake(0, pointY);
+    }
     if(!self.sortTypePopVC.isPopState) {
         weakify(self)
         self.sortTypePopVC = [[HJMainPodVC alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
@@ -251,7 +280,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         self.sortTypePopVC.clearBack = YES;
         NSArray *data = @[@"综合排序",@"优惠券面值由高到低",@"优惠券面值由低到高",@"预估收益由高到低"];
         self.sortTypePopVC.dataSource = data;
-        self.sortTypePopVC.showViewPoint = CGPointMake(0, 145);
+        self.sortTypePopVC.showViewPoint = self.showPopPoint;
         self.sortTypePopVC.viewSize = CGSizeMake(MaxWidth, 4 * 40);
         self.sortTypePopVC.selectedIndex = self.sort--;
         
@@ -287,7 +316,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         return self.activitys.count > 10 ? 10 : self.activitys.count;
     }
     if(section == HJMainVCSectionTypeSection2){
-        return 0;
+        return self.cellBanners.count > 0 ?  1 : 0;
     }
     if(section == HJMainVCSectionTypeSection3){
         return self.recommends.count;
@@ -307,7 +336,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
             if (banner.typedata == HJNavPushTypeUrl) {
                 [weak_self pushToWebWithUrl:banner.content_url];
             }else if (banner.typedata == HJNavPushTypeDetail) {
-                [weak_self pushToProductDetailWithId:banner.content_product];
+                [weak_self pushToProductDetailWithId:banner.item_id];
             }else if (banner.typedata == HJNavPushTypeList) {
                 [weak_self pushToProductListWithId:banner.content_product activityId:banner.taobao_activity_id];
             }
@@ -326,8 +355,19 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         }
         gridcell = cell;
     }else if (indexPath.section == HJMainVCSectionTypeSection2) {
-        HJGoodsCountDownCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJGoodsCountDownCellIdentifier forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor whiteColor];
+        HJMainSliderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HJMainSliderBannerCellIdentifier forIndexPath:indexPath];
+        cell.imageGroupArray = self.cellBannerImages;
+        cell.bannerItems = self.cellBanners;
+        weakify(self)
+        cell.bannerCellItemClick = ^(HJBannerModel *banner) {
+            if (banner.typedata == HJNavPushTypeUrl) {
+                [weak_self pushToWebWithUrl:banner.content_url];
+            }else if (banner.typedata == HJNavPushTypeDetail) {
+                [weak_self pushToProductDetailWithId:banner.item_id];
+            }else if (banner.typedata == HJNavPushTypeList) {
+                [weak_self pushToProductListWithId:banner.content_product activityId:banner.taobao_activity_id];
+            }
+        };
         gridcell = cell;
     }else if (indexPath.section == HJMainVCSectionTypeSection3) {
         if (self.showType == signleLineShowDoubleGoods) {
@@ -378,12 +418,13 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                         [weak_self headRefresh];
                     }
                 };
+                weakify(headerView)
                 headerView.showModeChangedBlock = ^(id obj) {
                     if (weak_self.showType == singleLineShowOneGoods) {
-                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
+                        [weak_headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
                         weak_self.showType = signleLineShowDoubleGoods;
                     }else{
-                        [headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
+                        [weak_headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];
                         weak_self.showType = singleLineShowOneGoods;
                     }
                     [weak_self.collectionView reloadData];
@@ -395,7 +436,8 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         if (indexPath.section == HJMainVCSectionTypeSection1) {
             HJMainGridSectionFootView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:HJMainGridSectionFootViewIdentifier forIndexPath:indexPath];
             footerView.rollingDidSelected = ^(NSInteger index) {
-                
+                HJRollingModel *rol = [self.rollings objectAtIndex:index];
+                [self pushToProductDetailWithId:rol.item_id];
             };
             NSMutableArray *titles = [[NSMutableArray alloc] init];
             for (HJRollingModel *rol in self.rollings) {
@@ -417,7 +459,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         return CGSizeMake(MaxWidth/5 , MaxWidth/5 + 10);
     }
     if (indexPath.section == HJMainVCSectionTypeSection2) {//广告
-        return CGSizeMake(MaxWidth, 180);
+        return CGSizeMake(MaxWidth, 100);
     }
     if (indexPath.section == HJMainVCSectionTypeSection3) {//列表
         if (self.showType == signleLineShowDoubleGoods) {
@@ -486,7 +528,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         if (banner.typedata == HJNavPushTypeUrl) {
             [self pushToWebWithUrl:banner.content_url];
         }else if (banner.typedata == HJNavPushTypeDetail) {
-            [self pushToProductDetailWithId:banner.content_product];
+            [self pushToProductDetailWithId:banner.item_id];
         }else if (banner.typedata == HJNavPushTypeList) {
             [self pushToProductListWithId:0 activityId:banner.taobao_activity_id];
         }
@@ -494,7 +536,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         id obj = [self.activitys objectAtIndex:indexPath.row];
         HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
         if([obj isKindOfClass:[HJActivityModel class]]){
-            HJActivityModel *model = (HJActivityModel *)model;
+            HJActivityModel *model = (HJActivityModel *)obj;
             if (model.islogindata && !userInfo.token) {
                 [self pushToLoginVC];
             }else{
@@ -507,13 +549,20 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 }
             }
         }else{
-            HJCategoryModel *model = (HJCategoryModel *)model;
+            HJCategoryModel *model = (HJCategoryModel *)obj;
             [self pushToProductListWithId:model.categoryId activityId:0];
         }
     
        
     }else if(indexPath.section == HJMainVCSectionTypeSection2){
-
+        HJBannerModel *banner = [self.cellBanners objectAtIndex:indexPath.row];
+        if (banner.typedata == HJNavPushTypeUrl) {
+            [self pushToWebWithUrl:banner.content_url];
+        }else if (banner.typedata == HJNavPushTypeDetail) {
+            [self pushToProductDetailWithId:banner.item_id];
+        }else if (banner.typedata == HJNavPushTypeList) {
+            [self pushToProductListWithId:0 activityId:banner.taobao_activity_id];
+        }
     }else if(indexPath.section == HJMainVCSectionTypeSection3){
         HJRecommendModel *item = [self.recommends objectAtIndex:indexPath.row];
         [self pushToProductDetailWithId:item.item_id];

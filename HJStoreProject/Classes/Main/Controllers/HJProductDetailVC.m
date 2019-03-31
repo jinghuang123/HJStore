@@ -94,7 +94,9 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, MaxWidth, MaxHeight - 29)];
+        CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? -49 : -20;
+        CGFloat tableViewH = MaxHeight >= ENM_SCREEN_H_X ? MaxHeight : MaxHeight - 29;
+        UITableView *tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, topOffSet, MaxWidth, tableViewH)];
         _tableView = tableView;
         tableView.backgroundColor = [UIColor clearColor];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -118,19 +120,24 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 
 - (void)setupNavItems {
-    _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, 64)];
+    CGFloat navH = MaxHeight >= ENM_SCREEN_H_X ? 84 : 64;
+    CGFloat buttonOffset = MaxHeight >= ENM_SCREEN_H_X ? 40 : 20;
+    _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, navH)];
     _navView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
     _navView.layer.borderWidth = 0.2;
     _navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
     [self.view addSubview:_navView];
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 60, 44)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, buttonOffset, 60, 44)];
     backView.backgroundColor = [UIColor clearColor];
     
     UIButton *backButton = [[UIButton alloc] init];
     _backButton = backButton;
     [backButton setBackgroundImage:[UIImage imageNamed:@"detail_nav_back"] forState:UIControlStateNormal];
     [backView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self back];
+    }];
+    [backButton jk_addActionHandler:^(NSInteger tag) {
         [self back];
     }];
     [backView addSubview:backButton];
