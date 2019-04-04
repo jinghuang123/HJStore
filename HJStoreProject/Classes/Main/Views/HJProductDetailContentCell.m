@@ -179,7 +179,7 @@
     }];
     
     UILabel *conponsValueLabel = [[UILabel alloc] init];
-    _conponsDateLabel = conponsValueLabel;
+    _conponsValueLabel = conponsValueLabel;
     conponsValueLabel.text = @"100元优惠券";
     conponsValueLabel.textColor = [UIColor whiteColor];
     conponsValueLabel.font = [UIFont systemFontOfSize:16];
@@ -194,7 +194,7 @@
     
     UILabel *conponsDateLabel = [[UILabel alloc] init];
     _conponsDateLabel = conponsDateLabel;
-    conponsDateLabel.text = @"2019-03-11~2019-04-11";
+    conponsDateLabel.text = @"";
     conponsDateLabel.textColor = [UIColor whiteColor];
     conponsDateLabel.font = [UIFont systemFontOfSize:10];
     conponsDateLabel.textAlignment = NSTextAlignmentCenter;
@@ -235,7 +235,9 @@
     _soldCountLabel.text = [NSString stringWithFormat:@"已售%ld",item.volume];
     _earningLabel.text = [NSString stringWithFormat:@"赚￥%.2f",item.earning];
     _storeName.text = item.nick;
-    
+    _conponsValueLabel.text = [NSString stringWithFormat:@"%@元优惠券",item.coupon_amount];
+    _conponsDateLabel.text = [NSString stringWithFormat:@"%@~%@",item.coupon_start_time,item.coupon_end_time];
+
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;

@@ -50,17 +50,10 @@ static NSString *cellReuseID = @"cellReuseID";
     }
     else
     {
-//        if (self.model.goods.count == 1)
-//        {
-//            self.height.constant = width/1.5;
-//        }
-//        else
-//        {
         NSInteger count = self.model.goods.count > 0 ? self.model.goods.count: self.model.images.count;
         count = count > 9 ? 9 : count;
         CGFloat height = ((count - 1) / 3 + 1) * (width / 3) + (count - 1) / 3 * 15 ;
             self.height.constant = height;
-//        }
     }
     weakify(self)
     [self.shareView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -85,6 +78,12 @@ static NSString *cellReuseID = @"cellReuseID";
     if (self.model.goods.count > 0) {
         HJRecommendModel *item = self.model.goods[indexPath.row];
         [cell.imgV sd_setImageWithURLString:item.pict_url placeholderImage:PLACEHOLDER_ITEM];
+        NSString *coupons = [NSString stringWithFormat:@"¥%.2f",item.coupon_after_price];
+        CGFloat wid = [NSString widthOfString:coupons font:[UIFont systemFontOfSize:12] height:20] + 5;
+        cell.couponvalueLabel.text = coupons;
+        [cell.couponvalueLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(wid);
+        }];
     }else{
         NSString *url = self.model.images[indexPath.row];
         [cell.imgV sd_setImageWithURLString:url placeholderImage:PLACEHOLDER_ITEM];
@@ -98,14 +97,7 @@ static NSString *cellReuseID = @"cellReuseID";
     CGFloat width = MaxWidth - 45;
     if (self.model.goods.count!=0)
     {
-//        if (self.model.goods.count == 1)
-//        {
-//            return CGSizeMake(width / 2, width/1.5);
-//        }
-//        else
-//        {
-            return CGSizeMake(width / 3, width / 3);
-//        }
+        return CGSizeMake(width / 3, width / 3);
     }else if(self.model.images.count !=0){
         return CGSizeMake(width / 3, width / 3);
     }

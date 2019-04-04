@@ -31,6 +31,18 @@
     [self.imgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
+    UILabel *couponvalueLabel = [[UILabel alloc] init];
+    _couponvalueLabel = couponvalueLabel;
+    couponvalueLabel.textColor = [UIColor whiteColor];
+    couponvalueLabel.textAlignment = NSTextAlignmentCenter;
+    couponvalueLabel.font = [UIFont systemFontOfSize:12];
+    couponvalueLabel.backgroundColor = [UIColor redColor];
+    [self.imgV addSubview:couponvalueLabel];
+    [couponvalueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_offset(0);
+        make.width.mas_equalTo(40);
+        make.height.mas_equalTo(20);
+    }];
 }
 
 @end

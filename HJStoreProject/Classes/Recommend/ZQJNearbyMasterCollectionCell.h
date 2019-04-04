@@ -10,4 +10,5 @@
 
 @interface ZQJNearbyMasterCollectionCell : UICollectionViewCell
 @property (nonatomic, strong) UIImageView *imgV;
+@property (nonatomic, strong) UILabel *couponvalueLabel;
 @end

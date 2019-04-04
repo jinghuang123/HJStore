@@ -237,6 +237,7 @@
     [kHTTPManager tryPost:kUrlGetListSearch parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *map_data = [responseObject objectForKey:@"data"];
         NSArray *searchModel = [HJRecommendModel mj_objectArrayWithKeyValuesArray:map_data];
+        searchModel = searchModel ? searchModel : [NSArray array];
         NSDictionary *response = @{
                                    @"searchModel":searchModel,
                                    };

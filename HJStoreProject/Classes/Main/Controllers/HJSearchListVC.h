@@ -12,5 +12,6 @@
 
 @interface HJSearchListVC : HJSuperViewController
 @property (nonatomic,strong) NSString *searchTip;
+@property (nonatomic,assign) CGPoint showPopPoint;
 @end
 

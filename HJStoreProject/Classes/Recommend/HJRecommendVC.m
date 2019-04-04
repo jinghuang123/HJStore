@@ -57,11 +57,11 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 - (void)setShareViewWithModel:(HJRecommendModel *)goodItem {
     HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 667) andDetailModel:goodItem];
     [self.view addSubview:imageV];
-    [self shareDataGet:[goodItem.item_id integerValue]];
+    [self shareDataGet:goodItem];
 }
 
-- (void)shareDataGet:(NSInteger)productid {
-//    [[HJMainRequest shared] getShareDataCache:YES productId:productid title:self.detailmodel.title url:self.detailmodel.coupon_click_url success:^(HJShareModel *share) {
+- (void)shareDataGet:(HJRecommendModel *)item{
+    [[HJMainRequest shared] getShareDataCache:YES productId:item.item_id title:item.title url:item.coupon_share_url success:^(HJShareModel *share) {
 //        HJShareVC *shareVC = [[HJShareVC alloc] init];
 //        share.title = self.detailmodel.title;
 //        share.product_id = self.productId;
@@ -74,8 +74,8 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 //        shareVC.shareModel = share;
 //        [shareVC setNavBackItem];
 //        [self.navigationController pushViewController:shareVC animated:YES];
-//    } fail:^(NSError *error) {
-//    }];
+    } fail:^(NSError *error) {
+    }];
 }
 
 
@@ -206,8 +206,11 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
             self.itemDidSelected(item);
         }
     };
-    cell.shareClickBlock = ^(HJRecommendModel *item) {
-        [self setShareViewWithModel:item];
+    cell.shareClickBlock = ^(HJRecommendItemModel *item) {
+        for (HJRecommendModel *model in item.goods) {
+            [self setShareViewWithModel:model];
+        }
+        
     };
 
     [self setupModelOfCell:cell atIndexPath:indexPath];

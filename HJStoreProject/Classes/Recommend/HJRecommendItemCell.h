@@ -25,7 +25,7 @@
 @property (nonatomic, strong) HJRecommendItemModel *model;
 
 @property (nonatomic,copy) void(^itemDidSelected)(HJRecommendModel *item);
-@property (nonatomic,copy) void(^shareClickBlock)(HJRecommendModel *item);
+@property (nonatomic,copy) void(^shareClickBlock)(HJRecommendItemModel *item);
 @end
 
 

@@ -12,10 +12,13 @@
 #import "HJCategoryRequest.h"
 #import "AlibcManager.h"
 #import "HJShareInstance.h"
+#import "HJPopToSearchViewController.h"
+#import "HJSearchListVC.h"
 
+#define kLastSearchKey @"kLastSearchKey"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) HJPopToSearchViewController *searchPodVC;
 @end
 
 @implementation AppDelegate
@@ -67,6 +70,15 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSLog(@">>>>>>>>%@",pasteboard.string);
+    NSString *lastStr = [NSUserDefaults jk_stringForKey:kLastSearchKey];
+    if(![lastStr isEqualToString:pasteboard.string] && ![pasteboard.string isEqualToString:@""]){
+        [self popSearchView:pasteboard.string];
+        [NSUserDefaults jk_setObject:pasteboard.string forKey:kLastSearchKey];
+    }else{
+        
+    }
 }
 
 
@@ -93,6 +105,28 @@
         //处理其他app跳转到自己的app，如果百川处理过会返回YES
     }
     return YES;
+}
+
+- (void)popSearchView:(NSString *)searchTip {
+    self.searchPodVC = [[HJPopToSearchViewController alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
+                                                      ShowStyle:MYPresentedViewShowStyleSuddenStyle
+                                                       callback:^(id obj) {
+                                                   
+                                                       }];
+    self.searchPodVC.clearBack = YES;
+    self.searchPodVC.searchTip = searchTip;
+    weakify(self)
+    self.searchPodVC.searchBlock = ^(NSString *key) {
+        HJSearchListVC *searchList = [[HJSearchListVC alloc] init];
+        searchList.searchTip = key;
+        [weak_self.searchPodVC dismissViewControllerAnimated:YES completion:nil];
+        HJTabBarVC *tabBar = (HJTabBarVC *)weak_self.window.rootViewController;
+        HJNavigationVC *controller = [tabBar.viewControllers objectAtIndex:tabBar.selectedIndex];
+        UIViewController *vc = controller.topViewController;
+        searchList.hidesBottomBarWhenPushed = YES;
+        [vc.navigationController pushViewController:searchList animated:YES];
+    };
+    [self.window.rootViewController presentViewController:self.searchPodVC animated:YES completion:nil];
 }
 
 

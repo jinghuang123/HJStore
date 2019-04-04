@@ -14,6 +14,7 @@
 		18151451224656790069AF5C /* HJFenceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18151450224656790069AF5C /* HJFenceRequest.m */; };
 		187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7FA21C13639005B9D77 /* HJSegemengVC.m */; };
 		18B08668224CEC11006BB844 /* HJAboutUSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B08667224CEC11006BB844 /* HJAboutUSVC.m */; };
+		18D226512256243B00901619 /* HJPopToSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D226502256243B00901619 /* HJPopToSearchViewController.m */; };
 		18D57DF2224769A200D970F7 /* HJMeizhiCustomServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */; };
 		18D57DF52247738300D970F7 /* HJFenceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D57DF42247738300D970F7 /* HJFenceModel.m */; };
 		18DFC50E224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC50D224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m */; };
@@ -200,6 +201,8 @@
 		187CE7FA21C13639005B9D77 /* HJSegemengVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSegemengVC.m; sourceTree = "<group>"; };
 		18B08666224CEC11006BB844 /* HJAboutUSVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJAboutUSVC.h; sourceTree = "<group>"; };
 		18B08667224CEC11006BB844 /* HJAboutUSVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJAboutUSVC.m; sourceTree = "<group>"; };
+		18D2264F2256243B00901619 /* HJPopToSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJPopToSearchViewController.h; sourceTree = "<group>"; };
+		18D226502256243B00901619 /* HJPopToSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJPopToSearchViewController.m; sourceTree = "<group>"; };
 		18D57DF0224769A200D970F7 /* HJMeizhiCustomServiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMeizhiCustomServiceVC.h; sourceTree = "<group>"; };
 		18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMeizhiCustomServiceVC.m; sourceTree = "<group>"; };
 		18D57DF32247738300D970F7 /* HJFenceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJFenceModel.h; sourceTree = "<group>"; };
@@ -759,6 +762,8 @@
 				B811D7EB21CE1F4500FBED10 /* UIImageView+HHWebImage.m */,
 				B8CE279A21FC7FEA0059FB9E /* HJTextField.h */,
 				B8CE279B21FC7FEA0059FB9E /* HJTextField.m */,
+				18D2264F2256243B00901619 /* HJPopToSearchViewController.h */,
+				18D226502256243B00901619 /* HJPopToSearchViewController.m */,
 			);
 			path = SuperClass;
 			sourceTree = "<group>";
@@ -1386,6 +1391,7 @@
 				B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */,
 				B811D7EC21CE1F4500FBED10 /* UIImageView+HHWebImage.m in Sources */,
 				B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */,
+				18D226512256243B00901619 /* HJPopToSearchViewController.m in Sources */,
 				B8CE279621FC60FC0059FB9E /* HJMobileChangeVC.m in Sources */,
 				B8626E6E21DB46CF00D7BA74 /* HJShareVC.m in Sources */,
 				B811D7E921CE1D0300FBED10 /* HJRollingModel.m in Sources */,

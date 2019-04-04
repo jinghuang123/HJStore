@@ -232,6 +232,10 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 
 - (void)podSortTypeView {
+    if (self.showPopPoint.y == 0) {
+        CGFloat pointY = MaxHeight >= ENM_SCREEN_H_X ? 128 : 103;
+        self.showPopPoint = CGPointMake(0, pointY);
+    }
     if(!self.sortTypePopVC.isPopState) {
         weakify(self)
         self.sortTypePopVC = [[HJMainPodVC alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
@@ -243,7 +247,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
         self.sortTypePopVC.clearBack = YES;
         NSArray *data = @[@"综合排序",@"优惠券面值由高到低",@"优惠券面值由低到高",@"预估收益由高到低"];
         self.sortTypePopVC.dataSource = data;
-        self.sortTypePopVC.showViewPoint = CGPointMake(0, 105);
+        self.sortTypePopVC.showViewPoint = self.showPopPoint;
         self.sortTypePopVC.viewSize = CGSizeMake(MaxWidth, 4 * 40);
         self.sortTypePopVC.selectedIndex = self.sort--;
         

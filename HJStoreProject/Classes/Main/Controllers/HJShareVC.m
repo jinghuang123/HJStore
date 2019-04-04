@@ -76,10 +76,6 @@
 
 
 - (void)sharedAction {
-//    [[HJShareInstance shareInstance] shareToWechat:NO images:self.selectedImages callback:^(NSString *errorMsg) {
-//
-//    }];
-    
     NSArray * items =  self.selectedImages;    //分享图片 数组
     
     UIActivityViewController * activityCtl = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
