@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "HJFenceModel.h"
 
 
 @interface HJFenceRequest : NSObject

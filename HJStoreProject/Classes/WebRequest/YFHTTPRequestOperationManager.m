@@ -57,6 +57,8 @@
                                             success:^(NSURLSessionDataTask *task, id responseObject) {
                                                 if([URLString containsString:@"search/get"]){
                                                     success(operation,responseObject);
+                                                }else if([URLString containsString:@"user/upgrade"]){
+                                                    success(operation,responseObject);
                                                 }else{
                                                     [self YFSuccess:responseObject
                                                           operation:operation

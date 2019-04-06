@@ -22,6 +22,7 @@
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 }
 
+ // same as push methods
 
 
 @end

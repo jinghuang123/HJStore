@@ -55,6 +55,9 @@
 
 - (void)getInvitationInfoSuccess:(CompletionSuccessBlock)success
                             fail:(CompletionFailBlock)fail;
+
+- (void)logOutActionSuccess:(CompletionSuccessBlock)success
+                       fail:(CompletionFailBlock)fail;
 @end
 
 

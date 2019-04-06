@@ -51,8 +51,9 @@
 
 - (LLSearchView *)searchView
 {
+    CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? 84 : 64;
     if (!_searchView) {
-        self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, 64, MaxWidth, MaxHeight - 64) hotArray:self.hotArray historyArray:self.historyArray];
+        self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, topOffSet, MaxWidth, MaxHeight - topOffSet) hotArray:self.hotArray historyArray:self.historyArray];
         weakify(self)
         _searchView.tapAction = ^(NSString *str) {
             [weak_self pushToSearchResultWithSearchStr:str];

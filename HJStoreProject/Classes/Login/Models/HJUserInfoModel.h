@@ -19,9 +19,10 @@
 @property (nonatomic , copy) NSString *nickname;
 @property (nonatomic , assign) NSInteger score;
 @property (nonatomic , copy) NSString *token;
+@property (nonatomic , copy) NSString *code;
 @property (nonatomic , copy) NSString *user_id;
 @property (nonatomic , copy) NSString *username;
-
+@property (nonatomic , assign) NSInteger group_id;
 
 - (void)saveUserInfo2Phone;
 

@@ -36,9 +36,13 @@
                           };
     NSString *url = [kHTTPManager getTokenUrl:kURLGetOrderList];
     [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        success(responseObject);
+        NSArray *orders = responseObject;
+        NSArray *orderItems = [HJOrderListItemModel mj_objectArrayWithKeyValuesArray:orders];
+        success(orderItems);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
 }
+
+
 @end

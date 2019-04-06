@@ -49,6 +49,7 @@
 #define PLACEHOLDER_HEAD   [UIImage imageNamed:@"placeholder_head"]
 #define PLACEHOLDER_160X240   [UIImage imageNamed:@"placeHoderBlog"]
 #define PLACEHOLDER_344X150   [UIImage imageNamed:@"bannerholder344"]
+#define PLACEHOLDER_Category   [UIImage imageNamed:@"small_category_holder"]
 
 
 ///弱引用
@@ -62,8 +63,7 @@
 #define HJStroeTabbarImgKey     @"imageName"
 #define HJStroeTabbarSelImgKey  @"selectedImageName"
 
-#define HJStoreTokenKey  @"kHJStoreTokenKey"
-#define kUserInfoKey @"kUserInfoKey"
+#define kUserInfoKey @"kUserInfoKeyVersion1"
 
 /***** consts ******/
 // 导航栏高度
@@ -78,3 +78,6 @@
 #define REQ_TIMEOUT 20
 
 #endif /* HJMacros_h */
+
+
+

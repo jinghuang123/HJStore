@@ -153,6 +153,19 @@
     }];
 }
 
+- (void)logOutActionSuccess:(CompletionSuccessBlock)success
+                       fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlLogout];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
+
+
+
 
 - (void)getInvitationInfoSuccess:(CompletionSuccessBlock)success
                             fail:(CompletionFailBlock)fail {

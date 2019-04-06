@@ -8,7 +8,7 @@
 
 #import "HJSuperViewController.h"
 #import <WebKit/WebKit.h>
-@interface YFPolicyWebVC : HJSuperViewController
+@interface YFPolicyWebVC : HJSuperViewController 
 
 @property(nonatomic,strong) NSString *labTitle;
 @property(nonatomic,strong) NSString *policyUrl;

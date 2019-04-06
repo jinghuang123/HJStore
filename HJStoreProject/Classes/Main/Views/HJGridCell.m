@@ -63,12 +63,12 @@
 - (void)updeteCellWithGridItem:(HJCategoryModel *)category {
     _gridLabel.text = category.name;
     if (category.image.length == 0) return;
-    [_gridImageView sd_setImageWithURLString:category.image placeholderImage:[UIImage imageNamed:@"default_49_11"]];
+    [_gridImageView sd_setImageWithURLString:category.image placeholderImage:PLACEHOLDER_Category];
 }
 
 - (void)updeteCellWithActivityItem:(HJActivityModel *)activity {
     _gridLabel.text = activity.name;
     if (activity.pic_image.length == 0) return;
-    [_gridImageView sd_setImageWithURLString:activity.pic_image placeholderImage:[UIImage imageNamed:@"default_49_11"]];
+    [_gridImageView sd_setImageWithURLString:activity.pic_image placeholderImage:PLACEHOLDER_Category];
 }
 @end

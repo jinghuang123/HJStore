@@ -75,7 +75,20 @@
 }
 
 - (void)setupNavItems {
-
+    UIButton *leftNav = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftNav setBackgroundImage:[UIImage imageNamed:@"main_Nav_left"] forState:UIControlStateNormal];
+    [leftNav addTarget:self action:@selector(onClickLeft) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftNav];
+    self.navigationItem.leftBarButtonItem = leftButtonItem;
+    
+    
+    UIButton *rightNav = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightNav setBackgroundImage:[UIImage imageNamed:@"main_Nav_right"] forState:UIControlStateNormal];
+    [rightNav addTarget:self action:@selector(onClickRight) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightNav];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
     //设置圆角效果
     bgView.layer.cornerRadius = 14;
@@ -88,10 +101,13 @@
         [self.navigationController pushViewController:searchvc animated:YES];
     }];
     
-    UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2.5, MaxWidth, 25)];
+    UIImageView *searchIcon= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_search_icon"]];
+    searchIcon.frame = CGRectMake(5, 6, 22, 18);
+    [bgView addSubview:searchIcon];
+    UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 2.5, 280, 25)];
     tiplabel.text = @"粘粘宝贝标题，先领劵省钱再购物";
     tiplabel.textColor = [UIColor grayColor];
-    tiplabel.textAlignment = NSTextAlignmentCenter;
+    tiplabel.textAlignment = NSTextAlignmentLeft;
     tiplabel.font = [UIFont systemFontOfSize:13];
     [bgView addSubview:tiplabel];
     

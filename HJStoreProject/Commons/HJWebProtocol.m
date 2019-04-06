@@ -41,6 +41,8 @@ Declare(kUrlGetCode, "api/sms/send") /* 3.11 获取验证码 */
 Declare(kUrlCheckCode, "api/sms/check") /* 3.12 验证验证码 */
 Declare(kUrlWechatLogin, "api/user/wechatlogin") /*3.13 微信登陆*/
 Declare(kUrlWechatBonding, "api/user/wechatbind") /*3.14 微信绑定*/
+Declare(kUrlUpdateGroup, "api/user/upgrade") /*3.15 升级运营商*/
+
 
 Declare(kUrlRecommendTitles, "api/bbs/getBbsChannel") /* 4.1 社区分类 */
 Declare(kUrlRecommendList, "api/bbs/getBbsList") /* 4.2 社区列表数据 */
@@ -51,8 +53,12 @@ Declare(kURLGetInvitationList, "api/setting/getInvitationInfo") /* 5.3 查询邀
 Declare(kURLApplyCash, "api/setting/applyCashWithdrawal") /* 5.4 申请提现 */
 Declare(kURLGetApplyCashList, "api/setting/getCashWithdrawalRecord") /* 5.4 提现记录 */
 Declare(kURLFileUpload, @"api/common/upload") /* 5.5 文件上传*/
-Declare(kURLGetBanners, @"api/common/getBanner") /*5.6 获取banners*/
-
+Declare(kURLGetBanners, @"api/common/getBanner") /* 5.6 获取banners */
+Declare(kUrlGetGeneralInfo, @"api/user/getGeneralInfo") /* 5.7 获取收益概要信息 */
+Declare(kUrlGetWeiquanOrders, @"api/order/getWeiquanOrders") /* 5.8 获取维权订单 */
+Declare(kUrlGetCommissionInfo, @"api/user/getCommissionInfo") /* 5.9 获取收益明细 */
+Declare(kUrlGetKefuInfo, @"api/setting/getKefuInfo") /* 5.10 获取维权订单 */
+Declare(kUrlGetServiceInfo, @"api/setting/getKefuInfo") /* 5.11 获取客服信息 */
 
 Declare(kURLGetOrderList, @"api/order/getOrder") /* 6.1 获取订单*/
 

@@ -22,6 +22,7 @@
 
 
 + (instancetype)shared;
+
 @end
 
 

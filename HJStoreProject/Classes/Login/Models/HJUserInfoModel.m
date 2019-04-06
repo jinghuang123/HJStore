@@ -23,6 +23,8 @@
     [aCoder encodeObject:_token forKey:@"token"];
     [aCoder encodeObject:_user_id forKey:@"user_id"];
     [aCoder encodeObject:_username forKey:@"username"];
+    [aCoder encodeObject:_code forKey:@"code"];
+    [aCoder encodeInteger:_group_id forKey:@"group_id"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -37,6 +39,8 @@
         self.token = [aDecoder decodeObjectForKey:@"token"];
         self.user_id = [aDecoder decodeObjectForKey:@"user_id"];
         self.username = [aDecoder decodeObjectForKey:@"username"];
+        self.code = [aDecoder decodeObjectForKey:@"code"];
+        self.group_id = [aDecoder decodeIntForKey:@"group_id"];
 
     }
     return self;
@@ -48,8 +52,7 @@
     [NSUserDefaults jk_setArcObject:self forKey:kUserInfoKey];
 }
 
-+ (HJUserInfoModel *)getSavedUserInfo
-{
++ (HJUserInfoModel *)getSavedUserInfo {
     HJUserInfoModel *info = nil;
     
     info = [NSUserDefaults jk_arcObjectForKey:kUserInfoKey];

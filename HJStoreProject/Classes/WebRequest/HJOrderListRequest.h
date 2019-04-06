@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "HJOrderListItemModel.h"
 
 @interface HJOrderListRequest : NSObject
 + (instancetype)shared;

@@ -12,6 +12,13 @@
 		1815144B224610120069AF5C /* HJOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1815144A224610120069AF5C /* HJOrderItemCell.m */; };
 		1815144E224617D40069AF5C /* HJOrderListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1815144D224617D40069AF5C /* HJOrderListItemModel.m */; };
 		18151451224656790069AF5C /* HJFenceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18151450224656790069AF5C /* HJFenceRequest.m */; };
+		182C630B2258550F00BF8397 /* HJCommissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C630A2258550F00BF8397 /* HJCommissionInfo.m */; };
+		182C630E2258583400BF8397 /* HJWeiquanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C630D2258583400BF8397 /* HJWeiquanModel.m */; };
+		182C6312225865A200BF8397 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C6311225865A200BF8397 /* UIView+Toast.m */; };
+		182C65D7225882D500BF8397 /* HJDrawalRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C65D6225882D500BF8397 /* HJDrawalRecordModel.m */; };
+		182C65DA22588A3D00BF8397 /* HJServiceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C65D922588A3D00BF8397 /* HJServiceInfoModel.m */; };
+		182C65DD22589CD300BF8397 /* HJUpdateGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C65DC22589CD300BF8397 /* HJUpdateGroupModel.m */; };
+		182C65E022589FD200BF8397 /* HJGropPopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C65DF22589FD200BF8397 /* HJGropPopVC.m */; };
 		187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CE7FA21C13639005B9D77 /* HJSegemengVC.m */; };
 		18B08668224CEC11006BB844 /* HJAboutUSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B08667224CEC11006BB844 /* HJAboutUSVC.m */; };
 		18D226512256243B00901619 /* HJPopToSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D226502256243B00901619 /* HJPopToSearchViewController.m */; };
@@ -19,6 +26,11 @@
 		18D57DF52247738300D970F7 /* HJFenceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D57DF42247738300D970F7 /* HJFenceModel.m */; };
 		18DFC50E224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC50D224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m */; };
 		18DFC511224F1EE1008F8F43 /* HJEarnDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC510224F1EE1008F8F43 /* HJEarnDetailCell.m */; };
+		18F07FCD2256FA3F0063A52F /* HJEarnDetailPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F07FCC2256FA3F0063A52F /* HJEarnDetailPage.m */; };
+		18F07FD02256FA740063A52F /* HJEarnDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F07FCF2256FA740063A52F /* HJEarnDetailVC.m */; };
+		18F07FD3225709FE0063A52F /* HJMyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F07FD2225709FE0063A52F /* HJMyCollectionVC.m */; };
+		18F07FD922570B160063A52F /* HJMessageListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F07FD822570B160063A52F /* HJMessageListVC.m */; };
+		18FFE858225765F8009A6895 /* HJGeneralInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FFE857225765F8009A6895 /* HJGeneralInfo.m */; };
 		296F06B196B4CBA081E8D294 /* libPods-HJStoreProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */; };
 		B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */; };
 		B8052FAE21DE2E0300F125F4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B8052FAD21DE2E0300F125F4 /* yw_1222.jpg */; };
@@ -197,6 +209,20 @@
 		1815144D224617D40069AF5C /* HJOrderListItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJOrderListItemModel.m; sourceTree = "<group>"; };
 		1815144F224656790069AF5C /* HJFenceRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJFenceRequest.h; sourceTree = "<group>"; };
 		18151450224656790069AF5C /* HJFenceRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJFenceRequest.m; sourceTree = "<group>"; };
+		182C63092258550F00BF8397 /* HJCommissionInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJCommissionInfo.h; sourceTree = "<group>"; };
+		182C630A2258550F00BF8397 /* HJCommissionInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJCommissionInfo.m; sourceTree = "<group>"; };
+		182C630C2258583400BF8397 /* HJWeiquanModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJWeiquanModel.h; sourceTree = "<group>"; };
+		182C630D2258583400BF8397 /* HJWeiquanModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJWeiquanModel.m; sourceTree = "<group>"; };
+		182C6310225865A200BF8397 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		182C6311225865A200BF8397 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		182C65D5225882D500BF8397 /* HJDrawalRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDrawalRecordModel.h; sourceTree = "<group>"; };
+		182C65D6225882D500BF8397 /* HJDrawalRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDrawalRecordModel.m; sourceTree = "<group>"; };
+		182C65D822588A3D00BF8397 /* HJServiceInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJServiceInfoModel.h; sourceTree = "<group>"; };
+		182C65D922588A3D00BF8397 /* HJServiceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJServiceInfoModel.m; sourceTree = "<group>"; };
+		182C65DB22589CD300BF8397 /* HJUpdateGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJUpdateGroupModel.h; sourceTree = "<group>"; };
+		182C65DC22589CD300BF8397 /* HJUpdateGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJUpdateGroupModel.m; sourceTree = "<group>"; };
+		182C65DE22589FD200BF8397 /* HJGropPopVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJGropPopVC.h; sourceTree = "<group>"; };
+		182C65DF22589FD200BF8397 /* HJGropPopVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJGropPopVC.m; sourceTree = "<group>"; };
 		187CE7F921C13639005B9D77 /* HJSegemengVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSegemengVC.h; sourceTree = "<group>"; };
 		187CE7FA21C13639005B9D77 /* HJSegemengVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSegemengVC.m; sourceTree = "<group>"; };
 		18B08666224CEC11006BB844 /* HJAboutUSVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJAboutUSVC.h; sourceTree = "<group>"; };
@@ -211,6 +237,16 @@
 		18DFC50D224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJEarnDeatilRecordVC.m; sourceTree = "<group>"; };
 		18DFC50F224F1EE1008F8F43 /* HJEarnDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJEarnDetailCell.h; sourceTree = "<group>"; };
 		18DFC510224F1EE1008F8F43 /* HJEarnDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJEarnDetailCell.m; sourceTree = "<group>"; };
+		18F07FCB2256FA3F0063A52F /* HJEarnDetailPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJEarnDetailPage.h; sourceTree = "<group>"; };
+		18F07FCC2256FA3F0063A52F /* HJEarnDetailPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJEarnDetailPage.m; sourceTree = "<group>"; };
+		18F07FCE2256FA740063A52F /* HJEarnDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJEarnDetailVC.h; sourceTree = "<group>"; };
+		18F07FCF2256FA740063A52F /* HJEarnDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJEarnDetailVC.m; sourceTree = "<group>"; };
+		18F07FD1225709FE0063A52F /* HJMyCollectionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMyCollectionVC.h; sourceTree = "<group>"; };
+		18F07FD2225709FE0063A52F /* HJMyCollectionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMyCollectionVC.m; sourceTree = "<group>"; };
+		18F07FD722570B160063A52F /* HJMessageListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMessageListVC.h; sourceTree = "<group>"; };
+		18F07FD822570B160063A52F /* HJMessageListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMessageListVC.m; sourceTree = "<group>"; };
+		18FFE856225765F8009A6895 /* HJGeneralInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJGeneralInfo.h; sourceTree = "<group>"; };
+		18FFE857225765F8009A6895 /* HJGeneralInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJGeneralInfo.m; sourceTree = "<group>"; };
 		2A9627EBDD40F69EA553FBA1 /* Pods-HJStoreProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.debug.xcconfig"; sourceTree = "<group>"; };
 		2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJStoreProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject.release.xcconfig"; sourceTree = "<group>"; };
 		4AAA644948A67C240F9B455C /* libPods-HJStoreProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJStoreProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,6 +586,108 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		182C630F225865A200BF8397 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				182C6310225865A200BF8397 /* UIView+Toast.h */,
+				182C6311225865A200BF8397 /* UIView+Toast.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		18F07FD422570A180063A52F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				18D57DF32247738300D970F7 /* HJFenceModel.h */,
+				18D57DF42247738300D970F7 /* HJFenceModel.m */,
+				1815144C224617D40069AF5C /* HJOrderListItemModel.h */,
+				1815144D224617D40069AF5C /* HJOrderListItemModel.m */,
+				18FFE856225765F8009A6895 /* HJGeneralInfo.h */,
+				18FFE857225765F8009A6895 /* HJGeneralInfo.m */,
+				182C63092258550F00BF8397 /* HJCommissionInfo.h */,
+				182C630A2258550F00BF8397 /* HJCommissionInfo.m */,
+				182C630C2258583400BF8397 /* HJWeiquanModel.h */,
+				182C630D2258583400BF8397 /* HJWeiquanModel.m */,
+				182C65D5225882D500BF8397 /* HJDrawalRecordModel.h */,
+				182C65D6225882D500BF8397 /* HJDrawalRecordModel.m */,
+				182C65D822588A3D00BF8397 /* HJServiceInfoModel.h */,
+				182C65D922588A3D00BF8397 /* HJServiceInfoModel.m */,
+				182C65DB22589CD300BF8397 /* HJUpdateGroupModel.h */,
+				182C65DC22589CD300BF8397 /* HJUpdateGroupModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		18F07FD522570A260063A52F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B817ABA021F4732C00363C2F /* HJMeView.h */,
+				B817ABA121F4732C00363C2F /* HJMeView.m */,
+				B817ABA621F4AC6B00363C2F /* HJUserInfoView.h */,
+				B817ABA721F4AC6B00363C2F /* HJUserInfoView.m */,
+				B88057F321F87D02000DBEEF /* HJUserInfoCell.h */,
+				B88057F421F87D02000DBEEF /* HJUserInfoCell.m */,
+				B816E5D721F9BD57008EE594 /* HJUserInfoFootView.h */,
+				B816E5D821F9BD57008EE594 /* HJUserInfoFootView.m */,
+				B8CE27A321FC8E1B0059FB9E /* HJFenceItemCell.h */,
+				B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */,
+				18DFC50F224F1EE1008F8F43 /* HJEarnDetailCell.h */,
+				18DFC510224F1EE1008F8F43 /* HJEarnDetailCell.m */,
+				18151449224610120069AF5C /* HJOrderItemCell.h */,
+				1815144A224610120069AF5C /* HJOrderItemCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		18F07FD622570A2F0063A52F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B8A9181621AFD0A2006733BA /* HJMineVC.h */,
+				B8A9181721AFD0A2006733BA /* HJMineVC.m */,
+				B817ABA321F49CB800363C2F /* HJUserInfoSetVC.h */,
+				B817ABA421F49CB800363C2F /* HJUserInfoSetVC.m */,
+				B8CE278821FC5C560059FB9E /* HJUserNameSetVC.h */,
+				B8CE278921FC5C560059FB9E /* HJUserNameSetVC.m */,
+				B8CE278B21FC60A90059FB9E /* HJZFBBindingVC.h */,
+				B8CE278C21FC60A90059FB9E /* HJZFBBindingVC.m */,
+				B8CE278E21FC60C30059FB9E /* HJWeChatBindingVC.h */,
+				B8CE278F21FC60C30059FB9E /* HJWeChatBindingVC.m */,
+				B8CE279121FC60DA0059FB9E /* HJTaoBaoBindingVC.h */,
+				B8CE279221FC60DA0059FB9E /* HJTaoBaoBindingVC.m */,
+				B8CE279421FC60FC0059FB9E /* HJMobileChangeVC.h */,
+				B8CE279521FC60FC0059FB9E /* HJMobileChangeVC.m */,
+				B8CE27A021FC85F00059FB9E /* HJFencePageVC.h */,
+				B8CE27A121FC85F00059FB9E /* HJFencePageVC.m */,
+				B8CE279D21FC84840059FB9E /* HJFenceListVC.h */,
+				B8CE279E21FC84840059FB9E /* HJFenceListVC.m */,
+				B8086B8722354B8A00668E27 /* HJEarningVC.h */,
+				B8086B8822354B8A00668E27 /* HJEarningVC.m */,
+				18DFC50C224F1D0E008F8F43 /* HJEarnDeatilRecordVC.h */,
+				18DFC50D224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m */,
+				181514432246094D0069AF5C /* HJOrderPageVC.h */,
+				181514442246094D0069AF5C /* HJOrderPageVC.m */,
+				B8086B8A22354BA900668E27 /* HJOrderListVC.h */,
+				B8086B8B22354BA900668E27 /* HJOrderListVC.m */,
+				B8086B8D22354BE300668E27 /* HJInvitationListVC.h */,
+				B8086B8E22354BE300668E27 /* HJInvitationListVC.m */,
+				18D57DF0224769A200D970F7 /* HJMeizhiCustomServiceVC.h */,
+				18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */,
+				18B08666224CEC11006BB844 /* HJAboutUSVC.h */,
+				18B08667224CEC11006BB844 /* HJAboutUSVC.m */,
+				18F07FCB2256FA3F0063A52F /* HJEarnDetailPage.h */,
+				18F07FCC2256FA3F0063A52F /* HJEarnDetailPage.m */,
+				18F07FCE2256FA740063A52F /* HJEarnDetailVC.h */,
+				18F07FCF2256FA740063A52F /* HJEarnDetailVC.m */,
+				18F07FD1225709FE0063A52F /* HJMyCollectionVC.h */,
+				18F07FD2225709FE0063A52F /* HJMyCollectionVC.m */,
+				18F07FD722570B160063A52F /* HJMessageListVC.h */,
+				18F07FD822570B160063A52F /* HJMessageListVC.m */,
+				182C65DE22589FD200BF8397 /* HJGropPopVC.h */,
+				182C65DF22589FD200BF8397 /* HJGropPopVC.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		B810EE1621E0C7A10059CACC /* XLPhotoBrowser+CoderXL */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +744,7 @@
 		B815D9D621C3C6640093CCD3 /* 3RD */ = {
 			isa = PBXGroup;
 			children = (
+				182C630F225865A200BF8397 /* Toast */,
 				B8E086A021E1E58000792D40 /* shareSDK */,
 				B810EE1621E0C7A10059CACC /* XLPhotoBrowser+CoderXL */,
 				B8264A6721D8BFE100004420 /* MYPresentation */,
@@ -905,56 +1044,9 @@
 		B8A9180B21AFCFBB006733BA /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				B8A9181621AFD0A2006733BA /* HJMineVC.h */,
-				B8A9181721AFD0A2006733BA /* HJMineVC.m */,
-				B817ABA021F4732C00363C2F /* HJMeView.h */,
-				B817ABA121F4732C00363C2F /* HJMeView.m */,
-				B817ABA321F49CB800363C2F /* HJUserInfoSetVC.h */,
-				B817ABA421F49CB800363C2F /* HJUserInfoSetVC.m */,
-				B817ABA621F4AC6B00363C2F /* HJUserInfoView.h */,
-				B817ABA721F4AC6B00363C2F /* HJUserInfoView.m */,
-				B88057F321F87D02000DBEEF /* HJUserInfoCell.h */,
-				B88057F421F87D02000DBEEF /* HJUserInfoCell.m */,
-				B816E5D721F9BD57008EE594 /* HJUserInfoFootView.h */,
-				B816E5D821F9BD57008EE594 /* HJUserInfoFootView.m */,
-				B8CE278821FC5C560059FB9E /* HJUserNameSetVC.h */,
-				B8CE278921FC5C560059FB9E /* HJUserNameSetVC.m */,
-				B8CE278B21FC60A90059FB9E /* HJZFBBindingVC.h */,
-				B8CE278C21FC60A90059FB9E /* HJZFBBindingVC.m */,
-				B8CE278E21FC60C30059FB9E /* HJWeChatBindingVC.h */,
-				B8CE278F21FC60C30059FB9E /* HJWeChatBindingVC.m */,
-				B8CE279121FC60DA0059FB9E /* HJTaoBaoBindingVC.h */,
-				B8CE279221FC60DA0059FB9E /* HJTaoBaoBindingVC.m */,
-				B8CE279421FC60FC0059FB9E /* HJMobileChangeVC.h */,
-				B8CE279521FC60FC0059FB9E /* HJMobileChangeVC.m */,
-				B8CE27A021FC85F00059FB9E /* HJFencePageVC.h */,
-				B8CE27A121FC85F00059FB9E /* HJFencePageVC.m */,
-				B8CE279D21FC84840059FB9E /* HJFenceListVC.h */,
-				B8CE279E21FC84840059FB9E /* HJFenceListVC.m */,
-				B8CE27A321FC8E1B0059FB9E /* HJFenceItemCell.h */,
-				B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */,
-				18D57DF32247738300D970F7 /* HJFenceModel.h */,
-				18D57DF42247738300D970F7 /* HJFenceModel.m */,
-				B8086B8722354B8A00668E27 /* HJEarningVC.h */,
-				B8086B8822354B8A00668E27 /* HJEarningVC.m */,
-				18DFC50C224F1D0E008F8F43 /* HJEarnDeatilRecordVC.h */,
-				18DFC50D224F1D0E008F8F43 /* HJEarnDeatilRecordVC.m */,
-				18DFC50F224F1EE1008F8F43 /* HJEarnDetailCell.h */,
-				18DFC510224F1EE1008F8F43 /* HJEarnDetailCell.m */,
-				181514432246094D0069AF5C /* HJOrderPageVC.h */,
-				181514442246094D0069AF5C /* HJOrderPageVC.m */,
-				B8086B8A22354BA900668E27 /* HJOrderListVC.h */,
-				B8086B8B22354BA900668E27 /* HJOrderListVC.m */,
-				18151449224610120069AF5C /* HJOrderItemCell.h */,
-				1815144A224610120069AF5C /* HJOrderItemCell.m */,
-				1815144C224617D40069AF5C /* HJOrderListItemModel.h */,
-				1815144D224617D40069AF5C /* HJOrderListItemModel.m */,
-				B8086B8D22354BE300668E27 /* HJInvitationListVC.h */,
-				B8086B8E22354BE300668E27 /* HJInvitationListVC.m */,
-				18D57DF0224769A200D970F7 /* HJMeizhiCustomServiceVC.h */,
-				18D57DF1224769A200D970F7 /* HJMeizhiCustomServiceVC.m */,
-				18B08666224CEC11006BB844 /* HJAboutUSVC.h */,
-				18B08667224CEC11006BB844 /* HJAboutUSVC.m */,
+				18F07FD622570A2F0063A52F /* Controllers */,
+				18F07FD522570A260063A52F /* Views */,
+				18F07FD422570A180063A52F /* Models */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -1185,7 +1277,7 @@
 				B8A917DF21AFB758006733BA /* Sources */,
 				B8A917E021AFB758006733BA /* Frameworks */,
 				B8A917E121AFB758006733BA /* Resources */,
-				BFC95FD9E0972F35172CACA1 /* [CP] Copy Pods Resources */,
+				7E951A5DD36EC91909838926 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1257,6 +1349,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7E951A5DD36EC91909838926 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		94D0CEEB9C0F06F4E8275780 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1275,28 +1393,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BFC95FD9E0972F35172CACA1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject-resources.sh",
-				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HJStoreProject/Pods-HJStoreProject-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1310,6 +1406,7 @@
 				B811D7E321CE1AB000FBED10 /* HJActivityModel.m in Sources */,
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
 				B886D68E21E9951500201231 /* HJLoginRegistRequest.m in Sources */,
+				18F07FD02256FA740063A52F /* HJEarnDetailVC.m in Sources */,
 				B8264A7321D8BFE100004420 /* MYColorBackView.m in Sources */,
 				B88057F521F87D02000DBEEF /* HJUserInfoCell.m in Sources */,
 				B8E38B5C21C94076008C216F /* HJCategoryRequest.m in Sources */,
@@ -1318,6 +1415,7 @@
 				B8A9181E21AFD334006733BA /* HJNavigationVC.m in Sources */,
 				B810EE4121E0C7A10059CACC /* FSActionSheet.m in Sources */,
 				B821268121D9BC2E007828B2 /* SegmentHeaderView.m in Sources */,
+				182C6312225865A200BF8397 /* UIView+Toast.m in Sources */,
 				181514452246094D0069AF5C /* HJOrderPageVC.m in Sources */,
 				B86E7ADF21B4D49F0094B82B /* HJMainTopToolView.m in Sources */,
 				B873DA4D21B0E29B008DBC66 /* HJGridCell.m in Sources */,
@@ -1335,6 +1433,7 @@
 				B8E38B5921C93BF0008C216F /* HJMainRequest.m in Sources */,
 				B856EC5221BB985B00503DF7 /* HJWebProtocol.m in Sources */,
 				B8E9B9B521F2D44900745C17 /* HMSegmentedControl+SelectionIndicatorLayer.m in Sources */,
+				18F07FD3225709FE0063A52F /* HJMyCollectionVC.m in Sources */,
 				18D57DF2224769A200D970F7 /* HJMeizhiCustomServiceVC.m in Sources */,
 				B817ABA521F49CB800363C2F /* HJUserInfoSetVC.m in Sources */,
 				B886D69A21E9C87000201231 /* HJRegistVC.m in Sources */,
@@ -1343,8 +1442,12 @@
 				B8E086D921E21D7700792D40 /* HJLoginVC.m in Sources */,
 				B810EDF621E091510059CACC /* HJShareModel.m in Sources */,
 				18B08668224CEC11006BB844 /* HJAboutUSVC.m in Sources */,
+				18F07FD922570B160063A52F /* HJMessageListVC.m in Sources */,
+				182C65D7225882D500BF8397 /* HJDrawalRecordModel.m in Sources */,
 				B8A917E821AFB758006733BA /* AppDelegate.m in Sources */,
 				B873DA5B21B1160D008DBC66 /* Reachability.m in Sources */,
+				182C65E022589FD200BF8397 /* HJGropPopVC.m in Sources */,
+				18F07FCD2256FA3F0063A52F /* HJEarnDetailPage.m in Sources */,
 				B8CE27A521FC8E1B0059FB9E /* HJFenceItemCell.m in Sources */,
 				B8E9B9B821F2D81400745C17 /* HJRecommendItemModel.m in Sources */,
 				B873DA6221B12F71008DBC66 /* HJGoodItemCell.m in Sources */,
@@ -1372,6 +1475,7 @@
 				B8CE27A221FC85F00059FB9E /* HJFencePageVC.m in Sources */,
 				B8052FAC21DE2DBB00F125F4 /* HJSearchVC.m in Sources */,
 				B8E9B9CF21F3121000745C17 /* HJRecommendItemCell.m in Sources */,
+				182C630E2258583400BF8397 /* HJWeiquanModel.m in Sources */,
 				B8086B8922354B8A00668E27 /* HJEarningVC.m in Sources */,
 				B810EE3921E0C7A10059CACC /* XLProgressView.m in Sources */,
 				B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */,
@@ -1385,11 +1489,14 @@
 				B8E0869F21E1E28100792D40 /* HJShareMainImageView.m in Sources */,
 				B8CE279F21FC84840059FB9E /* HJFenceListVC.m in Sources */,
 				B8E086DD21E222BE00792D40 /* UIButton+init.m in Sources */,
+				182C65DD22589CD300BF8397 /* HJUpdateGroupModel.m in Sources */,
 				B810EE4321E0C7A10059CACC /* FSActionSheetItem.m in Sources */,
+				18FFE858225765F8009A6895 /* HJGeneralInfo.m in Sources */,
 				B8CE278A21FC5C560059FB9E /* HJUserNameSetVC.m in Sources */,
 				B8E9B9BE21F2E60D00745C17 /* HHBlogAssetView.m in Sources */,
 				B810EDEA21E055920059CACC /* HJSearchListVC.m in Sources */,
 				B811D7EC21CE1F4500FBED10 /* UIImageView+HHWebImage.m in Sources */,
+				182C65DA22588A3D00BF8397 /* HJServiceInfoModel.m in Sources */,
 				B856EC5B21BBA3AA00503DF7 /* OneView.m in Sources */,
 				18D226512256243B00901619 /* HJPopToSearchViewController.m in Sources */,
 				B8CE279621FC60FC0059FB9E /* HJMobileChangeVC.m in Sources */,
@@ -1398,6 +1505,7 @@
 				B873DA5821B1156D008DBC66 /* HJNetworkType.m in Sources */,
 				B810EDED21E058470059CACC /* LLSearchView.m in Sources */,
 				B8A9181821AFD0A2006733BA /* HJMineVC.m in Sources */,
+				182C630B2258550F00BF8397 /* HJCommissionInfo.m in Sources */,
 				B86E7AD921B4BE730094B82B /* HJMainAdCell.m in Sources */,
 				B8CE279C21FC7FEA0059FB9E /* HJTextField.m in Sources */,
 				B811D7E021CE18EF00FBED10 /* HJBannerModel.m in Sources */,

@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
+#import "HJGeneralInfo.h"
+#import "HJCommissionInfo.h"
+#import "HJWeiquanModel.h"
+#import "HJDrawalRecordModel.h"
+#import "HJServiceInfoModel.h"
+#import "HJUpdateGroupModel.h"
 
 @interface HJSettingRequest : NSObject
 
@@ -21,6 +25,21 @@
 - (void)getBannersWithType:(NSInteger)type
                    Success:(CompletionSuccessBlock)success
                       fail:(CompletionFailBlock)fail;
+
+- (void)getGeneralInfoSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail;
+
+- (void)getCommissionInfoSuccess:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail;
+
+- (void)getWeiquanOrderSuccess:(CompletionSuccessBlock)success
+                          fail:(CompletionFailBlock)fail;
+
+- (void)getServiceInfoSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail;
+
+- (void)getUpdateGroupSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail;
 
 @end
 

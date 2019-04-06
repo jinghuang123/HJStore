@@ -8,6 +8,7 @@
 
 #import "HJFenceRequest.h"
 
+
 @implementation HJFenceRequest
 
 + (instancetype)shared {
@@ -34,7 +35,9 @@
         url = [kHTTPManager getTokenUrl:kUrlGetRecommendChildren];
     }
     [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        success(responseObject);
+        NSArray *fences = responseObject;
+        NSArray *fenceModels = [HJFenceModel mj_objectArrayWithKeyValuesArray:fences];
+        success(fenceModels);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];

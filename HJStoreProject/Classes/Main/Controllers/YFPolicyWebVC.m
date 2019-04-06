@@ -9,7 +9,7 @@
 #import "YFPolicyWebVC.h"
 #import <Masonry.h>
 #import "WebViewJavascriptBridge.h"
-
+#import "HJUserInfoModel.h"
 
 @interface YFPolicyWebVC ()<WKNavigationDelegate>
 @property (retain, nonatomic) UIProgressView *progressView;
@@ -31,6 +31,14 @@
     return self;
 }
 
+
+- (void)setPolicyUrl:(NSString *)policyUrl {
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if (![policyUrl containsString:@"token"]) {
+        policyUrl = [NSString stringWithFormat:@"%@?token=%@",policyUrl,userInfo.token];
+    }
+    _policyUrl = policyUrl;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,6 +111,7 @@
     }];
     //设置进度条的高度，下面这句代码表示进度条的宽度变为原来的1倍，高度变为原来的1.5倍.
     self.progressView.transform = CGAffineTransformMakeScale(1.0f, 2.0f);
+
 }
 
 
@@ -182,13 +191,23 @@
 }
 
 - (void)hh_popViewController {
+
+}
+
+- (void)jk_backButtonTouched:(JKBackButtonHandler)backButtonHandler {
+    
+}
+
+- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
     if (_webView.canGoBack) {
         [_webView goBack];
+        return NO;
     }else{
         [self.navigationController popViewControllerAnimated:YES];
         if(_onBackClick){
             _onBackClick(nil);
         }
+        return YES;
     }
 }
 

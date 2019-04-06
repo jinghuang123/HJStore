@@ -21,7 +21,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
-    if (userInfo.token) {
+    if (userInfo.token && userInfo.token.length > 0) {
         [self closeBtnClick];
     }
 }

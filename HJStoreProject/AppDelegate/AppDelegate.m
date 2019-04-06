@@ -14,6 +14,7 @@
 #import "HJShareInstance.h"
 #import "HJPopToSearchViewController.h"
 #import "HJSearchListVC.h"
+#import "HJUserInfoModel.h"
 
 #define kLastSearchKey @"kLastSearchKey"
 
@@ -37,7 +38,14 @@
     } fail:^(NSError *error) {
     }];
     
-
+    
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if (userInfo.token && userInfo.token.length > 0) {
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(HJEarningModel *earning) {
+        } fail:^(NSError *error) {
+        }];
+    }
+    
     
     [NSThread sleepForTimeInterval:0.5];
     HJTabBarVC *tabbarVc = [[HJTabBarVC alloc] init];
@@ -73,7 +81,7 @@
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     NSLog(@">>>>>>>>%@",pasteboard.string);
     NSString *lastStr = [NSUserDefaults jk_stringForKey:kLastSearchKey];
-    if(![lastStr isEqualToString:pasteboard.string] && ![pasteboard.string isEqualToString:@""]){
+    if(pasteboard.string && ![lastStr isEqualToString:pasteboard.string] && ![pasteboard.string isEqualToString:@""]){
         [self popSearchView:pasteboard.string];
         [NSUserDefaults jk_setObject:pasteboard.string forKey:kLastSearchKey];
     }else{

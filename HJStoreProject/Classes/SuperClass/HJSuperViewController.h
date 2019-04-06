@@ -10,7 +10,7 @@
 
 
 
-@interface HJSuperViewController : UIViewController
+@interface HJSuperViewController : UIViewController 
 - (void)setNavBackItem;
 @end
 

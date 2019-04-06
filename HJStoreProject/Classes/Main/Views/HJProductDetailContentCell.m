@@ -225,7 +225,7 @@
     CGFloat final_value = [item.zk_final_price floatValue];
     CGFloat couponValue = [item.coupon_amount floatValue];
     NSString *value = [NSString stringWithFormat:@"%.2f", final_value - couponValue];
-    _priceLabel.text = [NSString stringWithFormat:@"%@   %@",value,item.reserve_price];
+    _priceLabel.text = [NSString stringWithFormat:@"%@   %@",value,item.zk_final_price];
     //3.初始化NSTextAttachment对象
     if(item.user_type == 0) {
         _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];

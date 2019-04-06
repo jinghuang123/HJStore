@@ -53,7 +53,8 @@ static NSString *cellReuseID = @"cellReuseID";
         NSInteger count = self.model.goods.count > 0 ? self.model.goods.count: self.model.images.count;
         count = count > 9 ? 9 : count;
         CGFloat height = ((count - 1) / 3 + 1) * (width / 3) + (count - 1) / 3 * 15 ;
-            self.height.constant = height;
+        height = count == 1 ? width/2 : height;
+        self.height.constant = height;
     }
     weakify(self)
     [self.shareView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -97,9 +98,19 @@ static NSString *cellReuseID = @"cellReuseID";
     CGFloat width = MaxWidth - 45;
     if (self.model.goods.count!=0)
     {
-        return CGSizeMake(width / 3, width / 3);
+        if(self.model.goods.count == 1) {
+            return CGSizeMake(width  / 2, width / 2);
+        }else{
+            return CGSizeMake(width / 3, width / 3);
+        }
+        
     }else if(self.model.images.count !=0){
-        return CGSizeMake(width / 3, width / 3);
+        if(self.model.images.count == 1) {
+            return CGSizeMake(width/2, width / 2);
+        }else{
+            return CGSizeMake(width / 3, width / 3);
+        }
+    
     }
     return CGSizeZero;
 }
