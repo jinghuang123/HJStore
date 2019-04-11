@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18050A6C2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18050A6B2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.m */; };
 		181514452246094D0069AF5C /* HJOrderPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181514442246094D0069AF5C /* HJOrderPageVC.m */; };
 		1815144822460E3B0069AF5C /* HJOrderListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1815144722460E3B0069AF5C /* HJOrderListRequest.m */; };
 		1815144B224610120069AF5C /* HJOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1815144A224610120069AF5C /* HJOrderItemCell.m */; };
@@ -199,6 +200,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18050A6A2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJTaobaoAuthorPopVC.h; sourceTree = "<group>"; };
+		18050A6B2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJTaobaoAuthorPopVC.m; sourceTree = "<group>"; };
 		181514432246094D0069AF5C /* HJOrderPageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJOrderPageVC.h; sourceTree = "<group>"; };
 		181514442246094D0069AF5C /* HJOrderPageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJOrderPageVC.m; sourceTree = "<group>"; };
 		1815144622460E3B0069AF5C /* HJOrderListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJOrderListRequest.h; sourceTree = "<group>"; };
@@ -684,6 +687,8 @@
 				18F07FD822570B160063A52F /* HJMessageListVC.m */,
 				182C65DE22589FD200BF8397 /* HJGropPopVC.h */,
 				182C65DF22589FD200BF8397 /* HJGropPopVC.m */,
+				18050A6A2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.h */,
+				18050A6B2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1483,6 +1488,7 @@
 				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
 				B86E7ADC21B4C1300094B82B /* HJMainGridSectionFootView.m in Sources */,
 				B848BC6E21F0180700AAE751 /* HJRecommendPagesVC.m in Sources */,
+				18050A6C2258DFBB00DAFA79 /* HJTaobaoAuthorPopVC.m in Sources */,
 				B840430621DA400A0025B0CC /* HJProductDetailContentCell.m in Sources */,
 				B821268021D9BC2E007828B2 /* SegmentView.m in Sources */,
 				B810EE4021E0C7A10059CACC /* FSActionSheetConfig.m in Sources */,

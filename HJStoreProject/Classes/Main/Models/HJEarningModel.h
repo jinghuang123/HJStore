@@ -18,11 +18,11 @@
 @property (nonatomic , copy) NSString   *adzone_id;
 @property (nonatomic , copy) NSString   *pid;
 @property (nonatomic , copy) NSString   *member_invitecode;
+@property (nonatomic , copy) NSString  *relation_id;
+@property (nonatomic , copy) NSString  *special_id;
 
-
-
-+ (instancetype)shared;
-
+- (void)saveEarnConfiger2Phone;
++ (HJEarningModel *)getSavedEarnConfiger;
 @end
 
 

@@ -72,8 +72,6 @@
 
 - (void)getShareDataCache:(BOOL)cache
                 productId:(NSString *)productId
-                    title:(NSString *)title
-                      url:(NSString *)url
                   success:(CompletionSuccessBlock)success
                      fail:(CompletionFailBlock)fail;
 

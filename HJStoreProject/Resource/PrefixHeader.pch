@@ -29,7 +29,7 @@
 #import "HJTextField.h"
 #import "NSString+Extension.h"
 #import "UIView+Toast.h"
-
+#import "HJUserInfoModel.h"
 
 
 

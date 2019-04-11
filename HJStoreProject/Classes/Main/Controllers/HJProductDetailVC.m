@@ -13,6 +13,7 @@
 #import "HJProductDetailContentCell.h"
 #import "HJShareVC.h"
 #import "HJShareMainImageView.h"
+#import "HJUserInfoModel.h"
 
 static NSString *const HJProductDetailContentCellIdentifier = @"HJProductDetailContentCell";
 static NSString *const HJProductDetailCellIdentifier = @"HJProductDetailCell";
@@ -69,7 +70,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         self.detailmodel = recommendModel;
         NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",recommendModel.coupon_amount];
         [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
-        self.earningLabel.text = @"赚¥6.88";
+        self.earningLabel.text = [NSString stringWithFormat:@"赚¥%.2f",recommendModel.earning];
         [self getRamdoms];
     } fail:^(NSError *error) {
         
@@ -79,7 +80,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 - (void)getRamdoms {
     
-    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 667) andDetailModel:self.detailmodel];
+    HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 640) andDetailModel:self.detailmodel];
     self.shareMainImageV = imageV;
     [self.view addSubview:imageV];
     
@@ -316,24 +317,40 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     NSLog(@"shareAction");
     weakify(self)
     NSString *productId = [self.productId integerValue] > 0 ? self.productId : self.searchModel.item_id;
-    [[HJMainRequest shared] getShareDataCache:YES productId:productId title:self.detailmodel.title url:self.detailmodel.coupon_share_url success:^(HJShareModel *share) {
-        HJShareVC *shareVC = [[HJShareVC alloc] init];
-        share.title = self.detailmodel.title;
-        share.product_id = self.productId;
-        share.reserve_price = self.detailmodel.reserve_price;
-        share.zk_final_price = self.detailmodel.zk_final_price;
-        share.coupon_value = self.detailmodel.coupon_amount;
-        share.images = self.detailmodel.small_images;
-        share.mainImage = [weak_self getShareImage];
-        share.showCoupon = YES;
-        shareVC.shareModel = share;
-        [self.navigationController pushViewController:shareVC animated:YES];
-    } fail:^(NSError *error) {
-    }];
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if(!userInfo.token || userInfo.token.length == 0){
+        [self pushToLoginVC:NO];
+    }else {
+        [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
+            [[HJMainRequest shared] getShareDataCache:YES productId:productId success:^(HJShareModel *share) {
+                HJShareVC *shareVC = [[HJShareVC alloc] init];
+                shareVC.mainShareImage = [weak_self getShareImage];
+                shareVC.showCoupons = YES;
+                shareVC.detailmodel = weak_self.detailmodel;
+                shareVC.shareModel = share;
+                [weak_self.navigationController pushViewController:shareVC animated:YES];
+            } fail:^(NSError *error) {
+            }];
+        }];
+    }
+
+
 }
 
 - (void)couponInfo {
-    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:nil url:self.detailmodel.coupon_share_url success:nil fail:nil];
+    weakify(self)
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if(!userInfo.token || userInfo.token.length == 0){
+        [self pushToLoginVC:NO];
+    }else {
+        [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
+            [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:weak_self webView:nil url:weak_self.detailmodel.coupon_share_url success:nil fail:nil];
+        }];
+        
+    }
+    
+
+   
 }
 
 

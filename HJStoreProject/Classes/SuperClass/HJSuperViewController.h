@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HJTaobaoAuthorPopVC.h"
 
 
 @interface HJSuperViewController : UIViewController 
 - (void)setNavBackItem;
+- (void)pushToLoginVC:(BOOL)hideClose;
+- (void)showTaobaoAuthorDailogSuccess:(CompletionSuccessBlock)success;
 @end
 

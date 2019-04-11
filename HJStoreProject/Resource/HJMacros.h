@@ -64,7 +64,7 @@
 #define HJStroeTabbarSelImgKey  @"selectedImageName"
 
 #define kUserInfoKey @"kUserInfoKeyVersion1"
-
+#define kEarnConfigerKey @"kEarnConfigerKeyVersion1"
 /***** consts ******/
 // 导航栏高度
 #define HJNavH  44

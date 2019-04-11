@@ -11,7 +11,7 @@
 #import "HJMainRequest.h"
 #import "SegmentView.h"
 #import "HJSearchVC.h"
-
+#import "AlibcManager.h"
 
 @interface HJSegemengVC()
 @property (strong , nonatomic) UITextField *textField;
@@ -33,11 +33,6 @@
         [self setTopItemsWithArray:savedCategorys.categorys];
     }
     [self setupNavItems];
-    
-
-    
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    NSLog(@">>>>>>>>>>>%@",pasteboard.string);
 }
 
 - (void)setTopItemsWithArray:(NSArray *)categorys {

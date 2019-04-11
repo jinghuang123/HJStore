@@ -607,6 +607,7 @@
 - (void)setInfoWithGenerInfo:(HJGeneralInfo *)info {
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     self.codeLabel.text = [NSString stringWithFormat:@"邀请码: %@",userInfo.code];
+    [self.headImageView sd_setImageWithURLString:userInfo.avatar placeholderImage:PLACEHOLDER_HEAD];
     self.nameLabel.text = userInfo.nickname;
     self.monthEarnLabel.text = [NSString stringWithFormat:@"¥ %.2f",info.money];
     self.monthEarnTip.text = [NSString stringWithFormat:@"本月预估 ¥%.2f",info.month_money];

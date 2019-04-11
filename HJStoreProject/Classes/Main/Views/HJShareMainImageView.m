@@ -25,6 +25,17 @@
 }
 
 - (void)setupUI {
+    
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.detail.pict_url]];
+    [self addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(0);
+        make.top.mas_offset(0);
+        make.right.mas_offset(0);
+        make.height.mas_equalTo(355);
+    }];
+    
     UILabel *title = [[UILabel alloc] init];
     title.font = PFR18Font;
     title.text = self.detail.title;
@@ -32,9 +43,10 @@
     title.textColor = [UIColor jk_colorWithHexString:@"#262f42"];
     [self addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_offset(10);
+        make.top.equalTo(imageView.mas_bottom).offset(15);
+        make.left.mas_offset(10);
         make.right.mas_offset(-10);
-        make.height.mas_equalTo(70);
+        make.height.mas_equalTo(60);
     }];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title.text];
@@ -45,6 +57,21 @@
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.detail.title.length)];
     title.attributedText = attributedString;
     
+    UIImageView *preIcon = [[UIImageView alloc] init];
+    if(self.detail.user_type == 0) {
+        preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
+    }else{
+        preIcon.image = [UIImage imageNamed:@"ic_label_tmall"];
+    }
+    [self addSubview:preIcon];
+    [preIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(10);
+        make.top.equalTo(title.mas_top).offset(10);
+        make.width.mas_equalTo(18);
+        make.height.mas_equalTo(18);
+    }];
+
+    
     UILabel *finalPrice = [[UILabel alloc] init];
     finalPrice.font = PFR18Font;
     finalPrice.text = [NSString stringWithFormat:@"券后价¥%@",self.detail.zk_final_price];
@@ -52,13 +79,13 @@
     [self addSubview:finalPrice];
     [finalPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);
-        make.top.mas_equalTo(title.mas_bottom).offset(15);
+        make.top.mas_equalTo(title.mas_bottom).offset(30);
         make.right.mas_offset(-10);
         make.height.mas_equalTo(30);
     }];
     NSInteger final_price_length = self.detail.zk_final_price.length;
     NSMutableAttributedString *finalString = [[NSMutableAttributedString alloc] initWithString:finalPrice.text];
-    [finalString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:23] range:NSMakeRange(finalString.length - final_price_length, final_price_length)];
+    [finalString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:23] range:NSMakeRange(finalString.length - final_price_length, final_price_length)];
     finalPrice.attributedText = finalString;
     
     UILabel *price = [[UILabel alloc] init];
@@ -79,39 +106,49 @@
     [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(newPriceString.length - reserve_price_length, reserve_price_length)];
     price.attributedText = newPriceString;
     
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.layer.borderWidth = 5;
-    imageView.clipsToBounds = YES;
-    imageView.layer.borderColor = [UIColor redColor].CGColor;
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.detail.pict_url]];
-    [self addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(10);
-        make.top.mas_equalTo(price.mas_bottom).offset(25);
-        make.right.mas_offset(-10);
-        make.height.mas_equalTo(355);
-    }];
+
     
     
     UIImageView *qrCodeImageView = [[UIImageView alloc] init];
     [self addSubview:qrCodeImageView];
     [qrCodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_offset(-20);
-        make.right.mas_offset(-10);
-        make.height.width.mas_equalTo(90);
+        make.top.mas_equalTo(title.mas_bottom).offset(20);
+        make.right.mas_offset(-15);
+        make.height.width.mas_equalTo(120);
     }];
-    
+    UIImageView *icon = [[UIImageView alloc] init];
+    icon.image = [UIImage imageNamed:@"main_Nav_left"];
+    [qrCodeImageView addSubview:icon];
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(qrCodeImageView);
+        make.size.with.height.mas_equalTo(40);
+    }];
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    NSString *qrcodeUrl = [NSString stringWithFormat:@"%@?item_id=%@&code=%@",kURLQrcode,self.detail.item_id,userInfo.code];
     //创建过滤器
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     //过滤器恢复默认
     [filter setDefaults];
     //将NSString格式转化成NSData格式
-    NSData *data = [self.detail.item_url dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSData *data = [qrcodeUrl dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     [filter setValue:data forKeyPath:@"inputMessage"];
     //获取二维码过滤器生成的二维码
     CIImage *image = [filter outputImage];
+    UIImage *qrImage = [UIImage imageWithCIImage:image];
+    qrCodeImageView.image = qrImage;
     
-    qrCodeImageView.image = [UIImage imageWithCIImage:image];
+    UILabel *qrTipLabel = [[UILabel alloc] init];
+    [self addSubview:qrTipLabel];
+    qrTipLabel.text = @"选的美 买的值";
+    qrTipLabel.font = [UIFont systemFontOfSize:18];
+    qrTipLabel.textColor = [UIColor lightGrayColor];
+    qrTipLabel.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:qrTipLabel];
+    [qrTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(qrCodeImageView.mas_bottom).offset(0);
+        make.left.right.equalTo(qrCodeImageView);
+        make.height.mas_equalTo(25);
+    }];
 
 }
 

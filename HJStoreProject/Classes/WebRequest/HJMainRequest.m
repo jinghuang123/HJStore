@@ -108,7 +108,7 @@
 
 - (void)getCellBannersSuccess:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail {
-    [[HJSettingRequest shared] getBannersWithType:1 Success:^(NSArray *banners) {
+    [[HJSettingRequest shared] getBannersWithType:5 Success:^(NSArray *banners) {
         NSMutableArray *bannerImages = [[NSMutableArray alloc] init];
         for (HJBannerModel *banner in banners) {
             NSString *url = [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
@@ -249,16 +249,13 @@
 
 - (void)getShareDataCache:(BOOL)cache
                 productId:(NSString *)productId
-                    title:(NSString *)title
-                      url:(NSString *)url
                   success:(CompletionSuccessBlock)success
                      fail:(CompletionFailBlock)fail  {
     NSDictionary *parms = @{
-                            @"product_id":productId,
-                            @"text" :title,
-                            @"url":url,
+                            @"item_id":productId,
                             };
-    [kHTTPManager tryPost:kUrlGetShareData parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+    NSString *requestUrl = [kHTTPManager getTokenUrl:kUrlGetShareData];
+    [kHTTPManager tryPost:requestUrl parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         HJShareModel *shareModel = [HJShareModel mj_objectWithKeyValues:responseObject];
         success(shareModel);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
@@ -277,8 +274,9 @@
     }else{
         [kHTTPManager tryPost:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
             NSLog(@"getEarningConfigerSuccess:%@",responseObject);
-            HJEarningModel *model = [HJEarningModel shared];
+            HJEarningModel *model = [[HJEarningModel alloc] init];
             model = [HJEarningModel mj_objectWithKeyValues:responseObject];
+            [model saveEarnConfiger2Phone];
             success(model);
         } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
             fail(error);

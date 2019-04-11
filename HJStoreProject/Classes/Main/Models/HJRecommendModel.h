@@ -64,7 +64,9 @@
 @property (nonatomic , copy) NSString              *coupon_share_url; //链接-宝贝+券二合一页面链接
 @property (nonatomic , assign) NSInteger              taobao_category_id;
 @property (nonatomic , copy) NSString              * status;
-@property (nonatomic , assign) CGFloat             coupon_after_price;
+
+
+@property (nonatomic , assign) CGFloat             coupon_after_price; //商品实际价格
 @property (nonatomic , assign) CGFloat    earning; ///收益
 @property (nonatomic , assign) CGFloat    commission; ///佣金
 @end

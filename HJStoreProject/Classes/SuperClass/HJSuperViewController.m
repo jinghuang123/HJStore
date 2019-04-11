@@ -7,6 +7,10 @@
 //
 
 #import "HJSuperViewController.h"
+#import "HJLoginVC.h"
+#import "YFPolicyWebVC.h"
+#import "HJUserInfoModel.h"
+#import "HJEarningModel.h"
 
 @interface HJSuperViewController ()<UIGestureRecognizerDelegate>
 
@@ -54,6 +58,47 @@
     [self.navigationController popViewControllerAnimated:NO];
 }
 
+- (void)pushToLoginVC:(BOOL)hideClose {
+    HJLoginVC *login = [[HJLoginVC alloc] init];
+    login.closeHide = hideClose;
+    login.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:login animated:YES];
+}
+
+- (void)showTaobaoAuthorDailogSuccess:(CompletionSuccessBlock)success {
+    weakify(self)
+    HJEarningModel *configer = [HJEarningModel getSavedEarnConfiger];
+    if (configer.relation_id && configer.relation_id.length > 0 && configer.special_id && configer.special_id.length > 0) {
+        success(nil);
+    }else {
+        HJTaobaoAuthorPopVC *pop = [[HJTaobaoAuthorPopVC alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
+                                                                        ShowStyle:MYPresentedViewShowStyleSuddenStyle
+                                                                         callback:^(id obj) {
+                                                                         }];
+        pop.clearBack = YES;
+        weakify(pop)
+        pop.authorPushClick = ^(id obj) {
+            [weak_self gotoAuthor:weak_pop];
+        };
+        [self presentViewController:pop animated:YES completion:nil];
+        
+    }
+
+}
+
+- (void)gotoAuthor:(HJTaobaoAuthorPopVC *)pop {
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    HJEarningModel *configer = [HJEarningModel getSavedEarnConfiger];
+    NSString *uid = userInfo.user_id;
+    NSString *key = configer.appkey;
+    NSString *url = [NSString stringWithFormat:@"http://oauth.m.taobao.com/authorize?response_type=code&client_id=%@&redirect_uri=http://app.meizhi1000.com/index/taobaoAuth/saveScPublisherInfo&state=%@&view=web",key,uid];
+    YFPolicyWebVC *web = [[YFPolicyWebVC alloc] init];
+    web.policyUrl = url;
+    web.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:web animated:YES];
+    [pop dismissViewControllerAnimated:YES completion:nil];
+
+}
 
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {

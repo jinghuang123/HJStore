@@ -18,7 +18,8 @@ Declare(kUrlGetListSearch,"api/search/get") /* 1.6 搜索*/
 Declare(kUrlGetShareData,"api/goods/getShareInfo") /* 1.7 分享数据*/
 Declare(kUrlGetActivityList,"api/activity/getList") /* 1.8 活动类商品列表*/
 Declare(kUrlEarningConfiger,"api/user/getConfig") /* 1.9 商品收益配置 */
-
+Declare(kUrlFavoriteGoods,"api/goods/favorites") /* 1.10 商品收藏 */
+Declare(kUrlGetFavoriteGoods,"api/goods/getFavorites") /* 1.11 获取商品收藏列表 */
 
         
 Declare(kUrlGetCategorys, "api/category/getCategory")  /**< 2.1 分类 */
@@ -63,3 +64,4 @@ Declare(kUrlGetServiceInfo, @"api/setting/getKefuInfo") /* 5.11 获取客服信�
 Declare(kURLGetOrderList, @"api/order/getOrder") /* 6.1 获取订单*/
 
 Declare(kURLGetInvitationInfo, @"api/setting/getInvitationInfo") /*7.1 获取邀请数据*/
+Declare(kURLQrcode, @"index/app/detail") /* 8.1 生成二维码地址 */

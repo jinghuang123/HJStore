@@ -61,7 +61,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 }
 
 - (void)shareDataGet:(HJRecommendModel *)item{
-    [[HJMainRequest shared] getShareDataCache:YES productId:item.item_id title:item.title url:item.coupon_share_url success:^(HJShareModel *share) {
+    [[HJMainRequest shared] getShareDataCache:YES productId:item.item_id success:^(HJShareModel *share) {
 //        HJShareVC *shareVC = [[HJShareVC alloc] init];
 //        share.title = self.detailmodel.title;
 //        share.product_id = self.productId;

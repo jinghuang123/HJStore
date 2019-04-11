@@ -20,7 +20,13 @@ static NSString *cellReuseID = @"cellReuseID";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     [self.collectionView registerClass:[ZQJNearbyMasterCollectionCell class] forCellWithReuseIdentifier:cellReuseID];
-
+    self.bottomLineView = [[UIView alloc] init];
+    self.bottomLineView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.05];
+    [self.contentView addSubview:self.bottomLineView];
+    [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_offset(0);
+        make.height.mas_equalTo(3);
+    }];
 }
 
 - (void)setModel:(HJRecommendItemModel *)model{
@@ -29,6 +35,7 @@ static NSString *cellReuseID = @"cellReuseID";
     _nameLabel.text = model.nickname;
     _timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:model.createtime] jk_longDateString];
     _timeLabel.textColor = [UIColor jk_colorWithHexString:@"#4f4f4f"];
+    _shareCountLabel.text = [NSString stringWithFormat:@"%ld",model.share];
     NSString *htmlString = model.content;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     [attributedString addAttribute:NSFontAttributeName
@@ -148,7 +155,7 @@ static NSString *cellReuseID = @"cellReuseID";
 - (CGFloat)Calculating_Text_Height_2_Width:(CGFloat)width WithString:(NSAttributedString *)string {
     CGRect frame = [string boundingRectWithSize:CGSizeMake(width, FLT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) context:nil];
     NSLog(@"2:%@", NSStringFromCGRect(frame));
-    return frame.size.height + 10;
+    return frame.size.height - 40;
 }
 
 

@@ -37,6 +37,7 @@
     
     UIButton *closeButton = [[UIButton alloc] init];
     _closeButton = closeButton;
+    closeButton.hidden = self.closeHide;
     [closeButton setBackgroundImage:[UIImage imageNamed:@"ic_login_close"] forState:UIControlStateNormal];
     [self.view addSubview:closeButton];
     [closeButton addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -134,7 +135,8 @@
 }
 
 - (void)closeBtnClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
     
 

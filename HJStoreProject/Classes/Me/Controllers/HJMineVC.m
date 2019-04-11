@@ -47,10 +47,7 @@
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     _userInfo = userInfo;
     if (!userInfo.token || [userInfo.token isEqualToString:@""]) {
-        HJLoginVC *login = [[HJLoginVC alloc] init];
-        login.closeButton.hidden = YES;
-        HJNavigationVC *nav = [[HJNavigationVC alloc] initWithRootViewController:login];
-        [self presentViewController:nav animated:YES completion:nil];
+        [self pushToLoginVC:YES];
     }else {
         weakify(self)
         [[HJSettingRequest shared] getGeneralInfoSuccess:^(HJGeneralInfo *info) {
@@ -223,7 +220,7 @@
                 [[HJSettingRequest shared] getUpdateGroupSuccess:^(id obj) {
                     if ([obj isKindOfClass:[HJUpdateGroupModel class]]) {
                         HJUpdateGroupModel *group = (HJUpdateGroupModel *)obj;
-                        
+                        [self popUpdateGroupWithModel:group];
                     }else{
                         [self.view makeToast:obj duration:2.0 position:CSToastPositionCenter];
                     }
@@ -246,7 +243,6 @@
     HJGropPopVC *pop = [[HJGropPopVC alloc] initWithShowFrame:CGRectMake(0, 0 ,MaxWidth, MaxHeight)
                                                                     ShowStyle:MYPresentedViewShowStyleSuddenStyle
                                                                      callback:^(id obj) {
-                                                                         
                                                                      }];
     pop.clearBack = YES;
     pop.groupModel = model;
@@ -286,6 +282,8 @@
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:YES];
 }
+
+
 
 /*
 #pragma mark - Navigation

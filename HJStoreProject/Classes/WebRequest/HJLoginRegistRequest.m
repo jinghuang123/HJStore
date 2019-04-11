@@ -7,7 +7,7 @@
 //
 
 #import "HJLoginRegistRequest.h"
-
+#import "HJMainRequest.h"
 
 @implementation HJLoginRegistRequest
 + (instancetype)shared {
@@ -91,6 +91,7 @@
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
+        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
@@ -110,6 +111,7 @@
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
+        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
@@ -129,6 +131,7 @@
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
+        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);

@@ -12,5 +12,6 @@
 
 @interface HJLoginVC : HJSuperViewController
 @property (nonatomic,strong) UIButton *closeButton;
+@property (nonatomic,assign) BOOL closeHide;
 @end
 

@@ -112,10 +112,10 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     if (section == 3) {
         return 90;
     }
-    return 10;
+    return 0.1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
+    return 10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

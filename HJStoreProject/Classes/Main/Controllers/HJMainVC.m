@@ -47,6 +47,11 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 @implementation HJMainVC
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sort = HJSortTypeTotal;
@@ -106,7 +111,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 success(nil);
                 [self.collectionView reloadData];
                 
-       
+                
             } fail:^(NSError *error) {
                 success(nil);
             }];
@@ -127,7 +132,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 success(nil);
             }];
         }
-
     }else if(self.listType == HJMainVCProductListTypeMain){
         [[HJMainRequest shared] getMainListCache:NO categoryId:self.catteryId sort:self.sort pageNo:self.pageNo pageSize:self.pageSize success:^(NSDictionary *response) {
             if (self.pageNo > 1) {
@@ -145,21 +149,26 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 self.activitys = self.activitys.count > 0 ? self.activitys : [response objectForKey:@"category"];
             }
             success(nil);
+            [self getCellBanners];
             [self.collectionView reloadData];
         } fail:^(NSError *error) {
             success(nil);
         }];
-        if(self.catteryId == 0) {
-            [[HJMainRequest shared] getCellBannersSuccess:^(NSDictionary *response) {
-                self.cellBanners = [response objectForKey:@"cellBanners"];
-                self.cellBannerImages = [response objectForKey:@"cellbannerImages"];
-                [self.collectionView reloadData];
-            } fail:^(NSError *error) {
-                
-            }];
-        }
+ 
     }
 
+}
+
+- (void)getCellBanners {
+    if(self.catteryId == 0) {
+        [[HJMainRequest shared] getCellBannersSuccess:^(NSDictionary *response) {
+            self.cellBanners = [response objectForKey:@"cellBanners"];
+            self.cellBannerImages = [response objectForKey:@"cellbannerImages"];
+            [self.collectionView reloadData];
+        } fail:^(NSError *error) {
+            
+        }];
+    }
 }
 
 
@@ -537,15 +546,13 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
         if([obj isKindOfClass:[HJActivityModel class]]){
             HJActivityModel *model = (HJActivityModel *)obj;
-            if (model.islogindata && !userInfo.token) {
-                [self pushToLoginVC];
-            }else{
-                if (model.typedata == HJNavPushTypeUrl) {
-                    [self pushToWebWithUrl:model.content_url];
-                }else if (model.typedata == HJNavPushTypeDetail) {
-                    [self pushToProductDetailWithId:model.content_product];
-                }else if (model.typedata == HJNavPushTypeList) {
+            if (model.typedata == HJNavPushTypeUrl) {
+                [self pushToWebWithUrl:model.content_url];
+            }else if (model.typedata == HJNavPushTypeDetail) {
+                if (model.islist) {
                     [self pushToProductListWithId:0 activityId:model.activityId];
+                }else{
+                    [self pushToProductDetailWithId:model.content_product];
                 }
             }
         }else{
@@ -575,6 +582,8 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     productListVC.hidesBottomBarWhenPushed = YES;
     productListVC.catteryId = categoryId;
     productListVC.activityId = activityId;
+    CGFloat pointY = MaxHeight >= ENM_SCREEN_H_X ? 128 : 103;
+    productListVC.showPopPoint = CGPointMake(0, pointY);
     productListVC.headType  = HJMainVCProductListHeadTypeList;
     productListVC.listType = HJMainVCProductListTypeList;
     [self.navigationController pushViewController:productListVC animated:YES];
@@ -592,17 +601,19 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     if (![url containsString:@"https://"]) {
         url = [NSString stringWithFormat:@"https://%@",url];
     }
-    ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
-    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if(!userInfo.token || userInfo.token.length == 0){
+        [self pushToLoginVC:NO];
+    }else {
+        [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
+            ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
+            [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
+        }];
+    }
+
 
 }
 
-- (void)pushToLoginVC {
 
-    HJLoginVC *login = [[HJLoginVC alloc] init];
-    HJNavigationVC *nav = [[HJNavigationVC alloc] initWithRootViewController:login];
-    [self presentViewController:nav animated:YES completion:nil];
-
-}
 
 @end

@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 @property (weak, nonatomic) IBOutlet UILabel *earningLabel;
 @property (nonatomic, strong) HJRecommendItemModel *model;
+@property (strong, nonatomic) UIView *bottomLineView;
 
 @property (nonatomic,copy) void(^itemDidSelected)(HJRecommendModel *item);
 @property (nonatomic,copy) void(^shareClickBlock)(HJRecommendItemModel *item);

@@ -152,6 +152,7 @@
                         HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
                         userInfo.token = @"";
                         [userInfo saveUserInfo2Phone];
+                        self.tabBarController.selectedIndex = 0;
                         [self.navigationController popViewControllerAnimated:YES];
                     } fail:^(NSError *error) {
                         

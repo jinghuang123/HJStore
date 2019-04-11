@@ -10,8 +10,9 @@
 #import <Masonry.h>
 #import "WebViewJavascriptBridge.h"
 #import "HJUserInfoModel.h"
+#import "HJMainRequest.h"
 
-@interface YFPolicyWebVC ()<WKNavigationDelegate>
+@interface YFPolicyWebVC ()<WKNavigationDelegate,WKScriptMessageHandler>
 @property (retain, nonatomic) UIProgressView *progressView;
 @property (nonatomic ,strong) NSString *currentUrl;
 @property (nonatomic ,strong) WebViewJavascriptBridge *bridge;
@@ -46,6 +47,9 @@
     // Do any additional setup after loading the view.
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
     [self.bridge setWebViewDelegate:self];
+    [self.bridge registerHandler:@"close" handler:^(id data, WVJBResponseCallback responseCallback) {
+
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -84,11 +88,15 @@
     WKUserContentController *userContentController = [[WKUserContentController alloc] init];
     [userContentController addUserScript:noneSelectScript];
     
+    
+    
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.allowsInlineMediaPlayback = YES;
     config.userContentController = userContentController;
     _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
     _webView.navigationDelegate = self;
+    
+    [config.userContentController addScriptMessageHandler:self name:@"close"];
     
     [self addProgressObServer];
 
@@ -208,6 +216,21 @@
             _onBackClick(nil);
         }
         return YES;
+    }
+}
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([message.name isEqualToString:@"close"]) {
+        NSLog(@">>>>>>>>>>>>>>>>>>>>调用了close方法");
+        if([message.body integerValue] == 1) {
+            [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+            } fail:^(NSError *error) {
+            }];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [self.view makeToast:@"授权失败" duration:2.0 position:CSToastPositionCenter];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

@@ -68,3 +68,4 @@ Declare(kURLGetOrderList, @"api/order/getOrder") /* 6.1 获取订单*/
 
 
 Declare(kURLGetInvitationInfo, @"api/setting/getInvitationInfo") /*7.1 获取邀请数据*/
+Declare(kURLQrcode, @"index/app/detail") /* 8.1 生成二维码地址 */

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *pic_image;
 @property (nonatomic, assign) NSInteger typedata; //0.url 1.产品详情  2.产品列表
+@property (nonatomic, assign) BOOL islist;
 @end
 
 
