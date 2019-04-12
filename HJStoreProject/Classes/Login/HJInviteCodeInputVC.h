@@ -8,10 +8,10 @@
 
 #import "HJSuperViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface HJInviteCodeInputVC : HJSuperViewController
-
+@property (nonatomic, strong) NSString *openid;
+@property (nonatomic, strong) NSString *wechat_access_token;
 @end
 
-NS_ASSUME_NONNULL_END

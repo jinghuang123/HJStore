@@ -9,8 +9,8 @@
 #define qqAppID @"1108088074"
 #define qqKey @"Ic9hWiOdUmDx4inR"
 
-#define wechatAppID @"wxc5798db4358400b7"
-#define wechatSecret @"ceda4cb767a7cf1ff4e759cceb81631e"
+#define wechatAppID @"wx133415491ab36f05"
+#define wechatSecret @"6ee1de9c594d2982c74e9b522b6f390d"
 
 #define sinaKey @"3994717529"
 #define sinaSecret @"4e1fea2563231b2ecf72c2a8cbcc00c6"
@@ -104,5 +104,23 @@
     }];
 }
 
-
+- (void)getUserInfoForWechatSuccess:(CompletionSuccessBlock)suc {
+    [ShareSDK getUserInfo:SSDKPlatformTypeWechat
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+         if (state == SSDKResponseStateSuccess) {
+             NSLog(@"%@",user.dictionaryValue);
+             HJWechatUserModel *userModel = [[HJWechatUserModel alloc] init];
+             userModel.uid = user.uid;
+             userModel.token = user.credential.token;
+             userModel.nickname = user.nickname;
+             userModel.icon = user.icon;
+             userModel.openid = [user.rawData objectForKey:@"openid"];
+             
+             suc(userModel);
+         }else{
+             NSLog(@"%@",error);
+         }
+         
+     }];
+}
 @end

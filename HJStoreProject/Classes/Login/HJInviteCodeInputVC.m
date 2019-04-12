@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIView *inviteView;
 @property (nonatomic, assign) CGFloat inviteViewSize;
 @property (nonatomic, strong) NSString *inviteCode;
+@property (nonatomic, strong) UIImageView *avatarImageView;
+@property (nonatomic, strong) UILabel *nickName;
 @end
 
 @implementation HJInviteCodeInputVC
@@ -51,6 +53,29 @@
         make.height.mas_equalTo(weak_self.inviteViewSize);
     }];
     
+    UIImageView *avatarImageView = [[UIImageView alloc] init];
+    _avatarImageView = avatarImageView;
+    avatarImageView.layer.cornerRadius  = 25;
+    avatarImageView.clipsToBounds = YES;
+    [inviteView addSubview:avatarImageView];
+    [avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_offset(10);
+        make.bottom.mas_offset(-10);
+        make.width.height.mas_equalTo(50);
+    }];
+    
+    UILabel *nickName = [[UILabel alloc] init];
+    _nickName = nickName;
+    nickName.font = [UIFont systemFontOfSize:15];
+    nickName.textColor = [[UIColor jk_colorWithHexString:@"0x333333"] colorWithAlphaComponent:0.6];
+    [inviteView addSubview:nickName];
+    [nickName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(avatarImageView.mas_right).offset(10);
+        make.right.mas_offset(-20);
+        make.centerY.equalTo(avatarImageView);
+        make.height.mas_equalTo(50);
+    }];
+    
     
     UIButton *confirmBtn = [UIButton createThemeButton:@"确认"];
     _confirmBtn = confirmBtn;
@@ -84,7 +109,7 @@
         }else{
             self.confirmBtn.enabled = NO;
             self.inviteViewSize = 0;
-            [self updateInviteView];
+            [self updateInviteView:nil];
         }
     }else{
         if (textField.text.length == 5) {
@@ -96,7 +121,7 @@
         }else{
             self.confirmBtn.enabled = NO;
             self.inviteViewSize = 0;
-            [self updateInviteView];
+            [self updateInviteView:nil];
         }
     }
     return YES;
@@ -111,22 +136,26 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.field resignFirstResponder];
-        [[HJLoginRegistRequest shared] checkMobileOrCode:self.field.text success:^(id responseObject) {
+        [[HJLoginRegistRequest shared] checkMobileOrCode:self.field.text success:^(NSDictionary *invitationInfo) {
             self.inviteCode = self.field.text;
             self.confirmBtn.enabled = YES;
             self.inviteViewSize = 70;
-            [self updateInviteView];
+            [self updateInviteView:invitationInfo];
             [hud hideAnimated:YES];
         } fail:^(NSError *error,NSString *msg) {
             self.confirmBtn.enabled = NO;
             self.inviteViewSize = 0;
-            [self updateInviteView];
             [hud hideAnimated:YES];
+            [self updateInviteView:nil];
         }];
     });
 }
 
-- (void)updateInviteView {
+- (void)updateInviteView:(NSDictionary *)invitationInfo {
+    NSString *avatar = invitationInfo ? [invitationInfo objectForKey:@"avatar"] : @"";
+    NSString *nickname = invitationInfo ? [invitationInfo objectForKey:@"nickname"] : @"";
+    [_avatarImageView sd_setImageWithURLString:avatar placeholderImage:PLACEHOLDER_Category];
+    _nickName.text = nickname;
     [self.inviteView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.inviteViewSize);
     }];
@@ -136,6 +165,8 @@
     HJRegistVC *registVC = [[HJRegistVC alloc] init];
     registVC.title = @"注册";
     registVC.inviteCode = self.inviteCode;
+    registVC.wechat_access_token = self.wechat_access_token;
+    registVC.openid = self.openid;
     [self.navigationController pushViewController:registVC animated:YES];
 }
 

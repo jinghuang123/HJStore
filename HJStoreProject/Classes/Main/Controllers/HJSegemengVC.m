@@ -12,6 +12,8 @@
 #import "SegmentView.h"
 #import "HJSearchVC.h"
 #import "AlibcManager.h"
+#import "HJSettingRequest.h"
+#import "HJMeizhiCustomServiceVC.h"
 
 @interface HJSegemengVC()
 @property (strong , nonatomic) UITextField *textField;
@@ -75,7 +77,7 @@
 
 - (void)setupNavItems {
     UIButton *leftNav = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftNav setBackgroundImage:[UIImage imageNamed:@"main_Nav_left"] forState:UIControlStateNormal];
+    [leftNav setBackgroundImage:[UIImage imageNamed:@"meizhilogo"] forState:UIControlStateNormal];
     [leftNav addTarget:self action:@selector(onClickLeft) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftNav];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
@@ -121,6 +123,15 @@
     
 }
 - (void)onClickRight {
+    
+    [[HJSettingRequest shared] getServiceInfoSuccess:^(HJServiceInfoModel *service) {
+        HJMeizhiCustomServiceVC *serviceVC = [[HJMeizhiCustomServiceVC alloc] init];
+        serviceVC.serviceInfo = service;
+        serviceVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:serviceVC animated:YES];
+    } fail:^(NSError *error) {
+        
+    }];
     
 }
 @end

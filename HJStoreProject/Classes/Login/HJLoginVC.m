@@ -10,6 +10,8 @@
 #import "HJMobileLoginVC.h"
 #import "HJInviteCodeInputVC.h"
 #import "HJUserInfoModel.h"
+#import "HJShareInstance.h"
+#import "HJLoginRegistRequest.h"
 
 @interface HJLoginVC ()
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -125,8 +127,23 @@
     [self.navigationController pushViewController:codeVC animated:YES];
 }
 
+- (void)regisByWechatOpenid:(NSString *)open_id token:(NSString *)token {
+    HJInviteCodeInputVC *codeVC = [[HJInviteCodeInputVC alloc] init];
+    codeVC.openid = open_id;
+    codeVC.wechat_access_token = token;
+    [self.navigationController pushViewController:codeVC animated:YES];
+}
+
 - (void)wechatLoginClick {
-    
+    weakify(self)
+    [[HJShareInstance shareInstance] getUserInfoForWechatSuccess:^(HJWechatUserModel *userInfo) {
+        [self.view makeToast:@"微信授权成功" duration:2.0 position:CSToastPositionCenter];
+        [[HJLoginRegistRequest shared] loginWithWechatInfo:userInfo.openid success:^(id responseObject) {
+            
+        } fail:^(NSError *error, NSString *errorMsg) {
+            [weak_self regisByWechatOpenid:userInfo.openid token:userInfo.token];
+        }];
+    }];
 }
 
 - (void)phoneLoginClick {

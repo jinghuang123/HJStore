@@ -31,7 +31,7 @@
                             };
     [kHTTPManager tryPost:kUrlCheckModbileCode parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"checkMobileOrCode:%@",responseObject);
-        success(nil);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
     }];
@@ -133,6 +133,20 @@
         [userInfoModel saveUserInfo2Phone];
         [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
         success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
+        fail(error,errorMsg);
+    }];
+}
+
+- (void)loginWithWechatInfo:(NSString *)openId
+                    success:(CompletionSuccessBlock)success
+                       fail:(CompletionFailBlock2)fail {
+//    kUrlWechatLogin
+    NSDictionary *parms = @{
+                            @"openid":openId,
+                            };
+    [kHTTPManager tryPost:kUrlWechatLogin parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
     }];

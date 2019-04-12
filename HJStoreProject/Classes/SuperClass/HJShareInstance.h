@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ShareSDK/ShareSDK.h>
+#import "HJWechatUserModel.h"
 
 typedef void(^HJShareSDKCallback)(NSString *errorMsg);
 
@@ -21,6 +22,8 @@ typedef void(^HJShareSDKCallback)(NSString *errorMsg);
 - (void)shareToQQ:(BOOL)toQZone images:(NSArray *)images callback:(HJShareSDKCallback)callback;
 
 - (void)shareToWechat:(BOOL)toSession images:(NSArray *)images callback:(HJShareSDKCallback)callback;
+
+- (void)getUserInfoForWechatSuccess:(CompletionSuccessBlock)suc;
 @end
 
 

@@ -277,7 +277,6 @@
             HJEarningModel *model = [[HJEarningModel alloc] init];
             model = [HJEarningModel mj_objectWithKeyValues:responseObject];
             [model saveEarnConfiger2Phone];
-            success(model);
         } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
             fail(error);
         }];

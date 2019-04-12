@@ -12,5 +12,7 @@
 
 @interface HJRegistVC : HJSuperViewController
 @property (nonatomic, strong) NSString *inviteCode;
+@property (nonatomic, strong) NSString *openid;
+@property (nonatomic, strong) NSString *wechat_access_token;
 @end
 

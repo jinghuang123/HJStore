@@ -162,6 +162,9 @@
 		B8CE27A221FC85F00059FB9E /* HJFencePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE27A121FC85F00059FB9E /* HJFencePageVC.m */; };
 		B8CE27A521FC8E1B0059FB9E /* HJFenceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */; };
 		B8D2F6B5223C9D5800DD6D99 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D2F6B4223C9D5800DD6D99 /* NSString+Extension.m */; };
+		B8D77FB62260B65E00951386 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D77FB52260B65E00951386 /* libicucore.tbd */; };
+		B8D77FB82260B69100951386 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D77FB72260B69100951386 /* JavaScriptCore.framework */; };
+		B8D77FBB2260C7C600951386 /* HJWechatUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D77FBA2260C7C600951386 /* HJWechatUserModel.m */; };
 		B8DCD2F021EE281B003964DA /* HJMobileCodeLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DCD2EF21EE281B003964DA /* HJMobileCodeLoginVC.m */; };
 		B8E0869C21E1D88800792D40 /* SGAdvertScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E0869A21E1D88800792D40 /* SGAdvertScrollView.m */; };
 		B8E0869F21E1E28100792D40 /* HJShareMainImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E0869E21E1E28100792D40 /* HJShareMainImageView.m */; };
@@ -477,6 +480,10 @@
 		B8CE27A421FC8E1B0059FB9E /* HJFenceItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJFenceItemCell.m; sourceTree = "<group>"; };
 		B8D2F6B3223C9D5700DD6D99 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		B8D2F6B4223C9D5800DD6D99 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		B8D77FB52260B65E00951386 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		B8D77FB72260B69100951386 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		B8D77FB92260C7C600951386 /* HJWechatUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJWechatUserModel.h; sourceTree = "<group>"; };
+		B8D77FBA2260C7C600951386 /* HJWechatUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJWechatUserModel.m; sourceTree = "<group>"; };
 		B8DCD2EE21EE281B003964DA /* HJMobileCodeLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJMobileCodeLoginVC.h; sourceTree = "<group>"; };
 		B8DCD2EF21EE281B003964DA /* HJMobileCodeLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJMobileCodeLoginVC.m; sourceTree = "<group>"; };
 		B8E0869A21E1D88800792D40 /* SGAdvertScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAdvertScrollView.m; sourceTree = "<group>"; };
@@ -539,10 +546,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E086D321E1E62F00792D40 /* libsqlite3.tbd in Frameworks */,
+				B8D77FB82260B69100951386 /* JavaScriptCore.framework in Frameworks */,
+				B8E086D121E1E62600792D40 /* libz.tbd in Frameworks */,
+				B8D77FB62260B65E00951386 /* libicucore.tbd in Frameworks */,
 				B8E086D521E1E63F00792D40 /* Photos.framework in Frameworks */,
 				B821268B21D9C646007828B2 /* ImageIO.framework in Frameworks */,
-				B8E086D321E1E62F00792D40 /* libsqlite3.tbd in Frameworks */,
-				B8E086D121E1E62600792D40 /* libz.tbd in Frameworks */,
 				B8E086CF21E1E61F00792D40 /* libc++.tbd in Frameworks */,
 				B821269D21D9C696007828B2 /* Foundation.framework in Frameworks */,
 				B82126D321D9C7C6007828B2 /* OpenMtopExt.framework in Frameworks */,
@@ -932,6 +941,8 @@
 			children = (
 				B886D69C21EA10EB00201231 /* HJUserInfoModel.h */,
 				B886D69D21EA10EB00201231 /* HJUserInfoModel.m */,
+				B8D77FB92260C7C600951386 /* HJWechatUserModel.h */,
+				B8D77FBA2260C7C600951386 /* HJWechatUserModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1234,6 +1245,8 @@
 		F8E55D6CBE19A9D743CF63B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B8D77FB72260B69100951386 /* JavaScriptCore.framework */,
+				B8D77FB52260B65E00951386 /* libicucore.tbd */,
 				B8E086D421E1E63F00792D40 /* Photos.framework */,
 				B8E086D221E1E62F00792D40 /* libsqlite3.tbd */,
 				B8E086D021E1E62600792D40 /* libz.tbd */,
@@ -1409,6 +1422,7 @@
 				B8086B8C22354BA900668E27 /* HJOrderListVC.m in Sources */,
 				B8626E7121DB5D5E00D7BA74 /* HJShareCell.m in Sources */,
 				B811D7E321CE1AB000FBED10 /* HJActivityModel.m in Sources */,
+				B8D77FBB2260C7C600951386 /* HJWechatUserModel.m in Sources */,
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
 				B886D68E21E9951500201231 /* HJLoginRegistRequest.m in Sources */,
 				18F07FD02256FA740063A52F /* HJEarnDetailVC.m in Sources */,

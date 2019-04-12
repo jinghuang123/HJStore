@@ -140,6 +140,22 @@
     
 }
 
+- (void)updeteUserInfoWithAvater:(NSString *)avatar
+                        username:(NSString *)username
+                        nickname:(NSString *)nickname
+                   Success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{@"avatar":avatar,@"username":username,@"nickname":nickname};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlUserUpdate];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSArray *models = [HJBannerModel mj_objectArrayWithKeyValuesArray:responseObject];
+        success(models);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
 
+//
 
 @end

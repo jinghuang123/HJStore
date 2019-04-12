@@ -42,10 +42,15 @@
              success:(CompletionSuccessBlock)success
                 fail:(CompletionFailBlock2)fail;
 
+
 - (void)loginWithPsw:(NSString *)account
                  psw:(NSString *)password
              success:(CompletionSuccessBlock)success
                 fail:(CompletionFailBlock2)fail;
+
+- (void)loginWithWechatInfo:(NSString *)openId
+                    success:(CompletionSuccessBlock)success
+                       fail:(CompletionFailBlock2)fail;
 
 - (void)reSetPasswordWithMobileNum:(NSString *)mobile
                                psw:(NSString *)password
