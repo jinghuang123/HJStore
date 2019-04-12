@@ -20,7 +20,7 @@ Declare(kUrlGetActivityList,"api/activity/getList") /* 1.8 活动类商品列表
 Declare(kUrlEarningConfiger,"api/user/getConfig") /* 1.9 商品收益配置 */
 Declare(kUrlFavoriteGoods,"api/goods/favorites") /* 1.10 商品收藏 */
 Declare(kUrlGetFavoriteGoods,"api/goods/getFavorites") /* 1.11 获取商品收藏列表 */
-
+Declare(kUrlGetIfFavorite,"api/goods/checkItemFavorites") /* 1.12 检查商品是否收藏 */
         
 Declare(kUrlGetCategorys, "api/category/getCategory")  /**< 2.1 分类 */
 Declare(kUrlGetSubCategorys, "api/category/getCategory")  /**< 2.2 二级分类 */

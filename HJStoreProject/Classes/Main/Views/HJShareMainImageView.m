@@ -40,7 +40,7 @@
     title.font = PFR18Font;
     title.text = self.detail.title;
     title.numberOfLines = 2;
-    title.textColor = [UIColor jk_colorWithHexString:@"#262f42"];
+    title.textColor = [[UIColor jk_colorWithHexString:@"#262f42"] colorWithAlphaComponent:0.6];
     [self addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(imageView.mas_bottom).offset(15);
@@ -74,16 +74,16 @@
     
     UILabel *finalPrice = [[UILabel alloc] init];
     finalPrice.font = PFR18Font;
-    finalPrice.text = [NSString stringWithFormat:@"券后价¥%@",self.detail.zk_final_price];
+    finalPrice.text = [NSString stringWithFormat:@"券后价 ¥%.2f",[self.detail.zk_final_price floatValue] - [self.detail.coupon_amount floatValue]];
     finalPrice.textColor = [[UIColor redColor] colorWithAlphaComponent:0.8];
     [self addSubview:finalPrice];
     [finalPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);
-        make.top.mas_equalTo(title.mas_bottom).offset(30);
+        make.top.mas_equalTo(title.mas_bottom).offset(45);
         make.right.mas_offset(-10);
         make.height.mas_equalTo(30);
     }];
-    NSInteger final_price_length = self.detail.zk_final_price.length;
+    NSInteger final_price_length = finalPrice.text.length - 3;
     NSMutableAttributedString *finalString = [[NSMutableAttributedString alloc] initWithString:finalPrice.text];
     [finalString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:23] range:NSMakeRange(finalString.length - final_price_length, final_price_length)];
     finalPrice.attributedText = finalString;

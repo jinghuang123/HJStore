@@ -186,7 +186,7 @@
     }
     _earningLabel.text = [NSString stringWithFormat:@"赚%.2f",item.earning];
     [_couponIcon setImage:[UIImage imageNamed:@"CouponIcon"]];
-    _couponLabel.text = [NSString stringWithFormat:@"¥%@",item.coupon_amount];
+    _couponLabel.text = [NSString stringWithFormat:@"¥%ld",[item.coupon_amount integerValue]];
     
     _soldCountLabel.text = [NSString stringWithFormat:@"销量 %ld",item.volume];
     

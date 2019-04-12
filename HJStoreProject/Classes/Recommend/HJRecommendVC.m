@@ -15,6 +15,7 @@
 #import "HJMainSliderCell.h"
 #import "HJSettingRequest.h"
 
+
 static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 
 @interface HJRecommendVC () <UITableViewDelegate,UITableViewDataSource>
@@ -23,6 +24,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) UIImage *shareImage;
+@property (nonatomic, strong) NSMutableArray *shareImages;
 @property (nonatomic, strong) HJMainSliderView *adSliderCellView;
 @end
 
@@ -33,6 +35,13 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
         _dataSource = [[NSMutableArray alloc] init];
     }
     return _dataSource;
+}
+
+- (NSMutableArray *)shareImages {
+    if(!_shareImages) {
+        _shareImages = [[NSMutableArray alloc] init];
+    }
+    return _shareImages;
 }
 
 - (void)viewDidLoad {
@@ -57,26 +66,38 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 - (void)setShareViewWithModel:(HJRecommendModel *)goodItem {
     HJShareMainImageView *imageV = [[HJShareMainImageView alloc] initWithFrame:CGRectMake(MaxWidth, 0, 375, 667) andDetailModel:goodItem];
     [self.view addSubview:imageV];
-    [self shareDataGet:goodItem];
-}
-
-- (void)shareDataGet:(HJRecommendModel *)item{
-    [[HJMainRequest shared] getShareDataCache:YES productId:item.item_id success:^(HJShareModel *share) {
-//        HJShareVC *shareVC = [[HJShareVC alloc] init];
-//        share.title = self.detailmodel.title;
-//        share.product_id = self.productId;
-//        share.reserve_price = self.detailmodel.reserve_price;
-//        share.zk_final_price = self.detailmodel.zk_final_price;
-//        share.coupon_value = self.detailmodel.coupon_value;
-//        share.images = self.detailmodel.small_images;
-//        share.mainImage = [weak_self getShareImage];
-//        share.showCoupon = YES;
-//        shareVC.shareModel = share;
-//        [shareVC setNavBackItem];
-//        [self.navigationController pushViewController:shareVC animated:YES];
-    } fail:^(NSError *error) {
+    [self getShareImage:imageV success:^(UIImage *shareImage) {
+        [self.shareImages addObject:shareImage];
     }];
 }
+
+- (void)getShareImage:(UIView *)imageView success:(CompletionSuccessBlock)success {
+    UIGraphicsBeginImageContextWithOptions(imageView.mj_size,NO, 0.0);//设置截屏大小
+    [imageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    success(image);
+}
+
+//- (void)shareDataGet:(HJRecommendModel *)item{
+//
+//
+//    [[HJMainRequest shared] getShareDataCache:YES productId:item.item_id success:^(HJShareModel *share) {
+////        HJShareVC *shareVC = [[HJShareVC alloc] init];
+////        share.title = self.detailmodel.title;
+////        share.product_id = self.productId;
+////        share.reserve_price = self.detailmodel.reserve_price;
+////        share.zk_final_price = self.detailmodel.zk_final_price;
+////        share.coupon_value = self.detailmodel.coupon_value;
+////        share.images = self.detailmodel.small_images;
+////        share.mainImage = [weak_self getShareImage];
+////        share.showCoupon = YES;
+////        shareVC.shareModel = share;
+////        [shareVC setNavBackItem];
+////        [self.navigationController pushViewController:shareVC animated:YES];
+//    } fail:^(NSError *error) {
+//    }];
+//}
 
 
 
@@ -85,7 +106,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
     //
     //    }];
     
-    NSArray * items =  @[self.shareImage];    //分享图片 数组
+    NSArray * items = self.shareImages;    //分享图片 数组
     
     UIActivityViewController * activityCtl = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     
@@ -207,10 +228,8 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
         }
     };
     cell.shareClickBlock = ^(HJRecommendItemModel *item) {
-        for (HJRecommendModel *model in item.goods) {
-            [self setShareViewWithModel:model];
-        }
-        
+        [self.shareImages removeAllObjects];
+        [self shareWithItem:item];
     };
 
     [self setupModelOfCell:cell atIndexPath:indexPath];
@@ -230,6 +249,21 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 - (void)setupModelOfCell:(HJRecommendItemCell *) cell atIndexPath:(NSIndexPath *) indexPath {
     cell.model = self.dataSource[indexPath.row];
     [cell.collectionView reloadData];
+}
+
+
+- (void)shareWithItem:(HJRecommendItemModel *)item {
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if(!userInfo.token || userInfo.token.length == 0){
+        [self pushToLoginVC:NO];
+    }else {
+        [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
+            for (HJRecommendModel *model in item.goods) {
+                [self setShareViewWithModel:model];
+            }
+            [self sharedAction];
+        }];
+    }
 }
 
 @end

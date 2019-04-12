@@ -412,7 +412,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 headerView.layer.borderWidth = (self.catteryId > 0 || self.activityId > 0) ? 0.5 : 0;
                 headerView.backgroundColor = [UIColor whiteColor];
                 
-             
+                
                 weakify(self)
                 headerView.sortTypeChengBlock = ^(NSNumber *index) {
                     if ([index integerValue] == 0) {

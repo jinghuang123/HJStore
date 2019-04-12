@@ -29,6 +29,8 @@ typedef void(^switchValueChangeBlock)(BOOL on);
 @property (nonatomic, strong) HJSortIcon *view1;
 @property (nonatomic, strong) HJSortIcon *view2;
 @property (nonatomic, strong) HJSortIcon *view3;
+
+- (void)setSortImageWithType:(NSInteger)type;
 @end
 
 

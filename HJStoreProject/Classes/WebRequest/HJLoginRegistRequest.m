@@ -91,7 +91,9 @@
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
-        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+        } fail:^(NSError *error) {
+        }];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);

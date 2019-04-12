@@ -22,6 +22,9 @@ Declare(kUrlGetListSearch,"api/search/get") /* 1.6 搜索*/
 Declare(kUrlGetShareData,"api/goods/getShareInfo") /* 1.7 分享数据*/
 Declare(kUrlGetActivityList,"api/activity/getList") /* 1.8 活动类商品列表*/
 Declare(kUrlEarningConfiger,"api/user/getConfig") /* 1.9 商品收益配置 */
+Declare(kUrlFavoriteGoods,"api/goods/favorites") /* 1.10 商品收藏 */
+Declare(kUrlGetFavoriteGoods,"api/goods/getFavorites") /* 1.11 获取商品收藏列表 */
+Declare(kUrlGetIfFavorite,"api/goods/checkItemFavorites") /* 1.12 检查商品是否收藏 */
 
 
 Declare(kUrlGetCategorys, "api/category/getCategory")  /**< 2.1 分类 */

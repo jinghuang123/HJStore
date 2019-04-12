@@ -16,6 +16,7 @@
 @property (nonatomic,copy) cellItemClick collectionSaveBlock;
 @property (nonatomic,copy) cellItemClick conponGetBlock;
 - (void)setcontentWithModel:(HJRecommendModel *)item;
+- (void)setIffavourite:(BOOL)favourite;
 @end
 
 
