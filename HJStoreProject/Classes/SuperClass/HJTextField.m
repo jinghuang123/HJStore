@@ -13,7 +13,7 @@
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     }
     return self;
 }

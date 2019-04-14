@@ -23,6 +23,8 @@
     // Do any additional setup after loading the view.
     
     CGFloat fieldH = 40;
+    CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? 120 : 90;
+
     UITextField *mobileField = [UITextField createFieldWithPreIcon:@"ic_login_input_phone" placeHolder:@"请输入手机号码" sizeH:fieldH delegate:self];
     _mobileField = mobileField;
     mobileField.layer.cornerRadius = fieldH/2;
@@ -33,11 +35,11 @@
     [mobileField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_offset(180);
+        make.top.mas_offset(topOffSet);
         make.height.mas_equalTo(fieldH);
     }];
     
-    UITextField *pwdField = [UITextField createFieldWithPreIcon:@"ic_login_input_pwd" placeHolder:@"请输入登录密码" sizeH:fieldH delegate:self];
+    UITextField *pwdField = [UITextField createFieldWithPreIcon:@"ic_login_yzm" placeHolder:@"请输入登录密码" sizeH:fieldH delegate:self];
     _pwdField = pwdField;
     pwdField.layer.cornerRadius = fieldH/2;
     pwdField.clipsToBounds = YES;
@@ -47,22 +49,22 @@
     [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_equalTo(mobileField.mas_bottom).offset(40);
+        make.top.mas_equalTo(mobileField.mas_bottom).offset(25);
         make.height.mas_equalTo(fieldH);
     }];
 
     
     UIButton *getCodeBtn = [[UIButton alloc] init];
     [getCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [getCodeBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [getCodeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [getCodeBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    getCodeBtn.titleLabel.font = PFR12Font;
+    getCodeBtn.titleLabel.font = PFR14Font;
     [getCodeBtn addTarget:self action:@selector(getCodeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:getCodeBtn];
     [getCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(pwdField.mas_right).offset(0);
-        make.top.mas_equalTo(pwdField.mas_bottom).offset(10);
-        make.width.mas_equalTo(85);
+        make.top.mas_equalTo(pwdField.mas_bottom).offset(20);
+        make.width.mas_equalTo(100);
         make.height.mas_equalTo(30);
     }];
     
@@ -72,7 +74,7 @@
     [self.view addSubview:confirmBtn];
     [confirmBtn addTarget:self action:@selector(confirmBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(pwdField.mas_bottom).offset(45);
+        make.top.mas_equalTo(getCodeBtn.mas_bottom).offset(45);
         make.left.mas_offset(20);
         make.height.mas_equalTo(44);
         make.right.mas_offset(-20);

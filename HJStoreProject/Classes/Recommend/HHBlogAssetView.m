@@ -36,7 +36,7 @@
 
     self.contentMode =  UIViewContentModeScaleAspectFill;
     self.clipsToBounds = YES;
-    _videoIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mon_icon_n"]];
+    _videoIcon = [[UIImageView alloc] init];
     _videoIcon.hidden = YES;
     [self addSubview:_videoIcon];
     [_videoIcon mas_makeConstraints:^(MASConstraintMaker *make) {

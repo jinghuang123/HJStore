@@ -13,6 +13,8 @@
 @interface HJRecommendVC : HJSuperViewController
 @property (nonatomic,strong) HJRecommendCategorys *category;
 @property (nonatomic,copy) void(^itemDidSelected)(HJRecommendModel *item);
-
+@property (nonatomic,copy) void(^shareClick)(HJRecommendItemModel *item);
+- (void)setShareViewWithModel:(HJRecommendModel *)goodItem;
+- (void)sharedAction;
 @end
 

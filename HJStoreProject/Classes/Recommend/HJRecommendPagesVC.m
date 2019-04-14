@@ -35,6 +35,21 @@
                     detailVC.productId = item.item_id;
                     [self.navigationController pushViewController:detailVC animated:YES];
                 };
+                weakify(recommendVC)
+                recommendVC.shareClick = ^(HJRecommendItemModel *item) {
+                    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+                    if(!userInfo.token || userInfo.token.length == 0){
+                        [self pushToLoginVC:NO];
+                    }else {
+                        [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
+                            for (HJRecommendModel *model in item.goods) {
+                                [weak_recommendVC setShareViewWithModel:model];
+                            }
+                            [weak_recommendVC sharedAction];
+                        }];
+                    }
+                };
+                
                 recommendVC.category = model;
                 [self.viewControllers addObject:recommendVC];
                 [self.titles addObject:model.name];
@@ -83,5 +98,8 @@
 - (void)didEndDeceleratingToPageAtIndex:(NSInteger)index {
     [self.segment setSelectedSegmentIndex:index animated:YES];
 }
+
+
+
 
 @end

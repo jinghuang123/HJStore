@@ -193,6 +193,10 @@
     [swi addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
 }
 
+- (void)setSortImageWithType:(NSInteger)type {
+    
+}
+
 - (void)switchChange:(UISwitch *)swi{
     if(self.switchChangeBlock){
         self.switchChangeBlock(swi.on);

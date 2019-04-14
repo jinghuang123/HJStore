@@ -13,6 +13,8 @@
 #import "HJDrawalRecordModel.h"
 #import "HJServiceInfoModel.h"
 #import "HJUpdateGroupModel.h"
+#import "HJSettingInfo.h"
+#import "HJCashInfoModel.h"
 
 @interface HJSettingRequest : NSObject
 
@@ -40,6 +42,25 @@
 
 - (void)getUpdateGroupSuccess:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail;
+
+- (void)updeteUserInfoWithAvater:(NSString *)avatar
+                        username:(NSString *)username
+                        nickname:(NSString *)nickname
+                         Success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail;
+
+
+- (void)getSettingInfoSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail;
+
+
+- (void)getApplyCashWithMoney:(NSString *)sum
+                      Success:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail;
+
+
+- (void)getCachInfoSuccess:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail;
 
 @end
 

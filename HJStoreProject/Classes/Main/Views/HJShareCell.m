@@ -72,7 +72,7 @@
 @property (nonatomic,strong) UILabel *couponLabel;
 @property (nonatomic,strong) UILabel *downloadTipLabel;
 @property (nonatomic,strong) UILabel *tipCopyLabel;
-
+@property (nonatomic,strong)  HJShareModel *shareModel;
 
 @end
 @implementation HJShareImagesCell
@@ -237,7 +237,7 @@
     rightImage3.layer.borderWidth = 1;
     rightImage3.hidden = YES;
     [self.contentView addSubview:rightImage3];
-    rightImage3.image = [UIImage imageNamed:@"default_share"];
+//    rightImage3.image = PLACEHOLDER_ITEM;
     [rightImage3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(rightImage2.mas_bottom).offset(10);
         make.left.mas_equalTo(rightImage2.mas_left).offset(0);
@@ -251,7 +251,7 @@
     rightImage4.layer.borderWidth = 1;
     rightImage4.hidden = YES;
     [self.contentView addSubview:rightImage4];
-    rightImage4.image = [UIImage imageNamed:@"default_share"];
+//    rightImage4.image = PLACEHOLDER_ITEM;
     [rightImage4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(step1View.mas_bottom).offset(10);
         make.left.mas_equalTo(rightImage1.mas_right).offset(10);
@@ -352,7 +352,9 @@
         make.height.mas_equalTo(20);
     }];
     [copyTitleTip jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
- 
+        [self makeToast:@"复制文案成功" duration:1.0 position:CSToastPositionCenter];
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.contentLabel.text;
     }];
 
     UIImageView *copyTitleIcon = [[UIImageView alloc] init];
@@ -429,7 +431,9 @@
         make.height.width.mas_equalTo(16);
     }];
     [copyTklIcon jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        [self makeToast:@"复制淘口令成功" duration:1.0 position:CSToastPositionCenter];
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.shareModel.model;
     }];
     
     
@@ -527,11 +531,12 @@
 }
     
 - (void)updateCellWithShareModel:(HJShareModel *)share mainImage:(UIImage *)mainImage recommendInfo:(HJRecommendModel *)info {
+    _shareModel = share;
     _leftImageV.image = mainImage;
     [info.small_images enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL * _Nonnull stop) {
        HJShareImageView *imagV = [self.imageViews objectAtIndex:idx];
         imagV.hidden = NO;
-        [imagV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"list_holder"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [imagV sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:PLACEHOLDER_ITEM completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
     }];
     [self.images addObject:mainImage];

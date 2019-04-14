@@ -12,7 +12,7 @@
 #import "HJMainSliderCell.h"
 #import "HJGoodItemCell.h"
 #import "HJMainGridSectionFootView.h"
-#import "HJMainTopToolView.h"
+
 #import "HJGoodsCountDownCell.h"
 #import "HJMainListHeadView.h"
 #import "HJProductDetailVC.h"
@@ -25,10 +25,7 @@
 
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-
-@property (strong , nonatomic) HJMainTopToolView *topToolView;
 @property(nonatomic,strong)  HJMainPodVC *sortTypePopVC;
-
 @end
 
 
@@ -64,16 +61,16 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }
     // Do any additional setup after loading the view.
     
-    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateNormal];
-    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateSelected];
-    
-    [self.view insertSubview:topButton atIndex:0];
-    [topButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_offset(-12);
-        make.bottom.mas_offset(-100);
-        make.width.height.mas_equalTo(28);
-    }];
+//    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateNormal];
+//    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateSelected];
+//
+//    [self.view insertSubview:topButton atIndex:0];
+//    [topButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_offset(-12);
+//        make.bottom.mas_offset(-100);
+//        make.width.height.mas_equalTo(28);
+//    }];
 }
 
 - (void)headRefresh {
@@ -412,7 +409,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 headerView.layer.borderWidth = (self.catteryId > 0 || self.activityId > 0) ? 0.5 : 0;
                 headerView.backgroundColor = [UIColor whiteColor];
                 
-             
+                
                 weakify(self)
                 headerView.sortTypeChengBlock = ^(NSNumber *index) {
                     if ([index integerValue] == 0) {

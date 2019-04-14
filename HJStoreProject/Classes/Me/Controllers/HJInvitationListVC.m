@@ -182,6 +182,7 @@
 }
 
 - (void)copyToPasteboard {
+    [self.view makeToast:@"复制邀请码成功" duration:1.0 position:CSToastPositionCenter];
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.invitationCode;
 }

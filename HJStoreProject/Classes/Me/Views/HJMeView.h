@@ -31,11 +31,11 @@ typedef enum : NSUInteger {
     HJClickItemTypeUpdateGroup, ///升级运营商
 } HJClickItemType;
 
-#define kUrlNewGuide @"http://app.meizhi1000.com/cms/c/%E6%96%B0%E6%89%8B%E6%94%BB%E7%95%A5"
-#define kUrlQuestion @"http://app.meizhi1000.com/cms/c/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"
-#define kUrlFeedBack @"http://app.meizhi1000.com/cms/d/message"
-#define kUrlSign @"http://app.meizhi1000.com/cms/c/%E5%AE%98%E6%96%B9%E5%85%AC%E5%91%8A"
-#define kUrlUpdateUser @"http://app.meizhi1000.com/index/yys/index"
+#define kUrlNewGuide @"https://app.meizhi1000.com/cms/c/%E6%96%B0%E6%89%8B%E6%94%BB%E7%95%A5"
+#define kUrlQuestion @"https://app.meizhi1000.com/cms/c/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"
+#define kUrlFeedBack @"https://app.meizhi1000.com/cms/d/message"
+#define kUrlSign @"https://app.meizhi1000.com/cms/c/%E5%AE%98%E6%96%B9%E5%85%AC%E5%91%8A"
+#define kUrlUpdateUser @"https://app.meizhi1000.com/index/yys/index"
 
 @interface HJMeView : HJSuperView
 

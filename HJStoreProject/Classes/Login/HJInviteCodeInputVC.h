@@ -7,11 +7,10 @@
 //
 
 #import "HJSuperViewController.h"
-
+#import "HJWechatUserModel.h"
 
 
 @interface HJInviteCodeInputVC : HJSuperViewController
-@property (nonatomic, strong) NSString *openid;
-@property (nonatomic, strong) NSString *wechat_access_token;
+@property (nonatomic, strong) HJWechatUserModel *userModel;
 @end
 

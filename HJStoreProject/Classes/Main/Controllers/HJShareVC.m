@@ -55,6 +55,12 @@
         make.height.mas_equalTo(39);
     }];
     
+    [copyButton jk_addActionHandler:^(NSInteger tag) {
+        [self.view makeToast:@"复制淘口令成功" duration:1.0 position:CSToastPositionCenter];
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.shareModel.model;
+    }];
+    
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [shareButton setTitle:@"分享图片" forState:UIControlStateNormal];
     [shareButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];

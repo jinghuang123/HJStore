@@ -12,6 +12,7 @@
 #import <MJExtension.h>
 
 
+
 @implementation HJSettingRequest
 
 + (instancetype)shared {
@@ -29,8 +30,10 @@
 
 - (void)uploadFile:(NSData *)data success:(CompletionSuccessBlock)success fail:(CompletionFailBlock)fail {
     NSDictionary *dic = @{};
-    [kHTTPManager tryPostImg:kURLFileUpload parameters:dic data:data success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
+    NSString *url = [kHTTPManager getTokenUrl:kURLFileUpload];
+    [kHTTPManager tryPostImg:url parameters:dic data:data success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSString *imageUrl = [responseObject objectForKey:@"url"];
+        success(imageUrl);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         
     }];
@@ -148,8 +151,29 @@
     NSDictionary *dic = @{@"avatar":avatar,@"username":username,@"nickname":nickname};
     NSString *url = [kHTTPManager getTokenUrl:kUrlUserUpdate];
     [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSArray *models = [HJBannerModel mj_objectArrayWithKeyValuesArray:responseObject];
-        success(models);
+        HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+        userInfo.avatar = avatar;
+        userInfo.nickname = nickname;
+        userInfo.username = username;
+        [userInfo saveUserInfo2Phone];
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+//
+- (void)getSettingInfoSuccess:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlGetSettingInfo];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        HJSettingInfo *info = [HJSettingInfo shared];
+        HJSettingInfo *settingInfo = [HJSettingInfo mj_objectWithKeyValues:responseObject];
+        info.weixin = settingInfo.weixin;
+        info.taobao = settingInfo.taobao;
+        info.zfb = settingInfo.zfb;
+        success(info);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
@@ -157,5 +181,29 @@
 }
 
 //
+
+- (void)getApplyCashWithMoney:(NSString *)sum
+                      Success:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{@"sum":sum};
+    NSString *url = [kHTTPManager getTokenUrl:kURLApplyCash];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
+//
+- (void)getCachInfoSuccess:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlGetCachInfo];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        HJCashInfoModel *info = [HJCashInfoModel mj_objectWithKeyValues:responseObject];
+        success(info);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
 
 @end

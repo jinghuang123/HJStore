@@ -10,9 +10,9 @@
 
 @implementation UITextField (inputInit)
 + (UITextField *)createFieldWithPreIcon:(NSString *)icon placeHolder:(NSString *)holder sizeH:(CGFloat)height delegate:(id)delegate{
-    UITextField *field = [[UITextField alloc] init];
+    HJTextField *field = [[HJTextField alloc] init];
     field.leftViewMode = UITextFieldViewModeAlways;
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, height)];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, height)];
     UIImage *imageV = [UIImage imageNamed:icon];
     CGFloat iconW = imageV.size.width;
     CGFloat iconH = imageV.size.height;
@@ -23,6 +23,16 @@
     field.leftView = leftView;
     field.placeholder = holder;
     field.delegate = delegate;
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.7];
+    [leftView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-5);
+        make.width.mas_equalTo(1);
+        make.top.mas_offset(9);
+        make.bottom.mas_offset(-9);
+    }];
     return field;
 }
+
 @end

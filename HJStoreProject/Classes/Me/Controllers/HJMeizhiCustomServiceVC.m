@@ -100,9 +100,11 @@
 }
 
 - (void)copyToPasteboard {
-    [self.view makeToast:@"复制微信号成功" duration:1.0 position:CSToastPositionCenter];
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = self.serviceInfo.kefu_wechat;
+    if(self.serviceInfo.kefu_wechat) {
+        [self.view makeToast:@"复制微信号成功" duration:1.0 position:CSToastPositionCenter];
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.serviceInfo.kefu_wechat;
+    }
 }
 
 - (void)saveImageToAlbum {

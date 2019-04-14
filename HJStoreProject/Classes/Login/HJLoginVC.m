@@ -127,10 +127,9 @@
     [self.navigationController pushViewController:codeVC animated:YES];
 }
 
-- (void)regisByWechatOpenid:(NSString *)open_id token:(NSString *)token {
+- (void)regisByWechatUserInfo:(HJWechatUserModel *)userInfo {
     HJInviteCodeInputVC *codeVC = [[HJInviteCodeInputVC alloc] init];
-    codeVC.openid = open_id;
-    codeVC.wechat_access_token = token;
+    codeVC.userModel = userInfo;
     [self.navigationController pushViewController:codeVC animated:YES];
 }
 
@@ -139,9 +138,10 @@
     [[HJShareInstance shareInstance] getUserInfoForWechatSuccess:^(HJWechatUserModel *userInfo) {
         [self.view makeToast:@"微信授权成功" duration:2.0 position:CSToastPositionCenter];
         [[HJLoginRegistRequest shared] loginWithWechatInfo:userInfo.openid success:^(id responseObject) {
-            
+            [self.view makeToast:@"微信登录成功" duration:2.0 position:CSToastPositionCenter];
+            [self.navigationController popViewControllerAnimated:YES];
         } fail:^(NSError *error, NSString *errorMsg) {
-            [weak_self regisByWechatOpenid:userInfo.openid token:userInfo.token];
+            [weak_self regisByWechatUserInfo:userInfo];
         }];
     }];
 }

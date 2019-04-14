@@ -7,7 +7,7 @@
 //
 
 #import "HJSuperView.h"
-
+#import "HJSettingInfo.h"
 #define USERNameUpdateClick           0x00001
 #define USERHeadImageClick            0x00002
 #define USERZFBBindClick              0x00003
@@ -31,7 +31,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) id<HJUserInfoViewDelegate> delegate;
-@property (nonatomic, strong) UIImageView *headImageView;
 - (void)setDataSourceChange;
 @end
 

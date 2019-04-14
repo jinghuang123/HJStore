@@ -78,7 +78,7 @@
         pop.clearBack = YES;
         weakify(pop)
         pop.authorPushClick = ^(id obj) {
-            [weak_self gotoAuthor:weak_pop];
+            [weak_self gotoAuthor:weak_pop success:success];
         };
         [self presentViewController:pop animated:YES completion:nil];
         
@@ -86,13 +86,16 @@
 
 }
 
-- (void)gotoAuthor:(HJTaobaoAuthorPopVC *)pop {
+- (void)gotoAuthor:(HJTaobaoAuthorPopVC *)pop success:(CompletionSuccessBlock)suc{
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     HJEarningModel *configer = [HJEarningModel getSavedEarnConfiger];
     NSString *uid = userInfo.user_id;
     NSString *key = configer.appkey;
     NSString *url = [NSString stringWithFormat:@"http://oauth.m.taobao.com/authorize?response_type=code&client_id=%@&redirect_uri=http://app.meizhi1000.com/index/taobaoAuth/saveScPublisherInfo&state=%@&view=web",key,uid];
     YFPolicyWebVC *web = [[YFPolicyWebVC alloc] init];
+    web.taobaoAuthorSuccess = ^(id obj) {
+        suc(nil);
+    };
     web.policyUrl = url;
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:YES];

@@ -8,10 +8,10 @@
 
 #import "HJSuperViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^UserInfoSetCommitBlock)(id obj);
 @interface HJUserNameSetVC : HJSuperViewController
-
+@property (nonatomic, copy) UserInfoSetCommitBlock userNameSetBlock;
 @end
 
-NS_ASSUME_NONNULL_END
+

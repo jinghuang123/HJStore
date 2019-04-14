@@ -11,7 +11,7 @@
 #import "HJEarnDetailPage.h"
 #import "YFPolicyWebVC.h"
 
-#define kEarnDeatilTipUrl @"http://app.meizhi1000.com/cms/p/%E6%94%B6%E7%9B%8A%E6%98%8E%E7%BB%86"
+#define kEarnDeatilTipUrl @"https://app.meizhi1000.com/cms/p/%E6%94%B6%E7%9B%8A%E6%98%8E%E7%BB%86"
 @interface CardView ()
 @property (nonatomic,strong) UILabel *title;
 @property (nonatomic,strong) UILabel *payedOrderTip;

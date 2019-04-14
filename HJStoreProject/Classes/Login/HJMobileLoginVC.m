@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     CGFloat fieldH = 40;
+    CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? 120 : 90;
     UITextField *mobileField = [UITextField createFieldWithPreIcon:@"ic_login_input_phone" placeHolder:@"请输入手机号码" sizeH:fieldH delegate:self];
     _mobileField = mobileField;
     mobileField.layer.cornerRadius = fieldH/2;
@@ -32,7 +33,7 @@
     [mobileField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_offset(180);
+        make.top.mas_offset(topOffSet);
         make.height.mas_equalTo(fieldH);
     }];
     
@@ -49,35 +50,35 @@
     [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_equalTo(mobileField.mas_bottom).offset(40);
+        make.top.mas_equalTo(mobileField.mas_bottom).offset(25);
         make.height.mas_equalTo(fieldH);
     }];
     
     UIButton *forgetBtn = [[UIButton alloc] init];
     [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [forgetBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [forgetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [forgetBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    forgetBtn.titleLabel.font = PFR12Font;
+    forgetBtn.titleLabel.font = PFR14Font;
     [forgetBtn addTarget:self action:@selector(forgetBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:forgetBtn];
     [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(pwdField.mas_left).offset(0);
-        make.top.mas_equalTo(pwdField.mas_bottom).offset(45);
+        make.top.mas_equalTo(pwdField.mas_bottom).offset(30);
         make.width.mas_equalTo(65);
         make.height.mas_equalTo(30);
     }];
     
     UIButton *codeLoginBtn = [[UIButton alloc] init];
     [codeLoginBtn setTitle:@"短信验证码登录" forState:UIControlStateNormal];
-    [codeLoginBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [codeLoginBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [codeLoginBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    codeLoginBtn.titleLabel.font = PFR12Font;
+    codeLoginBtn.titleLabel.font = PFR14Font;
     [codeLoginBtn addTarget:self action:@selector(codeLoginBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:codeLoginBtn];
     [codeLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(pwdField.mas_right).offset(0);
-        make.top.mas_equalTo(pwdField.mas_bottom).offset(45);
-        make.width.mas_equalTo(85);
+        make.top.mas_equalTo(pwdField.mas_bottom).offset(30);
+        make.width.mas_equalTo(105);
         make.height.mas_equalTo(30);
     }];
     

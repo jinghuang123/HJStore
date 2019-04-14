@@ -77,6 +77,8 @@
 - (void)registWithMobileNum:(NSString *)mobile
                         psw:(NSString *)password
                        Code:(NSString *)code
+                     openId:(NSString *)openid
+                      token:(NSString *)token
                    userName:(NSString *)username
                   success:(CompletionSuccessBlock)success
                      fail:(CompletionFailBlock2)fail  {
@@ -86,12 +88,24 @@
                             @"password":password,
                             @"username":username,
                             };
+    if (openid && openid.length > 0) {
+        parms = @{
+                  @"code":code,
+                  @"mobile":mobile,
+                  @"password":password,
+                  @"username":username,
+                  @"openid":openid,
+                  @"access_token":token,
+                  };
+    }
     [kHTTPManager tryPost:kUrlRegist parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"registWithMobileNum:%@",responseObject);
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
-        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+        } fail:^(NSError *error) {
+        }];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
@@ -111,7 +125,9 @@
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
-        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+        } fail:^(NSError *error) {
+        }];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
@@ -131,7 +147,9 @@
         NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
         HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
         [userInfoModel saveUserInfo2Phone];
-        [[HJMainRequest shared] getEarningConfigerSuccess:nil fail:nil];
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+        } fail:^(NSError *error) {
+        }];
         success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
@@ -146,11 +164,65 @@
                             @"openid":openId,
                             };
     [kHTTPManager tryPost:kUrlWechatLogin parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
+        NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
+        NSLog(@"userInfo>>%@",userInfo);
+        HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
+        [userInfoModel saveUserInfo2Phone];
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+        } fail:^(NSError *error) {
+        }];
+        success(nil);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
         fail(error,errorMsg);
     }];
 }
+
+- (void)bondingWithWechatInfo:(NSString *)openId
+                        token:(NSString *)access_token
+                    success:(CompletionSuccessBlock)success
+                       fail:(CompletionFailBlock2)fail {
+    //    kUrlWechatLogin
+    NSDictionary *parms = @{
+                            @"openid":openId,
+                            @"access_token":access_token
+                            };
+    NSString *url = [kHTTPManager getTokenUrl:kUrlWechatBonding];
+    [kHTTPManager tryPost:url parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *userInfo = [responseObject objectForKey:@"userinfo"];
+        NSLog(@"userInfo>>%@",userInfo);
+        HJUserInfoModel *userInfoModel = [HJUserInfoModel mj_objectWithKeyValues:userInfo];
+        [userInfoModel saveUserInfo2Phone];
+        [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
+        } fail:^(NSError *error) {
+        }];
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
+        fail(error,errorMsg);
+    }];
+}
+//
+
+- (void)bondingZFBWithName:(NSString *)name
+                   account:(NSString *)account
+                    mobile:(NSString *)mobile
+                   captcha:(NSString *)code
+                      success:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock2)fail {
+    NSDictionary *parms = @{
+                            @"name":name,
+                            @"account":account,
+                            @"mobile":mobile,
+                            @"captcha":code
+                            };
+    NSString *url = [kHTTPManager getTokenUrl:kURLBindAlipay];
+    [kHTTPManager tryPost:url parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+  
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *errorMsg) {
+        fail(error,errorMsg);
+    }];
+}
+
 
 - (void)reSetPasswordWithMobileNum:(NSString *)mobile
                                psw:(NSString *)password
@@ -195,5 +267,18 @@
     }];
 }
 
+
+- (void)postNewMobileWithMobile:(NSString *)mobile
+                           code:(NSString *)code
+                        success:(CompletionSuccessBlock)success
+                             fail:(CompletionFailBlock2)fail {
+    NSDictionary *dic = @{@"mobile":mobile,@"captcha":code};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlMobileUpdate];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error,yfErrCode);
+    }];
+}
 
 @end

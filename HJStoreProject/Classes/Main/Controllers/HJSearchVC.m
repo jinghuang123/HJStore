@@ -70,7 +70,6 @@
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(titleView.frame) - 15, 30)];
 
     searchBar.placeholder = @"搜索内容";
-    searchBar.backgroundImage = [UIImage imageNamed:@"clearImage"];
     searchBar.delegate = self;
     searchBar.showsCancelButton = YES;
     UITextField *searchTextField = searchTextField = [searchBar valueForKey:@"_searchField"];

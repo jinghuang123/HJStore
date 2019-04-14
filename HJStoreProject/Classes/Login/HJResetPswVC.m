@@ -22,25 +22,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     CGFloat fieldH = 40;
-    UITextField *mobileField = [UITextField createFieldWithPreIcon:@"ic_login_input_phone" placeHolder:@"请输入手机号码" sizeH:fieldH delegate:self];
+    CGFloat topOffSet = MaxHeight >= ENM_SCREEN_H_X ? 120 : 90;
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    NSString *mobile = [NSString stringWithFormat:@"%@****%@",[userInfo.mobile substringToIndex:3],[userInfo.mobile substringWithRange:NSMakeRange(7, 4)]];
+    UITextField *mobileField = [UITextField createFieldWithPreIcon:@"ic_login_input_phone" placeHolder:@"" sizeH:fieldH delegate:self];
     _mobileField = mobileField;
+    mobileField.text = mobile;
     mobileField.layer.cornerRadius = fieldH/2;
     mobileField.clipsToBounds = YES;
+    mobileField.enabled = NO;
     mobileField.font = PFR13Font;
     mobileField.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
     [self.view addSubview:mobileField];
     [mobileField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_offset(180);
+        make.top.mas_offset(topOffSet);
         make.height.mas_equalTo(fieldH);
     }];
     
     UIButton *getCodeBtn = [[UIButton alloc] init];
-    [getCodeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
-    [getCodeBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [getCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [getCodeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [getCodeBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    getCodeBtn.titleLabel.font = PFR12Font;
+    getCodeBtn.titleLabel.font = PFR14Font;
     [getCodeBtn addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:getCodeBtn];
     [getCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,7 +65,7 @@
     [codeField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_equalTo(getCodeBtn.mas_bottom).offset(40);
+        make.top.mas_equalTo(getCodeBtn.mas_bottom).offset(25);
         make.height.mas_equalTo(fieldH);
     }];
     
@@ -69,12 +74,13 @@
     pwdField.layer.cornerRadius = fieldH/2;
     pwdField.clipsToBounds = YES;
     pwdField.font = PFR13Font;
+    pwdField.secureTextEntry = YES;
     pwdField.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
     [self.view addSubview:pwdField];
     [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(30);
         make.right.mas_offset(-30);
-        make.top.mas_equalTo(codeField.mas_bottom).offset(40);
+        make.top.mas_equalTo(codeField.mas_bottom).offset(25);
         make.height.mas_equalTo(fieldH);
     }];
     
@@ -85,7 +91,7 @@
     [self.view addSubview:confirmBtn];
     [confirmBtn addTarget:self action:@selector(confirmBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(pwdField.mas_bottom).offset(55);
+        make.top.mas_equalTo(pwdField.mas_bottom).offset(40);
         make.left.mas_offset(20);
         make.height.mas_equalTo(44);
         make.right.mas_offset(-20);
@@ -98,7 +104,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (_codeField.text.length >= 6 && _pwdField.text.length >= 5 && _mobileField.text.length == 11) {
+    if (_codeField.text.length > 0 && _pwdField.text.length >= 5 && _mobileField.text.length == 11) {
         self.confirmButton.enabled = YES;
     }else{
         self.confirmButton.enabled = NO;
@@ -107,7 +113,8 @@
 }
 
 - (void)getCode {
-    [[HJLoginRegistRequest shared] getCodeWithMobile:_mobileField.text event:@"resetpwd" success:^(id responseObject) {
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    [[HJLoginRegistRequest shared] getCodeWithMobile:userInfo.mobile event:@"resetpwd" success:^(id responseObject) {
     } fail:^(NSError *error, NSString *errorMsg) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.label.text = errorMsg;

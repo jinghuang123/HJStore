@@ -9,10 +9,10 @@
 #import "HJUserInfoView.h"
 #import "HJUserInfoCell.h"
 #import "HJUserInfoFootView.h"
+#import "HJUserInfoModel.h"
 
 @interface HJUserInfoView () <UITableViewDelegate,UITableViewDataSource>
-
-
+@property (nonatomic, strong) HJUserInfoModel *userInfo;
 @end
 
 
@@ -30,6 +30,7 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
 }
 
 - (void)setupUI {
+    self.userInfo = [HJUserInfoModel getSavedUserInfo];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -41,9 +42,16 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     [self setDataSourceChange];
 }
 - (void)setDataSourceChange {
+    self.userInfo = [HJUserInfoModel getSavedUserInfo];
+    HJSettingInfo *info = [HJSettingInfo shared];
     CGFloat folderSize = [[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
     NSString *cacheSize = [NSString stringWithFormat:@"%.2fM",folderSize];
-    [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":@"呵呵"},@{@"支付宝绑定":@"绑定"},@{@"微信绑定":@"绑定"},@{@"淘宝绑定":@"绑定"}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"},@{@"收益消息":@""}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}]]];
+    NSString *wechatBind = info.weixin ? @"已绑定":@"绑定";
+    NSString *taobaoBind = info.taobao ? @"已绑定":@"绑定";
+    NSString *zfbBind = info.zfb ? @"已绑定":@"绑定";
+    [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}]]];
+    [self.tableView reloadData];
+
 }
 
 - (NSMutableArray *)dataSource {
@@ -80,7 +88,7 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.titleLab.text = title;
     cell.headImageV.hidden = ![title isEqualToString:@""];
-    cell.headImageV.image = [title isEqualToString:@""] ? [UIImage imageNamed:@"head_imageDefalut"] : nil;
+    [cell.headImageV sd_setImageWithURLString:self.userInfo.avatar placeholderImage:PLACEHOLDER_HEAD];
     cell.valueLab.text = [dic valueForKey:title];
     return cell;
 }

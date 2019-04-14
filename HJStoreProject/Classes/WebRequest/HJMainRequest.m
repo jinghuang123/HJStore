@@ -264,6 +264,59 @@
     
 }
 
+- (void)getIfFavouriteWithItemId:(NSString *)productId
+                         success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail  {
+    NSDictionary *parms = @{
+                            @"item_id":productId,
+                            };
+    NSString *requestUrl = [kHTTPManager getTokenUrl:kUrlGetIfFavorite];
+    [kHTTPManager tryPost:requestUrl parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        id status =  [responseObject objectForKey:@"status"];
+        success(status);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
+- (void)postFavouriteWithItemId:(NSString *)productId
+                         status:(NSString *)statu
+                         success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail  {
+    NSDictionary *parms = @{
+                            @"item_id":productId,
+                            @"status":statu,
+                            };
+    NSString *requestUrl = [kHTTPManager getTokenUrl:kUrlFavoriteGoods];
+    [kHTTPManager tryPost:requestUrl parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
+- (void)getFavouriteListWithPage:(NSInteger)page
+                        PageSize:(NSInteger)pageSize
+                             success:(CompletionSuccessBlock)success
+                                fail:(CompletionFailBlock)fail  {
+    NSDictionary *parms = @{
+                            @"page":@(page),
+                            @"pageSize":@(pageSize),
+                            };
+    NSString *requestUrl = [kHTTPManager getTokenUrl:kUrlGetFavoriteGoods];
+    [kHTTPManager tryPost:requestUrl parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSArray *map_data = responseObject;
+        NSArray *favourites = [HJRecommendModel mj_objectArrayWithKeyValuesArray:map_data];
+        favourites = favourites ? favourites : [NSArray array];
+        success(favourites);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
 
 
 - (void)getEarningConfigerSuccess:(CompletionSuccessBlock)success
@@ -277,6 +330,7 @@
             HJEarningModel *model = [[HJEarningModel alloc] init];
             model = [HJEarningModel mj_objectWithKeyValues:responseObject];
             [model saveEarnConfiger2Phone];
+            success(model);
         } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
             fail(error);
         }];

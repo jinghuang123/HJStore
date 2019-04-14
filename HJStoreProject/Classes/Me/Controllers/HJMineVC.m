@@ -30,6 +30,8 @@
 #import "HJMessageListVC.h"
 #import "YFPolicyWebVC.h"
 #import "HJGropPopVC.h"
+#import "HJZFBBindingVC.h"
+#import "HJTakeCashVC.h"
 
 @interface HJMineVC ()
 @property (nonatomic,strong) HJGeneralInfo *info;
@@ -56,6 +58,12 @@
         } fail:^(NSError *error) {
             
         }];
+        HJSettingInfo *info = [HJSettingInfo shared];
+        if (!info.zfb) {
+            [[HJSettingRequest shared] getSettingInfoSuccess:^(id responseObject) {
+            } fail:^(NSError *error) {
+            }];
+        }
     }
 }
 
@@ -108,8 +116,22 @@
             break;
         case HJClickItemTypeWithDrawal:
         {
-    
-            
+            HJSettingInfo *setInfo = [HJSettingInfo shared];
+            if (!setInfo.zfb) {
+                HJZFBBindingVC *zfbVC = [[HJZFBBindingVC alloc] init];
+                zfbVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:zfbVC animated:YES];
+            }else{
+      
+                [[HJSettingRequest shared] getCachInfoSuccess:^(HJCashInfoModel *cashInfo) {
+                    HJTakeCashVC *cashVC = [[HJTakeCashVC alloc] init];
+                    cashVC.hidesBottomBarWhenPushed = YES;
+                    cashVC.cashInfo = cashInfo;
+                    [self.navigationController pushViewController:cashVC animated:YES];
+                } fail:^(NSError *error) {
+                    
+                }];
+            }
         }
             break;
         case HJClickItemTypeEarn:
@@ -273,7 +295,6 @@
     }
     ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
     [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
-    
 }
 
 - (void)pushToWebUrl:(NSString *)url {
@@ -282,17 +303,5 @@
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:YES];
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

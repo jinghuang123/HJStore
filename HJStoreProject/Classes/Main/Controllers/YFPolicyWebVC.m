@@ -35,9 +35,10 @@
 
 - (void)setPolicyUrl:(NSString *)policyUrl {
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
-    if (![policyUrl containsString:@"token"]) {
+    if (![policyUrl containsString:@"token"] && ![policyUrl containsString:@"oauth.m.taobao.com/authorize"]) {
         policyUrl = [NSString stringWithFormat:@"%@?token=%@",policyUrl,userInfo.token];
     }
+    NSLog(@"policyUrl = %@",policyUrl);
     _policyUrl = policyUrl;
 }
 
@@ -160,6 +161,11 @@
     if (!navigationAction.targetFrame.isMainFrame) {
         [webView evaluateJavaScript:@"var a = document.getElementsByTagName('a');for(var i=0;i<a.length;i++){a[i].setAttribute('target','');}" completionHandler:nil];
     }
+//    NSString *urlStr = [webView.URL absoluteString];
+//    _currentUrl = urlStr;
+//    if (![_currentUrl containsString:@"token"] ) {
+//        _currentUrl = [NSString stringWithFormat:@"%@?token=%@",_currentUrl,[HJUserInfoModel getSavedUserInfo].token];
+//    }
     decisionHandler(WKNavigationActionPolicyAllow);
 }
 
@@ -169,7 +175,7 @@
     
     NSString *urlStr = [webView.URL absoluteString];
     _currentUrl = urlStr;
-    
+
     //开始加载网页时展示出progressView
     self.progressView.hidden = NO;
     //开始加载网页的时候将progressView的Height恢复为1.5倍
@@ -226,6 +232,9 @@
             [[HJMainRequest shared] getEarningConfigerSuccess:^(id responseObject) {
             } fail:^(NSError *error) {
             }];
+            if (self.taobaoAuthorSuccess) {
+                self.taobaoAuthorSuccess(nil);
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             [self.view makeToast:@"授权失败" duration:2.0 position:CSToastPositionCenter];

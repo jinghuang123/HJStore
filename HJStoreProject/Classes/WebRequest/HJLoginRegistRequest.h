@@ -31,6 +31,8 @@
 - (void)registWithMobileNum:(NSString *)mobile
                         psw:(NSString *)password
                        Code:(NSString *)code
+                     openId:(NSString *)openid
+                      token:(NSString *)token
                    userName:(NSString *)username
                     success:(CompletionSuccessBlock)success
                        fail:(CompletionFailBlock2)fail;
@@ -52,6 +54,18 @@
                     success:(CompletionSuccessBlock)success
                        fail:(CompletionFailBlock2)fail;
 
+- (void)bondingWithWechatInfo:(NSString *)openId
+                        token:(NSString *)access_token
+                      success:(CompletionSuccessBlock)success
+                         fail:(CompletionFailBlock2)fail;
+
+- (void)bondingZFBWithName:(NSString *)name
+                   account:(NSString *)account
+                    mobile:(NSString *)mobile
+                   captcha:(NSString *)code
+                   success:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock2)fail;
+
 - (void)reSetPasswordWithMobileNum:(NSString *)mobile
                                psw:(NSString *)password
                               Code:(NSString *)code
@@ -63,6 +77,11 @@
 
 - (void)logOutActionSuccess:(CompletionSuccessBlock)success
                        fail:(CompletionFailBlock)fail;
+
+- (void)postNewMobileWithMobile:(NSString *)mobile
+                           code:(NSString *)code
+                        success:(CompletionSuccessBlock)success
+                           fail:(CompletionFailBlock2)fail;
 @end
 
 

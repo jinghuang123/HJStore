@@ -80,5 +80,19 @@
 
 - (void)getCellBannersSuccess:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail;
+
+- (void)getIfFavouriteWithItemId:(NSString *)productId
+                         success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail;
+
+- (void)postFavouriteWithItemId:(NSString *)productId
+                         status:(NSString *)statu
+                        success:(CompletionSuccessBlock)success
+                           fail:(CompletionFailBlock)fail;
+
+- (void)getFavouriteListWithPage:(NSInteger)page
+                        PageSize:(NSInteger)pageSize
+                         success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail;
 @end
 

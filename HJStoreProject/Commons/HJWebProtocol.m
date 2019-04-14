@@ -20,7 +20,7 @@ Declare(kUrlGetActivityList,"api/activity/getList") /* 1.8 活动类商品列表
 Declare(kUrlEarningConfiger,"api/user/getConfig") /* 1.9 商品收益配置 */
 Declare(kUrlFavoriteGoods,"api/goods/favorites") /* 1.10 商品收藏 */
 Declare(kUrlGetFavoriteGoods,"api/goods/getFavorites") /* 1.11 获取商品收藏列表 */
-
+Declare(kUrlGetIfFavorite,"api/goods/checkItemFavorites") /* 1.12 检查商品是否收藏 */
         
 Declare(kUrlGetCategorys, "api/category/getCategory")  /**< 2.1 分类 */
 Declare(kUrlGetSubCategorys, "api/category/getCategory")  /**< 2.2 二级分类 */
@@ -43,7 +43,7 @@ Declare(kUrlCheckCode, "api/sms/check") /* 3.12 验证验证码 */
 Declare(kUrlWechatLogin, "api/user/wechatlogin") /*3.13 微信登陆*/
 Declare(kUrlWechatBonding, "api/user/wechatbind") /*3.14 微信绑定*/
 Declare(kUrlUpdateGroup, "api/user/upgrade") /*3.15 升级运营商*/
-
+Declare(kUrlGetSettingInfo, "api/setting/getSettingInfo") /*3.16 查询设置信息*/
 
 Declare(kUrlRecommendTitles, "api/bbs/getBbsChannel") /* 4.1 社区分类 */
 Declare(kUrlRecommendList, "api/bbs/getBbsList") /* 4.2 社区列表数据 */
@@ -51,7 +51,7 @@ Declare(kUrlRecommendList, "api/bbs/getBbsList") /* 4.2 社区列表数据 */
 Declare(kURLBindAlipay, "api/setting/bindZfb") /* 5.1 绑定支付宝 */
 Declare(kURLGetBindMsg, "api/setting/getBindZfb") /* 5.2 绑定信息获取 */
 Declare(kURLGetInvitationList, "api/setting/getInvitationInfo") /* 5.3 查询邀请页数据 */
-Declare(kURLApplyCash, "api/setting/applyCashWithdrawal") /* 5.4 申请提现 */
+Declare(kURLApplyCash, "api/user/requestCash") /* 5.4 申请提现 */
 Declare(kURLGetApplyCashList, "api/setting/getCashWithdrawalRecord") /* 5.4 提现记录 */
 Declare(kURLFileUpload, @"api/common/upload") /* 5.5 文件上传*/
 Declare(kURLGetBanners, @"api/common/getBanner") /* 5.6 获取banners */
@@ -60,6 +60,7 @@ Declare(kUrlGetWeiquanOrders, @"api/order/getWeiquanOrders") /* 5.8 获取维权
 Declare(kUrlGetCommissionInfo, @"api/user/getCommissionInfo") /* 5.9 获取收益明细 */
 Declare(kUrlGetKefuInfo, @"api/setting/getKefuInfo") /* 5.10 获取维权订单 */
 Declare(kUrlGetServiceInfo, @"api/setting/getKefuInfo") /* 5.11 获取客服信息 */
+Declare(kUrlGetCachInfo, @"api/setting/getCashInfo") /*5.12 获取提现信息 */
 
 Declare(kURLGetOrderList, @"api/order/getOrder") /* 6.1 获取订单*/
 

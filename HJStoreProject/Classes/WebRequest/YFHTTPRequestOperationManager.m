@@ -26,8 +26,9 @@
         self.manager.requestSerializer.timeoutInterval = REQ_TIMEOUT;
         [self.manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
         self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        self.manager.responseSerializer = [AFJSONResponseSerializer serializer];
         [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json", @"text/html", @"image/jpg", @"image/png", @"application/octet-stream", @"text/json",@"multipart/form-data", @"text/plain"]];
+        self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json",@"multipart/form-data", @"text/javascript",@"charset=utf-8"]];
     }
     return self;
 }
@@ -87,7 +88,7 @@
                                       parameters:parameters
                        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                            if (imagedata) {
-                               [formData appendPartWithFileData:imagedata name:@"file" fileName:@"userIcon.png" mimeType:@"image/jpg"];
+                               [formData appendPartWithFileData:imagedata name:@"file" fileName:@"userIcon.png" mimeType:@"image/jpeg"];
                            }
                        } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
                            [self YFSuccess:responseObject
@@ -134,6 +135,7 @@
           success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
           failure:(void (^)(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode))failure {
     NSNumber *resultCode = [responseObject objectForKey:@"code"];
+
     if ([resultCode integerValue] == 1) {
         NSDictionary *result = [responseObject objectForKey:@"data"];
         success(operation, result);

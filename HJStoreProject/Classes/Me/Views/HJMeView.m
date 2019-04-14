@@ -169,6 +169,7 @@
     
     UIImageView *earningView = [[UIImageView alloc] init];
     earningView.image = [UIImage imageNamed:@"me_top_yellow"];
+    earningView.userInteractionEnabled = YES;
     _earningView = earningView;
     [headView addSubview:earningView];
     [earningView mas_makeConstraints:^(MASConstraintMaker *make) {

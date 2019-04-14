@@ -14,5 +14,6 @@
 @property(nonatomic,strong) NSString *policyUrl;
 @property (nonatomic ,strong) WKWebView *webView;
 @property(nonatomic,copy) void (^onBackClick)(id obj);
+@property(nonatomic,copy) void (^taobaoAuthorSuccess)(id obj);
 - (void)loadURL:(NSString *)url;
 @end

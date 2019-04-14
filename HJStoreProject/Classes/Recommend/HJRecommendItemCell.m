@@ -69,6 +69,12 @@ static NSString *cellReuseID = @"cellReuseID";
             weak_self.shareClickBlock(weak_self.model);
         }
     }];
+    
+    [self.copyedView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = @"【购买步骤】 长按识别二维码-复制淘口令-打开手机淘宝领券下单";
+        [weak_self jk_makeToast:@"复制评论成功" duration:2.0 position:CSToastPositionCenter];
+    }];
 }
 
 

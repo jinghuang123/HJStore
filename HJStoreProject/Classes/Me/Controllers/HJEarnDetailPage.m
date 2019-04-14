@@ -25,7 +25,7 @@
 
 - (instancetype)init {
     if(self = [super init]) {
-        for (NSInteger i = 0; i < 4; i++) {
+        for (NSInteger i = 0; i < 2; i++) {
             HJEarnDetailVC *earnDetailList = [[HJEarnDetailVC alloc] init];
             earnDetailList.type = i;
             [self.viewControllers addObject:earnDetailList];

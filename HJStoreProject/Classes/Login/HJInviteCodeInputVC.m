@@ -29,6 +29,7 @@
     
     UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(20, 150, MaxWidth - 40, 20)];
     _field = field;
+
     field.font = PFR16Font
     field.delegate = self;
     field.placeholder = @"请输入邀请码";
@@ -67,13 +68,25 @@
     UILabel *nickName = [[UILabel alloc] init];
     _nickName = nickName;
     nickName.font = [UIFont systemFontOfSize:15];
-    nickName.textColor = [[UIColor jk_colorWithHexString:@"0x333333"] colorWithAlphaComponent:0.6];
+    nickName.textColor = [UIColor blackColor];
     [inviteView addSubview:nickName];
     [nickName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(avatarImageView.mas_right).offset(10);
         make.right.mas_offset(-20);
-        make.centerY.equalTo(avatarImageView);
-        make.height.mas_equalTo(50);
+        make.top.mas_offset(15);
+        make.height.mas_equalTo(25);
+    }];
+    
+    UILabel *inviteTip = [[UILabel alloc] init];
+    inviteTip.font = [UIFont systemFontOfSize:14];
+    inviteTip.text = @"邀请您加入美值";
+    inviteTip.textColor = [[UIColor jk_colorWithHexString:@"0x333333"] colorWithAlphaComponent:0.5];
+    [inviteView addSubview:inviteTip];
+    [inviteTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(avatarImageView.mas_right).offset(10);
+        make.right.mas_offset(-20);
+        make.top.equalTo(nickName.mas_bottom).offset(0);
+        make.height.mas_equalTo(20);
     }];
     
     
@@ -165,8 +178,7 @@
     HJRegistVC *registVC = [[HJRegistVC alloc] init];
     registVC.title = @"注册";
     registVC.inviteCode = self.inviteCode;
-    registVC.wechat_access_token = self.wechat_access_token;
-    registVC.openid = self.openid;
+    registVC.userModel = self.userModel;
     [self.navigationController pushViewController:registVC animated:YES];
 }
 

@@ -32,6 +32,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 @property (nonatomic, strong) HJShareMainImageView *shareMainImageV;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UILabel *earningLabel;
+@property (nonatomic, assign) BOOL favourite;
 @end
 
 @implementation HJProductDetailVC
@@ -68,10 +69,17 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJRecommendModel *recommendModel) {
         self.tableHeadView.imageGroupArray = recommendModel.small_images.count == 0 ? @[recommendModel.pict_url] : recommendModel.small_images;
         self.detailmodel = recommendModel;
-        NSString *tip = [NSString stringWithFormat:@"领券 ¥%@",recommendModel.coupon_amount];
+        NSString *tip = [NSString stringWithFormat:@"自购赚 ¥%.2f",recommendModel.earning];
         [self.couponInfoBtn setTitle:tip forState:UIControlStateNormal];
         self.earningLabel.text = [NSString stringWithFormat:@"赚¥%.2f",recommendModel.earning];
         [self getRamdoms];
+    } fail:^(NSError *error) {
+        
+    }];
+    
+    [[HJMainRequest shared] getIfFavouriteWithItemId:self.productId success:^(id status) {
+        self.favourite = [status boolValue];
+        [self.tableView reloadData];
     } fail:^(NSError *error) {
         
     }];
@@ -245,6 +253,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         contentCell.conponGetBlock = ^(id obj) {
             [weak_self couponInfo];
         };
+        [contentCell setIffavourite:self.favourite];
         cell = contentCell;
     }else if(indexPath.section == 1){
         HJProductDetailCell *detailcell = [tableView dequeueReusableCellWithIdentifier:HJProductDetailCellIdentifier];

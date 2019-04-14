@@ -309,7 +309,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 - (void)pushToProductDetailWithItem:(HJRecommendModel *)item {
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
-    productDetailVC.searchModel = item;
+    productDetailVC.productId = item.item_id;
     productDetailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:productDetailVC animated:YES];
 }

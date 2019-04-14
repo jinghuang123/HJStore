@@ -13,14 +13,14 @@
 #import "HJUserNameSetVC.h"
 #import "HJZFBBindingVC.h"
 #import "HJZFBBindingVC.h"
-#import "HJWeChatBindingVC.h"
-#import "HJTaoBaoBindingVC.h"
 #import "HJMobileChangeVC.h"
 #import "HJResetPswVC.h"
 #import "HJSettingRequest.h"
 #import "HJAboutUSVC.h"
 #import "HJLoginRegistRequest.h"
 #import <MJAlertManager/MJAlertManager.h>
+#import "HJShareInstance.h"
+#import "HJLoginRegistRequest.h"
 
 
 @interface HJUserInfoSetVC () <HJUserInfoViewDelegate,TZImagePickerControllerDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -33,7 +33,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-
 }
 
 
@@ -55,7 +54,11 @@
     switch (msgType) {
         case USERNameUpdateClick:
             {
+                weakify(self)
                 HJUserNameSetVC *nameSetVc = [[HJUserNameSetVC alloc] init];
+                nameSetVc.userNameSetBlock = ^(NSString *name) {
+                    [weak_self updateUserInfo:nil nickName:name userName:nil];
+                };
                 [self.navigationController pushViewController:nameSetVc animated:YES];
             }
             break;
@@ -78,8 +81,7 @@
                 TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
                 imagePickerVc.didFinishPickingPhotosHandle = ^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                     if (photos.count > 0) {
-                        self.selfView.headImageView.image = [photos firstObject];
-                        [self saveImageUser];
+                        [self saveImageUser:[photos firstObject]];
                     }
                 };
                 [self presentViewController:imagePickerVc animated:YES completion:nil];
@@ -93,20 +95,37 @@
             break;
         case USERZFBBindClick:
         {
-            HJZFBBindingVC *zfbVC = [[HJZFBBindingVC alloc] init];
-            [self.navigationController pushViewController:zfbVC animated:YES];
+            HJSettingInfo *info = [HJSettingInfo shared];
+            if(!info.zfb){
+                HJZFBBindingVC *zfbVC = [[HJZFBBindingVC alloc] init];
+                [self.navigationController pushViewController:zfbVC animated:YES];
+            }
         }
             break;
         case USERWeChatBindClick:
         {
-            HJWeChatBindingVC *wechatVC = [[HJWeChatBindingVC alloc] init];
-            [self.navigationController pushViewController:wechatVC animated:YES];
+            HJSettingInfo *info = [HJSettingInfo shared];
+            if(!info.weixin){
+                [[HJShareInstance shareInstance] getUserInfoForWechatSuccess:^(HJWechatUserModel *userInfo) {
+                    [self.view makeToast:@"微信授权成功" duration:2.0 position:CSToastPositionCenter];
+                    [[HJLoginRegistRequest shared] bondingWithWechatInfo:userInfo.openid token:userInfo.token success:^(id responseObject) {
+                        [self.view makeToast:@"微信绑定成功" duration:2.0 position:CSToastPositionCenter];
+                        info.weixin = YES;
+                        [self.selfView setDataSourceChange];
+                    } fail:^(NSError *error, NSString *errorMsg) {
+                        
+                    }];
+                }];
+            }
         }
             break;
         case USERTaoBaoBindClick:
         {
-            HJTaoBaoBindingVC *taobaoVC = [[HJTaoBaoBindingVC alloc] init];
-            [self.navigationController pushViewController:taobaoVC animated:YES];
+            HJSettingInfo *info = [HJSettingInfo shared];
+            [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
+                info.taobao = YES;
+                [self.selfView setDataSourceChange];
+            }];
         }
             break;
         case USERMobileUpdateClick:
@@ -128,9 +147,7 @@
                 if (selectIndex == 1) {
                     [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
                         [weak_self.selfView setDataSourceChange];
-                        [weak_self.selfView.tableView reloadData];
                     }];
- 
                 }
             }];
             
@@ -174,12 +191,29 @@
     
 }
 
-- (void)saveImageUser {
-    NSData *data = UIImageJPEGRepresentation(self.selfView.headImageView.image, 0.5);
-    [[HJSettingRequest shared] uploadFile:data success:^(id responseObject) {
-        NSLog(@"responseObject:%@",responseObject);
+- (void)saveImageUser:(UIImage *)image {
+    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+    [[HJSettingRequest shared] uploadFile:data success:^(NSString *url) {
+        [self updateUserInfo:url nickName:nil userName:nil];
     } fail:^(NSError *error) {
 
+    }];
+}
+
+- (void)updateUserInfo:(NSString *)headImageUrl nickName:(NSString *)nickName userName:(NSString *)userName {
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if (!headImageUrl) {
+        headImageUrl = userInfo.avatar;
+    }
+    if(!nickName) {
+        nickName = userInfo.nickname;
+    }
+    if (!userName) {
+        userName = userInfo.username;
+    }
+    [[HJSettingRequest shared] updeteUserInfoWithAvater:headImageUrl username:userName nickname:nickName Success:^(id responseObject) {
+        [self.selfView setDataSourceChange];
+    } fail:^(NSError *error) {
     }];
 }
 
@@ -192,8 +226,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     NSLog(@"info:%@",info);
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    self.selfView.headImageView.image = image;
-    [self saveImageUser];
+    [self saveImageUser:image];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
