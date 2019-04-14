@@ -34,7 +34,7 @@
     backView.backgroundColor = [UIColor clearColor];
     UIImage *img = [UIImage imageNamed:@"NavBar_backImg"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 10, 22, 22);
+    btn.frame = CGRectMake(0, 0, 22, 40);
     [btn setImage:img forState:UIControlStateNormal];
     [backView addSubview:btn];
     [backView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -43,6 +43,8 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:backView];
     self.navigationItem.leftBarButtonItem = backButton;
 }
+
+
     
 
 - (void)viewWillAppear:(BOOL)animated {

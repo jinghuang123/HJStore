@@ -75,7 +75,10 @@
             showParam.nativeFailMode=AlibcNativeFailModeJumpH5;
         }
     }
-
+    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+    if (![url containsString:@"token"] && ![url containsString:@"oauth.m.taobao.com/authorize"]) {
+        url = [NSString stringWithFormat:@"%@?token=%@",url,userInfo.token];
+    }
     NSLog(@"showParam %@",showParam);
     NSString *targetUrl = [url containsString:@"https"] ? url : [NSString stringWithFormat:@"https:%@",url];
     id<AlibcTradePage> page = [AlibcTradePageFactory page:targetUrl];

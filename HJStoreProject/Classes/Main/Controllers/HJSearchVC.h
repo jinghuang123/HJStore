@@ -8,10 +8,11 @@
 
 #import "HJSuperViewController.h"
 #import "HJMainVC.h"
-
+#import "LLSearchView.h"
 
 @interface HJSearchVC : HJSuperViewController
-
+@property (nonatomic, assign) NSInteger search_type;
+@property (nonatomic, copy) TapActionBlock onItemTapClick;
 @end
 
 

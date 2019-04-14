@@ -12,6 +12,7 @@
 #import "HJCategoryRequest.h"
 #import "HJMainVC.H"
 #import "HJSearchVC.h"
+#import "HJSearchPageVC.h"
 
 
 @interface HJStroeTypeListVC ()
@@ -76,7 +77,7 @@
 
 - (void)setupNavItems {
     UIButton *leftNav = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftNav setBackgroundImage:[UIImage imageNamed:@"main_Nav_left"] forState:UIControlStateNormal];
+    [leftNav setBackgroundImage:[UIImage imageNamed:@"meizhilogo"] forState:UIControlStateNormal];
     [leftNav addTarget:self action:@selector(onClickLeft) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftNav];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
@@ -96,7 +97,7 @@
     
     bgView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
     [bgView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        HJSearchVC *searchvc = [[HJSearchVC alloc] init];
+        HJSearchPageVC *searchvc = [[HJSearchPageVC alloc] init];
         searchvc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:searchvc animated:YES];
     }];

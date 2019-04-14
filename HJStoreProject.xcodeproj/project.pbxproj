@@ -155,6 +155,11 @@
 		B8A9181B21AFD0D1006733BA /* HJRecommendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A9181A21AFD0D1006733BA /* HJRecommendVC.m */; };
 		B8A9181E21AFD334006733BA /* HJNavigationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A9181D21AFD334006733BA /* HJNavigationVC.m */; };
 		B8CBF2B22262E50100699652 /* HJCashInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2B12262E50100699652 /* HJCashInfoModel.m */; };
+		B8CBF2B522630E8000699652 /* HJSearchHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2B422630E8000699652 /* HJSearchHotModel.m */; };
+		B8CBF2B82263127F00699652 /* HJSystemInfoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2B72263127F00699652 /* HJSystemInfoInstance.m */; };
+		B8CBF2BB22631A1500699652 /* HJSearchPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2BA22631A1500699652 /* HJSearchPageVC.m */; };
+		B8CBF2BD22632E4600699652 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CBF2BC22632E4600699652 /* Images.xcassets */; };
+		B8CBF2C1226330BE00699652 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CBF2C0226330BE00699652 /* Images-2.xcassets */; };
 		B8CE278A21FC5C560059FB9E /* HJUserNameSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE278921FC5C560059FB9E /* HJUserNameSetVC.m */; };
 		B8CE278D21FC60A90059FB9E /* HJZFBBindingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE278C21FC60A90059FB9E /* HJZFBBindingVC.m */; };
 		B8CE279621FC60FC0059FB9E /* HJMobileChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE279521FC60FC0059FB9E /* HJMobileChangeVC.m */; };
@@ -467,6 +472,14 @@
 		B8A9181D21AFD334006733BA /* HJNavigationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJNavigationVC.m; sourceTree = "<group>"; };
 		B8CBF2B02262E50100699652 /* HJCashInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJCashInfoModel.h; sourceTree = "<group>"; };
 		B8CBF2B12262E50100699652 /* HJCashInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJCashInfoModel.m; sourceTree = "<group>"; };
+		B8CBF2B322630E8000699652 /* HJSearchHotModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchHotModel.h; sourceTree = "<group>"; };
+		B8CBF2B422630E8000699652 /* HJSearchHotModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchHotModel.m; sourceTree = "<group>"; };
+		B8CBF2B62263127F00699652 /* HJSystemInfoInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSystemInfoInstance.h; sourceTree = "<group>"; };
+		B8CBF2B72263127F00699652 /* HJSystemInfoInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSystemInfoInstance.m; sourceTree = "<group>"; };
+		B8CBF2B922631A1500699652 /* HJSearchPageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchPageVC.h; sourceTree = "<group>"; };
+		B8CBF2BA22631A1500699652 /* HJSearchPageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchPageVC.m; sourceTree = "<group>"; };
+		B8CBF2BC22632E4600699652 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B8CBF2C0226330BE00699652 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		B8CE278821FC5C560059FB9E /* HJUserNameSetVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJUserNameSetVC.h; sourceTree = "<group>"; };
 		B8CE278921FC5C560059FB9E /* HJUserNameSetVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJUserNameSetVC.m; sourceTree = "<group>"; };
 		B8CE278B21FC60A90059FB9E /* HJZFBBindingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJZFBBindingVC.h; sourceTree = "<group>"; };
@@ -826,6 +839,8 @@
 				B8626E6D21DB46CF00D7BA74 /* HJShareVC.m */,
 				B8264A7421D8C03C00004420 /* HJMainPodVC.h */,
 				B8264A7521D8C03C00004420 /* HJMainPodVC.m */,
+				B8CBF2B922631A1500699652 /* HJSearchPageVC.h */,
+				B8CBF2BA22631A1500699652 /* HJSearchPageVC.m */,
 				B8052FAA21DE2DBB00F125F4 /* HJSearchVC.h */,
 				B8052FAB21DE2DBB00F125F4 /* HJSearchVC.m */,
 				B810EDE821E055920059CACC /* HJSearchListVC.h */,
@@ -888,6 +903,8 @@
 				B810EDF421E091510059CACC /* HJShareModel.m */,
 				B886D68921E9885D00201231 /* HJEarningModel.h */,
 				B886D68A21E9885D00201231 /* HJEarningModel.m */,
+				B8CBF2B322630E8000699652 /* HJSearchHotModel.h */,
+				B8CBF2B422630E8000699652 /* HJSearchHotModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -922,6 +939,8 @@
 				B8CE279B21FC7FEA0059FB9E /* HJTextField.m */,
 				18D2264F2256243B00901619 /* HJPopToSearchViewController.h */,
 				18D226502256243B00901619 /* HJPopToSearchViewController.m */,
+				B8CBF2B62263127F00699652 /* HJSystemInfoInstance.h */,
+				B8CBF2B72263127F00699652 /* HJSystemInfoInstance.m */,
 			);
 			path = SuperClass;
 			sourceTree = "<group>";
@@ -983,6 +1002,8 @@
 				B8A917F121AFB75A006733BA /* LaunchScreen.storyboard */,
 				B8A917F421AFB75A006733BA /* Info.plist */,
 				B8A917F521AFB75A006733BA /* main.m */,
+				B8CBF2BC22632E4600699652 /* Images.xcassets */,
+				B8CBF2C0226330BE00699652 /* Images-2.xcassets */,
 			);
 			path = HJStoreProject;
 			sourceTree = "<group>";
@@ -1363,8 +1384,10 @@
 				B873DA5F21B11B76008DBC66 /* HomeHighGoods.plist in Resources */,
 				B82126E221D9C819007828B2 /* NBResource.bundle in Resources */,
 				B8E086C521E1E59000792D40 /* ShareSDK.bundle in Resources */,
+				B8CBF2BD22632E4600699652 /* Images.xcassets in Resources */,
 				B8E086BF21E1E59000792D40 /* WeiboSDK.bundle in Resources */,
 				B810EE3E21E0C7A10059CACC /* FSActionSheet_cancel@3x.png in Resources */,
+				B8CBF2C1226330BE00699652 /* Images-2.xcassets in Resources */,
 				B873DA5E21B11B76008DBC66 /* GoodsGrid.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1431,6 +1454,7 @@
 				B856EC5521BB9AD400503DF7 /* HJShareInstance.m in Sources */,
 				B886D68E21E9951500201231 /* HJLoginRegistRequest.m in Sources */,
 				18F07FD02256FA740063A52F /* HJEarnDetailVC.m in Sources */,
+				B8CBF2BB22631A1500699652 /* HJSearchPageVC.m in Sources */,
 				B8264A7321D8BFE100004420 /* MYColorBackView.m in Sources */,
 				B88057F521F87D02000DBEEF /* HJUserInfoCell.m in Sources */,
 				B8E38B5C21C94076008C216F /* HJCategoryRequest.m in Sources */,
@@ -1461,6 +1485,7 @@
 				18D57DF2224769A200D970F7 /* HJMeizhiCustomServiceVC.m in Sources */,
 				B817ABA521F49CB800363C2F /* HJUserInfoSetVC.m in Sources */,
 				B886D69A21E9C87000201231 /* HJRegistVC.m in Sources */,
+				B8CBF2B522630E8000699652 /* HJSearchHotModel.m in Sources */,
 				B810EE4D21E0DF9F0059CACC /* YFPolicyWebVC.m in Sources */,
 				B886D69121E9AE8A00201231 /* HJMobileLoginVC.m in Sources */,
 				B8E086D921E21D7700792D40 /* HJLoginVC.m in Sources */,
@@ -1503,6 +1528,7 @@
 				182C630E2258583400BF8397 /* HJWeiquanModel.m in Sources */,
 				B8086B8922354B8A00668E27 /* HJEarningVC.m in Sources */,
 				B810EE3921E0C7A10059CACC /* XLProgressView.m in Sources */,
+				B8CBF2B82263127F00699652 /* HJSystemInfoInstance.m in Sources */,
 				B8264A7221D8BFE100004420 /* MYPresentAnimationManager.m in Sources */,
 				18D57DF52247738300D970F7 /* HJFenceModel.m in Sources */,
 				187CE7FB21C13639005B9D77 /* HJSegemengVC.m in Sources */,
@@ -1695,6 +1721,7 @@
 			baseConfigurationReference = 2A9627EBDD40F69EA553FBA1 /* Pods-HJStoreProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5N6PJKNJRG;
@@ -1734,6 +1761,7 @@
 			baseConfigurationReference = 2EBFF09586D8270160A40BA4 /* Pods-HJStoreProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5N6PJKNJRG;

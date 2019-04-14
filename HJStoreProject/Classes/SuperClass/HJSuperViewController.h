@@ -10,7 +10,8 @@
 #import "HJTaobaoAuthorPopVC.h"
 
 
-@interface HJSuperViewController : UIViewController 
+@interface HJSuperViewController : UIViewController
+- (void)backButtonClick;
 - (void)setNavBackItem;
 - (void)pushToLoginVC:(BOOL)hideClose;
 - (void)showTaobaoAuthorDailogSuccess:(CompletionSuccessBlock)success;

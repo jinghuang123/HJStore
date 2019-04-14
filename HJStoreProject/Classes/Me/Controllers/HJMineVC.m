@@ -283,6 +283,9 @@
 }
 
 - (void)pushToProductDetailWithId:(NSString *)productId {
+    if ([productId isEqualToString:@""]) {
+        return;
+    }
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
     productDetailVC.productId = productId;
     productDetailVC.hidesBottomBarWhenPushed = YES;
@@ -290,14 +293,23 @@
 }
 
 - (void)pushToWebWithUrl:(NSString *)url {
-    if (![url containsString:@"https://"]) {
-        url = [NSString stringWithFormat:@"https://%@",url];
+    if ([url isEqualToString:@""]) {
+        return;
+    }
+    if (![url containsString:@"http"]) {
+        url = [NSString stringWithFormat:@"http://%@",url];
     }
     ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
     [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
 }
 
 - (void)pushToWebUrl:(NSString *)url {
+    if ([url isEqualToString:@""]) {
+        return;
+    }
+    if (![url containsString:@"https://"]) {
+        url = [NSString stringWithFormat:@"https://%@",url];
+    }
     YFPolicyWebVC *web = [[YFPolicyWebVC alloc] init];
     web.policyUrl = url;
     web.hidesBottomBarWhenPushed = YES;

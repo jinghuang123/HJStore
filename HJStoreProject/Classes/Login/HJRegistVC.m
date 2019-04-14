@@ -8,10 +8,10 @@
 
 #import "HJRegistVC.h"
 #import "HJLoginRegistRequest.h"
-
+#import "YFPolicyWebVC.h"
 #define UserAgrement @"https://app.meizhi1000.com/cms/p/%E7%BE%8E%E5%80%BC%E7%94%A8%E6%88%B7%E5%8D%8F%E8%AE%AE"
 
-@interface HJRegistVC () <UITextFieldDelegate>
+@interface HJRegistVC () <UITextFieldDelegate,TYAttributedLabelDelegate>
 @property (nonatomic, strong) UITextField *mobileField;
 @property (nonatomic, strong) UITextField *codeField;
 @property (nonatomic, strong) UITextField *pwdField;
@@ -95,15 +95,17 @@
         make.right.mas_offset(-20);
     }];
     
-    UILabel *agrementTip = [[UILabel alloc] init];
+    TYAttributedLabel *agrementTip = [[TYAttributedLabel alloc] init];
     agrementTip.text = @"注册代表您已同意《美值用户协议》";
-    agrementTip.font = [UIFont systemFontOfSize:14];
-    agrementTip.textAlignment = NSTextAlignmentCenter;
+    agrementTip.font = [UIFont systemFontOfSize:12];
+    agrementTip.delegate = self;
+    agrementTip.backgroundColor = [UIColor clearColor];
+    agrementTip.textAlignment = kCTTextAlignmentCenter;
     agrementTip.textColor = [UIColor jk_colorWithHexString:@"#333333"];
     [self.view addSubview:agrementTip];
     [agrementTip mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(20);
-        make.right.mas_offset(-20);
+        make.left.mas_offset(0);
+        make.right.mas_offset(0);
         make.top.equalTo(confirmBtn.mas_bottom).offset(20);
         make.height.mas_equalTo(20);
     }];
@@ -157,5 +159,14 @@
         self.hud.label.text = errorMsg;
         [self.hud hideAnimated:YES afterDelay:1.5];
     }];
+}
+
+- (void)attributedLabel:(TYAttributedLabel *)attributedLabel textStorageClicked:(id<TYTextStorageProtocol>)textStorage atPoint:(CGPoint)point {
+    NSDictionary *data = ((TYLinkTextStorage *) textStorage).linkData;
+    NSString *title = data[@"title"];
+    NSString *url = data[@"url"];
+    YFPolicyWebVC *web = [[YFPolicyWebVC alloc] init];
+    web.policyUrl = url;
+    [self.navigationController pushViewController:web animated:YES];
 }
 @end

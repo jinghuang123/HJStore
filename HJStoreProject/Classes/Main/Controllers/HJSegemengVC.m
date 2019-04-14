@@ -14,12 +14,21 @@
 #import "AlibcManager.h"
 #import "HJSettingRequest.h"
 #import "HJMeizhiCustomServiceVC.h"
+#import "HJSystemInfoInstance.h"
+#import "HJSearchPageVC.h"
 
 @interface HJSegemengVC()
 @property (strong , nonatomic) UITextField *textField;
 @property (strong , nonatomic) SegmentView *segmentView;
 @end
 @implementation HJSegemengVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[HJSystemInfoInstance shared] getSearchHots];
+    });
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,7 +106,7 @@
     
     bgView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
     [bgView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        HJSearchVC *searchvc = [[HJSearchVC alloc] init];
+        HJSearchPageVC *searchvc = [[HJSearchPageVC alloc] init];
         searchvc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:searchvc animated:YES];
     }];

@@ -39,12 +39,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HJStoreProject/Classes/WebRequest/HJLoginRegistRequest.m"
-            timestampString = "576913355.519232"
+            timestampString = "576952953.640859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "278"
             endingLineNumber = "278"
             landmarkName = "-postNewMobileWithMobile:code:success:fail:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HJStoreProject/Classes/Me/Controllers/HJMineVC.m"
+            timestampString = "576952953.641161"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "-pushToProductListWithId:activityId:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HJStoreProject/Classes/Me/Controllers/HJMineVC.m"
+            timestampString = "576952953.641222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-popUpdateGroupWithModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

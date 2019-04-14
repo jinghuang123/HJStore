@@ -12,7 +12,6 @@
 #import "HJMainSliderCell.h"
 #import "HJGoodItemCell.h"
 #import "HJMainGridSectionFootView.h"
-
 #import "HJGoodsCountDownCell.h"
 #import "HJMainListHeadView.h"
 #import "HJProductDetailVC.h"
@@ -47,6 +46,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidLoad {
@@ -549,7 +549,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 if (model.islist) {
                     [self pushToProductListWithId:0 activityId:model.activityId];
                 }else{
-                    [self pushToProductDetailWithId:model.content_product];
+                    model.item_id ? [self pushToProductDetailWithId:model.item_id] : @"";
                 }
             }
         }else{
@@ -588,6 +588,9 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 - (void)pushToProductDetailWithId:(NSString *)productId {
+    if ([productId isEqualToString:@""]) {
+        return;
+    }
     HJProductDetailVC *productDetailVC = [[HJProductDetailVC alloc] init];
     productDetailVC.productId = productId;
     productDetailVC.hidesBottomBarWhenPushed = YES;
@@ -595,8 +598,11 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 - (void)pushToWebWithUrl:(NSString *)url {
-    if (![url containsString:@"https://"]) {
-        url = [NSString stringWithFormat:@"https://%@",url];
+    if ([url isEqualToString:@""]) {
+        return;
+    }
+    if (![url containsString:@"http"]) {
+        url = [NSString stringWithFormat:@"http://%@",url];
     }
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     if(!userInfo.token || userInfo.token.length == 0){

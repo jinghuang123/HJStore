@@ -64,6 +64,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    self.title = @"商品详情";
     [self setupNavItems];
     [self setupButtons];
     [[HJMainRequest shared] getProductDetailCache:YES productId:self.productId success:^(HJRecommendModel *recommendModel) {

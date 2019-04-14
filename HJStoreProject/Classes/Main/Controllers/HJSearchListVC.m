@@ -75,7 +75,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
-    [[HJMainRequest shared] getListBySearchCodeCache:YES code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize has_coupon:self.showCouponsOnly sort:self.sort success:^(NSDictionary *response) {
+    [[HJMainRequest shared] getListBySearchCodeCache:YES soreType:self.sort code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize has_coupon:self.showCouponsOnly sort:self.sort success:^(NSDictionary *response) {
         if (self.pageNo > 1) {
             [self.searchmodels addObjectsFromArray:[response objectForKey:@"searchModel"]];
             if (self.searchmodels.count < 20) {
@@ -94,7 +94,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 - (void)setBarButtonItem {
     // 创建搜索框
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(5, 7, self.view.frame.size.width - 40, 30)];
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(titleView.frame) - 15, 30)];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(titleView.frame) - 40, 30)];
     _searchBar = searchBar;
     searchBar.placeholder = @"搜索内容";
     searchBar.backgroundImage = [UIImage imageNamed:@"clearImage"];

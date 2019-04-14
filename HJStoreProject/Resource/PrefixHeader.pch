@@ -30,7 +30,7 @@
 #import "NSString+Extension.h"
 #import "UIView+Toast.h"
 #import "HJUserInfoModel.h"
-
+#import <TYAttributedLabel.h>
 
 
 

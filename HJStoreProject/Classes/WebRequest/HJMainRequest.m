@@ -67,6 +67,7 @@
                             @"pageSize":@(20),
                             };
     [kHTTPManager tryPost:kUrlGetMainList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@">>>>>>>>>>>>>>%@",responseObject);
         NSDictionary *bannerDic = [responseObject objectForKey:@"banner"];
         NSDictionary *activityDic = [responseObject objectForKey:@"activity"];
         NSDictionary *categoryDic = [responseObject objectForKey:@"category"];
@@ -99,7 +100,7 @@
                                    @"category":categorys
                                    };
         success(response);
-        NSLog(@">>>>>>>>>>>>>>%@",response);
+        
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
         fail(error);
     }];
@@ -219,6 +220,7 @@
 
 
 - (void)getListBySearchCodeCache:(BOOL)cache
+                        soreType:(NSInteger)soretype
                           code:(NSString *)code
                               pageNo:(NSInteger)pageNo
                             pageSize:(NSInteger)pangeSize
@@ -229,6 +231,7 @@
     //排序方式，1->综合，2->优惠券面值由低到高，3->优惠券面值由高到低，4->预估收益由高到低，5->卷后价由低到高，6->卷后价由高到低，7->销量由低到高，8->销量由高到低
     NSDictionary *parms = @{
                             @"q":code,
+                            @"search_type":@(soretype),
                             @"pageNo" :@(pageNo),
                             @"pageSize":@(pangeSize),
                             @"has_coupon":has_coupon,
@@ -336,6 +339,21 @@
         }];
     }
 }
+
+
+- (void)getSearchHotSuccess:(CompletionSuccessBlock)success
+                             fail:(CompletionFailBlock)fail {
+    NSString *url = [kHTTPManager getTokenUrl:kUrlGetSearchHot];
+    [kHTTPManager tryPost:url parameters:@{} success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSArray *hots = [responseObject objectForKey:@"data"];
+        NSArray *searchHots = [HJSearchHotModel mj_objectArrayWithKeyValuesArray:hots];
+        success(searchHots);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+    
+}
+
 
 
 

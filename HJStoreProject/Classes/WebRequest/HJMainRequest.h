@@ -16,6 +16,7 @@
 #import "HJRecommendModel.h"
 #import "HJShareModel.h"
 #import "HJEarningModel.h"
+#import "HJSearchHotModel.h"
 
 
 @interface HJMainRequest : NSObject
@@ -61,6 +62,7 @@
 
 
 - (void)getListBySearchCodeCache:(BOOL)cache
+                        soreType:(NSInteger)soretype
                             code:(NSString *)code
                           pageNo:(NSInteger)pageNo
                         pageSize:(NSInteger)pangeSize
@@ -94,5 +96,8 @@
                         PageSize:(NSInteger)pageSize
                          success:(CompletionSuccessBlock)success
                             fail:(CompletionFailBlock)fail;
+
+- (void)getSearchHotSuccess:(CompletionSuccessBlock)success
+                       fail:(CompletionFailBlock)fail;
 @end
 

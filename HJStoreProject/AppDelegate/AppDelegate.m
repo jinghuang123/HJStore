@@ -15,7 +15,7 @@
 #import "HJPopToSearchViewController.h"
 #import "HJSearchListVC.h"
 #import "HJUserInfoModel.h"
-
+#import "HJSystemInfoInstance.h"
 #define kLastSearchKey @"kLastSearchKey"
 
 @interface AppDelegate ()
@@ -33,7 +33,7 @@
     [AlibcManager shared];
     
     [[HJShareInstance shareInstance] registerShareSDK];
-    
+    [[HJSystemInfoInstance shared] getSearchHots];
     [[HJCategoryRequest shared] getCategoryCache:NO success:^(id responseObject) {
     } fail:^(NSError *error) {
     }];

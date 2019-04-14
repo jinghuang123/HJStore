@@ -12,7 +12,7 @@
 
 @interface HJActivityModel : NSObject
 @property (nonatomic, assign) NSInteger content_list;
-@property (nonatomic, copy) NSString *content_product;
+@property (nonatomic, copy) NSString *item_id;
 @property (nonatomic, strong) NSString *content_url;
 @property (nonatomic, assign) NSInteger activityId;
 @property (nonatomic, assign) NSInteger islogindata;

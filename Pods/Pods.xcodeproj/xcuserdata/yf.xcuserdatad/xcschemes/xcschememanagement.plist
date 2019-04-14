@@ -107,6 +107,11 @@
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
+		<key>TYAttributedLabel.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>TZImagePickerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
