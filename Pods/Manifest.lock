@@ -178,6 +178,7 @@ PODS:
   - SDWebImage/GIF (4.4.6):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - TYAttributedLabel (2.6.6)
   - TZImagePickerController (2.1.9)
   - "UITableView+FDTemplateLayoutCell (1.6)"
   - WebViewJavascriptBridge (6.0.3)
@@ -196,6 +197,7 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.75)
   - SDWebImage (~> 4.0)
   - SDWebImage/GIF
+  - TYAttributedLabel (~> 2.6.2)
   - TZImagePickerController (~> 2.1.5)
   - "UITableView+FDTemplateLayoutCell (~> 1.6)"
   - WebViewJavascriptBridge (~> 6.0)
@@ -216,6 +218,7 @@ SPEC REPOS:
     - ModuleCapability
     - SDCycleScrollView
     - SDWebImage
+    - TYAttributedLabel
     - TZImagePickerController
     - "UITableView+FDTemplateLayoutCell"
     - WebViewJavascriptBridge
@@ -235,10 +238,11 @@ SPEC CHECKSUMS:
   ModuleCapability: c9d20a2f6070d9315531a94d51b1551a070662b6
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
   TZImagePickerController: 6c9721783063edafc9ad42cd95acc82f1b648485
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
 
-PODFILE CHECKSUM: 8dd4999d5288f8a1eda929e27f66c050ee684c05
+PODFILE CHECKSUM: d130daa8af91fedc60d4512e318477ee9fe24d3f
 
 COCOAPODS: 1.6.1
