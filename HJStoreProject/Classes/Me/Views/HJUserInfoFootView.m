@@ -29,7 +29,7 @@
     quiteButton.hidden = YES;
     [self.contentView addSubview:quiteButton];
     [quiteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(40);
+        make.top.mas_offset(25);
         make.left.mas_offset(0);
         make.right.mas_offset(0);
         make.height.mas_equalTo(44);

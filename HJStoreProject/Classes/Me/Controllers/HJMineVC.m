@@ -49,7 +49,10 @@
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     _userInfo = userInfo;
     if (!userInfo.token || [userInfo.token isEqualToString:@""]) {
-        [self pushToLoginVC:YES];
+        [self pushToLoginVC:NO closeBlock:^(id obj) {
+            self.tabBarController.selectedIndex = 0;
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
     }else {
         weakify(self)
         [[HJSettingRequest shared] getGeneralInfoSuccess:^(HJGeneralInfo *info) {
@@ -97,6 +100,12 @@
             [images addObject:realUrl];
         }
         meView.adSliderCellView.imageGroupArray = images;
+        CGFloat adH = images.count == 0 ? 0 : 100;
+        CGFloat topOffSet = images.count == 0 ? 0 : 8;
+        [meView.adSliderCellView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(adH);
+            make.top.mas_equalTo(meView.icomView.mas_bottom).offset(topOffSet);
+        }];
     } fail:^(NSError *error) {
         
     }];
@@ -300,7 +309,7 @@
         url = [NSString stringWithFormat:@"http://%@",url];
     }
     ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
-    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
+    [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url productid:@"" success:nil fail:nil];
 }
 
 - (void)pushToWebUrl:(NSString *)url {

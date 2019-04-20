@@ -143,7 +143,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     
     UIButton *backButton = [[UIButton alloc] init];
     _backButton = backButton;
-    [backButton setBackgroundImage:[UIImage imageNamed:@"detail_nav_back"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"NavBar_backImg"] forState:UIControlStateNormal];
     [backView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [self back];
     }];
@@ -254,6 +254,9 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
         contentCell.conponGetBlock = ^(id obj) {
             [weak_self couponInfo];
         };
+        contentCell.shareToEarnBlock = ^(id obj) {
+            [weak_self shareAction];
+        };
         [contentCell setIffavourite:self.favourite];
         cell = contentCell;
     }else if(indexPath.section == 1){
@@ -306,7 +309,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if(scrollView.mj_offsetY < 200) {
-        [_backButton setBackgroundImage:[UIImage imageNamed:@"detail_nav_back"] forState:UIControlStateNormal];
+        [_backButton setBackgroundImage:[UIImage imageNamed:@"NavBar_backImg"] forState:UIControlStateNormal];
         _navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:scrollView.mj_offsetY/200];
     }else{
         [_backButton setBackgroundImage:[UIImage imageNamed:@"NavBar_backImg"] forState:UIControlStateNormal];
@@ -329,7 +332,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     NSString *productId = [self.productId integerValue] > 0 ? self.productId : self.searchModel.item_id;
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     if(!userInfo.token || userInfo.token.length == 0){
-        [self pushToLoginVC:NO];
+        [self pushToLoginVC:NO closeBlock:nil];
     }else {
         [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
             [[HJMainRequest shared] getShareDataCache:YES productId:productId success:^(HJShareModel *share) {
@@ -351,16 +354,13 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     weakify(self)
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     if(!userInfo.token || userInfo.token.length == 0){
-        [self pushToLoginVC:NO];
+        [self pushToLoginVC:NO closeBlock:nil];
     }else {
         [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
-            [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:weak_self webView:nil url:weak_self.detailmodel.coupon_share_url success:nil fail:nil];
+            [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:weak_self webView:nil url:weak_self.detailmodel.coupon_share_url productid:self.detailmodel.item_id success:nil fail:nil];
         }];
         
     }
-    
-
-   
 }
 
 

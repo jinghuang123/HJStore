@@ -20,7 +20,7 @@
     [super viewDidLoad];
     self.title = @"关于我们";
     // Do any additional setup after loading the view.
-    UIImageView *iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"aboutus_Icon"]];
+    UIImageView *iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"meizhilogo"]];
     [self.view addSubview:iconImageView];
     [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(28 + 64);

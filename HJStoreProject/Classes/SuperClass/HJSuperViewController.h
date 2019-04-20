@@ -13,7 +13,7 @@
 @interface HJSuperViewController : UIViewController
 - (void)backButtonClick;
 - (void)setNavBackItem;
-- (void)pushToLoginVC:(BOOL)hideClose;
+- (void)pushToLoginVC:(BOOL)hideClose closeBlock:(void (^)(id obj))block;
 - (void)showTaobaoAuthorDailogSuccess:(CompletionSuccessBlock)success;
 @end
 

@@ -74,7 +74,7 @@
     [searchTextField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
     searchTextField.font = [UIFont systemFontOfSize:14];
     searchTextField.backgroundColor = RGBA(234, 235, 237, 1.0);;
-    [searchBar setImage:[UIImage imageNamed:@"sort_magnifier"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    [searchBar setImage:[UIImage imageNamed:@"sort_magnifier2"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     UIButton *cancleBtn = [searchBar valueForKey:@"cancelButton"];
     cancleBtn.hidden = YES;
 

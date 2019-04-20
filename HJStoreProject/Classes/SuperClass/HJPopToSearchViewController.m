@@ -70,13 +70,14 @@
     UILabel *tipLabel = [[UILabel alloc] init];
     tipLabel.font = [UIFont systemFontOfSize:12];
     tipLabel.text = self.searchTip;
-    tipLabel.numberOfLines = 4;
+    tipLabel.numberOfLines = 0;
     [bottomView addSubview:tipLabel];
+    CGFloat tipH = [NSString heightOfString:self.searchTip font:tipLabel.font width:260];
     [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(bottomView);
         make.centerY.equalTo(bottomView).offset(-20);
         make.width.mas_equalTo(260);
-        make.height.mas_equalTo(55);
+        make.height.mas_equalTo(tipH);
     }];
     
     [bottomView jk_addBottomBorderWithColor:[UIColor clearColor] width:1];

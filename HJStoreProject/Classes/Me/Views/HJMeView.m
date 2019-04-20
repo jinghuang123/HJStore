@@ -16,7 +16,6 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *earningView;
 @property (nonatomic, strong) UIImageView *earningBottomView;
-@property (nonatomic, strong) UIView *icomView;
 @property (nonatomic, strong) UIView *serviceView;
 
 @property (nonatomic, strong) UIView *toolsView;
@@ -99,7 +98,7 @@
     
     UILabel *nameLabel = [[UILabel alloc] init];
     _nameLabel = nameLabel;
-    nameLabel.text = @"杨老板是大傻B";
+    nameLabel.text = @"昵称";
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.font = [UIFont systemFontOfSize:16];
     nameLabel.textAlignment = NSTextAlignmentLeft;
@@ -206,16 +205,16 @@
     }];
     [self addItomViewItems];
     
-    HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth - 16, 100)];
+    HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth - 16, 0)];
     _adSliderCellView = adSliderCellView;
     adSliderCellView.backgroundColor = [UIColor clearColor];
-    adSliderCellView.imageGroupArray = @[@"me_banner"];
+    adSliderCellView.imageGroupArray = @[@""];
     [headView addSubview:adSliderCellView];
     [adSliderCellView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(8);
         make.right.mas_offset(-8);
-        make.height.mas_equalTo(100);
-        make.top.mas_equalTo(icomView.mas_bottom).offset(8);
+        make.height.mas_equalTo(0);
+        make.top.mas_equalTo(icomView.mas_bottom).offset(0);
     }];
     adSliderCellView.bannerCellItemClick = ^(HJBannerModel *banner) {
         [self onItemClickWithType:HJClickItemTypeADS params:banner];

@@ -25,6 +25,7 @@
 
 @interface HJUserInfoSetVC () <HJUserInfoViewDelegate,TZImagePickerControllerDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) HJUserInfoView *selfView;
+@property (nonatomic, assign) NSInteger type;
 @end
 
 @implementation HJUserInfoSetVC
@@ -48,6 +49,7 @@
     [selfView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.top.mas_offset(0);
     }];
+    [selfView setDataSourceChange];
 }
 
 - (void)cellDidSelected:(long)msgType args:(NSObject *)args {
@@ -56,6 +58,8 @@
             {
                 weakify(self)
                 HJUserNameSetVC *nameSetVc = [[HJUserNameSetVC alloc] init];
+                HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+                nameSetVc.name = userInfo.nickname;
                 nameSetVc.userNameSetBlock = ^(NSString *name) {
                     [weak_self updateUserInfo:nil nickName:name userName:nil];
                 };
@@ -64,33 +68,14 @@
             break;
         case USERHeadImageClick:
         {
-            UIAlertController *actionsheet = [UIAlertController alertControllerWithTitle:@"" message:@"头像设置" preferredStyle:UIAlertControllerStyleActionSheet];
-            UIAlertAction *action0 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"相机拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                UIImagePickerController *imagePick = [[UIImagePickerController alloc] init];
-                imagePick.delegate = self;
-                imagePick.allowsEditing = YES; //可编辑
-                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-                    imagePick.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    [self presentViewController:imagePick animated:YES completion:nil];
+            self.type = 0;
+            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+            imagePickerVc.didFinishPickingPhotosHandle = ^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+                if (photos.count > 0) {
+                    [self saveImageUser:[photos firstObject]];
                 }
-                
-            }];
-            UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
-                imagePickerVc.didFinishPickingPhotosHandle = ^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-                    if (photos.count > 0) {
-                        [self saveImageUser:[photos firstObject]];
-                    }
-                };
-                [self presentViewController:imagePickerVc animated:YES completion:nil];
-            }];
-            [actionsheet addAction:action0];
-            [actionsheet addAction:action1];
-            [actionsheet addAction:action2];
-            [self presentViewController:actionsheet animated:YES completion:nil];
-
+            };
+            [self presentViewController:imagePickerVc animated:YES completion:nil];
         }
             break;
         case USERZFBBindClick:
@@ -160,6 +145,30 @@
             
         }
             break;
+        case USERUploadQrCode:
+        {
+            self.type = 1;
+            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+            imagePickerVc.didFinishPickingPhotosHandle = ^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+                if (photos.count > 0) {
+                    [self saveQrCode:[photos firstObject]];
+                }
+            };
+            [self presentViewController:imagePickerVc animated:YES completion:nil];
+        }
+            break;
+        case USERUploadWechat:
+        {
+            weakify(self)
+            HJSettingInfo *info = [HJSettingInfo shared];
+            HJUserNameSetVC *nameSetVc = [[HJUserNameSetVC alloc] init];
+            nameSetVc.name = info.kefu_wechat;
+            nameSetVc.userNameSetBlock = ^(NSString *name) {
+                [weak_self uploadKefuInfo:@"" weChat:name];
+            };
+            [self.navigationController pushViewController:nameSetVc animated:YES];
+        }
+            break;
         case USERQuiteClick:
         {
             NSLog(@"退出登录");
@@ -200,6 +209,26 @@
     }];
 }
 
+- (void)saveQrCode:(UIImage *)image {
+    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+    [[HJSettingRequest shared] uploadFile:data success:^(NSString *url) {
+        [self uploadKefuInfo:url weChat:@""];
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
+- (void)uploadKefuInfo:(NSString *)url weChat:(NSString *)wechat {
+    [[HJSettingRequest shared] getUploadKefuInfoQrCodeUrl:url we_chat:wechat success:^(id responseObject) {
+        HJSettingInfo *info = [HJSettingInfo shared];
+        info.kefu_wechat = [wechat isEqualToString:@""] ? info.kefu_wechat : wechat;
+        info.kefu_qrcode = [url isEqualToString:@""] ? info.kefu_qrcode : url ;
+        [self.selfView setDataSourceChange];
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
 - (void)updateUserInfo:(NSString *)headImageUrl nickName:(NSString *)nickName userName:(NSString *)userName {
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     if (!headImageUrl) {
@@ -226,7 +255,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     NSLog(@"info:%@",info);
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    [self saveImageUser:image];
+    self.type == 0 ?  [self saveImageUser:image] : [self saveQrCode:image];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

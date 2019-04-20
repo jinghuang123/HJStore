@@ -44,6 +44,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIView *fenceView;
 @property (nonatomic, strong) UIView *invitateView;
 @property (nonatomic, strong) HJMainSliderView *adSliderCellView;
+@property (nonatomic, strong) UIView *icomView;
 @property (nonatomic,strong) NSString *code;
 
 @property (nonatomic,copy) void(^settingClick)(id obj,HJClickItemType type);

@@ -13,8 +13,8 @@
 #import "HJMainVC.H"
 #import "HJSearchVC.h"
 #import "HJSearchPageVC.h"
-
-
+#import "HJSettingRequest.h"
+#import "HJMeizhiCustomServiceVC.h"
 @interface HJStroeTypeListVC ()
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @end
@@ -123,7 +123,14 @@
     
 }
 - (void)onClickRight {
-    
+    [[HJSettingRequest shared] getServiceInfoSuccess:^(HJServiceInfoModel *service) {
+        HJMeizhiCustomServiceVC *serviceVC = [[HJMeizhiCustomServiceVC alloc] init];
+        serviceVC.serviceInfo = service;
+        serviceVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:serviceVC animated:YES];
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 /*

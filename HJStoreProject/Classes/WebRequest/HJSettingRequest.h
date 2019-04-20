@@ -62,6 +62,14 @@
 - (void)getCachInfoSuccess:(CompletionSuccessBlock)success
                       fail:(CompletionFailBlock)fail;
 
+- (void)getKefuInfoSuccess:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail;
+
+- (void)getUploadKefuInfoQrCodeUrl:(NSString *)qrcode
+                           we_chat:(NSString *)wechat
+                           success:(CompletionSuccessBlock)success
+                              fail:(CompletionFailBlock)fail;
+
 @end
 
 

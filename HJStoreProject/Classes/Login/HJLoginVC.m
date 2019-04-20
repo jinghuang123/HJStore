@@ -68,8 +68,8 @@
     [tipImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX).offset(0);
         make.top.mas_equalTo(iconImageView.mas_bottom).offset(40);
-        make.width.mas_equalTo(198);
-        make.height.mas_equalTo(23);
+        make.width.mas_equalTo(192);
+        make.height.mas_equalTo(46);
     }];
     
     UIButton *regisButton = [UIButton createThemeButtonRegist:@"注册"];
@@ -152,8 +152,13 @@
 }
 
 - (void)closeBtnClick {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.closeBlock) {
+        self.closeBlock(nil);
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
 }
     
 

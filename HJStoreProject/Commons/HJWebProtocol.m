@@ -45,6 +45,7 @@ Declare(kUrlWechatLogin, "api/user/wechatlogin") /*3.13 微信登陆*/
 Declare(kUrlWechatBonding, "api/user/wechatbind") /*3.14 微信绑定*/
 Declare(kUrlUpdateGroup, "api/user/upgrade") /*3.15 升级运营商*/
 Declare(kUrlGetSettingInfo, "api/setting/getSettingInfo") /*3.16 查询设置信息*/
+Declare(kUrlUploadInfo, "api/setting/uploadKefuInfo") /* 3.17 上传客服信息 */
 
 Declare(kUrlRecommendTitles, "api/bbs/getBbsChannel") /* 4.1 社区分类 */
 Declare(kUrlRecommendList, "api/bbs/getBbsList") /* 4.2 社区列表数据 */

@@ -24,6 +24,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) UIImage *shareImage;
+@property (nonatomic, strong) NSArray *banners;
 @property (nonatomic, strong) NSMutableArray *shareImages;
 @property (nonatomic, strong) HJMainSliderView *adSliderCellView;
 @end
@@ -139,6 +140,7 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
     
     [[HJSettingRequest shared] getBannersWithType:3 Success:^(NSArray *banners) {
         self.adSliderCellView.bannerItems = banners;
+        self.banners = banners;
         NSMutableArray *images = [[NSMutableArray alloc] init];
         for (HJBannerModel *banner in banners) {
             NSString *realUrl = [banner.banner_image hasPrefix:@"http"] ? banner.banner_image : [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
@@ -161,13 +163,13 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return 150;
+        return self.banners.count > 0 ? 150 : 0;
     }
     return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGFloat adViewH = 150;
+    CGFloat adViewH = self.banners.count > 0 ? 150 : 0;
     if (!self.adSliderCellView) {
         HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth, adViewH)];
         _adSliderCellView = adSliderCellView;

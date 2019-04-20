@@ -7,6 +7,7 @@
 //
 
 #import "HJMainListHeadView.h"
+#import "HJMainPodVC.h"
 
 @implementation HJMainListHeadView
 
@@ -167,6 +168,7 @@
     return view;
 }
 
+
 - (void)addViewToBottom {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 40, MaxWidth, 40)];
     view.layer.borderWidth = 0.5;
@@ -192,9 +194,54 @@
     }];
     [swi addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
 }
-
+//HJSortTypeTotal = 1,
+//HJSortTypeHtoL,
+//HJSortTypeLtoH,
+//HJSortTypeEarnH,
+//HJSortTypePriceLtoH,
+//HJSortTypePriceHtoL,
+//HJSortTypeShellCountLtoH,
+//HJSortTypeShellCountHtoL,
 - (void)setSortImageWithType:(NSInteger)type {
-    
+    switch (type) {
+        case HJSortTypeTotal:
+        case HJSortTypeHtoL:
+        case HJSortTypeLtoH:
+        case HJSortTypeEarnH:
+        {
+            _view2.sortImageView.image = [UIImage imageNamed:@"sortType_nomal"];
+            _view3.sortImageView.image = [UIImage imageNamed:@"sortType_nomal"];
+        }
+            break;
+        case HJSortTypePriceLtoH:
+        {
+            _view2.sortImageView.image = [UIImage imageNamed:@"sortType_down"];
+            _view3.sortImageView.image = [UIImage imageNamed:@"sortType_nomal"];
+        }
+            break;
+        case HJSortTypePriceHtoL:
+        {
+            _view2.sortImageView.image = [UIImage imageNamed:@"sortType_up"];
+            _view3.sortImageView.image = [UIImage imageNamed:@"sortType_nomal"];
+        }
+            break;
+        case HJSortTypeShellCountLtoH:
+        {
+            _view2.sortImageView.image = [UIImage imageNamed:@"sortType_nomal"];
+            _view3.sortImageView.image = [UIImage imageNamed:@"sortType_down"];
+        }
+            break;
+        case HJSortTypeShellCountHtoL:
+        {
+            _view2.sortImageView.image = [UIImage imageNamed:@"sortType_nomal"];
+            _view3.sortImageView.image = [UIImage imageNamed:@"sortType_up"];
+        }
+            break;
+            
+            
+        default:
+            break;
+    }
 }
 
 - (void)switchChange:(UISwitch *)swi{

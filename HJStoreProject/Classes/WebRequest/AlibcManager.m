@@ -55,6 +55,7 @@
                   parentController:(UIViewController *)parentController
                            webView:(UIWebView *)webView
                                url:(NSString *)url
+                         productid:(NSString *)productId
                            success:(AlibcTradeProcessSuccessCallback)success
                               fail:(AlibcTradeProcessFailedCallback)fail {
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
@@ -75,17 +76,26 @@
             showParam.nativeFailMode=AlibcNativeFailModeJumpH5;
         }
     }
-    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
-    if (![url containsString:@"token"] && ![url containsString:@"oauth.m.taobao.com/authorize"]) {
-        url = [NSString stringWithFormat:@"%@?token=%@",url,userInfo.token];
-    }
+//    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
+//    if (![url containsString:@"token"] && ![url containsString:@"oauth.m.taobao.com/authorize"]) {
+//        url = [NSString stringWithFormat:@"%@?token=%@",url,userInfo.token];
+//    }
     NSLog(@"showParam %@",showParam);
-    NSString *targetUrl = [url containsString:@"https"] ? url : [NSString stringWithFormat:@"https:%@",url];
-    id<AlibcTradePage> page = [AlibcTradePageFactory page:targetUrl];
+    id<AlibcTradePage> page;
+    if(url){
+        NSString *targetUrl = [url containsString:@"https"] ? url : [NSString stringWithFormat:@"https:%@",url];
+        page = [AlibcTradePageFactory page:targetUrl];
+    }else{
+        page = [AlibcTradePageFactory itemDetailPage:productId];
+    }
+
 
     NSDictionary *trackParam = [NSDictionary dictionary];
     AlibcTradeTaokeParams *taoKeParams=[[AlibcTradeTaokeParams alloc] init];
-    taoKeParams.pid=@"mm_12549758_288100257_78712850490";
+    HJEarningModel *configer = [HJEarningModel getSavedEarnConfiger];
+    taoKeParams.pid=configer.pid;
+    taoKeParams.adzoneId = configer.adzone_id;
+    taoKeParams.extParams = @{@"taokeAppkey":configer.appkey};
     if (webView) {
         ALiTradeWebViewController* view = [[ALiTradeWebViewController alloc] init];
         view.hidesBottomBarWhenPushed = YES;

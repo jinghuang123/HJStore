@@ -47,7 +47,7 @@
                               HJStroeTabbarSelImgKey : @"icon_category"},
                             
                             @{HJStroeTabbarClassKey  : @"HJRecommendPagesVC",
-                              HJStroeTabbarTitleKey  : @"美粉圈",
+                              HJStroeTabbarTitleKey  : @"社区",
                               HJStroeTabbarImgKey    : @"icon_Recommend_n",
                               HJStroeTabbarSelImgKey : @"icon_Recommend"},
                             

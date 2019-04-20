@@ -88,17 +88,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSLocationUsageDescription</key>
-	<string></string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>允许使用相机拍照用于设置头像</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
+	<string>允许使用麦克风</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>允许保存图片到本地相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>允许使用相册选择图片上传设置头像</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

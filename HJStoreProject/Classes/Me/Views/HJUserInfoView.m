@@ -49,7 +49,12 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     NSString *wechatBind = info.weixin ? @"已绑定":@"绑定";
     NSString *taobaoBind = info.taobao ? @"已绑定":@"绑定";
     NSString *zfbBind = info.zfb ? @"已绑定":@"绑定";
-    [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}]]];
+    if (self.userInfo.group_id == 2) {
+        [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}],@[@{@"专属客服二维码":@""},@{@"专属客服微信号":info.kefu_wechat}]]];
+    }else{
+        [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}]]];
+    }
+
     [self.tableView reloadData];
 
 }
@@ -90,6 +95,13 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     cell.headImageV.hidden = ![title isEqualToString:@""];
     [cell.headImageV sd_setImageWithURLString:self.userInfo.avatar placeholderImage:PLACEHOLDER_HEAD];
     cell.valueLab.text = [dic valueForKey:title];
+    if ([title isEqualToString:@"专属客服二维码"]) {
+        cell.qrImageView.hidden = NO;
+        HJSettingInfo *info = [HJSettingInfo shared];
+        [cell.qrImageView sd_setImageWithURLString:info.kefu_qrcode placeholderImage:PLACEHOLDER_ITEM];
+    }else{
+        cell.qrImageView.hidden = YES;
+    }
     return cell;
 }
 
@@ -99,7 +111,7 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     if (!footView) {
         footView = [[HJUserInfoFootView alloc] initWithReuseIdentifier:HJUserInfoFootIdentifier];
     }
-    footView.quiteButton.hidden = section != 3;
+    footView.quiteButton.hidden = section != self.dataSource.count - 1;
     footView.commitBlock = ^(id obj) {
         if ([self.delegate respondsToSelector:@selector(cellDidSelected:args:)]) {
             [self.delegate cellDidSelected:USERQuiteClick args:nil];
@@ -117,13 +129,13 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 3) {
+    if (section == self.dataSource.count - 1) {
         return 90;
     }
     return 0.1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    return 5;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,6 +178,15 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
                 tag = USERCacheClearClick;
             }else if(indexPath.row == 1){
                 tag = USERAboutUsClick;
+            }
+        }
+            break;
+        case 4:
+        {
+            if(indexPath.row == 0){
+                tag = USERUploadQrCode;
+            }else if(indexPath.row == 1){
+                tag = USERUploadWechat;
             }
         }
             break;

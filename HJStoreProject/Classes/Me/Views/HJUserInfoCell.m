@@ -67,6 +67,16 @@
         make.width.mas_equalTo(100);
         make.height.mas_equalTo(20);
     }];
+    
+    UIImageView *qrImageView = [[UIImageView alloc] init];
+    qrImageView.hidden = YES;
+    _qrImageView  = qrImageView;
+    [self.contentView addSubview:qrImageView];
+    [qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-30);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY).offset(0);
+        make.width.height.mas_equalTo(30);
+    }];
 }
 
 

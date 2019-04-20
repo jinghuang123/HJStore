@@ -19,6 +19,8 @@
 
 @interface HJSettingInfo :NSObject
 @property (nonatomic , strong) HJZfbInfo        * zfb;
+@property (nonatomic , copy) NSString              *kefu_qrcode;
+@property (nonatomic , copy) NSString              *kefu_wechat;
 @property (nonatomic , assign) BOOL              weixin;
 @property (nonatomic , assign) BOOL              taobao;
 + (HJSettingInfo *)shared;

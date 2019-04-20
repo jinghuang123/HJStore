@@ -15,6 +15,7 @@
 @property (nonatomic,strong) UILabel *valueLab;
 @property (nonatomic,strong) UIImageView *headImageV;
 @property (nonatomic,strong) UIImageView *nextImageV;
+@property (nonatomic,strong) UIImageView *qrImageView;
 @end
 
 

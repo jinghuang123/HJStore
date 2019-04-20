@@ -11,7 +11,6 @@
 
 
 @interface HJUserInfoSetVC : HJSuperViewController
-
 @end
 
 

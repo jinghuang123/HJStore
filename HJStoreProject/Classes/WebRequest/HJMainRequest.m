@@ -180,7 +180,7 @@
                  pageSize:(NSInteger)pageSize
                    success:(CompletionSuccessBlock)success
                       fail:(CompletionFailBlock)fail  {
-    NSDictionary *parms = @{@"pageSize":@(pageSize)};
+    NSDictionary *parms = @{@"pageSize":@(pageSize),@"os":@"ios"};
     [kHTTPManager tryPost:kUrlGetRandomList parameters:parms success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *recommends = [HJRecommendModel mj_objectArrayWithKeyValuesArray:responseObject];
 

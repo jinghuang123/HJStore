@@ -172,6 +172,8 @@
         HJSettingInfo *settingInfo = [HJSettingInfo mj_objectWithKeyValues:responseObject];
         info.weixin = settingInfo.weixin;
         info.taobao = settingInfo.taobao;
+        info.kefu_qrcode = settingInfo.kefu_qrcode;
+        info.kefu_wechat = settingInfo.kefu_wechat;
         info.zfb = settingInfo.zfb;
         success(info);
     } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
@@ -205,5 +207,33 @@
         fail(error);
     }];
 }
+
+- (void)getKefuInfoSuccess:(CompletionSuccessBlock)success
+                      fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlGetKefuInfo];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
+
+- (void)getUploadKefuInfoQrCodeUrl:(NSString *)qrcode
+                           we_chat:(NSString *)wechat
+                           success:(CompletionSuccessBlock)success
+                            fail:(CompletionFailBlock)fail {
+    NSDictionary *dic = @{@"kefu_qrcode":qrcode,@"kefu_wechat":wechat};
+    NSString *url = [kHTTPManager getTokenUrl:kUrlUploadInfo];
+    [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        success(nil);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error, NSString *yfErrCode) {
+        fail(error);
+    }];
+}
+
+
+
+//
 
 @end

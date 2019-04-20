@@ -75,7 +75,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 
 - (void)refreshActionSuccess:(CompletionSuccessBlock)success {
-    [[HJMainRequest shared] getListBySearchCodeCache:YES soreType:self.sort code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize has_coupon:self.showCouponsOnly sort:self.sort success:^(NSDictionary *response) {
+    [[HJMainRequest shared] getListBySearchCodeCache:YES soreType:self.search_type code:self.searchTip pageNo:self.pageNo pageSize:self.pageSize has_coupon:self.showCouponsOnly sort:self.sort success:^(NSDictionary *response) {
         if (self.pageNo > 1) {
             [self.searchmodels addObjectsFromArray:[response objectForKey:@"searchModel"]];
             if (self.searchmodels.count < 20) {
@@ -210,13 +210,19 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
     headerView.switchChangeBlock = ^(BOOL on) {
         [weak_self switchChange:on];
     };
-
+    weakify(headerView)
     headerView.sortTypeChengBlock = ^(NSNumber *index) {
         if ([index integerValue] == 0) {
             [weak_self podSortTypeView];
+        }else if([index integerValue] == 1) {
+            weak_self.sort = weak_self.sort == HJSortTypePriceHtoL ? HJSortTypePriceLtoH  : HJSortTypePriceHtoL;
+            [weak_self headRefresh];
+        }else if([index integerValue] == 2) {
+            weak_self.sort = weak_self.sort == HJSortTypeShellCountHtoL ? HJSortTypeShellCountLtoH : HJSortTypeShellCountHtoL;
+            [weak_self headRefresh];
         }
+        [weak_headerView setSortImageWithType:weak_self.sort];
     };
-    weakify(headerView)
     headerView.showModeChangedBlock = ^(id obj) {
         if (weak_self.showType == singleLineShowOneGoods) {
             [weak_headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"icon_wangge"] forState:UIControlStateNormal];

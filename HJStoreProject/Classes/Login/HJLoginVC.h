@@ -9,9 +9,10 @@
 #import "HJSuperViewController.h"
 
 
-
+typedef void(^closeBlock)(id obj);
 @interface HJLoginVC : HJSuperViewController
 @property (nonatomic,strong) UIButton *closeButton;
+@property (nonatomic,copy) closeBlock closeBlock;
 @property (nonatomic,assign) BOOL closeHide;
 @end
 

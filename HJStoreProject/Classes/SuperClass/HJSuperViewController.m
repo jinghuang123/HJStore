@@ -7,10 +7,10 @@
 //
 
 #import "HJSuperViewController.h"
-#import "HJLoginVC.h"
 #import "YFPolicyWebVC.h"
 #import "HJUserInfoModel.h"
 #import "HJEarningModel.h"
+#import "HJLoginVC.h"
 
 @interface HJSuperViewController ()<UIGestureRecognizerDelegate>
 
@@ -60,9 +60,10 @@
     [self.navigationController popViewControllerAnimated:NO];
 }
 
-- (void)pushToLoginVC:(BOOL)hideClose {
+- (void)pushToLoginVC:(BOOL)hideClose closeBlock:(closeBlock)block{
     HJLoginVC *login = [[HJLoginVC alloc] init];
     login.closeHide = hideClose;
+    login.closeBlock = block;
     login.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:login animated:YES];
 }

@@ -88,13 +88,23 @@
     _couponLabel.textAlignment = NSTextAlignmentCenter;
     [_couponIcon addSubview:_couponLabel];
     
+    
     _earningLabel =  [[UILabel alloc] init];
     _earningLabel.backgroundColor = [UIColor jk_colorWithHexString:@"#E32828"];
     _earningLabel.textColor = [UIColor whiteColor];
-    _earningLabel.layer.cornerRadius = 8;
+    _earningLabel.layer.cornerRadius = 10;
     _earningLabel.clipsToBounds = YES;
     _earningLabel.font = [UIFont systemFontOfSize:10];
-    _earningLabel.textAlignment = NSTextAlignmentCenter;
+    _earningLabel.jk_edgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    
+    
+    UIImageView *earnpreIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"earn_pre"]];
+    [_earningLabel addSubview:earnpreIcon];
+    [earnpreIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(5);
+        make.centerY.equalTo(self.earningLabel);
+        make.width.height.mas_equalTo(10);
+    }];
     [self.contentView addSubview:_earningLabel];
 
     
@@ -146,9 +156,9 @@
     
     [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-5);
-        make.width.mas_equalTo(65);
+        make.width.mas_equalTo(62);
         make.top.mas_equalTo(weak_self.couponIcon.mas_top).offset(0);
-        make.height.mas_equalTo(16);
+        make.height.mas_equalTo(20);
     }];
     
     
@@ -211,6 +221,11 @@
         _couponIcon.hidden = YES;
         _nowPriceLabel.hidden = YES;
         _priceLabel.text = [NSString stringWithFormat:@"现价 ¥%.2f",item.coupon_after_price];
+    }else{
+        _couponIcon.hidden = NO;
+        _nowPriceLabel.hidden = NO;
+        _priceLabel.text = [NSString stringWithFormat:@"券后 ¥%.2f",item.coupon_after_price];
+
     }
 
 }
@@ -299,10 +314,17 @@
     _earningLabel =  [[UILabel alloc] init];
     _earningLabel.backgroundColor = [UIColor jk_colorWithHexString:@"#E32828"];
     _earningLabel.textColor = [UIColor whiteColor];
-    _earningLabel.layer.cornerRadius = 8;
+    _earningLabel.layer.cornerRadius = 10;
     _earningLabel.clipsToBounds = YES;
     _earningLabel.font = [UIFont systemFontOfSize:10];
-    _earningLabel.textAlignment = NSTextAlignmentCenter;
+    _earningLabel.jk_edgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    UIImageView *earnpreIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"earn_pre"]];
+    [_earningLabel addSubview:earnpreIcon];
+    [earnpreIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(5);
+        make.centerY.equalTo(self.earningLabel);
+        make.width.height.mas_equalTo(10);
+    }];
     [self.contentView addSubview:_earningLabel];
     
     _soldCountLabel =  [[UILabel alloc] init];
@@ -353,9 +375,9 @@
     
     [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-15);
-        make.width.mas_equalTo(80);
+        make.width.mas_equalTo(62);
         make.top.mas_equalTo(weak_self.couponIcon.mas_top).offset(0);
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(20);
     }];
     
     [_nowPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -395,6 +417,7 @@
     [_couponIcon setImage:[UIImage imageNamed:@"CouponIcon"]];
     _couponLabel.text = [NSString stringWithFormat:@"¥ %ld",[item.coupon_amount integerValue]];
     _earningLabel.text = [NSString stringWithFormat:@"赚 %.2f",item.earning];
+
     _soldCountLabel.text = [NSString stringWithFormat:@"销量 %ld",item.volume];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:item.title];
@@ -418,6 +441,11 @@
         _couponIcon.hidden = YES;
         _nowPriceLabel.hidden = YES;
         _priceLabel.text = [NSString stringWithFormat:@"现价 ¥%.2f",item.coupon_after_price];
+    }else{
+        _couponIcon.hidden = NO;
+        _nowPriceLabel.hidden = NO;
+        _priceLabel.text = [NSString stringWithFormat:@"券后 ¥%.2f",item.coupon_after_price];
+        
     }
 }
 

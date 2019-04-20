@@ -46,7 +46,9 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    if(self.recommends.count == 0) {
+        [self.collectionView.mj_header beginRefreshing];
+    }
 }
 
 - (void)viewDidLoad {
@@ -56,9 +58,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     [HJNetworkType isConnected];
     [self setupUI];
     NSLog(@"maxw:%f  maxh:%f",MaxWidth,MaxHeight);
-    if (!self.isSearch) {
-       [self.collectionView.mj_header beginRefreshing];
-    }
+
     // Do any additional setup after loading the view.
     
 //    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -174,7 +174,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 }
 
 - (void)setupUI {
-    self.collectionView.backgroundColor = RGB(245, 245, 245);
+    self.collectionView.backgroundColor =  [UIColor whiteColor];
 }
 
 - (UICollectionView *)collectionView {
@@ -189,7 +189,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
         _collectionView.frame = CGRectMake(0, 0, MaxWidth, collectionH);
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.alwaysBounceVertical = YES;
-        
         [_collectionView registerClass:[HJMainSliderCell class] forCellWithReuseIdentifier:HJMainSliderCellIdentifier];
         [_collectionView registerClass:[HJMainSliderCell class] forCellWithReuseIdentifier:HJMainSliderBannerCellIdentifier];
         [_collectionView registerClass:[HJGridCell class] forCellWithReuseIdentifier:HJGridCellIdentifier];
@@ -411,6 +410,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 
                 
                 weakify(self)
+                weakify(headerView)
                 headerView.sortTypeChengBlock = ^(NSNumber *index) {
                     if ([index integerValue] == 0) {
                         NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:3];
@@ -423,8 +423,9 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                         weak_self.sort = weak_self.sort == HJSortTypeShellCountHtoL ? HJSortTypeShellCountLtoH : HJSortTypeShellCountHtoL;
                         [weak_self headRefresh];
                     }
+                    [weak_headerView setSortImageWithType:weak_self.sort];
                 };
-                weakify(headerView)
+                
                 headerView.showModeChangedBlock = ^(id obj) {
                     if (weak_self.showType == singleLineShowOneGoods) {
                         [weak_headerView.rightBtn setBackgroundImage:[UIImage imageNamed:@"nav_list_single"] forState:UIControlStateNormal];
@@ -606,11 +607,11 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     }
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     if(!userInfo.token || userInfo.token.length == 0){
-        [self pushToLoginVC:NO];
+        [self pushToLoginVC:NO closeBlock:nil];
     }else {
         [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
             ALiTradeWebViewController *webVC = [[ALiTradeWebViewController alloc] init];
-            [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url success:nil fail:nil];
+            [[AlibcManager shared] showWithAliSDKByParamsType:0 parentController:self webView:webVC.webView url:url productid:@"" success:nil fail:nil];
         }];
     }
 

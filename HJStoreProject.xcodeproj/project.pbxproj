@@ -158,8 +158,6 @@
 		B8CBF2B522630E8000699652 /* HJSearchHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2B422630E8000699652 /* HJSearchHotModel.m */; };
 		B8CBF2B82263127F00699652 /* HJSystemInfoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2B72263127F00699652 /* HJSystemInfoInstance.m */; };
 		B8CBF2BB22631A1500699652 /* HJSearchPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CBF2BA22631A1500699652 /* HJSearchPageVC.m */; };
-		B8CBF2BD22632E4600699652 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CBF2BC22632E4600699652 /* Images.xcassets */; };
-		B8CBF2C1226330BE00699652 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CBF2C0226330BE00699652 /* Images-2.xcassets */; };
 		B8CE278A21FC5C560059FB9E /* HJUserNameSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE278921FC5C560059FB9E /* HJUserNameSetVC.m */; };
 		B8CE278D21FC60A90059FB9E /* HJZFBBindingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE278C21FC60A90059FB9E /* HJZFBBindingVC.m */; };
 		B8CE279621FC60FC0059FB9E /* HJMobileChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CE279521FC60FC0059FB9E /* HJMobileChangeVC.m */; };
@@ -478,8 +476,6 @@
 		B8CBF2B72263127F00699652 /* HJSystemInfoInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSystemInfoInstance.m; sourceTree = "<group>"; };
 		B8CBF2B922631A1500699652 /* HJSearchPageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJSearchPageVC.h; sourceTree = "<group>"; };
 		B8CBF2BA22631A1500699652 /* HJSearchPageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJSearchPageVC.m; sourceTree = "<group>"; };
-		B8CBF2BC22632E4600699652 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B8CBF2C0226330BE00699652 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		B8CE278821FC5C560059FB9E /* HJUserNameSetVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJUserNameSetVC.h; sourceTree = "<group>"; };
 		B8CE278921FC5C560059FB9E /* HJUserNameSetVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJUserNameSetVC.m; sourceTree = "<group>"; };
 		B8CE278B21FC60A90059FB9E /* HJZFBBindingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJZFBBindingVC.h; sourceTree = "<group>"; };
@@ -1002,8 +998,6 @@
 				B8A917F121AFB75A006733BA /* LaunchScreen.storyboard */,
 				B8A917F421AFB75A006733BA /* Info.plist */,
 				B8A917F521AFB75A006733BA /* main.m */,
-				B8CBF2BC22632E4600699652 /* Images.xcassets */,
-				B8CBF2C0226330BE00699652 /* Images-2.xcassets */,
 			);
 			path = HJStoreProject;
 			sourceTree = "<group>";
@@ -1384,10 +1378,8 @@
 				B873DA5F21B11B76008DBC66 /* HomeHighGoods.plist in Resources */,
 				B82126E221D9C819007828B2 /* NBResource.bundle in Resources */,
 				B8E086C521E1E59000792D40 /* ShareSDK.bundle in Resources */,
-				B8CBF2BD22632E4600699652 /* Images.xcassets in Resources */,
 				B8E086BF21E1E59000792D40 /* WeiboSDK.bundle in Resources */,
 				B810EE3E21E0C7A10059CACC /* FSActionSheet_cancel@3x.png in Resources */,
-				B8CBF2C1226330BE00699652 /* Images-2.xcassets in Resources */,
 				B873DA5E21B11B76008DBC66 /* GoodsGrid.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -117,11 +117,11 @@
         make.height.width.mas_equalTo(120);
     }];
     UIImageView *icon = [[UIImageView alloc] init];
-    icon.image = [UIImage imageNamed:@"main_Nav_left"];
+    icon.image = [UIImage imageNamed:@"meizhilogo"];
     [qrCodeImageView addSubview:icon];
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(qrCodeImageView);
-        make.size.with.height.mas_equalTo(40);
+        make.size.with.height.mas_equalTo(25);
     }];
     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     NSString *qrcodeUrl = [NSString stringWithFormat:@"%@?item_id=%@&code=%@",kURLQrcode,self.detail.item_id,userInfo.code];

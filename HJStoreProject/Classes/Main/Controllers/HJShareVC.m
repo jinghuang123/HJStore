@@ -13,6 +13,7 @@
 @interface HJShareVC ()  <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) NSArray *selectedImages;
+@property (nonatomic,strong) HJShareImagesCell *cell;
 @end
 
 @implementation HJShareVC
@@ -28,7 +29,8 @@
 
 - (UITableView *)tableview {
     if (!_tableview) {
-        UITableView *tableView  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight - 49)];
+        CGFloat tableviewH = MaxHeight >= ENM_SCREEN_H_X ? MaxHeight - 79: MaxHeight - 49;
+        UITableView *tableView  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, tableviewH)];
         _tableview = tableView;
         tableView.backgroundColor = RGB(245, 245, 245);;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -39,6 +41,8 @@
 }
 
 - (void)setupButtons {
+    CGFloat bottomOffset = MaxHeight >= ENM_SCREEN_H_X ? 35 : 5;
+
     UIButton *copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [copyButton setTitle:@"复制淘口令" forState:UIControlStateNormal];
     [copyButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -50,15 +54,13 @@
     [self.view addSubview:copyButton];
     [copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(10);
-        make.bottom.mas_offset(-5);
+        make.bottom.mas_offset(-bottomOffset);
         make.width.mas_equalTo((MaxWidth - 30)/2);
         make.height.mas_equalTo(39);
     }];
     
     [copyButton jk_addActionHandler:^(NSInteger tag) {
-        [self.view makeToast:@"复制淘口令成功" duration:1.0 position:CSToastPositionCenter];
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = self.shareModel.model;
+        [self.cell copyTaokouling];
     }];
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -73,7 +75,7 @@
     [self.view addSubview:shareButton];
     [shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-10);
-        make.bottom.mas_offset(-5);
+        make.bottom.mas_offset(-bottomOffset);
         make.width.mas_equalTo((MaxWidth - 30)/2);
         make.height.mas_equalTo(39);
     }];
@@ -114,6 +116,7 @@
     HJShareImagesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HJShareImagesCell"];
     if (!cell) {
         cell = [[HJShareImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HJShareImagesCell"];
+        _cell = cell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell updateCellWithShareModel:self.shareModel mainImage:self.mainShareImage recommendInfo:self.detailmodel];
@@ -121,12 +124,13 @@
     cell.didImagesSelectedUpdateBlock = ^(NSArray *images) {
         self.selectedImages = images;
     };
+    
     return cell;
     
 }
 
 -(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 667;
+    return MaxHeight >= ENM_SCREEN_H_X ? 730 : 680;
 }
 
 @end

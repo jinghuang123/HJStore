@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "PLACEHOLDER_SCRO_SLIDER.png",
+      "filename" : "jiazai02.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PLACEHOLDER_SCRO_SLIDER@2x.png",
+      "filename" : "jiazai02@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PLACEHOLDER_SCRO_SLIDER@3x.png",
+      "filename" : "jiazai02@3x.png",
       "scale" : "3x"
     }
   ],

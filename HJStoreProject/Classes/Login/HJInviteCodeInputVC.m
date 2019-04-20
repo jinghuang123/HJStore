@@ -10,9 +10,10 @@
 #import "HJRegistVC.h"
 #import "HJLoginRegistRequest.h"
 
+
 @interface HJInviteCodeInputVC () <UITextFieldDelegate>
 @property (nonatomic, strong) UIButton *confirmBtn;
-@property (nonatomic, strong) UITextField *field;
+@property (nonatomic, strong) HJTextField *field;
 @property (nonatomic, strong) UIView *inviteView;
 @property (nonatomic, assign) CGFloat inviteViewSize;
 @property (nonatomic, strong) NSString *inviteCode;
@@ -27,14 +28,15 @@
     self.title = @"邀请码";
     
     
-    UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(20, 150, MaxWidth - 40, 20)];
+    HJTextField *field = [[HJTextField alloc] initWithFrame:CGRectMake(20, 150, MaxWidth - 40, 40)];
     _field = field;
 
     field.font = PFR16Font
     field.delegate = self;
-    field.placeholder = @"请输入邀请码";
+    field.placeholder = @"请输入邀请码或者邀请人手机号";
+    field.edgeInsets = UIEdgeInsetsMake(0, 10, 10, 10);
     [self.view addSubview:field];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 170, MaxWidth - 40, 1)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 180, MaxWidth - 40, 1)];
     line.backgroundColor = [UIColor jk_colorWithHexString:@"#D8D8D8"];
     [self.view addSubview:line];
     

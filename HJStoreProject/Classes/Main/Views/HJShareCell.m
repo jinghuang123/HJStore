@@ -418,7 +418,7 @@
         make.height.mas_equalTo(20);
     }];
     [copyTklTip jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        
+        [self copyTaokouling];
     }];
     
     UIImageView *copyTklIcon = [[UIImageView alloc] init];
@@ -431,9 +431,7 @@
         make.height.width.mas_equalTo(16);
     }];
     [copyTklIcon jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        [self makeToast:@"复制淘口令成功" duration:1.0 position:CSToastPositionCenter];
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = self.shareModel.model;
+        [self copyTaokouling];
     }];
     
     
@@ -632,6 +630,23 @@
     border.lineDashPattern = @[@4, @2];
     
     [view.layer addSublayer:border];
+}
+
+- (void)copyTaokouling {
+    NSMutableString *copyStr = [[NSMutableString alloc] init];
+    [copyStr appendString:self.titleLab.text];
+    [copyStr appendString:@"\n"];
+    [copyStr appendString:self.priceLabel.text];
+    [copyStr appendString:@"\n"];
+    [copyStr appendString:self.couponLabel.text];
+    [copyStr appendString:@"\n"];
+    [copyStr appendString:self.downloadTipLabel.text];
+    [copyStr appendString:@"\n"];
+    [copyStr appendString:self.tipCopyLabel.text];
+    [copyStr appendString:@"\n"];
+    [self makeToast:@"复制淘口令成功" duration:1.0 position:CSToastPositionCenter];
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = copyStr;
 }
 
 @end

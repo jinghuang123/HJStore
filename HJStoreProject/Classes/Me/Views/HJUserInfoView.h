@@ -17,7 +17,9 @@
 #define USERPSWUpdateClick            0x00007
 #define USERCacheClearClick           0x00008
 #define USERAboutUsClick             0x00009
-#define USERQuiteClick             0x000010
+#define USERUploadQrCode             0x000011
+#define USERUploadWechat             0x000012
+#define USERQuiteClick             0x000013
 
 
 @protocol HJUserInfoViewDelegate <NSObject>

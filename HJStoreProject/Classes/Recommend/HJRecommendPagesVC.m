@@ -39,7 +39,7 @@
                 recommendVC.shareClick = ^(HJRecommendItemModel *item) {
                     HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
                     if(!userInfo.token || userInfo.token.length == 0){
-                        [self pushToLoginVC:NO];
+                        [self pushToLoginVC:NO closeBlock:nil];
                     }else {
                         [self showTaobaoAuthorDailogSuccess:^(id responseObject) {
                             for (HJRecommendModel *model in item.goods) {

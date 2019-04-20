@@ -26,6 +26,7 @@ typedef void(^imageViewSelected)(int state);
 - (void)updateCellWithShareModel:(HJShareModel *)share mainImage:(UIImage *)mainImage recommendInfo:(HJRecommendModel *)info;
 
 - (NSArray *)getSelectedImages;
+- (void)copyTaokouling;
 @end
 
 

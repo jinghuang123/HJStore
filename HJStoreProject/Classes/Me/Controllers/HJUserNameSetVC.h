@@ -11,6 +11,7 @@
 
 typedef void(^UserInfoSetCommitBlock)(id obj);
 @interface HJUserNameSetVC : HJSuperViewController
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, copy) UserInfoSetCommitBlock userNameSetBlock;
 @end
 

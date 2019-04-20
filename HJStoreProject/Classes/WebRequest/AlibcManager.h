@@ -24,6 +24,7 @@
                   parentController:(UIViewController *)parentController
                            webView:(UIWebView *)webView
                                url:(NSString *)url
+                         productid:(NSString *)productId
                            success:(AlibcTradeProcessSuccessCallback)success
                               fail:(AlibcTradeProcessFailedCallback)fail;
 @end

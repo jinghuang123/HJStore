@@ -25,13 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    HJUserInfoModel *userInfo = [HJUserInfoModel getSavedUserInfo];
     CGFloat yoffSet = MaxHeight >= ENM_SCREEN_H_X ? 90 : 70;
     HJTextField *field = [[HJTextField alloc] initWithFrame:CGRectMake(0, yoffSet, MaxWidth, 44)];
     _field = field;
     field.edgeInsets = UIEdgeInsetsMake(5, 20, 5, 0);
     field.backgroundColor = [UIColor whiteColor];
-    field.text = userInfo.nickname;
+    field.text = self.name;
     field.textColor = [UIColor jk_colorWithHexString:@"#262f42"];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = self;

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIButton *collectionBtn;
 @property (nonatomic, strong) UILabel *collectionTip;
 @property (nonatomic, strong) NSString *itemId;
+@property (nonatomic, strong) UIImageView *conponsImageView;
 @end
 
 @implementation HJProductDetailContentCell
@@ -101,6 +102,7 @@
     }];
     
     UIButton *collectionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _collectionBtn = collectionBtn;
     [collectionBtn setBackgroundImage:[UIImage imageNamed:@"collected_n"] forState:UIControlStateNormal];
     [collectionBtn setBackgroundImage:[UIImage imageNamed:@"collected_h"] forState:UIControlStateSelected];
     [collectionBtn addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -126,12 +128,18 @@
     
     
     UIImageView *earnBgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"earn_bg"]];
+    earnBgImageView.userInteractionEnabled = YES;
     [self.contentView addSubview:earnBgImageView];
     [earnBgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-20);
         make.width.mas_equalTo(75);
         make.top.mas_equalTo(priceLabel.mas_bottom).offset(6);
         make.height.mas_equalTo(23);
+    }];
+    [earnBgImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        if (self.shareToEarnBlock) {
+            self.shareToEarnBlock(nil);
+        }
     }];
     
     UIImageView *earnPreIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"earn_pre"]];
@@ -157,6 +165,7 @@
     }];
     
     UIImageView *conponsImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"conponsImage_bg"]];
+    _conponsImageView = conponsImageView;
     conponsImageView.userInteractionEnabled = YES;
     [self.contentView addSubview:conponsImageView];
     [conponsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -240,7 +249,7 @@
     CGFloat final_value = [item.zk_final_price floatValue];
     CGFloat couponValue = [item.coupon_amount floatValue];
     NSString *value = [NSString stringWithFormat:@"%.2f", final_value - couponValue];
-    _priceLabel.text = [NSString stringWithFormat:@"%@   %@",value,item.zk_final_price];
+    _priceLabel.text = [NSString stringWithFormat:@"%@   ¥%@",value,item.zk_final_price];
     //3.初始化NSTextAttachment对象
     if(item.user_type == 0) {
         _preIcon.image = [UIImage imageNamed:@"ic_label_taobao"];
@@ -276,7 +285,17 @@
     [newPriceString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(final_price_length, newPriceString.length - final_price_length)];
     _priceLabel.attributedText = newPriceString;
     
-    
+    if (!item.coupon_amount) {
+        [_conponsImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(20);
+        }];
+        _conponsImageView.hidden = YES;
+    }else{
+        _conponsImageView.hidden = NO;
+        [_conponsImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(60);
+        }];
+    }
 }
 
 - (void)collectionAction:(UIButton *)sender {
@@ -465,10 +484,17 @@
     _earningLabel =  [[UILabel alloc] init];
     _earningLabel.backgroundColor = [UIColor jk_colorWithHexString:@"#E32828"];
     _earningLabel.textColor = [UIColor whiteColor];
-    _earningLabel.layer.cornerRadius = 8;
+    _earningLabel.layer.cornerRadius = 10;
     _earningLabel.clipsToBounds = YES;
     _earningLabel.font = [UIFont systemFontOfSize:10];
-    _earningLabel.textAlignment = NSTextAlignmentCenter;
+    _earningLabel.jk_edgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    UIImageView *earnpreIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"earn_pre"]];
+    [_earningLabel addSubview:earnpreIcon];
+    [earnpreIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(5);
+        make.centerY.equalTo(self.earningLabel);
+        make.width.height.mas_equalTo(10);
+    }];
     [self.contentView addSubview:_earningLabel];
     
     _soldCountLabel =  [[UILabel alloc] init];
@@ -519,9 +545,9 @@
     
     [_earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-15);
-        make.width.mas_equalTo(80);
+        make.width.mas_equalTo(62);
         make.top.mas_equalTo(weak_self.couponIcon.mas_top).offset(0);
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(20);
     }];
     
     [_nowPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -583,6 +609,11 @@
         _couponIcon.hidden = YES;
         _nowPriceLabel.hidden = YES;
         _priceLabel.text = [NSString stringWithFormat:@"现价 ¥%.2f",item.coupon_after_price];
+    }else{
+        _couponIcon.hidden = NO;
+        _nowPriceLabel.hidden = NO;
+        _priceLabel.text = [NSString stringWithFormat:@"券后 ¥%.2f",item.coupon_after_price];
+        
     }
 }
 @end
