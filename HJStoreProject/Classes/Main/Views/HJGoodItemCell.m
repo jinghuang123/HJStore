@@ -213,7 +213,7 @@
     [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:9] range:NSMakeRange(0, 2)];
     _priceLabel.attributedText = newPriceString;
     
-    NSMutableAttributedString *currentPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"现价 %@",_nowPriceLabel.text]];
+    NSMutableAttributedString *currentPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"现价  %@  ",_nowPriceLabel.text]];
     [currentPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, currentPriceString.length - 3)];
     _nowPriceLabel.attributedText = currentPriceString;
     
@@ -433,7 +433,7 @@
     [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:9] range:NSMakeRange(0, 2)];
     _priceLabel.attributedText = newPriceString;
     
-    NSMutableAttributedString *currentPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"现价 %@",_nowPriceLabel.text]];
+    NSMutableAttributedString *currentPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"现价   %@  ",_nowPriceLabel.text]];
     [currentPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, currentPriceString.length - 3)];
     _nowPriceLabel.attributedText = currentPriceString;
     

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *height;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
+@property (weak, nonatomic) IBOutlet UILabel *nomalTipLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *earningLabel;
 @property (nonatomic, strong) HJRecommendItemModel *model;
 @property (strong, nonatomic) UIView *bottomLineView;

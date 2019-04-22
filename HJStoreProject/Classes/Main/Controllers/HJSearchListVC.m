@@ -32,6 +32,9 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 
 @property (assign , nonatomic) GoodsListShowType showType;
 @property(nonatomic,strong)  HJMainPodVC *sortTypePopVC;
+
+@property(nonatomic,strong)  HJMainListHeadViewList *headerView;
+
 @end
 
 @implementation HJSearchListVC
@@ -203,6 +206,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
  
     HJMainListHeadViewList *headerView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier2 forIndexPath:indexPath];
+    _headerView = headerView;
     headerView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5].CGColor;
     headerView.layer.borderWidth = 0.5;
     headerView.backgroundColor = [UIColor whiteColor];
@@ -217,11 +221,13 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
         }else if([index integerValue] == 1) {
             weak_self.sort = weak_self.sort == HJSortTypePriceHtoL ? HJSortTypePriceLtoH  : HJSortTypePriceHtoL;
             [weak_self headRefresh];
+             [weak_headerView setSortImageWithType:weak_self.sort];
         }else if([index integerValue] == 2) {
             weak_self.sort = weak_self.sort == HJSortTypeShellCountHtoL ? HJSortTypeShellCountLtoH : HJSortTypeShellCountHtoL;
             [weak_self headRefresh];
+             [weak_headerView setSortImageWithType:weak_self.sort];
         }
-        [weak_headerView setSortImageWithType:weak_self.sort];
+       
     };
     headerView.showModeChangedBlock = ^(id obj) {
         if (weak_self.showType == singleLineShowOneGoods) {
@@ -265,6 +271,7 @@ static NSString *const HJMainListHeadViewIdentifier2 = @"HJMainListHeadViewList2
             weak_self.sort = row++;
             [weak_self headRefresh];
             weak_self.sortTypePopVC.isPopState = NO;
+            [weak_self.headerView setSortImageWithType:weak_self.sort];
             [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
         };
         self.sortTypePopVC.isPopState = YES;

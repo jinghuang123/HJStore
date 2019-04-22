@@ -27,7 +27,30 @@ static NSString *cellReuseID = @"cellReuseID";
         make.left.right.bottom.mas_offset(0);
         make.height.mas_equalTo(3);
     }];
+    _contentLabel.userInteractionEnabled = YES;
+    weakify(self)
+    [_contentLabel jk_addLongPressActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [weak_self becomeFirstResponder];
+        
+        UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copy:)];
+        [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:copyLink, nil]];
+        [[UIMenuController sharedMenuController] setTargetRect:weak_self.contentLabel.frame inView:self];
+        [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+    }];
 }
+
+
+- (BOOL)canBecomeFirstResponder{
+    return YES;
+}
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    return (action == @selector(copy:));
+}
+- (void)copy:(id)sender{
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    pasteBoard.string = self.contentLabel.text;
+}
+
 
 - (void)setModel:(HJRecommendItemModel *)model{
     _model = model;
@@ -36,6 +59,17 @@ static NSString *cellReuseID = @"cellReuseID";
     _timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:model.createtime] jk_longDateString];
     _timeLabel.textColor = [UIColor jk_colorWithHexString:@"#4f4f4f"];
     _shareCountLabel.text = [NSString stringWithFormat:@"%ld",model.share];
+    _nomalTipLabel.text = [model.contentOfcopy isEqualToString:@""] ? @"" : model.contentOfcopy;
+    CGFloat copyH = [model.contentOfcopy isEqualToString:@""] ? 0 :[NSString heightOfString:model.contentOfcopy font:_nomalTipLabel.font width:MaxWidth - 40];
+    [_nomalTipLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(20);
+        make.right.mas_offset(-20);
+        make.height.mas_equalTo(copyH);
+    }];
+    [_copyedView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-20);
+        make.height.mas_equalTo(copyH);
+    }];
     NSString *htmlString = model.content;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     [attributedString addAttribute:NSFontAttributeName
@@ -72,7 +106,7 @@ static NSString *cellReuseID = @"cellReuseID";
     
     [self.copyedView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = @"【购买步骤】 长按识别二维码-复制淘口令-打开手机淘宝领券下单";
+        pasteboard.string = model.contentOfcopy;
         [weak_self jk_makeToast:@"复制评论成功" duration:2.0 position:CSToastPositionCenter];
     }];
 }
@@ -95,11 +129,13 @@ static NSString *cellReuseID = @"cellReuseID";
         NSString *coupons = [NSString stringWithFormat:@"¥%.2f",item.coupon_after_price];
         CGFloat wid = [NSString widthOfString:coupons font:[UIFont systemFontOfSize:12] height:20] + 5;
         cell.couponvalueLabel.text = coupons;
+        cell.couponvalueLabel.hidden = NO;
         [cell.couponvalueLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(wid);
         }];
     }else{
         NSString *url = self.model.images[indexPath.row];
+        cell.couponvalueLabel.hidden = YES;
         [cell.imgV sd_setImageWithURLString:url placeholderImage:PLACEHOLDER_ITEM];
     }
 
@@ -161,7 +197,7 @@ static NSString *cellReuseID = @"cellReuseID";
 - (CGFloat)Calculating_Text_Height_2_Width:(CGFloat)width WithString:(NSAttributedString *)string {
     CGRect frame = [string boundingRectWithSize:CGSizeMake(width, FLT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) context:nil];
     NSLog(@"2:%@", NSStringFromCGRect(frame));
-    return frame.size.height - 40;
+    return frame.size.height;
 }
 
 

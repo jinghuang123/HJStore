@@ -49,8 +49,9 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     NSString *wechatBind = info.weixin ? @"已绑定":@"绑定";
     NSString *taobaoBind = info.taobao ? @"已绑定":@"绑定";
     NSString *zfbBind = info.zfb ? @"已绑定":@"绑定";
+    NSString *wechat = info.kefu_wechat ? :@"";
     if (self.userInfo.group_id == 2) {
-        [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}],@[@{@"专属客服二维码":@""},@{@"专属客服微信号":info.kefu_wechat}]]];
+        [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}],@[@{@"专属客服二维码":@""},@{@"专属客服微信号":wechat}]]];
     }else{
         [self.dataSource setArray:@[@[@{@"":@"修改头像"}],@[@{@"昵称":self.userInfo.nickname},@{@"支付宝绑定":zfbBind},@{@"微信绑定":wechatBind},@{@"淘宝绑定":taobaoBind}],@[@{@"修改手机号":@"修改"},@{@"修改密码":@"修改"}],@[@{@"清理缓存":cacheSize},@{@"关于我们":@""}]]];
     }
@@ -98,7 +99,7 @@ static NSString *const HJUserInfoFootIdentifier = @"HJUserInfoFoot";
     if ([title isEqualToString:@"专属客服二维码"]) {
         cell.qrImageView.hidden = NO;
         HJSettingInfo *info = [HJSettingInfo shared];
-        [cell.qrImageView sd_setImageWithURLString:info.kefu_qrcode placeholderImage:PLACEHOLDER_ITEM];
+        [cell.qrImageView sd_setImageWithURLString:info.kefu_qrcode placeholderImage:[UIImage imageNamed:@""]];
     }else{
         cell.qrImageView.hidden = YES;
     }

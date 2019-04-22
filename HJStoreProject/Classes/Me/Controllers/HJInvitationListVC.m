@@ -141,22 +141,10 @@
         [imageView sd_setImageWithURLString:url placeholderImage:PLACEHOLDER_160X240];
         [self.scroView addSubview:imageView];
         
-//        UIImageView *qrImageView = [[UIImageView alloc] init];
-//        qrImageView.image = self.qrCodeImage;
-//        qrImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-//        qrImageView.layer.borderWidth = 10;
-//        [imageView addSubview:qrImageView];
-//        [qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.mas_equalTo(imageView);
-//            make.bottom.mas_offset(-60);
-//            make.width.height.mas_equalTo(80);
-//        }];
         
         UILabel *label = [[UILabel alloc] init];
-        label.text = [NSString stringWithFormat:@"邀请码\n%@",self.invitationCode];
-        label.numberOfLines = 2;
-        label.backgroundColor = [UIColor whiteColor];
-        label.font = [UIFont systemFontOfSize:11];
+        label.text = [NSString stringWithFormat:@"%@",self.invitationCode];
+        label.font = [UIFont systemFontOfSize:13];
         label.textAlignment = NSTextAlignmentCenter;
         label.layer.cornerRadius = 5;
         label.clipsToBounds = YES;

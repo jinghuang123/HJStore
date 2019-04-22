@@ -132,10 +132,10 @@
     topTipLabel.textColor = [UIColor whiteColor];
     topTipLabel.textAlignment = NSTextAlignmentCenter;
     topTipLabel.font = [UIFont systemFontOfSize:13];
-    topTipLabel.text = [NSString stringWithFormat:@"预估收益 %.2f    分享朋友圈三部曲",3.32];
+    topTipLabel.text = [NSString stringWithFormat:@"预估收益  %.2f     分享朋友圈三部曲",3.32];
     [topView addSubview:topTipLabel];
     [topTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(topLetIcon.mas_right).offset(10);
+        make.left.mas_equalTo(topLetIcon.mas_right).offset(0);
         make.centerY.equalTo(topView);
         make.right.mas_equalTo(topRightIcon.mas_left).offset(-10);
         make.height.mas_equalTo(20);
@@ -548,7 +548,7 @@
     self.priceLabel.text = [NSString stringWithFormat:@"【在售价】 %@元",info.reserve_price];
     self.couponLabel.text = [NSString stringWithFormat:@"【券后价】 %.2f元",info.coupon_after_price];
     self.downloadTipLabel.text = [NSString stringWithFormat:@"【下载美值APP再赚】 %.2f元",3.21];
-    self.tipCopyLabel.text = [NSString stringWithFormat:@"下载这条信息%@,\n打开【手机淘宝】即可购买",share.model];
+    self.tipCopyLabel.text = [NSString stringWithFormat:@"复制这条信息%@，启动【手机淘宝】即可购买",share.model];
     self.topTipLabel.text = [NSString stringWithFormat:@"预估收益 %.2f    分享朋友圈三部曲",info.earning];
     self.contentLabel.text = info.title;
 }

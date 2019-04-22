@@ -50,6 +50,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,copy) void(^settingClick)(id obj,HJClickItemType type);
 
 - (void)setInfoWithGenerInfo:(HJGeneralInfo *)info;
+
+- (instancetype)initWithBanners:(NSArray *)array;
 @end
 
 

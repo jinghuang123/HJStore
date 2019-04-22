@@ -187,7 +187,7 @@
 - (void)getApplyCashWithMoney:(NSString *)sum
                       Success:(CompletionSuccessBlock)success
                          fail:(CompletionFailBlock)fail {
-    NSDictionary *dic = @{@"sum":sum};
+    NSDictionary *dic = @{@"money":sum};
     NSString *url = [kHTTPManager getTokenUrl:kURLApplyCash];
     [kHTTPManager tryPost:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
         success(nil);

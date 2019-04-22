@@ -143,7 +143,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     
     UIButton *backButton = [[UIButton alloc] init];
     _backButton = backButton;
-    [backButton setBackgroundImage:[UIImage imageNamed:@"NavBar_backImg"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"detailBack"] forState:UIControlStateNormal];
     [backView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         [self back];
     }];
@@ -155,8 +155,8 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(15);
         make.top.mas_offset(10);
-        make.height.mas_equalTo(20);
-        make.width.mas_equalTo(11);
+        make.height.mas_equalTo(25);
+        make.width.mas_equalTo(25);
     }];
 }
 
@@ -178,7 +178,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     UIButton *couponInfoBtn = [[UIButton alloc] init];
     _couponInfoBtn = couponInfoBtn;
     couponInfoBtn.backgroundColor = [UIColor redColor];
-    [couponInfoBtn setTitle:@"领券 ¥3" forState:UIControlStateNormal];
+    [couponInfoBtn setTitle:@"领券 ¥0" forState:UIControlStateNormal];
     [couponInfoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     couponInfoBtn.titleLabel.font = PFR16Font;
     [couponInfoBtn addTarget:self action:@selector(couponInfo) forControlEvents:UIControlEventTouchUpInside];
@@ -196,7 +196,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     [shareView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.mas_offset(0);
         make.height.mas_equalTo(49);
-        make.width.mas_equalTo(MaxWidth/3);
+        make.width.mas_equalTo(MaxWidth/3 + 20);
     }];
     [earnPreIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(15);
@@ -205,7 +205,7 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
     }];
     [earningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(earnPreIcon.mas_right).offset(5);
-        make.width.mas_equalTo(65);
+        make.width.mas_equalTo(85);
         make.top.mas_offset(13);
         make.height.mas_equalTo(23);
     }];
@@ -285,8 +285,10 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 }
 
 -(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    HJRecommendModel *detailModel = [self.dataSource objectAtIndex:0];
+
     if (indexPath.section == 0) {
-        return 230;
+        return detailModel.coupon_amount ? 230 : 190;
     }else if(indexPath.section == 1) {
         return 50;
     }else if(indexPath.section == 2) {
@@ -307,16 +309,6 @@ static NSString *const HJGoodItemSingleCellIdentifier = @"HJGoodItemSingleCell";
 }
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(scrollView.mj_offsetY < 200) {
-        [_backButton setBackgroundImage:[UIImage imageNamed:@"NavBar_backImg"] forState:UIControlStateNormal];
-        _navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:scrollView.mj_offsetY/200];
-    }else{
-        [_backButton setBackgroundImage:[UIImage imageNamed:@"NavBar_backImg"] forState:UIControlStateNormal];
-        _navView.backgroundColor = [UIColor whiteColor];
-    }
-
-}
 
 - (UIImage *)getShareImage {
     UIGraphicsBeginImageContextWithOptions(self.shareMainImageV.mj_size,NO, 0.0);//设置截屏大小

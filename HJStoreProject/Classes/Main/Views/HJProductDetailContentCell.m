@@ -505,6 +505,7 @@
     
 }
 
+
 #pragma mark - 布局
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -569,6 +570,28 @@
         make.width.mas_equalTo(120);
         make.top.mas_equalTo(weak_self.nowPriceLabel.mas_bottom).offset(10);
     }];
+    _goodsLabel.userInteractionEnabled = YES;
+    _preIcon.userInteractionEnabled = YES;
+    self.contentView.userInteractionEnabled = YES;
+    [_goodsLabel jk_addLongPressActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [weak_self.contentView becomeFirstResponder]; //
+        UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copy:)];
+        [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:copyLink, nil]];
+        [[UIMenuController sharedMenuController] setTargetRect:weak_self.goodsLabel.frame inView:self];
+        [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+    }];
+}
+
+
+- (BOOL)canBecomeFirstResponder{
+    return YES;
+}
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    return (action == @selector(copy:));
+}
+- (void)copy:(id)sender{
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    pasteBoard.string = self.goodsLabel.text;
 }
 
 
@@ -600,7 +623,7 @@
     [newPriceString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:9] range:NSMakeRange(0, 2)];
     _priceLabel.attributedText = newPriceString;
     
-    NSMutableAttributedString *currentPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"现价 %@",_nowPriceLabel.text]];
+    NSMutableAttributedString *currentPriceString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"现价   %@  ",_nowPriceLabel.text]];
     [currentPriceString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, currentPriceString.length - 3)];
     _nowPriceLabel.attributedText = currentPriceString;
     

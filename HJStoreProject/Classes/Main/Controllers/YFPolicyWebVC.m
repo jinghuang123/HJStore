@@ -63,11 +63,15 @@
 - (void)loadURL:(NSString *)url{
     url = [url stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     url = [url stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if (![url containsString:@"token"]) {
+        url = [NSString stringWithFormat:@"%@?token=%@",url,[HJUserInfoModel getSavedUserInfo].token];
+    }
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[[NSURL alloc]initWithString:url]];
     request.timeoutInterval = 10;
     if (![url hasPrefix:@"http"]) {
         return;
     }
+    _currentUrl = url;
     [_webView loadRequest:request];
 }
 
@@ -162,14 +166,24 @@
     if (!navigationAction.targetFrame.isMainFrame) {
         [webView evaluateJavaScript:@"var a = document.getElementsByTagName('a');for(var i=0;i<a.length;i++){a[i].setAttribute('target','');}" completionHandler:nil];
     }
-//    NSString *urlStr = [webView.URL absoluteString];
-//    _currentUrl = urlStr;
-//    if (![_currentUrl containsString:@"token"] ) {
-//        _currentUrl = [NSString stringWithFormat:@"%@?token=%@",_currentUrl,[HJUserInfoModel getSavedUserInfo].token];
-//    }
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
 
+    NSString *urlStr = [navigationAction.request.URL absoluteString];
+    NSLog(@"urlStr = %@,_currentUrl = %@",urlStr,_currentUrl);
+    if ([_currentUrl isEqualToString:urlStr]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }
+    _currentUrl = urlStr;
+    
+    if ([_currentUrl containsString:@"token"]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }else{
+        [self loadURL:urlStr];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
+}
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     NSLog(@"开始加载网页");

@@ -311,7 +311,7 @@
     todayEarnBgView.payedOrderValue.text = [NSString stringWithFormat:@"%ld",self.info.today_money_count];
     todayEarnBgView.earnValue.text = [NSString stringWithFormat:@"¥ %.2f",self.info.today_money];
     todayEarnBgView.otherEarnValue.text = [NSString stringWithFormat:@"¥ %.2f",self.info.today_money_else];
-    [todayEarnBgView.rightButton setTitle:@"收益明细" forState:UIControlStateNormal];
+    [todayEarnBgView.rightButton setTitle:@"收益说明" forState:UIControlStateNormal];
     [self.view addSubview:todayEarnBgView];
     [todayEarnBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(16);

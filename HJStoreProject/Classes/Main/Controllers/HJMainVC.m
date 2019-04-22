@@ -25,6 +25,7 @@
 
 @interface HJMainVC () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)  HJMainPodVC *sortTypePopVC;
+@property(nonatomic,strong)  HJMainListHeadViewList *headerView;
 @end
 
 
@@ -46,9 +47,6 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if(self.recommends.count == 0) {
-        [self.collectionView.mj_header beginRefreshing];
-    }
 }
 
 - (void)viewDidLoad {
@@ -58,19 +56,12 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     [HJNetworkType isConnected];
     [self setupUI];
     NSLog(@"maxw:%f  maxh:%f",MaxWidth,MaxHeight);
+}
 
-    // Do any additional setup after loading the view.
-    
-//    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateNormal];
-//    [topButton setBackgroundImage:[UIImage imageNamed:@"Rectangle"] forState:UIControlStateSelected];
-//
-//    [self.view insertSubview:topButton atIndex:0];
-//    [topButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_offset(-12);
-//        make.bottom.mas_offset(-100);
-//        make.width.height.mas_equalTo(28);
-//    }];
+- (void)onClickSegmentItem {
+    if(self.recommends.count == 0) {
+        [self.collectionView.mj_header beginRefreshing];
+    }
 }
 
 - (void)headRefresh {
@@ -297,6 +288,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
             weak_self.sort = row++;
             [weak_self headRefresh];
             weak_self.sortTypePopVC.isPopState = NO;
+            [weak_self.headerView setSortImageWithType:weak_self.sort];
             [weak_self.sortTypePopVC dismissViewControllerAnimated:YES completion:nil];
         };
         self.sortTypePopVC.isPopState = YES;
@@ -404,6 +396,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                 reusableview = headerView;
             }else{
                 HJMainListHeadViewList *headerView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HJMainListHeadViewIdentifier2 forIndexPath:indexPath];
+                _headerView = headerView;
                 headerView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5].CGColor;
                 headerView.layer.borderWidth = (self.catteryId > 0 || self.activityId > 0) ? 0.5 : 0;
                 headerView.backgroundColor = [UIColor whiteColor];
@@ -419,11 +412,13 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
                     }else if([index integerValue] == 1) {
                         weak_self.sort = weak_self.sort == HJSortTypePriceHtoL ? HJSortTypePriceLtoH  : HJSortTypePriceHtoL;
                         [weak_self headRefresh];
+                        [weak_headerView setSortImageWithType:weak_self.sort];
                     }else if([index integerValue] == 2) {
                         weak_self.sort = weak_self.sort == HJSortTypeShellCountHtoL ? HJSortTypeShellCountLtoH : HJSortTypeShellCountHtoL;
                         [weak_self headRefresh];
+                        [weak_headerView setSortImageWithType:weak_self.sort];
                     }
-                    [weak_headerView setSortImageWithType:weak_self.sort];
+                    
                 };
                 
                 headerView.showModeChangedBlock = ^(id obj) {
@@ -584,6 +579,7 @@ static NSString *const HJGoodsCountDownCellIdentifier = @"HJGoodsCountDownCell";
     productListVC.showPopPoint = CGPointMake(0, pointY);
     productListVC.headType  = HJMainVCProductListHeadTypeList;
     productListVC.listType = HJMainVCProductListTypeList;
+    [productListVC onClickSegmentItem];
     [self.navigationController pushViewController:productListVC animated:YES];
     
 }

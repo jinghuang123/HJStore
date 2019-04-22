@@ -70,7 +70,7 @@
     UILabel *tipLabel = [[UILabel alloc] init];
     tipLabel.font = [UIFont systemFontOfSize:12];
     tipLabel.text = self.searchTip;
-    tipLabel.numberOfLines = 0;
+    tipLabel.numberOfLines = 6;
     [bottomView addSubview:tipLabel];
     CGFloat tipH = [NSString heightOfString:self.searchTip font:tipLabel.font width:260];
     [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {

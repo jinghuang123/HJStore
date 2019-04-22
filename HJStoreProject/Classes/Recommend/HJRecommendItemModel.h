@@ -11,17 +11,18 @@
 
 
 @interface HJRecommendItemModel :NSObject
-@property (nonatomic , assign) NSInteger              id;
-@property (nonatomic , copy) NSString              * image;
+@property (nonatomic , assign) NSInteger              itemId;
+@property (nonatomic , copy) NSString              *image;
 @property (nonatomic , assign) NSInteger              createtime;
 @property (nonatomic , assign) NSInteger              share;
-@property (nonatomic , copy) NSString              * content;
-@property (nonatomic , copy) NSString              * avatar;
-@property (nonatomic , copy) NSString              * nickname;
-@property (nonatomic , copy) NSString              * taobao_items;
+@property (nonatomic , copy) NSString              *content;
+@property (nonatomic , copy) NSString              *avatar;
+@property (nonatomic , copy) NSString              *nickname;
+@property (nonatomic , copy) NSString              *taobao_items;
 @property (nonatomic , assign) NSInteger              goods_count;
 @property (nonatomic , strong) NSArray <HJRecommendModel *>              * goods;
 @property (nonatomic , strong) NSArray <NSString *>              * images;
+@property (nonatomic , strong) NSString              *contentOfcopy;
 
 @end
 

@@ -146,7 +146,9 @@ static NSString *const HJRecmomendItemCellIdentifier = @"HJRecmomendItemCell";
             NSString *realUrl = [banner.banner_image hasPrefix:@"http"] ? banner.banner_image : [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
             [images addObject:realUrl];
         }
-        self.adSliderCellView.imageGroupArray = images;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.adSliderCellView.imageGroupArray = images;
+        });
         [self.tableView reloadData];
     } fail:^(NSError *error) {
         

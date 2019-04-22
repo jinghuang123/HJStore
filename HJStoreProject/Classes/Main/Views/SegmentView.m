@@ -33,7 +33,9 @@
         weakSelf.headerView.selectedItemHelper = ^(NSUInteger index) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.contentScrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
-
+            if (weakSelf.selectedItemHelper) {
+                weakSelf.selectedItemHelper(index);
+            }
         };
         
         self.contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, SegmentHeaderViewHeight, kWidth, kHeight-SegmentHeaderViewHeight)];

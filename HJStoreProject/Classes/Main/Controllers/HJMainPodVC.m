@@ -64,32 +64,9 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.scrollEnabled = NO;
-//    [self drawShareVeiw];
 }
 
 
-
-//- (void)drawShareVeiw{
-//    // Drawing code
-//
-//    //定义画图的path
-//    UIBezierPath *path = [[UIBezierPath alloc] init];
-//    //path移动到开始画图的位置
-//    [path moveToPoint:CGPointMake(self.showViewPoint.x + 55, self.showViewPoint.y)];
-//    [path addLineToPoint:CGPointMake(self.showViewPoint.x + 55 + 5, self.showViewPoint.y - 5 * sqrt(3))];
-//    [path addLineToPoint:CGPointMake(self.showViewPoint.x + 55 + 10, self.showViewPoint.y)];
-//    //关闭path
-//    path.lineWidth = 5;
-//    [path closePath];
-//
-//
-//    //三角形内填充颜色
-//    CAShapeLayer *layer = [CAShapeLayer layer];
-//    layer.path = path.CGPath;
-//    layer.lineWidth = 5;
-//    layer.strokeColor = [UIColor whiteColor].CGColor;
-//    [self.view.layer addSublayer:layer];
-//}
 
 - (void)dismissPop {
     if (self.popDismissBlock) {

@@ -184,6 +184,7 @@
                 <outlet property="headImageV" destination="IbH-d9-S31" id="oKO-E1-0iY"/>
                 <outlet property="height" destination="SSd-tJ-9CP" id="GMD-BE-Le2"/>
                 <outlet property="nameLabel" destination="PlB-UF-z8k" id="A2R-fa-3rA"/>
+                <outlet property="nomalTipLabel" destination="d5v-VW-hfy" id="MGe-E9-4e8"/>
                 <outlet property="shareCountLabel" destination="irc-Gj-1rt" id="gNi-Ws-VaA"/>
                 <outlet property="shareView" destination="2aW-XI-XUK" id="wM7-ce-fbI"/>
                 <outlet property="timeLabel" destination="nBh-66-kjI" id="2wV-Ry-LKd"/>

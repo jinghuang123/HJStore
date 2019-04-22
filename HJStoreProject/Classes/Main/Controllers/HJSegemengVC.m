@@ -74,6 +74,8 @@
     if (!_segmentView) {
         SegmentView *segmentView = [[SegmentView alloc] initWithFrame:CGRectMake(0, 0, MaxWidth, MaxHeight) controllers:Cacontrollers titleArray:names parentController:self];
         segmentView.selectedIndex = 0;
+        HJMainVC *mainVC = [Cacontrollers objectAtIndex:0];
+        [mainVC onClickSegmentItem];
         _segmentView = segmentView;
     }
     [self.view addSubview:_segmentView];
@@ -82,6 +84,10 @@
         make.left.bottom.mas_offset(0);
         make.right.mas_offset(0);
     }];
+    _segmentView.selectedItemHelper = ^(NSUInteger index) {
+        HJMainVC *mainVC = [Cacontrollers objectAtIndex:index];
+        [mainVC onClickSegmentItem];
+    };
 }
 
 - (void)setupNavItems {
@@ -114,7 +120,7 @@
     searchIcon.frame = CGRectMake(5, 6, 22, 18);
     [bgView addSubview:searchIcon];
     UILabel *tiplabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 2.5, 280, 25)];
-    tiplabel.text = @"粘粘宝贝标题，先领劵省钱再购物";
+    tiplabel.text = @"粘粘宝贝标题，先领券省钱再购物";
     tiplabel.textColor = [UIColor grayColor];
     tiplabel.textAlignment = NSTextAlignmentLeft;
     tiplabel.font = [UIFont systemFontOfSize:13];

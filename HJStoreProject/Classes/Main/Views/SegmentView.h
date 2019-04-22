@@ -11,6 +11,7 @@
 
 @interface SegmentView : UIView
 @property (nonatomic, assign) NSUInteger selectedIndex;
+@property (nonatomic, copy) void (^selectedItemHelper)(NSUInteger index);
 
 - (instancetype)initWithFrame:(CGRect)frame controllers:(NSArray *)controllers titleArray:(NSArray *)titleArray parentController:(UIViewController *)parentController;
 @end

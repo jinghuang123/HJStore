@@ -47,6 +47,8 @@
 @property (nonatomic,assign) BOOL isSearch;
 
 @property (nonatomic,assign) CGPoint showPopPoint;
+
+- (void)onClickSegmentItem;
 @end
 
 

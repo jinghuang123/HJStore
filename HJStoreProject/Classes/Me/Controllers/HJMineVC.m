@@ -55,6 +55,11 @@
         }];
     }else {
         weakify(self)
+        if (!self.meView) {
+            [self setSelfView];
+        }
+        
+        
         [[HJSettingRequest shared] getGeneralInfoSuccess:^(HJGeneralInfo *info) {
             weak_self.info = info;
             [weak_self.meView setInfoWithGenerInfo:info];
@@ -67,6 +72,8 @@
             } fail:^(NSError *error) {
             }];
         }
+        
+  
     }
 }
 
@@ -79,38 +86,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    
-    HJMeView *meView = [[HJMeView alloc] init];
-    _meView = meView;
-    [self.view addSubview:meView];
-    [meView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_offset(0);
-    }];
-    
+    [self setSelfView];
+}
+
+- (void)setSelfView {
     weakify(self)
-    meView.settingClick = ^(id obj,HJClickItemType type) {
-        [weak_self responsToItemClickWithType:type params:obj];
-    };
-    
     [[HJSettingRequest shared] getBannersWithType:4 Success:^(NSArray *banners) {
-        meView.adSliderCellView.bannerItems = banners;
+        HJMeView *meView = [[HJMeView alloc] initWithBanners:banners];
         NSMutableArray *images = [[NSMutableArray alloc] init];
         for (HJBannerModel *banner in banners) {
             NSString *realUrl = [banner.banner_image hasPrefix:@"http"] ? banner.banner_image : [NSString stringWithFormat:@"%@%@",kHHWebServerBaseURL,banner.banner_image];
             [images addObject:realUrl];
         }
-        meView.adSliderCellView.imageGroupArray = images;
-        CGFloat adH = images.count == 0 ? 0 : 100;
-        CGFloat topOffSet = images.count == 0 ? 0 : 8;
-        [meView.adSliderCellView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(adH);
-            make.top.mas_equalTo(meView.icomView.mas_bottom).offset(topOffSet);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weak_self.meView.adSliderCellView.imageGroupArray = images;
+        });
+        
+        weak_self.meView = meView;
+        [self.view addSubview:meView];
+        [meView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_offset(0);
         }];
+        meView.settingClick = ^(id obj,HJClickItemType type) {
+            [weak_self responsToItemClickWithType:type params:obj];
+        };
+        
     } fail:^(NSError *error) {
         
     }];
-    
-
 }
 
 - (void)responsToItemClickWithType:(HJClickItemType)type params:(id)obj{

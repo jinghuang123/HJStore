@@ -28,14 +28,16 @@
 @property (nonatomic, strong) UILabel *todayEarnTip;
 @property (nonatomic, strong) UILabel *lastMonthEarnCount;
 @property (nonatomic, strong) UILabel *lastMonthCount;
+@property (nonatomic, strong) NSArray *banners;
 @end
 
 @implementation HJMeView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithBanners:(NSArray *)array
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
+        self.banners = array;
         [self setupUI];
     }
     return self;
@@ -112,7 +114,7 @@
     
     UILabel *codeLabel = [[UILabel alloc] init];
     _codeLabel = codeLabel;
-    codeLabel.text = @"邀请码:x5s7DdgyZ";
+    codeLabel.text = @"邀请码:-------";
     codeLabel.textColor = [UIColor whiteColor];
     codeLabel.font = [UIFont systemFontOfSize:11];
     codeLabel.textAlignment = NSTextAlignmentLeft;
@@ -205,16 +207,22 @@
     }];
     [self addItomViewItems];
     
-    HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth - 16, 0)];
+    
+
+    CGFloat adH = self.banners.count == 0 ? 0 : 100;
+    CGFloat adTopOffSet = self.banners.count == 0 ? 0 : 8;
+    
+    HJMainSliderView *adSliderCellView = [[HJMainSliderView alloc] initWithFrame:CGRectMake(8, 0, MaxWidth - 16, adH)];
     _adSliderCellView = adSliderCellView;
     adSliderCellView.backgroundColor = [UIColor clearColor];
-    adSliderCellView.imageGroupArray = @[@""];
+    adSliderCellView.imageGroupArray = @[@"placeHoderBlog"];
     [headView addSubview:adSliderCellView];
+ 
     [adSliderCellView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(8);
         make.right.mas_offset(-8);
-        make.height.mas_equalTo(0);
-        make.top.mas_equalTo(icomView.mas_bottom).offset(0);
+        make.height.mas_equalTo(adH);
+        make.top.mas_equalTo(icomView.mas_bottom).offset(adTopOffSet);
     }];
     adSliderCellView.bannerCellItemClick = ^(HJBannerModel *banner) {
         [self onItemClickWithType:HJClickItemTypeADS params:banner];
@@ -273,7 +281,7 @@
     
     UILabel *monthEarnLabel = [[UILabel alloc] init];
     _monthEarnLabel = monthEarnLabel;
-    monthEarnLabel.text = @"¥ 10120";
+    monthEarnLabel.text = @"¥ 0";
     monthEarnLabel.textColor = [UIColor whiteColor];
     monthEarnLabel.font = [UIFont systemFontOfSize:18];
     monthEarnLabel.textAlignment = NSTextAlignmentCenter;
@@ -300,7 +308,7 @@
     
     UILabel *monthEarnTip = [[UILabel alloc] init];
     _monthEarnTip = monthEarnTip;
-    monthEarnTip.text = @"本月预估 ¥ 1509";
+    monthEarnTip.text = @"本月预估 ¥ 0";
     monthEarnTip.textColor = [UIColor blackColor];
     monthEarnTip.font = [UIFont systemFontOfSize:12];
     monthEarnTip.textAlignment = NSTextAlignmentCenter;
@@ -314,7 +322,7 @@
 
     UILabel *todayEarnTip = [[UILabel alloc] init];
     _todayEarnTip = todayEarnTip;
-    todayEarnTip.text = @"今日收益 ¥28";
+    todayEarnTip.text = @"今日收益 ¥0";
     todayEarnTip.textColor = [UIColor blackColor];
     todayEarnTip.font = [UIFont systemFontOfSize:12];
     todayEarnTip.textAlignment = NSTextAlignmentCenter;
@@ -341,7 +349,7 @@
     
     UILabel *lastMonthEarnCount = [[UILabel alloc] init];
     _lastMonthEarnCount = lastMonthEarnCount;
-    lastMonthEarnCount.text = @"¥200";
+    lastMonthEarnCount.text = @"¥0";
     lastMonthEarnCount.textColor = [UIColor blackColor];
     lastMonthEarnCount.font = [UIFont systemFontOfSize:11];
     lastMonthEarnCount.textAlignment = NSTextAlignmentCenter;
@@ -369,7 +377,7 @@
     
     UILabel *lastMonthCount = [[UILabel alloc] init];
     _lastMonthCount = lastMonthCount;
-    lastMonthCount.text = @"¥180";
+    lastMonthCount.text = @"¥0";
     lastMonthCount.textColor = [UIColor blackColor];
     lastMonthCount.font = [UIFont systemFontOfSize:11];
     lastMonthCount.textAlignment = NSTextAlignmentCenter;
